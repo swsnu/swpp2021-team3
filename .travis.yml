@@ -19,6 +19,7 @@ jobs:
       node_js: 14
       install:
         - cd frontend
+        - cd gaejosim
         - yarn install
       script:
         - ./node_modules/.bin/eslint src
