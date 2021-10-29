@@ -29,3 +29,5 @@ tomli==1.2.2
 typing-extensions==3.10.0.2
 virtualenv==20.9.0
 wrapt==1.13.2
+coverage==5.3
+pylint-django==2.3.0
