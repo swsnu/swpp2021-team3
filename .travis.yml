@@ -1,33 +1,33 @@
-# CI Environment
 dist: bionic
-
-# Job Configurations
 jobs:
   include:
-    - language: python
-      python: "3.8.3"
-      addons:
-        sonarcloud:
-          organization: swsnu
-          token:
-            secure: "fWdQg8pX0KlIfix9TRlcvw0CQh57Cb8/auu9NN8R3q52ween3jUcQzcS0w/AMgKt9u8V58st1ORHMgOXkGx0U6a6wHQ8yVs/zxfzGzP0qQoiHQB8f6eKdob9/ln47jgL+UuaAm1jW+zPL77up2l08dgQPEVrPnJCt+4qrNw89APRbmfuBfwOHNgwamPPdwsKteQONmYBfs3W2gbzNmXfS9E/tXtAlbf4yk0zopvLGIqG1+z+SZ80LYsYJDqI6ZyPNr/ZoYAunJqcm3xWwZIt2ufgJW3YlVqIY+xokR4x33sRXo2Gc6T1g5zlQEOrTUY+QQ3+RPrRW5VACybzkXXMVpjpNOlzqwSouzMvtnqUOuMg7Ksp65TqRgBC7PgVthsdIj2YpV+TQ0FjxPZQoeOQ2VvllyVA8KbBGMuF+9HCugNbwVI+hCaOZuhJcMbvSGa/k3cWOaEd3q/sBk1e1qyshaBDiQHq2ClH6AJfHFDwg6MnFzKY19RBKvgZHVmUalshRW4+Q8fSjj1CLi4H/XhU+2Wa98A2lnK6RELtrF9XO5bU/t0CM7KBohksl7kzbkQn4xPoVFw1BHMyufuGqThXpefQjsFle0MqGAlxFfFKboIqfZLdnRW1BKvtLJfyXyvzZoa4gA9L6Q9lxnsiQCV1YD7MHp/Q93rFwEiJMmroupU="
-      install:
-        - cd backend
-        - pip install -r requirements.txt
-      script:
-        - cd gaejosim
-        - pylint **/*.py --load-plugins pylint_django
-        - coverage run --source='.' manage.py test
-        - coverage xml
-        - cd ..
-        - cd .. && sonar-scanner
-
-    - language: node_js
-      node_js: 14
-      install:
-        - cd frontend
-        - cd gaejosim
-        - yarn install
-      script:
-        - ./node_modules/.bin/eslint src
-        - yarn test --coverage --watchAll=false
+  - language: python
+    python: 3.8.3
+    addons:
+      sonarcloud:
+        organization: swsnu
+        token:
+          secure: fWdQg8pX0KlIfix9TRlcvw0CQh57Cb8/auu9NN8R3q52ween3jUcQzcS0w/AMgKt9u8V58st1ORHMgOXkGx0U6a6wHQ8yVs/zxfzGzP0qQoiHQB8f6eKdob9/ln47jgL+UuaAm1jW+zPL77up2l08dgQPEVrPnJCt+4qrNw89APRbmfuBfwOHNgwamPPdwsKteQONmYBfs3W2gbzNmXfS9E/tXtAlbf4yk0zopvLGIqG1+z+SZ80LYsYJDqI6ZyPNr/ZoYAunJqcm3xWwZIt2ufgJW3YlVqIY+xokR4x33sRXo2Gc6T1g5zlQEOrTUY+QQ3+RPrRW5VACybzkXXMVpjpNOlzqwSouzMvtnqUOuMg7Ksp65TqRgBC7PgVthsdIj2YpV+TQ0FjxPZQoeOQ2VvllyVA8KbBGMuF+9HCugNbwVI+hCaOZuhJcMbvSGa/k3cWOaEd3q/sBk1e1qyshaBDiQHq2ClH6AJfHFDwg6MnFzKY19RBKvgZHVmUalshRW4+Q8fSjj1CLi4H/XhU+2Wa98A2lnK6RELtrF9XO5bU/t0CM7KBohksl7kzbkQn4xPoVFw1BHMyufuGqThXpefQjsFle0MqGAlxFfFKboIqfZLdnRW1BKvtLJfyXyvzZoa4gA9L6Q9lxnsiQCV1YD7MHp/Q93rFwEiJMmroupU=
+    install:
+    - cd backend
+    - pip install -r requirements.txt
+    script:
+    - cd gaejosim
+    - pylint **/*.py --load-plugins pylint_django
+    - coverage run --source='.' manage.py test
+    - coverage xml
+    - cd ..
+    - cd .. && sonar-scanner
+  - language: node_js
+    node_js: 14
+    install:
+    - cd frontend
+    - cd gaejosim
+    - yarn install
+    script:
+    - "./node_modules/.bin/eslint src"
+    - yarn test --coverage --watchAll=false
+before_install:
+- openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar

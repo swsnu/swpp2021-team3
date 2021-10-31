@@ -9,6 +9,7 @@ click==8.0.3
 coverage==5.3
 distlib==0.3.3
 Django==3.2.8
+django-dotenv==1.4.2
 filelock==3.3.1
 identify==2.3.1
 idna==3.3
