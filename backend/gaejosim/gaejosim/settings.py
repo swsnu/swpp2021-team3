@@ -9,7 +9,9 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 SECRETS_DIR = os.path.join(
     Path(__file__).resolve().parent.parent.parent.parent, '.secrets')
 SECRETS_BASE = os.path.join(SECRETS_DIR, 'base.json')
-secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
+
+with open(SECRETS_BASE, encoding="utf8") as secret:
+    secrets_base = json.loads(secret.read())
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
