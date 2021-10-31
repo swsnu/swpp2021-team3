@@ -6,7 +6,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = os.path.dirname(BASE_DIR)
-SECRETS_DIR = os.path.join(ROOT_DIR, '.secrets')
+SECRETS_DIR = os.path.join(
+    Path(__file__).resolve().parent.parent.parent.parent, '.secrets')
 SECRETS_BASE = os.path.join(SECRETS_DIR, 'base.json')
 secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
 
