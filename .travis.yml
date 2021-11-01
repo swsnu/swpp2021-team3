@@ -14,7 +14,7 @@ jobs:
     script:
     - cd gaejosim
     - pylint **/*.py --load-plugins pylint_django
-    - coverage run --source='.' manage.py test
+    - coverage run --omit=manage.py manage.py test
     - coverage xml
     - cd ..
     - cd .. && sonar-scanner
