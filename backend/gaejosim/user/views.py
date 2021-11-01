@@ -38,50 +38,49 @@ def sign_up(request):
         validation_req = requests.get(validation_url)
         is_summoner = (validation_req.status_code == 200)
 
-        if is_summoner:
-            summoner_info = validation_req.json()
-            summoner_id = summoner_info['puuid']
-            summoner, _ = Summoner.objects.get_or_create(
-                summoner_id=summoner_id)
+        if not is_summoner:
+            return JsonResponse(
+                {
+                    "error": "This summoner name is invalid"
+                }, status=400
+            )
 
-            exist = User.objects.filter(summoner=summoner).exists()
+        summoner_info = validation_req.json()
+        summoner_id = summoner_info['puuid']
+        summoner, _ = Summoner.objects.get_or_create(
+            summoner_id=summoner_id)
 
-            if exist:
+        exist = User.objects.filter(summoner=summoner).exists()
+
+        if exist:
+            return JsonResponse(
+                {
+                    "error": "This summoner is already registered in our service"
+                }, status=400
+            )
+
+        try:
+            User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                summoner=summoner
+            )
+
+        except(IntegrityError) as invalid_input_error:
+            if 'username' in str(invalid_input_error):
                 return JsonResponse(
                     {
-                        "error": "This summoner is already registered in our service"
+                        "error": "This username already exists."
                     }, status=400
                 )
 
-            try:
-                User.objects.create_user(
-                    username=username,
-                    email=email,
-                    password=password,
-                    summoner=summoner
-                )
+            return JsonResponse(
+                {
+                    "error": "This email already exists."
+                }, status=400
+            )
 
-            except(IntegrityError) as invalid_input_error:
-                if 'username' in str(invalid_input_error):
-                    return JsonResponse(
-                        {
-                            "error": "This username already exists."
-                        }, status=400
-                    )
-
-                if 'email' in str(invalid_input_error):
-                    return JsonResponse(
-                        {
-                            "error": "This email already exists."
-                        }, status=400
-                    )
-
-            return JsonResponse({"message": "User is created!"}, status=201)
-
-        return JsonResponse(
-            {
-                "error": "This summoner name is invalid"
-            }, status=400
-        )
+        return JsonResponse({"message": "User is created!"}, status=201)
 
     return HttpResponseNotAllowed(['POST'])
