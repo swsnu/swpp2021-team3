@@ -7,8 +7,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = os.path.dirname(BASE_DIR)
 SECRETS_DIR = os.path.join(
-    Path(__file__).resolve().parent.parent.parent.parent, '.secrets')
-SECRETS_BASE = os.path.join(SECRETS_DIR, 'base.json')
+    Path(__file__).resolve().parent.parent.parent.parent, ".secrets"
+)
+SECRETS_BASE = os.path.join(SECRETS_DIR, "base.json")
 
 with open(SECRETS_BASE, encoding="utf8") as secret:
     secrets_base = json.loads(secret.read())
@@ -17,7 +18,7 @@ with open(SECRETS_BASE, encoding="utf8") as secret:
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secrets_base['SECRET_KEY']
+SECRET_KEY = secrets_base["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "user",
 ]
+
+AUTH_USER_MODEL = "user.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
