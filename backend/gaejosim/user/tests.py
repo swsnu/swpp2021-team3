@@ -23,6 +23,7 @@ class UserTestCase(TestCase):
             password="password",
             summoner=self.test_summoner1,
         )
+        self.test_user1.save()
 
         self.test_json_data = {
             "username": "test2",
@@ -44,3 +45,63 @@ class UserTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 405)
+
+    def test_success_signin(self):
+        """test success signin"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/signin/",
+            json.dumps(
+                {
+                    "username": "test1",
+                    "password": "password",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_failed_signin_with_wrong_username(self):
+        """test success signin"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/signin/",
+            json.dumps(
+                {
+                    "username": "wrongusername",
+                    "password": "password",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_failed_signin_with_wrong_password(self):
+        """test success signin"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/signin/",
+            json.dumps(
+                {
+                    "username": "test1",
+                    "password": "wrongpassword",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 403)
