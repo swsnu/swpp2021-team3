@@ -13,7 +13,7 @@ jobs:
     - pip install -r requirements.txt
     script:
     - cd gaejosim
-    - pylint **/*.py --load-plugins pylint_django
+    - pylint **/*.py --disable=E1101 --load-plugins pylint_django
     - coverage run --omit=manage.py manage.py test
     - coverage xml
     - cd ..
