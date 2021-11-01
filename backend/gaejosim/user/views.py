@@ -30,7 +30,9 @@ def sign_up(request):
         summoner_name = data['summoner_name']
         password = data['password']
 
-        validation_url = F"{api_default['region']}/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_default['key']}"
+
+        validation_url = F"{api_default['region']}/lol/summoner/v4/summoners/" + \
+            F"by-name/{summoner_name}?api_key={api_default['key']}"
 
         validation_req = requests.get(validation_url)
         is_summoner = (validation_req.status_code == 200)
