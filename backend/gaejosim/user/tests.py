@@ -2,7 +2,7 @@
 import json
 
 from django.test import TestCase, Client
-from .models import User, Summoner
+from user.models import User, Summoner
 
 class UserTestCase(TestCase):
     """class for testing user feature"""
@@ -19,7 +19,7 @@ class UserTestCase(TestCase):
             'username': 'test2',
             'email' : 'test2@swpp.com',
             'password': 'password',
-            'summoner_name' : 'Faker'
+            'summoner_name' : 'faker'
         }
 
     def test_token(self):

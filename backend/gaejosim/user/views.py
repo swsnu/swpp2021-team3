@@ -10,7 +10,7 @@ from .models import Summoner, User
 
 api_default = {
     'region': 'https://kr.api.riotgames.com',  # korea server
-    'key': 'RGAPI-ccb716a9-d0a3-476d-8d4c-b8a37a381628'  # api key : needs to regenerate every 24hr
+    'key': 'RGAPI-670b3502-c473-4867-a9b1-b65f8b21339b'  # api key : needs to regenerate every 24hr
 }
 
 
@@ -30,9 +30,8 @@ def sign_up(request):
         summoner_name = data['summoner_name']
         password = data['password']
 
-
-        validation_url = F"{api_default['region']}/lol/summoner/v4/summoners/" + \
-            F"by-name/{summoner_name}?api_key={api_default['key']}"
+        validation_url = F"{api_default['region']}/lol/summoner/v4/summoners" +\
+             F"/by-name/{summoner_name}?api_key={api_default['key']}"
 
         validation_req = requests.get(validation_url)
         is_summoner = (validation_req.status_code == 200)
