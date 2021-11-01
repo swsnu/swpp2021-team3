@@ -1,12 +1,16 @@
 """views for user"""
-import json
-import requests
+# import json
+# import requests
 
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
-from django.db.utils import IntegrityError
 
-from .models import Summoner, User
+# from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed
+
+# from django.db.utils import IntegrityError
+from django.views.decorators.http import require_http_methods
+
+# from .models import Summoner, User
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
