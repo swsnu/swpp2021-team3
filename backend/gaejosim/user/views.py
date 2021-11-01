@@ -14,6 +14,7 @@ api_default = {
 }
 
 
+@require_http_methods(["GET"])
 @ensure_csrf_cookie
 def token(request):
     """set token"""
