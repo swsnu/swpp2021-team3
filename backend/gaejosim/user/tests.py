@@ -11,7 +11,10 @@ class UserTestCase(TestCase):
     def setUp(self):
         """set up for test"""
         self.test_summoner1 = Summoner.objects.create(
-            summoner_id="tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJdmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ"
+            summoner_id=(
+                "tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJ"
+                "dmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ"
+            )
         )
         self.test_summoner1.save()
         self.test_user1 = User.objects.create_user(
