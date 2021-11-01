@@ -3,6 +3,8 @@ jobs:
   include:
   - language: python
     sudo: enabled
+    services:
+      - mysql
     python: 3.8.3
     addons:
       apt:
