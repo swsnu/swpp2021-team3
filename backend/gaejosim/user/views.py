@@ -1,7 +1,7 @@
 """views for user"""
 import json
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -9,8 +9,6 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 
 # from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
-
-from .models import Summoner, User
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
@@ -29,6 +27,7 @@ def token(request):
 
 @require_http_methods(["POST"])
 def sign_in(request):
+    """sign in"""
     data = json.loads(request.body.decode())
     username = data["username"]
     password = data["password"]
