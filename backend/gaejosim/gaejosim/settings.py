@@ -85,6 +85,7 @@ DATABASES = {
         "PASSWORD": secrets_base["DB_PASSWORD"],
         "HOST": secrets_base["DB_HOST"],
         "PORT": secrets_base["DB_PORT"],
+        "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
 }
 
