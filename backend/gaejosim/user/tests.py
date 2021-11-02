@@ -10,11 +10,11 @@ class UserTestCase(TestCase):
 
     def setUp(self):
         """set up for test"""
-        self.test_summoner1 = Summoner.objects.create(
-            summoner_id="tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJdmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ")
+        self.test_summoner1 = Summoner.objects.create(summoner_id=\
+            "tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJdmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ")
         self.test_summoner1.save()
         self.test_user1 = User.objects.create_user(username="test1", email="test1@swpp.com",
-                                                   password="password", summoner=self.test_summoner1)
+                            password="password", summoner=self.test_summoner1)
 
         self.test_json_data = {
             'username': 'test2',
