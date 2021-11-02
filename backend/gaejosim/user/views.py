@@ -5,6 +5,7 @@ import requests
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.db.utils import IntegrityError
+from django.views.decorators.http import require_http_methods
 
 from .models import Summoner, User
 
@@ -15,6 +16,7 @@ api_default = {
 }
 
 
+@require_http_methods(["GET"])
 @ensure_csrf_cookie
 def token(request):
     """set token"""
@@ -23,6 +25,7 @@ def token(request):
     return HttpResponseNotAllowed(['GET'])
 
 
+@require_http_methods(["POST"])
 def sign_up(request):
     """sign up"""
     if request.method == 'POST':
