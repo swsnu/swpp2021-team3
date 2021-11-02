@@ -7,7 +7,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 
-# from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
 
 api_default = {
