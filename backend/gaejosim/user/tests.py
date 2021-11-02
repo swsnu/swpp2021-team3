@@ -4,22 +4,23 @@ import json
 from django.test import TestCase, Client
 from user.models import User, Summoner
 
+
 class UserTestCase(TestCase):
     """class for testing user feature"""
 
     def setUp(self):
         """set up for test"""
-        self.test_summoner1 = Summoner.objects.create(summoner_id = \
-            "tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJdmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ")
+        self.test_summoner1 = Summoner.objects.create(
+            summoner_id="tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJdmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ")
         self.test_summoner1.save()
         self.test_user1 = User.objects.create_user(username="test1", email="test1@swpp.com",
-            password="password", summoner=self.test_summoner1)
+                                                   password="password", summoner=self.test_summoner1)
 
         self.test_json_data = {
             'username': 'test2',
-            'email' : 'test2@swpp.com',
+            'email': 'test2@swpp.com',
             'password': 'password',
-            'summoner_name' : 'faker'
+            'summoner_name': 'faker'
         }
 
     def test_token(self):
@@ -29,16 +30,15 @@ class UserTestCase(TestCase):
         csrftoken = response.cookies['csrftoken'].value
 
         response = client.post('/api/token/', json.dumps({}),
-            content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+                               content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
-
 
     def test_signup(self):
         """test sign up"""
         # request without csrf token
         client = Client(enforce_csrf_checks=True)
         response = client.post('/api/signup/', json.dumps(self.test_json_data),
-            content_type='application/json')
+                               content_type='application/json')
         self.assertEqual(response.status_code, 403)
 
         response = client.get('/api/token/')
@@ -46,7 +46,7 @@ class UserTestCase(TestCase):
 
         # sign up success
         response = client.post('/api/signup/', json.dumps(self.test_json_data),
-            content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+                               content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
         # not allowed request
@@ -61,9 +61,9 @@ class UserTestCase(TestCase):
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/signup/', json.dumps({
             'username': 'test10',
-            'email' : 'test10@swpp.com',
+            'email': 'test10@swpp.com',
             'password': 'password',
-            'summoner_name' : '301동여신'
+            'summoner_name': '301동여신'
         }), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
 
@@ -76,12 +76,11 @@ class UserTestCase(TestCase):
 
         response = client.post('/api/signup/', json.dumps({
             'username': 'test2',
-            'email' : 'test10@swpp.com',
+            'email': 'test10@swpp.com',
             'password': 'password',
-            'summoner_name' : 'swpp2021fall'
+            'summoner_name': 'swpp2021fall'
         }), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
-
 
     def test_signup_invalid_username(self):
         """already existing username"""
@@ -91,12 +90,11 @@ class UserTestCase(TestCase):
 
         response = client.post('/api/signup/', json.dumps({
             'username': 'test1',
-            'email' : 'test10@swpp.com',
+            'email': 'test10@swpp.com',
             'password': 'password',
-            'summoner_name' : 'PASS'
+            'summoner_name': 'PASS'
         }), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
-
 
     def test_sign_up_invalid_email(self):
         """already existing email"""
@@ -106,8 +104,8 @@ class UserTestCase(TestCase):
 
         response = client.post('/api/signup/', json.dumps({
             'username': 'test3',
-            'email' : 'test1@swpp.com',
+            'email': 'test1@swpp.com',
             'password': 'password',
-            'summoner_name' : 'Deft'
+            'summoner_name': 'Deft'
         }), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
