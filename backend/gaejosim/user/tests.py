@@ -178,3 +178,4 @@ class UserTestCase(TestCase):
             'summoner_name': 'Deft'
         }), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
+        
