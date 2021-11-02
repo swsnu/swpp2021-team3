@@ -1,7 +1,7 @@
 """views for user"""
 import json
 import requests
-
+from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 from django.db.utils import IntegrityError
@@ -21,6 +21,27 @@ api_default = {
 def token(request):
     """set token"""
     return HttpResponse(status=204)
+
+
+@require_http_methods(["POST"])
+def sign_in(request):
+    """sign in"""
+    data = json.loads(request.body.decode())
+    username = data["username"]
+    password = data["password"]
+
+    user = authenticate(username=username, password=password)
+
+    if user:
+        login(request, user)
+        return JsonResponse(
+            {
+                "message": "login success",
+            },
+            status=200,
+        )
+
+    return JsonResponse({"error": "Wrong username or wrong password"}, status=403)
 
 
 @require_http_methods(["POST"])

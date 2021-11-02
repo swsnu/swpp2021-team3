@@ -13,6 +13,5 @@ class Summoner(models.Model):
 
 class User(AbstractUser):
     """User customized model"""
-    email = models.EmailField(verbose_name='email', unique=True)
-    summoner = models.OneToOneField(
-        Summoner, on_delete=models.CASCADE, null=True)
+    email = models.EmailField(verbose_name="email", unique=True)
+    summoner = models.OneToOneField(Summoner, on_delete=models.CASCADE, null=True)
