@@ -1,4 +1,4 @@
-"""views for report"""
+"""report views"""
 import json
 import requests
 from django.http import JsonResponse, HttpResponse
