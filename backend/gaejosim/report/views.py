@@ -1,8 +1,8 @@
 """views for report"""
+import json
 import requests
 from django.http import JsonResponse, HttpResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
-from rest_framework.decorators import api_view
+from django.views.decorators.http import require_http_methods
 
 api_default = {
     "asia": "https://asia.api.riotgames.com",  # korea server
@@ -11,50 +11,29 @@ api_default = {
 }
 
 
-@ensure_csrf_cookie
-@api_view(["GET", "POST"])
+@require_http_methods(["GET", "POST"])
 def report_authentication(request):
-    """/api/reports/auth/"""
+    """report authentication"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return HttpResponse(status=401)
+
+    recent_matches_list = get_recent_matches(user)
+
+    recent_10_game_players = []
+
+    for match_id in recent_matches_list:
+        recent_10_game_players += get_team_players(user, match_id)
+
     if request.method == "POST":
-        return authenticate_team_players(request)
-    return get_authenticated_players(request)
 
+        data = json.loads(request.body.decode())
+        summoner_name = data["summoner_name"]
 
-def authenticate_team_players(request):
-    """report authentication"""
-    user = request.user
+        played = bool(summoner_name in recent_10_game_players)
 
-    if not user.is_authenticated:
-        return HttpResponse(status=401)
-
-    recent_matches_list = get_recent_matches(user)
-
-    recent_10_game_players = []
-
-    for match_id in recent_matches_list:
-        recent_10_game_players += get_team_players(user, match_id)
-
-    data = request.data
-    summoner_name = data["summoner_name"]
-
-    played = bool(summoner_name in recent_10_game_players)
-
-    return JsonResponse({"authenticated": played})
-
-
-def get_authenticated_players(request):
-    """report authentication"""
-    user = request.user
-
-    if not user.is_authenticated:
-        return HttpResponse(status=401)
-
-    recent_matches_list = get_recent_matches(user)
-
-    recent_10_game_players = []
-
-    for match_id in recent_matches_list:
-        recent_10_game_players += get_team_players(user, match_id)
+        return JsonResponse({"authenticated": played})
 
     return JsonResponse({"recent_players": recent_10_game_players}, status=200)
 
