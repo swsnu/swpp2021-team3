@@ -12,7 +12,7 @@ from .models import Summoner, User
 api_default = {
     'region': 'https://kr.api.riotgames.com',  # korea server
     # api key : needs to regenerate every 24hr
-    'key': 'RGAPI-670b3502-c473-4867-a9b1-b65f8b21339b'
+    'key': 'RGAPI-a6f02b48-c453-4e3e-9938-6a80f77e94f9'
 }
 
 
@@ -67,9 +67,10 @@ def sign_up(request):
         )
 
     summoner_info = validation_req.json()
-    summoner_id = summoner_info['puuid']
     summoner, _ = Summoner.objects.get_or_create(
-        summoner_id=summoner_id)
+        summoner_id=summoner_info['id'],
+        summoner_puuid = summoner_info['puuid']
+        )
 
     exist = User.objects.filter(summoner=summoner).exists()
 

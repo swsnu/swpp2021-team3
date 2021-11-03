@@ -1,3 +1,61 @@
-from django.shortcuts import render
+"""views for report"""
+import json
+import requests
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.http import require_http_methods
 
-# Create your views here.
+
+from .models import Report
+
+api_default = {
+    'asia': 'https://asia.api.riotgames.com',  # korea server
+    # api key : needs to regenerate every 24hr
+    'key': 'RGAPI-a6f02b48-c453-4e3e-9938-6a80f77e94f9'
+}
+
+
+@require_http_methods(["GET"])
+def report_authentication(request):
+    """report authentication"""
+    user = request.user
+
+    recent_matches_list = get_recent_matches(user)
+
+    recent_10_game_players = []
+
+    for match_id in recent_matches_list:
+        recent_10_game_players += get_team_players(user, match_id)
+
+    return JsonResponse({"recent_players" : recent_10_game_players}, status=200)
+
+
+def get_recent_matches(user):
+    """get recent 10 matches id"""
+    recent_matches_url = F"{api_default['asia']}/lol/match/v5/matches/" +\
+        F"by-puuid/{user.summoner.summoner_puuid}/ids?start=0&count=10&api_key={api_default['key']}"
+    recent_matches_req = requests.get(recent_matches_url)
+    recent_matches_list = recent_matches_req.json()
+
+    return recent_matches_list
+
+
+def get_team_players(user, match_id):
+    """get five players list in the same team"""
+    match_url = F"{api_default['asia']}/lol/match/v5/matches/{match_id}?api_key={api_default['key']}"
+    match_participants = requests.get(match_url).json()['info']['participants']
+
+    team_100 = []
+    team_200 = []
+    user_team = None
+
+    for i in range(1, 10):
+        if match_participants[i]['teamId'] == 100:
+            team_100.append(match_participants[i]['summonerName'])
+        team_200.append(match_participants[i]['summonerName'])
+
+        if match_participants[i]['summonerId'] == user.summoner.summoner_id:
+            user_team = match_participants[i]['teamId']
+
+    if user_team == 100:
+        return team_100
+    return team_200
