@@ -19,8 +19,8 @@ class MannerPoint(models.Model):
 
 class Summoner(models.Model):
     """Summoner model"""
-
-    summoner_id = models.CharField(max_length=255)
+    summoner_id = models.CharField(max_length=255, null=True)
+    summoner_puuid = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     manner_point = models.OneToOneField(
@@ -32,4 +32,5 @@ class User(AbstractUser):
     """User customized model"""
 
     email = models.EmailField(verbose_name="email", unique=True)
-    summoner = models.OneToOneField(Summoner, on_delete=models.CASCADE, null=True)
+    summoner = models.OneToOneField(
+        Summoner, on_delete=models.CASCADE, null=True)
