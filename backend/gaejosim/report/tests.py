@@ -1,8 +1,6 @@
 """test for report"""
-import json
-
-from django.test import TestCase, Client
-from .models import User, Summoner
+from django.test import TestCase
+from user.models import Summoner, User
 
 
 class ReportTestCase(TestCase):
@@ -30,6 +28,13 @@ class ReportTestCase(TestCase):
 
     def test_success_get_recent_players(self):
         """test success to get recent teamplayers"""
-        client = Client(enforce_csrf_checks=True)
-        response = client.get("/api/token/")
-        csrftoken = response.cookies["csrftoken"].value
+        login = self.client.login(username='test1', password='password')
+        self.assertTrue(login)
+
+        response = self.client.get("/api/reports/auth/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_failed_get_recent_players_without_login(self):
+        """test to get recent teamplayers"""
+        response = self.client.get("/api/reports/auth/")
+        self.assertEqual(response.status_code, 401)
