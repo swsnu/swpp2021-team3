@@ -14,9 +14,7 @@ class ReportTestCase(TestCase):
                 "tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJ"
                 "dmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ"
             ),
-            summoner_id=(
-                "8uopZZbQAokiGkW68Ch8bfvZE1zlHAhRgViy37GIDxnP1Aia"
-            )
+            summoner_id=("8uopZZbQAokiGkW68Ch8bfvZE1zlHAhRgViy37GIDxnP1Aia"),
         )
         self.test_summoner1.save()
 
@@ -29,7 +27,7 @@ class ReportTestCase(TestCase):
 
     def test_success_get_recent_players(self):
         """test success to get recent teamplayers"""
-        login = self.client.login(username='test1', password='password')
+        login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
         response = self.client.get("/api/reports/auth/")
@@ -46,18 +44,14 @@ class ReportTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
-        self.client.login(username='test1', password='password')
+        self.client.login(username="test1", password="password")
 
         response = self.client.get("/api/reports/auth/")
-        player1 = response.json()['recent_players'][0]
+        player1 = response.json()["recent_players"][0]
 
         response = self.client.post(
             "/api/reports/auth/",
-            json.dumps(
-                {
-                    "summoner_name": player1
-                }
-            ),
+            json.dumps({"summoner_name": player1}),
             content_type="application/json",
             HTTP_X_CSRFTOKEN=csrftoken,
         )

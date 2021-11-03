@@ -69,8 +69,8 @@ def sign_up(request):
     summoner_info = validation_req.json()
     summoner, _ = Summoner.objects.get_or_create(
         summoner_id=summoner_info['id'],
-        summoner_puuid = summoner_info['puuid']
-        )
+        summoner_puuid=summoner_info['puuid']
+    )
 
     exist = User.objects.filter(summoner=summoner).exists()
 
