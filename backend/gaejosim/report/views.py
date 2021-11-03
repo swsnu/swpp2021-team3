@@ -1,5 +1,4 @@
 """views for report"""
-import json
 import requests
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
