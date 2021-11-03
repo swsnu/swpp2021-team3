@@ -2,7 +2,7 @@
 import json
 
 from django.test import TestCase, Client
-from .models import User, Summoner
+from .models import User, Summoner, MannerPoint
 
 
 class UserTestCase(TestCase):
@@ -10,11 +10,14 @@ class UserTestCase(TestCase):
 
     def setUp(self):
         """set up for test"""
+        self.manner_point = MannerPoint.objects.create()
+        self.manner_point.save()
         self.test_summoner1 = Summoner.objects.create(
             summoner_id=(
                 "tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJ"
                 "dmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ"
-            )
+            ),
+            manner_point=self.manner_point,
         )
         self.test_summoner1.save()
         self.test_user1 = User.objects.create_user(
