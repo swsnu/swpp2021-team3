@@ -4,7 +4,7 @@ from user.models import Summoner
 
 
 class Report(models.Model):
-    """Summoner model"""
+    """Report model"""
     tag = models.TextField()
     comment = models.CharField(max_length=2000)
     reported_summoner = models.OneToOneField(
