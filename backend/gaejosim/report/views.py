@@ -1,11 +1,7 @@
 """views for report"""
-import json
 import requests
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
-
-
-from .models import Report
 
 api_default = {
     'asia': 'https://asia.api.riotgames.com',  # korea server
@@ -19,6 +15,9 @@ def report_authentication(request):
     """report authentication"""
     user = request.user
 
+    if not user.is_authenticated:
+        return HttpResponse(status=401)
+
     recent_matches_list = get_recent_matches(user)
 
     recent_10_game_players = []
@@ -26,7 +25,7 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         recent_10_game_players += get_team_players(user, match_id)
 
-    return JsonResponse({"recent_players" : recent_10_game_players}, status=200)
+    return JsonResponse({"recent_players": recent_10_game_players}, status=200)
 
 
 def get_recent_matches(user):
@@ -41,7 +40,8 @@ def get_recent_matches(user):
 
 def get_team_players(user, match_id):
     """get five players list in the same team"""
-    match_url = F"{api_default['asia']}/lol/match/v5/matches/{match_id}?api_key={api_default['key']}"
+    match_url = F"{api_default['asia']}/lol/match/v5/matches/" +\
+        F"{match_id}?api_key={api_default['key']}"
     match_participants = requests.get(match_url).json()['info']['participants']
 
     team_100 = []
@@ -49,12 +49,16 @@ def get_team_players(user, match_id):
     user_team = None
 
     for i in range(1, 10):
-        if match_participants[i]['teamId'] == 100:
-            team_100.append(match_participants[i]['summonerName'])
-        team_200.append(match_participants[i]['summonerName'])
+        participant = match_participants[i]
 
         if match_participants[i]['summonerId'] == user.summoner.summoner_id:
             user_team = match_participants[i]['teamId']
+
+        elif participant['teamId'] == 100:
+            team_100.append(match_participants[i]['summonerName'])
+
+        else:
+            team_200.append(match_participants[i]['summonerName'])
 
     if user_team == 100:
         return team_100
