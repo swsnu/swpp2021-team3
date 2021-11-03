@@ -1,5 +1,6 @@
 """test for report"""
-from django.test import TestCase
+import json
+from django.test import TestCase, Client
 from user.models import Summoner, User
 
 
@@ -38,3 +39,25 @@ class ReportTestCase(TestCase):
         """test to get recent teamplayers"""
         response = self.client.get("/api/reports/auth/")
         self.assertEqual(response.status_code, 401)
+
+    def test_success_authentication(self):
+        """authenticate with username"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username='test1', password='password')
+
+        response = self.client.get("/api/reports/auth/")
+        player1 = response.json()['recent_players'][0]
+
+        response = self.client.post(
+            "/api/reports/auth/",
+            json.dumps(
+                {
+                    "summoner_name": player1
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )

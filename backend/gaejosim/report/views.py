@@ -1,4 +1,5 @@
 """views for report"""
+import json
 import requests
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
@@ -10,7 +11,7 @@ api_default = {
 }
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def report_authentication(request):
     """report authentication"""
     user = request.user
@@ -24,6 +25,15 @@ def report_authentication(request):
 
     for match_id in recent_matches_list:
         recent_10_game_players += get_team_players(user, match_id)
+
+    if request.method == 'POST':
+
+        data = json.loads(request.body.decode())
+        summoner_name = data['summoner_name']
+
+        played = bool(summoner_name in recent_10_game_players)
+
+        return JsonResponse({"authenticated": played})
 
     return JsonResponse({"recent_players": recent_10_game_players}, status=200)
 
