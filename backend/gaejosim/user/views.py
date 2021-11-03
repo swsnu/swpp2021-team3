@@ -66,12 +66,14 @@ def sign_up(request):
     manner_point = MannerPoint.objects.create()
     summoner_info = validation_req.json()
 
-    summoner_id = summoner_info["puuid"]
-    if Summoner.objects.filter(summoner_id=summoner_id).exists():
-        summoner = Summoner.objects.get(summoner_id=summoner_id)
+    summoner_id = summoner_info["id"]
+    summoner_puuid = summoner_info["puuid"]
+
+    if Summoner.objects.filter(summoner_puuid=summoner_puuid).exists():
+        summoner = Summoner.objects.get(summoner_puuid=summoner_puuid)
     else:
         summoner = Summoner.objects.create(
-            summoner_id=summoner_id, manner_point=manner_point
+            summoner_puuid=summoner_puuid, summoner_id=summoner_id, manner_point=manner_point
         )
 
     exist = User.objects.filter(summoner=summoner).exists()

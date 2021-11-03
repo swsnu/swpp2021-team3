@@ -17,10 +17,10 @@ class UserTestCase(TestCase):
                 "tYHShqNpN6xATI_lwWhSw6wZqsFuNnB70nV1ie98yJ"
                 "dmhAmOPCkXTWOI_Pp_lHf2DAcS2m7B18ZqJQ"
             ),
-            summoner_id= (
+            summoner_id=(
                 "8uopZZbQAokiGkW68Ch8bfvZE1zlHAhRgViy37GIDxnP1Aia"
-            )
-            manner_point=self.manner_point,
+            ),
+            manner_point=self.manner_point
         )
         self.test_summoner1.save()
         self.test_user1 = User.objects.create_user(
