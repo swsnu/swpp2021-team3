@@ -5,20 +5,26 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 
 from .models import Report
-from user.models import Summoner
+from user.models import Summoner, MannerPoint
 
 api_default = {
+    "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-a6f02b48-c453-4e3e-9938-6a80f77e94f9",
+    "key": "RGAPI-77aea97f-79aa-4074-bd4b-35744eef356e",
 }
+
+tag_dict = {"tag1_1": 1, "tag1_2": 1,
+            "tag2_1": 2, "tag2_2": 2,
+            "tag3_1": 3, "tag3_2": 3,
+            "tag4_1": 4, "tag4_2": 4,
+            "tag5_1": 1, "tag5_2": 5}
 
 
 @require_http_methods(["GET", "POST"])
 def report_authentication(request):
     """report authentication"""
     user = request.user
-
     if not user.is_authenticated:
         return JsonResponse({"error": "User is not logged in"}, status=401)
 
@@ -83,7 +89,7 @@ def get_team_players(user, match_id):
 
 
 @require_http_methods(["POST"])
-def report(request):
+def post_report(request):
     """make a report"""
     user = request.user
 
@@ -108,16 +114,44 @@ def report(request):
     if reported_summoner_req.status_code != 200:
         return JsonResponse({"error": "Such summoner does not exist."}, status=400)
 
-    reported_summoner_id = reported_summoner_req.json()["id"]
-    reported_summoner, _ = Summoner.objects.get_or_create(
-        summoner_id=reported_summoner_id)
+    reported_summoner_json = reported_summoner_req.json()
+    reported_summoner_id = reported_summoner_json["id"]
+    reported_summoner_puuid = reported_summoner_json["puuid"]
 
-    report = Report(tag=tag, comment=comment,
-                    reported_summoner=reported_summoner,
-                    reporting_user=user,
-                    evaluation=evaluation)
+    if Summoner.objects.filter(summoner_puuid = reported_summoner_puuid).exists():
+        reported_summoner= Summoner.objects.get(
+            summoner_puuid=reported_summoner_puuid)
+    else:
+        reported_manner_point = MannerPoint.objects.create()
+        reported_summoner= Summoner.objects.create(
+            summoner_id=reported_summoner_id,
+            summoner_puuid=reported_summoner_puuid,
+            manner_point=reported_manner_point)
 
-    report.save()
+    report = Report.objects.create(tag=tag, comment=comment,
+                                   reported_summoner=reported_summoner,
+                                   reporting_user=user,
+                                   evaluation=evaluation)
+
+    # apply to manner point
+    manner_point = reported_summoner.manner_point
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
+    manner_point.point = (manner_point.point *
+                          reports_cnt + evaluation)/(reports_cnt+1)
+
+    tag_list = tag.split(',')
+    for t in tag_list:
+        if tag_dict[t] == 1:
+            manner_point.tag1 -= 0.2
+        elif tag_dict[t] == 2:
+            manner_point.tag2 -= 0.2
+        elif tag_dict[t] == 3:
+            manner_point.tag3 -= 0.2
+        elif tag_dict[t] == 4:
+            manner_point.tag4 -= 0.2
+        else:
+            manner_point.tag5 -= 0.2
 
     return JsonResponse({
         "id": report.id,
