@@ -143,15 +143,15 @@ def post_report(request):
     tag_list = tag.split(',')
     for t in tag_list:
         if tag_dict[t] == 1:
-            manner_point.tag1 -= 0.2
+            manner_point.tag1 -= 1
         elif tag_dict[t] == 2:
-            manner_point.tag2 -= 0.2
+            manner_point.tag2 -= 1
         elif tag_dict[t] == 3:
-            manner_point.tag3 -= 0.2
+            manner_point.tag3 -= 1
         elif tag_dict[t] == 4:
-            manner_point.tag4 -= 0.2
+            manner_point.tag4 -= 1
         else:
-            manner_point.tag5 -= 0.2
+            manner_point.tag5 -= 1
 
     manner_point.save()
 
