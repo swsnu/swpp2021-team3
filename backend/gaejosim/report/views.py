@@ -118,12 +118,12 @@ def post_report(request):
     reported_summoner_id = reported_summoner_json["id"]
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
-    if Summoner.objects.filter(summoner_puuid = reported_summoner_puuid).exists():
-        reported_summoner= Summoner.objects.get(
+    if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
+        reported_summoner = Summoner.objects.get(
             summoner_puuid=reported_summoner_puuid)
     else:
         reported_manner_point = MannerPoint.objects.create()
-        reported_summoner= Summoner.objects.create(
+        reported_summoner = Summoner.objects.create(
             summoner_id=reported_summoner_id,
             summoner_puuid=reported_summoner_puuid,
             manner_point=reported_manner_point)
@@ -152,6 +152,8 @@ def post_report(request):
             manner_point.tag4 -= 0.2
         else:
             manner_point.tag5 -= 0.2
+
+    manner_point.save()
 
     return JsonResponse({
         "id": report.id,
