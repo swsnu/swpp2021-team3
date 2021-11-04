@@ -18,7 +18,7 @@ tag_dict = {"tag1_1": 1, "tag1_2": 1,
             "tag2_1": 2, "tag2_2": 2,
             "tag3_1": 3, "tag3_2": 3,
             "tag4_1": 4, "tag4_2": 4,
-            "tag5_1": 1, "tag5_2": 5}
+            "tag5_1": 5, "tag5_2": 5}
 
 
 @require_http_methods(["GET", "POST"])
