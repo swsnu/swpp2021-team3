@@ -102,7 +102,7 @@ def post_report(request):
     tag = data['tag']
     comment = data['comment']
 
-    if tag is None:
+    if tag is None or not tag:
         return JsonResponse({"error": "No tag selected"}, status=400)
 
     get_reported_summoner_id = (
