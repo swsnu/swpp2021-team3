@@ -8,10 +8,10 @@ class Report(models.Model):
 
     tag = models.TextField()
     comment = models.CharField(max_length=2000, null=True)
-    reported_summoner = models.OneToOneField(
+    reported_summoner = models.ForeignKey(
         Summoner, on_delete=models.CASCADE, related_name="reported"
     )
-    reporting_user = models.OneToOneField(
+    reporting_user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="reporting", null=True
     )
     evaluation = models.IntegerField()
