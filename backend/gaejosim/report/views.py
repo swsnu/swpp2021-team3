@@ -4,6 +4,9 @@ import requests
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 
+from .models import Report
+from user.models import Summoner
+
 api_default = {
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
@@ -17,7 +20,7 @@ def report_authentication(request):
     user = request.user
 
     if not user.is_authenticated:
-        return HttpResponse(status=401)
+        return JsonResponse({"error": "User is not logged in"}, status=401)
 
     recent_matches_list = get_recent_matches(user)
 
@@ -77,3 +80,49 @@ def get_team_players(user, match_id):
     if user_team == 100:
         return team_100
     return team_200
+
+
+@require_http_methods(["POST"])
+def report(request):
+    """make a report"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "User is not logged in"}, status=401)
+
+    data = json.loads(request.body.decode())
+    name = data['name']
+    evaluation = data['evaluation']
+    tag = data['tag']
+    comment = data['comment']
+
+    if tag is None:
+        return JsonResponse({"error": "No tag selected"}, status=400)
+
+    get_reported_summoner_id = (
+        f"{api_default['region']}/lol/summoner/v4/summoners"
+        + f"/by-name/{name}?api_key={api_default['key']}"
+    )
+    reported_summoner_req = requests.get(get_reported_summoner_id)
+
+    if reported_summoner_req.status_code != 200:
+        return JsonResponse({"error": "Such summoner does not exist."}, status=400)
+
+    reported_summoner_id = reported_summoner_req.json()["id"]
+    reported_summoner, _ = Summoner.objects.get_or_create(
+        summoner_id=reported_summoner_id)
+
+    report = Report(tag=tag, comment=comment,
+                    reported_summoner=reported_summoner,
+                    reporting_user=user,
+                    evaluation=evaluation)
+
+    report.save()
+
+    return JsonResponse({
+        "id": report.id,
+        "tag": report.tag,
+        "comment": report.comment,
+        "reported_summoner": name,
+        "evaluation": report.evaluation
+    }, status=201)
