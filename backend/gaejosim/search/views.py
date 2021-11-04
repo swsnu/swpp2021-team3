@@ -1,15 +1,14 @@
 """search views"""
-import json
 import requests
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
-from user.models import MannerPoint, Summoner
+from user.models import Summoner
 
 api_default = {
     "asia": "https://asia.api.riotgames.com",  # asia server
     "korea": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-a6f02b48-c453-4e3e-9938-6a80f77e94f9",
+    "key": "RGAPI-188ef543-d845-4086-84f4-4784465cb4dc",
 }
 
 
@@ -25,7 +24,7 @@ def search(request):
         return HttpResponse(status=400)
 
     summoners = request.GET["summoners"].split(",")
-    multisearch_results = list()
+    multisearch_results = []
 
     for summoner in summoners:
         summoner_name_url = (
@@ -34,7 +33,11 @@ def search(request):
         )
         summoner_name_req = requests.get(summoner_name_url)
         if summoner_name_req.status_code == 404:
-            multisearch_results.append({"summoner_name": summoner})
+            multisearch_results.append(
+                {
+                    "summoner_name": summoner,
+                }
+            )
             continue
         summoner_puuid = summoner_name_req.json()["puuid"]
 
@@ -59,12 +62,14 @@ def search(request):
         )
         matches_by_summoner_req = requests.get(matches_by_summoner_url)
         matches_by_summoner_list = matches_by_summoner_req.json()
-        recent_result = list()
+        recent_result = []
 
         for match in matches_by_summoner_list:
-            match_metadata_url = f"{api_default['asia']}/lol/match/v5/matches/{match}?api_key={api_default['key']}"
+            match_metadata_url = (
+                f"{api_default['asia']}/lol/match/v5/matches/",
+                f"{match}?api_key={api_default['key']}",
+            )
             match_metadata_req = requests.get(match_metadata_url)
-            print(match_metadata_req)
             match_metadata = match_metadata_req.json()
             summoner_index = match_metadata["metadata"]["participants"].index(
                 summoner_puuid
@@ -82,7 +87,9 @@ def search(request):
             )
 
         if Summoner.objects.filter(summoner_puuid=summoner_puuid).exists():
-            manner_point = Summoner.objects.get(summoner_puuid=summoner_puuid).point
+            manner_point = Summoner.objects.get(
+                summoner_puuid=summoner_puuid
+            ).manner_point.point
         else:
             manner_point = None
 
@@ -95,4 +102,8 @@ def search(request):
             }
         )
 
-    return JsonResponse({"matchers": multisearch_results}, status=200)
+    return JsonResponse(
+        {"matchers": multisearch_results},
+        status=200,
+        json_dumps_params={"ensure_ascii": False},
+    )
