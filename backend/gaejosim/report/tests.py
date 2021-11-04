@@ -162,18 +162,20 @@ class ReportTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 201)
 
-        test_summoner = Summoner.objects.get(summoner_id = "KxtuC6Mcf45lWc7bbfKfJ-onjzWFBxl_b07BouGAseUKkxc")
+        test_summoner = Summoner.objects.get(
+            summoner_id = "KxtuC6Mcf45lWc7bbfKfJ-onjzWFBxl_b07BouGAseUKkxc")
         self.assertEqual(test_summoner.manner_point.point, 60)
         self.assertEqual(test_summoner.manner_point.tag1, 4)
         self.assertEqual(test_summoner.manner_point.tag2, 4)
-    
+
     def test_success_poist_with_empty_comment(self):
+        """make a report with empty string comment"""
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
-        self.client.login(username="test1", password="password")
-
+        self.client.login(username="test1", password="password"
+        )
         response = self.client.post(
             "/api/reports/",
             json.dumps({"name": "연세대",
