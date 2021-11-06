@@ -6,11 +6,11 @@ class Searchbar extends Component {
         summonerName: '',
         summonerList: '',
         searchType: 'Single',
-        searched: false
+        clickSearch: false
     }
     
     postSearchHandler = () => {
-        this.setState({ searched: true });
+        this.setState({ clickSearch: true });
     }
 
     postSearchTypeHandler = () => {
@@ -42,7 +42,7 @@ class Searchbar extends Component {
 
     render() {
         let redirect = null;
-        if (this.state.searched) {
+        if (this.state.clickSearch) {
             if(this.state.searchType === 'Single') {
                 redirect = <Redirect to = {`/singleSearchResult/${this.state.summonerName}`} />
             } else {

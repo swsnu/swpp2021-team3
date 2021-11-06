@@ -4,7 +4,7 @@ class SingleSearchResultPage extends Component {
 
     render () {
         return (
-            <div className='FindUserInfoPage'>
+            <div className='SingleSearchResultPage'>
                 SingleSearchResultPage
             </div>
         )
