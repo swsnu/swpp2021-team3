@@ -11,7 +11,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-77aea97f-79aa-4074-bd4b-35744eef356e",
+    "key": "RGAPI-006518de-8e93-40d8-a2f8-c397ed7d5bf7",
 }
 
 tag_dict = {
@@ -126,7 +126,8 @@ def post_report(request):
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
     if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
-        reported_summoner = Summoner.objects.get(summoner_puuid=reported_summoner_puuid)
+        reported_summoner = Summoner.objects.get(
+            summoner_puuid=reported_summoner_puuid)
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
@@ -145,7 +146,8 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
