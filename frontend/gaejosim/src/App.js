@@ -20,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Switch>
             <Route path='/' exact component={SearchPage} />
+            <Route path='/search' exact component={SearchPage} />
             <Route path='/findUserInfo' exact component={FindUserInfoPage} />
             <Route path='/login' exact component={LoginPage} />
             <Route path='/multiSearchResult/:summonerList' exact component={MultiSearchResultPage} />
