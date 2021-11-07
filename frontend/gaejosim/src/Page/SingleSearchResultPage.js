@@ -6,14 +6,11 @@ import TagView from '../Component/CommonSearch/TagView/TagView';
 
 class SingleSearchResultPage extends Component {
     
-    
-    
-    
     render () {
         return (
             <div className='SingleSearchResultPage'>
                 <Header />
-                SingleSearchResultPage
+                 SingleSearchResultPage
                 <Searchbar />
             </div>
         )
