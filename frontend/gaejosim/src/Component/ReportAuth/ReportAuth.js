@@ -1,21 +1,61 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 
-const ReportAuth= (props) => {
-    return (
-        <div className='ReportAction'>            
-            {/* <div className = 'tagDiagrm'>
-                <img className = 'tag-diagram-img' alt = 'tag-diagram-img' src = '../../../public/images/imagename' />
-            </div> */}
-            {/* <div className = 'tags'>
-                <text className = 'tag1'>{this.props.tag1}</text>
-                <text className = 'tag2'>{this.props.tag2}</text> 
-                <text className = 'tag3'>{this.props.tag3}</text>
-                <text className = 'tag4'>{this.props.tag4}</text> 
-                <text className = 'tag5'>{this.props.tag5}</text> 
-            </div> */}
-            <h3>ReportAuth Component</h3>
-        </div>
-    )
+class ReportAuth extends Component {
+    state = {
+        summonerName: '',
+        clickNext: false,
+        authType: 'true',
+    }
+
+    //todo: axios를 통하여 data를 가져온 다음에, authentified되면 authType을 true로 바꾸는 기능 넣기
+    
+    onClickNextButton = () => {
+        this.setState({ clickNext: true });
+    }
+
+    onClickCheckAuthButton = () => {
+        if(this.state.authType === 'true') {
+            this.setState({ searchType : 'false'});
+        }
+        else {
+            this.setState({ searchType : 'false'});
+        }
+    }
+
+    render() {
+        let redirect = null;
+        if (this.state.clickNext) {
+            redirect = <Redirect to = {`/ReportAction`} />
+        }
+        return (
+            <>
+                <div className='ReportAuth'>
+                    {redirect}                    
+                        <input type='text' placeholder='SummonerID' 
+                            value={this.state.summonerName}
+                            onChange={(event) => this.setState({ summonerName: event.target.value })} />
+                    
+                </div>
+                <div className="Next">
+                {(this.state.authType==='true')&&
+                    <div>
+                        <button>OK</button>
+                        <text>Authentified</text>
+                        <div><button onClick={() => {this.onClickNextButton()}}>Next</button></div>
+                    </div>}
+                {(this.state.authType==='false')&&
+                    <div>
+                        <button>NO</button>
+                        <text>Not Authentified</text>
+                        <div><button>Next</button></div>
+                    </div>}
+                </div>
+            </>
+         
+        )
+    }
 }
 
 export default ReportAuth;
+

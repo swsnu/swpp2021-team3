@@ -6,26 +6,16 @@ import ReportAuth from '../Component/ReportAuth/ReportAuth';
 
 class ReportAuthPage extends Component {
 
-    state = {
-        clickReportAction : false
-    }
-
-    onClickReportActionButton = () => {
-        this.setState({ clickReportAction: true });
-    }
 
     render () {
-        let redirect = null;
-        if (this.state.clickReportAction) {
-            redirect = <Redirect to = '/reportAction' />
-        }
+
         return (
             <div className='ReportAuthPage'>
-                {redirect}
+
                 <Header />
                 ReportAuthPage
                 <ReportAuth />
-                <button onClick={() => this.onClickReportActionButton()}>Next</button>
+
             </div>
         )
     }
