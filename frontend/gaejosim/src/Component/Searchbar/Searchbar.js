@@ -9,11 +9,11 @@ class Searchbar extends Component {
         clickSearch: false
     }
     
-    postSearchHandler = () => {
+    onClickSearchButton = () => {
         this.setState({ clickSearch: true });
     }
 
-    postSearchTypeHandler = () => {
+    onClickSingleOrMultiButton = () => {
         if(this.state.searchType === 'Single') {
             this.setState({ searchType : 'Multi'});
         }
@@ -24,7 +24,7 @@ class Searchbar extends Component {
 
     // TODO: MultiSearch parsing 구현하기: 한국어로 할건지 영어로 할건지 문의
     // https://regexr.com/
-    getSummonerHandler = () => {
+    getSummoner = () => {
         let summonerArr = []
         let summonerStr =''
         if(this.state.summonerList) {
@@ -62,12 +62,12 @@ class Searchbar extends Component {
                         placeholder={`Summoner1 joined the room.\nSummoner2 joined the room.\nSummoner3 joined the room.\nSummoner4 joined the room.\nSummoner5 joined the room.`}
                         value={this.state.summonerList}
                         onChange={(event) => this.setState({ summonerList: event.target.value })} />}
-                <button onClick={() => this.postSearchTypeHandler()}>
+                <button onClick={() => this.onClickSingleOrMultiButton ()}>
                     {(this.state.searchType==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
                 </button>
                 <button onClick={() => { 
-                    this.getSummonerHandler()
-                    this.postSearchHandler()}}>Search</button>
+                    if(this.state.searchType === 'Multi') { this.getSummoner() }
+                    this.onClickSearchButton()}}>Search</button>
             </div>
         )
     }

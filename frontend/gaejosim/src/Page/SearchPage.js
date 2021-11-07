@@ -11,7 +11,7 @@ class SearchPage extends Component {
         clickReport : false
     }
 
-    postClickHandler = () => {
+    onClickReportButton = () => {
         this.setState({ clickReport: true });
     }
 
@@ -26,7 +26,7 @@ class SearchPage extends Component {
                 <Header />
                 SearchPage
                 <Searchbar />
-                <button onClick={() => this.postClickHandler()}>Go to Report</button>
+                <button onClick={() => this.onClickReportButton()}>Go to Report</button>
                 <Statistic />
                 <ReportedUserList />
             </div>

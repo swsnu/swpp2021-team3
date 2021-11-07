@@ -9,11 +9,11 @@ class Header extends Component {
         clickMyPage: false
     }
 
-    postLoginHandler = () => {
+    onClickLoginButton = () => {
         this.setState({ clickLogin: true });
     }
 
-    postMyPageHandler = () => {
+    onClickMyPageButton = () => {
         this.setState({ clickMyPage: true });
     }
 
@@ -28,9 +28,10 @@ class Header extends Component {
         return (
             <div className='Header'>
                 {redirect}
-                <h1>Gaejosim</h1>
-                <button onClick={() => this.postLoginHandler()}>Login</button>
-                {/* <button onClick={() => this.postMyPageHandler()}>MyPage</button> */}
+                <img className = 'logo-img' alt = 'logo-img' src = '../../../public/images/imagename' />
+                <h1 className = 'logo-text'>Gaejosim</h1>
+                <button onClick={() => this.onClickLoginButton()}>Login</button>
+                <button onClick={() => this.onClickMyPageButton()}>MyPage</button>
             </div>
         )
     }

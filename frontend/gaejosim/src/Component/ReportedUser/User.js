@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 const User = (props) => {
     return (
         <div className='User'>
