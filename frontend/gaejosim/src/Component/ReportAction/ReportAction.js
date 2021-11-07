@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+//todo: axios post
+
+
 const ReportAction= (props) => {
     return (
         <div className='ReportAction'>            
@@ -22,7 +25,7 @@ const ReportAction= (props) => {
             </div>
             <div>
                 <h3>4. Comment(Optional)</h3>
-                <div><text>my name is blah blah blah</text></div>
+                <div><text>description about the optional comment</text></div>
                 <div><input type="text" placeholder="Type your text contents here" /></div>
             </div>
             {/* <button>Submit</button> */}

@@ -8,7 +8,8 @@ class ReportAuth extends Component {
         authType: 'true',
     }
 
-    //todo: axios를 통하여 data를 가져온 다음에, authentified되면 authType을 true로 바꾸는 기능 넣기
+    //todo: axios get -> authentified -> change authType true
+    //todo: axios post
     
     onClickNextButton = () => {
         this.setState({ clickNext: true });
