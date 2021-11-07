@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 
 import Header from '../Container/Header/Header';
 
-class MyReportPage extends Component {
+class ReportActionPage extends Component {
 
     render () {
         return (
-            <div className='MyReportPage'>
+            <div className='ReportActionPage'>
                 <Header />
-                MyReportPage
+                ReportActionPage
             </div>
         )
     }
 }
 
-export default MyReportPage;
+export default ReportActionPage;
