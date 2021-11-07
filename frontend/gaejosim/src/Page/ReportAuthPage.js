@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Header from '../Container/Header/Header';
+import ReportAuth from '../Component/ReportAuth/ReportAuth';
 
 class ReportAuthPage extends Component {
 
@@ -23,6 +24,7 @@ class ReportAuthPage extends Component {
                 {redirect}
                 <Header />
                 ReportAuthPage
+                <ReportAuth />
                 <button onClick={() => this.onClickReportActionButton()}>Next</button>
             </div>
         )
