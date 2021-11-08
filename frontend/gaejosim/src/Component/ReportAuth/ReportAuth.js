@@ -11,36 +11,19 @@ class ReportAuth extends Component {
 
     //todo: axios get -> authentified -> change authType true
     //todo: axios post
-
-
-    // getNumbers = async() => {
-    //     const {
-    //         data : {
-    //             data: {numReports}, 
-    //             data: {numPrevents}, 
-    //         } 
-    //     } = awiat axios.get(url)
-    //     console.log(numReports)
-    //     console.log(numPrevents)
-    //     this.setState({numReports, numPrevents, isLoading = false})
-    // }
-
-    // componentDidMount() {
-    //     this.getNumbers();
-    // }
-
     
     onClickNextButton = () => {
         this.setState({ clickNext: true });
     }
 
     onClickCheckAuthButton = () => {
-        if(this.state.authType === 'true') {
-            this.setState({ searchType : 'false'});
-        }
-        else {
-            this.setState({ searchType : 'false'});
-        }
+        // if(this.state.authType === 'true') {
+        //     this.setState({ searchType : 'false'});
+        // }
+        // else {
+        //     this.setState({ searchType : 'false'});
+        // }
+        this.setState({searchType: 'false'});
     }
 
     render() {

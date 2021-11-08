@@ -31,6 +31,12 @@ class ReportAction extends React.Component {
             reported_summoner: '',
             evaluation: '',
         });
+        if(this.state.tag === undefined){
+            alert("tag를 선택해주세요");
+        }
+        if(this.state.evaluation === undefined){
+            alert("매너 포인트를 선택해주세요");
+        }
     }
 
     state = {
@@ -54,8 +60,8 @@ class ReportAction extends React.Component {
                 <div>
                     <h3>2. Manner Point</h3>
                     {/* <textarea> Manner Point Graph Image</textarea> */}
-                    <div><text>Select a number between 1 to 10</text></div>
                     <form>
+                        <text>Select a number between 1 to 10</text>
                         <input 
                             type="number"
                             max = '10'
@@ -65,7 +71,7 @@ class ReportAction extends React.Component {
                             onChange={this.handleChange}
                             name="evaluation"
                         />
-                        <div>{this.state.evaluation}</div>
+                        {/* <div>{this.state.evaluation}</div> */}
                     </form>
                 </div>
                 <div>
@@ -93,7 +99,6 @@ class ReportAction extends React.Component {
                 </div>
                 <div>
                     <h3>4. Comment(Optional)</h3>
-                    <div><text>description about the optional comment</text></div>
                     <form>
                         <input
                             placeholder="enter your text contents"
@@ -101,12 +106,14 @@ class ReportAction extends React.Component {
                             onChange={this.handleChange}
                             name="comment"
                         />
-                        <div>{this.state.comment}</div>
+                        {/* <div>{this.state.comment}</div> */} 
                     </form>
                 </div>
-
-                <button onClick = {this.handleClick}>Submit</button>
-                <div><button onClick={() => {this.onClickCancelButton()}}>Cancel</button></div>
+                <div>
+                    <h3> </h3>
+                    <button onClick = {this.handleClick}>Submit</button>
+                    <div><button onClick={() => {this.onClickCancelButton()}}>Cancel</button></div>
+                </div>
             </div>
         )
     }
