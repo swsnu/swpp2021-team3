@@ -8,7 +8,7 @@ api_default = {
     "asia": "https://asia.api.riotgames.com",  # asia server
     "korea": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-188ef543-d845-4086-84f4-4784465cb4dc",
+    "key": "RGAPI-1a26dc39-7e67-4e43-b727-c8be836b8078",
 }
 
 
@@ -46,11 +46,8 @@ def search(request):
             + f"{summoner_name_req.json()['id']}?api_key={api_default['key']}"
         )
         summoner_league_req = requests.get(summoner_league_url)
-        if summoner_league_req.json() == []:
-            tier = None
-        else:
-            tier = None
-
+        tier = None
+        if summoner_league_req.json() != []:
             for league_dto in summoner_league_req.json():
                 if league_dto["queueType"] == "RANKED_SOLO_5x5":
                     tier = {"tier": league_dto["tier"], "rank": league_dto["rank"]}
@@ -66,8 +63,8 @@ def search(request):
 
         for match in matches_by_summoner_list:
             match_metadata_url = (
-                f"{api_default['asia']}/lol/match/v5/matches/",
-                f"{match}?api_key={api_default['key']}",
+                f"{api_default['asia']}/lol/match/v5/matches/"
+                + f"{match}?api_key={api_default['key']}"
             )
             match_metadata_req = requests.get(match_metadata_url)
             match_metadata = match_metadata_req.json()
@@ -85,7 +82,6 @@ def search(request):
                     "win": summoner_metadata["win"],
                 }
             )
-
         if Summoner.objects.filter(summoner_puuid=summoner_puuid).exists():
             manner_point = Summoner.objects.get(
                 summoner_puuid=summoner_puuid

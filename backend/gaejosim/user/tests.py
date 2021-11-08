@@ -13,8 +13,10 @@ class UserTestCase(TestCase):
         self.manner_point = MannerPoint.objects.create()
         self.manner_point.save()
         self.test_summoner1 = Summoner.objects.create(
-            summoner_puuid="BrwqoWacUEMkvpZCCmWOCpSNeV3xewLW7hWw"
-            + "ScQeh0q8qvxZ2DracSi8ZJK54RduM3ojik7PfPFNUw",
+            summoner_puuid=(
+                "BrwqoWacUEMkvpZCCmWOCpSNeV3xewLW7hWw"
+                + "ScQeh0q8qvxZ2DracSi8ZJK54RduM3ojik7PfPFNUw"
+            ),
             summoner_id=("6FXMN41iyS6TyDh12OTXEXiIIiN6OIf_9rQYAkhTDU7znMAe"),
             manner_point=self.manner_point,
         )

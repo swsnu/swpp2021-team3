@@ -11,10 +11,10 @@ class ReportTestCase(TestCase):
         """set up for test"""
         self.test_summoner1 = Summoner.objects.create(
             summoner_puuid=(
-                "BrwqoWacUEMkvpZCCmWOCpSNeV3xewLW7hWwSc",
-                "Qeh0q8qvxZ2DracSi8ZJK54RduM3ojik7PfPFNUw",
+                "BrwqoWacUEMkvpZCCmWOCpSNeV3xewLW7hWwSc"
+                + "Qeh0q8qvxZ2DracSi8ZJK54RduM3ojik7PfPFNUw",
             ),
-            summoner_id=("8uopZZbQAokiGkW68Ch8bfvZE1zlHAhRgViy37GIDxnP1Aia"),
+            summoner_id=("gvP4r4jVmX6wF-K3NVrD1SFF4FMX8aZWzw1UHF3LJ4gjqUjQvPLeaUwk"),
         )
         self.test_summoner1.save()
 

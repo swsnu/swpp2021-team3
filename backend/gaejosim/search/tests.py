@@ -12,10 +12,10 @@ class SearchTestCase(TestCase):
 
         self.test_summoner1 = Summoner.objects.create(
             summoner_puuid=(
-                "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9",
-                "KVE_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w",
+                "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9"
+                + "KVE_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("Kpo85cdwkrwZrQBt8-u8ubjhImJ2FR4lcjuY1GQ3U9kLHyUd"),
+            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.test_manner_point1,
         )
         self.test_summoner1.save()

@@ -12,7 +12,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-188ef543-d845-4086-84f4-4784465cb4dc",
+    "key": "RGAPI-1a26dc39-7e67-4e43-b727-c8be836b8078",
 }
 
 
@@ -63,7 +63,6 @@ def sign_up(request):
     if not validation_req.status_code == 200:
         return JsonResponse({"error": "This summoner name is invalid"}, status=400)
 
-    manner_point = MannerPoint.objects.create()
     summoner_info = validation_req.json()
 
     summoner_id = summoner_info["id"]
@@ -72,6 +71,7 @@ def sign_up(request):
     if Summoner.objects.filter(summoner_puuid=summoner_puuid).exists():
         summoner = Summoner.objects.get(summoner_puuid=summoner_puuid)
     else:
+        manner_point = MannerPoint.objects.create()
         summoner = Summoner.objects.create(
             summoner_puuid=summoner_puuid,
             summoner_id=summoner_id,

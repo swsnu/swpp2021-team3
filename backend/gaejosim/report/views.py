@@ -7,7 +7,7 @@ from django.views.decorators.http import require_http_methods
 api_default = {
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-188ef543-d845-4086-84f4-4784465cb4dc",
+    "key": "RGAPI-1a26dc39-7e67-4e43-b727-c8be836b8078",
 }
 
 
