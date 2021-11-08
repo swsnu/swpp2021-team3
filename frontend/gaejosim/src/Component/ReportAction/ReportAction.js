@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
+// import ReportAuth from '../ReportAuth/ReportAuth';
 
 //todo: axios post
 
 // input : https://velopert.com/3634
 // React input to django post https://velog.io/@95ybya/프로젝트-8일차-React-Django-POST-구현
+
+//todo: reportAuth에서 summonerName 가지고 와서 reported_summoner에 넣어주기
+//todo: tag multi-select 기능 구현하기
+
 
 class ReportAction extends React.Component {
 
