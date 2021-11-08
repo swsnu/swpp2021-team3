@@ -46,7 +46,7 @@ def search(request):
             + f"{summoner_name_req.json()['id']}?api_key={api_default['key']}"
         )
         summoner_league_req = requests.get(summoner_league_url)
-        tier = None
+        tier = {"tier": None, "rank": None}
         if summoner_league_req.json() != []:
             for league_dto in summoner_league_req.json():
                 if league_dto["queueType"] == "RANKED_SOLO_5x5":
@@ -60,6 +60,7 @@ def search(request):
         matches_by_summoner_req = requests.get(matches_by_summoner_url)
         matches_by_summoner_list = matches_by_summoner_req.json()
         recent_result = []
+        recent_win_lose = []
 
         for match in matches_by_summoner_list:
             match_metadata_url = (
@@ -82,19 +83,32 @@ def search(request):
                     "win": summoner_metadata["win"],
                 }
             )
+            recent_win_lose.append("W" if summoner_metadata["win"] else "L")
+
         if Summoner.objects.filter(summoner_puuid=summoner_puuid).exists():
-            manner_point = Summoner.objects.get(
+            manner_point_obj = Summoner.objects.get(
                 summoner_puuid=summoner_puuid
-            ).manner_point.point
+            ).manner_point
+            manner_point = manner_point_obj.point
+            tag_list = []
+            tag_list.append(manner_point_obj.tag1)
+            tag_list.append(manner_point_obj.tag2)
+            tag_list.append(manner_point_obj.tag3)
+            tag_list.append(manner_point_obj.tag4)
+            tag_list.append(manner_point_obj.tag5)
         else:
             manner_point = None
+            tag_list = None
 
         multisearch_results.append(
             {
                 "summoner_name": summoner,
                 "manner_point": manner_point,
-                "tier": tier,
+                "tag_values": tag_list,
+                "tier": tier["tier"],
+                "rank": tier["rank"],
                 "recent_result": recent_result,
+                "win_lose": recent_win_lose,
             }
         )
 
