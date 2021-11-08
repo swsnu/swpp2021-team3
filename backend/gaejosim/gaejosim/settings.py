@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "user",
-    "report"
+    "report",
+    "search",
 ]
 
 AUTH_USER_MODEL = "user.User"
@@ -136,4 +137,4 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = "user.User"
