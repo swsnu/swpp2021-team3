@@ -2,31 +2,36 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+// TODO: /api/statistics/ 만들어 져야 완성 가능
 
 class Statistic extends Component {
     state = {
         isLoading : true,
-        numReports : 37,
-        numPrevents : 5
+        numReports : 100,
+        numPrevents : 5,
+        // numReports : reportNum,
+        // numPrevents : preventNum,
     }
-    
-    // TODO: axios get 두 번하여 num Reports와 num Prevent 숫자 뽑아옴.
-    // getNumbers = async() => {
-    //     const {
-    //         data : {
-    //             data: {numReports}, 
-    //             data: {numPrevents}, 
-    //         } 
-    //     } = awiat axios.get(url)
-    //     console.log(numReports)
-    //     console.log(numPrevents)
-    //     this.setState({numReports, numPrevents, isLoading = false})
+
+    // getStatisticData = async() => {
+    //     // Get data from API
+    //     axios.get('http://localhost:3000//api/statistics/')
+    //     .then(
+    //         (response) => {
+    //             console.log('response get from /api/statistics: ' + JSON.stringify(response))
+    //             const reportNum = response.data.accumulated_reports;
+    //             const preventNum = response.data.today_reports;
+                //    this.state.numReports = reportNum;
+                //    this.state.numPrevents = preventNum; 
+    //         }
+    //     )
+    //     .catch( error => console.log(error))
     // }
 
-    // componentDidMount() {
-    //     this.getNumbers();
-    // }
-
+    componentDidMount() {
+        console.log('In componentDidMount')
+        // this.getStatisticData();
+    }
 
     render() {
         return (
