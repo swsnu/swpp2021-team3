@@ -37,6 +37,7 @@ import TagView from "./TagView/TagView";
             )
         })
 
+
         return (
             <div className='commonSearch'>            
                 <NavLink className = 'summoner_name' exact to = {`/singleSearchResult/${this.state.summoner_name}`}>
@@ -52,13 +53,11 @@ import TagView from "./TagView/TagView";
                     {resultViews}
                 </div>
                 <div className = 'tag_values'>
-                    <TagView tags={this.state.tag_values}/>
+                    <TagView tag_values={this.state.tag_values}/>
                 </div>
             </div>
         )
     }
-
-
 }   
     
 export default CommonSearch;
