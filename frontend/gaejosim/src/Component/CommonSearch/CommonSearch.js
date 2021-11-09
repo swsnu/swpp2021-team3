@@ -16,7 +16,6 @@ import TagView from "./TagView/TagView";
         win_lose : [],
     }
 
-
     static getDerivedStateFromProps = (props, state) => {
         state.summoner_name = props.summoner_name
         state.tier = props.tier
