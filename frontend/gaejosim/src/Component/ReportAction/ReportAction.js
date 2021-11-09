@@ -2,10 +2,8 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 // import ReportAuth from '../ReportAuth/ReportAuth';
-import Select from 'react-select';
 
 //todo: axios post
-
 
 class ReportAction extends React.Component {
 
@@ -131,19 +129,10 @@ class ReportAction extends React.Component {
             redirect = <Redirect to = {`/`} />
         }
 
+        const {selectedOption} = this.state;
+
         return (
             <div className='ReportAction'>
-                
-                <div className='Process'>
-                    <h3>1. Choose Manner Point of reporting player.</h3>
-                    <text>Select a number between 1 to 10</text>
-                    <input 
-                        type='number'
-                        placeholder="Evaluate Manner Point of reporting player"
-                        max = '10'
-                        min='1'
-                        value={this.state.evaluation}
-                        onChange={(event) => this.setState({ evaluation : event.target.value })} />
                 </div>
                 <div className='Process'>
                     <h3>2.Choose all Tags appropriate to describe behavior of reporting player if you want.</h3>
@@ -180,8 +169,8 @@ class ReportAction extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div className='Process'>
-                    <h3>4. Write down Comment if you want</h3>
+              <div className='Process'>
+                    <h3>3. Write down Comment if you want</h3>
                     <input
                         placeholder="Enter Comments on reported player if you want"
                         value={this.state.comment}

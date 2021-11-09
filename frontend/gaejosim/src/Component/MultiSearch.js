@@ -13,6 +13,7 @@ class MultiSearch extends Component {
         state.summoners = props.summoners
     }
 
+
     getMatchersData = () => {
         // axios.defaults.xsrfCookieName = 'csrftoken';
         // axios.defaults.xsrfHeaderName = 'X-CSRFToken';  
@@ -27,7 +28,7 @@ class MultiSearch extends Component {
 
         // // Get data from API
         // const url = `http://localhost:3000/api/search/` 
-       
+     
         // // TODO: Check axios - failed.
         // axios.get(url, {
         //     params : {

@@ -12,6 +12,34 @@ class ReportAuth extends Component {
         clickNext: false,
     }
 
+
+
+    //todo: axios get -> authentified -> change authType true
+    // 일단은 no 버튼을 눌러서 authentified -> button을 ok로
+    //todo: axios post
+
+    // getSummoners = async() => {
+    //     // get data from api
+    //     axios.get('http://localhost:3000//api/report/auth')
+    //     .then(
+    //         (response, {data}) => {
+    //             const summonerList = response.data;
+    //             this.setState({summonerList: data.recent_players});
+    //             console.log('response get from /api/report/auth: ' + response)
+    //             // const reportNum = response.data.accumulated_reports;
+    //             // const preventNum = response.data.today_reports;
+    //             //     this.state.numReports = reportNum;
+    //             //     this.state.numPrevents = preventNum; 
+    //         }
+    //     )
+    //     .catch( error => console.log(error))
+    // }
+
+    // componentDidMount() {
+    //     console.log('In componentDidMount');
+    //     this.getSummoners();
+    // }
+    
     onClickNextButton = () => {
         this.setState({ clickNext: true });
     }
@@ -122,6 +150,7 @@ class ReportAuth extends Component {
                 {(this.state.authenticated) && <button onClick={() => this.onClickNextButton()}>Next</button>}
         </div>
         )
+        
     }
 }
 

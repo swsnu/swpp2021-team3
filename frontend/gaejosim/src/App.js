@@ -15,6 +15,7 @@ import SignupPage from './Page/SignupPage';
 import SingleSearchResultPage from './Page/SingleSearchResultPage';
 
 function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>
