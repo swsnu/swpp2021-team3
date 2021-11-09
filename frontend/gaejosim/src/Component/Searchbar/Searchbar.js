@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
+
+// TODO: corner case 처리 (1) 이름 적지 않고 내기
+
 
 class Searchbar extends Component {
     state = {
@@ -22,29 +25,42 @@ class Searchbar extends Component {
         }
     }
 
-    // TODO: MultiSearch parsing 구현하기: 한국어로 할건지 영어로 할건지 문의
+    // TODO: MultiSearch parsing 구현하기: 한국어로 할건지 영어로 할건지 논의
     // https://regexr.com/
-    getSummoner = () => {
-        let summonerArr = []
-        let summonerStr =''
-        if(this.state.summonerList) {
-            summonerArr = this.state.summonerList.split(' joined the room.')
+    parseSummoner = () => {
+        if(this.state.searchType === 'Multi') {
+            let summonerArr = []
+            let summonerStr =''
+            if(this.state.summonerList) {
+                summonerArr = this.state.summonerList.split(' joined the room.')
+            }
+            if(summonerArr.length === 6) {
+                summonerArr.pop()
+                summonerStr = summonerArr.join('-');
+            } 
+            else {
+                alert('You have to put five summoners for multiSearch')
+            }
+            this.setState({ summonerList : summonerStr })
         }
-        if(summonerArr.length === 6) {
-            summonerArr.pop()
-            summonerStr = summonerArr.join('-');
-        } 
         else {
-            alert('You have to put five summoners for multiSearch')
+            if(this.state.summonerName === '')
+                alert('You cannot search summoner without typing summonerName')
         }
-        this.setState({ summonerList : summonerStr })
     }
 
     render() {
         let redirect = null;
+        let router = null;
         if (this.state.clickSearch) {
             if(this.state.searchType === 'Single') {
-                redirect = <Redirect to = {`/singleSearchResult/${this.state.summonerName}`} />
+                if(this.state.summonerName != '') {
+                    redirect = <Redirect to = {`/singleSearchResult/${this.state.summonerName}`} />
+                }
+                else {
+                    this.setState({ clickSearch : false})
+                    redirect = <Redirect to ={'/search'} />
+                }
             } else {
                 // SummonerList는 Summoner1-Summoner2-Summoner3-Summoner4-Summoner5 형태로 전달됨.
                 redirect = <Redirect to = {`/multiSearchResult/${this.state.summonerList}`}/>
@@ -52,6 +68,7 @@ class Searchbar extends Component {
         }
         return (
             <div className='Searchbar'>
+                {router}
                 {redirect}
                 {(this.state.searchType==='Single') && 
                     <input type='text' placeholder='SummonerID' 
@@ -66,7 +83,7 @@ class Searchbar extends Component {
                     {(this.state.searchType==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
                 </button>
                 <button onClick={() => { 
-                    if(this.state.searchType === 'Multi') { this.getSummoner() }
+                    this.parseSummoner() 
                     this.onClickSearchButton()}}>Search</button>
             </div>
         )

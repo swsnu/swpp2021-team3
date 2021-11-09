@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, activeStyle } from 'react-router-dom';
 
 const TeamMate = (props) => {
     return (
@@ -9,7 +9,7 @@ const TeamMate = (props) => {
                 <img className = 'champion-img' alt = 'champion-img' src = '../../../public/images/imagename' />
             </div>
             <NavLink className = 'summonerID' exact to = {`/singleSearchResult/${this.props.summonerID}`}  
-                activeStyle={activeStyle}>{this.props.summonerID}</NavLink>
+                >{this.props.summonerID}</NavLink>
             <text className = 'KDA'>{this.props.KDA}</text>
             <text className = 'tier'>{this.props.tier}</text> 
             <div className = 'line'> 
@@ -21,4 +21,4 @@ const TeamMate = (props) => {
     )
 }
 
-export default MatchMate;
+export default TeamMate;

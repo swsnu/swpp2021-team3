@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import Header from '../Container/Header/Header';
 import Searchbar from '../Component/Searchbar/Searchbar';
-import Statistic from '../Component/Statistics/Statistic';
+import Statistic from '../Component/Statistic/Statistic';
 import ReportedUserList from '../Component/ReportedUser/ReportedUserList';
 
 class SearchPage extends Component {
