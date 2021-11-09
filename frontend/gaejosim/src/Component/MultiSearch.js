@@ -15,8 +15,8 @@ class MultiSearch extends Component {
     }
 
     getMatchers = () => {
-        axios.defaults.xsrfCookieName = 'csrftoken';
-        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+        // axios.defaults.xsrfCookieName = 'csrftoken';
+        // axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
         // axios.get('/api/token/').then(
         // )
