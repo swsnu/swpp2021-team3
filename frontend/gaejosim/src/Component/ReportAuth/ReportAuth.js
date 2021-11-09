@@ -107,7 +107,7 @@ class ReportAuth extends Component {
         }
         let redirect = null;
         if (this.state.clickNext) {
-            redirect = <Redirect to = {`/ReportAction`} />
+            redirect = <Redirect to = {`/ReportAction/${this.state.summoner_name}`} />
         }
         return (
             <div className = 'ReportAuth'>
