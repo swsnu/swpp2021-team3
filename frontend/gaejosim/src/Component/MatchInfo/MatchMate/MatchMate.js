@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, activeStyle } from 'react-router-dom';
 
 const MatchMate = (props) => {
     return (
