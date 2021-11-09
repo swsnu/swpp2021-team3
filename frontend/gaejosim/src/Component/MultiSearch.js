@@ -15,34 +15,34 @@ class MultiSearch extends Component {
     }
 
     getMatchers = () => {
-        // axios.defaults.xsrfCookieName = 'csrftoken';
-        // axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-        // axios.get('/api/token/').then(
-        // )
+        axios.get('/api/token/').then(
+        )
         
-        // axios.get('/api/search/', {
-        //     "type" : "multi",
-        //     "summobers" : this.state.summoners
-        // })
+        axios.get('/api/search/', {
+            "type" : "multi",
+            "summobers" : this.state.summoners
+        })
         
-        // // Get data from API
-        // const url = `http://localhost:3000/api/search/`
+        // Get data from API
+        const url = `http://localhost:3000/api/search/`
         
-        // TODO: Check axios - failed.
-        // axios.get(url, {
-        //     params : {
-        //         type : 'multi',
-        //         summoners : this.state.summoners
-        //     }
-        // })
-        // .then(
-        //     (response) => {
-        //         // Check response.body
-        //         console.log('response get from /api/search: ' + JSON.stringify(response))
-        //     }
-        // )
-        // .catch( error => console.log(error))
+        //TODO: Check axios - failed.
+        axios.get(url, {
+            params : {
+                type : 'multi',
+                summoners : this.state.summoners
+            }
+        })
+        .then(
+            (response) => {
+                // Check response.body
+                console.log('response get from /api/search: ' + JSON.stringify(response))
+            }
+        )
+        .catch( error => console.log(error))
 
         let responseBody = {
             matchers : [
