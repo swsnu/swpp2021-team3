@@ -32,13 +32,14 @@ class Searchbar extends Component {
             let summonerArr = []
             let summonerStr =''
             if(this.state.summonerList) {
-                summonerArr = this.state.summonerList.split(' joined the room\n.')
+                summonerArr = this.state.summonerList.split(' joined the room.')
             }
             if(summonerArr.length === 6) {
                 summonerArr.pop()
                 summonerStr = summonerArr.join('-');
             } 
             else {
+                console.log(summonerArr)
                 alert('You have to put five summoners for multiSearch')
             }
             this.setState({ summonerList : summonerStr })
