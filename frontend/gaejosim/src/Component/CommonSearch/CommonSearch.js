@@ -1,24 +1,33 @@
 import React, { Component } from "react";
-import { NavLink, activeStyle } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
+import ResultView from "./ResultView/ResultView";
 import TagView from "./TagView/TagView";
 
 const CommonSearch = (props) => {
+    const recent_results = this.props.recent_results.map((result) => {
+        return (
+            <ResultView recent_result = {result}/>
+        )
+    })
+    
     return (
         <div className='commonSearch'>            
-            <NavLink className = 'summonerID' exact to = {`/singleSearchResult/${props.summonerName}`}  
-                >{props.summonerName}</NavLink>
+            <NavLink className = 'summoner_name' exact to = {`/singleSearchResult/${props.summoner_name}`}>
+                {props.summoner_name}
+            </NavLink>
             <text className = 'tier'>{props.tier}</text> 
-            <div className ='mannerPoint'>
-                <img className = 'mannerPoint-img' alt = 'mannerPoint-img' src = '../../../public/images/imagename' />    
-                <text className = 'mannerPoint-text'>{props.mannerPoint}</text>
+            <text className = 'rank'>{props.rank}</text> 
+            <div className = 'manner_point'>
+                <img className = 'manner_point_img' alt = 'manner_point_img' src = '../../../public/images/imagename' />    
+                <text className = 'manner_point_text'>{props.manner_point}</text>
             </div>
-            <TagView tags={props.taglist}/>
-            {/* <div className = 'recentGameHistory'> 
-                {/* TODO: img 파일 디자인에서 넘어오면 Switch 문으로 line value별 이미지 랜딩 필요 */}
-                {/* <text className = 'recentHistory-text'>{this.props.recentHistory}</text>
-                <img className = 'recentHistory-img' alt = 'history-img' src = '../../../public/images/imagename' />    
-            </div> */} 
+            <div className= 'recent_results'>
+                {recent_results}
+            </div>
+            <div className = 'tag_values'>
+                <TagView tags={props.tag_values}/>
+            </div>
         </div>
     )
 }

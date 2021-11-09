@@ -499,12 +499,12 @@ class MultiSearch extends Component {
         const matcherInfos = this.state.matchers.map((matcher) => {
             return (
                 <CommonSearch summoner_name = {matcher.summoner_name} 
-                tier = {matcher.tier}
-                rank = {matcher.rank}
-                manner_point = {matcher.manner_point}
-                tag_values = {matcher.tag_values}
-                win_lose = {matcher.win_lose}
-                recent_result = {matcher.recent_result}
+                    tier = {matcher.tier}
+                    rank = {matcher.rank}
+                    manner_point = {matcher.manner_point}
+                    tag_values = {matcher.tag_values}
+                    win_lose = {matcher.win_lose}
+                    recent_result = {matcher.recent_result}
                 />
             )
         }) 
