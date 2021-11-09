@@ -4,7 +4,7 @@ import CommonSearch from "./CommonSearch/CommonSearch";
 const MultiSearch = (props) => {
     return (
         <div className='multiSearch'>            
-            
+            {props.summoners}
         </div>
     )
 }

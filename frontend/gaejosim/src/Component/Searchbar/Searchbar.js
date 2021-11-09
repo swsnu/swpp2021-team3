@@ -32,7 +32,7 @@ class Searchbar extends Component {
             let summonerArr = []
             let summonerStr =''
             if(this.state.summonerList) {
-                summonerArr = this.state.summonerList.split(' joined the room.')
+                summonerArr = this.state.summonerList.split(' joined the room\n.')
             }
             if(summonerArr.length === 6) {
                 summonerArr.pop()
