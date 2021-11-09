@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Header from '../Container/Header/Header';
+import Searchbar from '../Component/Searchbar/Searchbar';
 
 class MultiSearchResultPage extends Component {
 
@@ -8,7 +9,9 @@ class MultiSearchResultPage extends Component {
         return (
             <div className='MultiSearchResultPage'>
                 <Header />
+                <Searchbar />
                 MultiSearchResultPage
+
             </div>
         )
     }
