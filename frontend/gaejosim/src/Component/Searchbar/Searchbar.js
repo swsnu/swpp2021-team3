@@ -33,6 +33,7 @@ class Searchbar extends Component {
             let summonerStr =''
             if(this.state.summonerList) {
                 summonerArr = this.state.summonerList.split(' joined the room.')
+                summonerArr = summonerArr.map(x => x.includes('\n')? x.replace('\n', '') : x)
             }
             if(summonerArr.length === 6) {
                 summonerArr.pop()
