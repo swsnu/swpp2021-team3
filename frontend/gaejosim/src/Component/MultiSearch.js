@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import CommonSearch from "./CommonSearch/CommonSearch";
 import axios from 'axios';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
 class MultiSearch extends Component {
 
     state = {
@@ -16,11 +13,22 @@ class MultiSearch extends Component {
         state.summoners = props.summoners
     }
 
-    getMatchers = () => {
-        // Get data from API
-        const url = `http://localhost:3000/api/search/`
-        
-        // TODO: Check axios - failed.
+    getMatchersData = () => {
+        // axios.defaults.xsrfCookieName = 'csrftoken';
+        // axios.defaults.xsrfHeaderName = 'X-CSRFToken';  
+
+        // axios.get('/api/token/').then()
+
+        // axios.get('/api/search/', {
+        //     type: "multi",
+        //     summoners: this.state.summoners
+        // }).then()
+
+
+        // // Get data from API
+        // const url = `http://localhost:3000/api/search/` 
+       
+        // // TODO: Check axios - failed.
         // axios.get(url, {
         //     params : {
         //         type : 'multi',
@@ -495,7 +503,7 @@ class MultiSearch extends Component {
     }
 
     render() {
-        this.getMatchers()
+        this.getMatchersData()
         const matcherInfos = this.state.matchers.map((matcher) => {
             return (
                 <CommonSearch summoner_name = {matcher.summoner_name} 

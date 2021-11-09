@@ -24,7 +24,7 @@ class SearchPage extends Component {
             <div className='SearchPage'>
                 {redirect}
                 <Header />
-                SearchPage
+                <h1>SearchPage</h1>
                 <Searchbar />
                 <button onClick={() => this.onClickReportButton()}>Go to Report</button>
                 <Statistic />

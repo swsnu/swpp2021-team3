@@ -9,7 +9,7 @@ class ReportActionPage extends Component {
         return (
             <div className='ReportActionPage'>
                 <Header />
-                ReportActionPage
+                <h1>ReportActionPage</h1>
                 <ReportAction />
             </div>
         )

@@ -13,7 +13,7 @@ class ReportAuthPage extends Component {
             <div className='ReportAuthPage'>
 
                 <Header />
-                ReportAuthPage
+                <h1>ReportAuthPage</h1>
                 <ReportAuth />
 
             </div>
