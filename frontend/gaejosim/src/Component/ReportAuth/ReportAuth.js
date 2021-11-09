@@ -119,7 +119,7 @@ class ReportAuth extends Component {
                         onChange = {(event) => this.setState({ summoner_name: event.target.value })}
                 />
                 <button onClick={() => this.onClickAuthenticateButton()}>{buttonName}</button>
-                {(this.state.authenticated) && <button onClick={() => this.onClickNextButton()}>Report this user</button>}
+                {(this.state.authenticated) && <button onClick={() => this.onClickNextButton()}>Next</button>}
         </div>
         )
     }
