@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 // import ReportAuth from '../ReportAuth/ReportAuth';
+import Select from 'react-select';
 
 //todo: axios post
 
@@ -10,6 +11,19 @@ import { Redirect } from 'react-router-dom';
 //todo: reportAuth에서 summonerName 가지고 와서 reported_summoner에 넣어주기
 //todo: tag multi-select 기능 구현하기
 
+// https://www.freakyjolly.com/react-select-single-or-multiple-select-box-using-react-select-tutorial-with-examples/
+const options = [
+    {value: '#tag1_1', label: 'tag1_1'},
+    {value: '#tag1_2', label: 'tag1_2'},
+    {value: '#tag2_1', label: 'tag2_1'},
+    {value: '#tag2_2', label: 'tag2_2'},
+    {value: '#tag3_1', label: 'tag3_1'},
+    {value: '#tag3_2', label: 'tag3_2'},
+    {value: '#tag4_1', label: 'tag4_1'},
+    {value: '#tag4_2', label: 'tag4_2'},
+    {value: '#tag5_1', label: 'tag5_1'},
+    {value: '#tag5_2', label: 'tag5_2'},
+];
 
 class ReportAction extends React.Component {
 
@@ -52,12 +66,22 @@ class ReportAction extends React.Component {
         this.setState({ clickCancel: true });
     }
 
+    state = {
+        selectedOption: null,
+    }
+
+    handleTagChange = selectedOption => {
+        this.setState({selectedOption});
+    }
+
     render() {
 
         let redirect = null;
         if (this.state.clickCancel) {
             redirect = <Redirect to = {`/`} />
         }
+
+        const {selectedOption} = this.state;
 
         return (
             <div className='ReportAction'>
@@ -81,14 +105,13 @@ class ReportAction extends React.Component {
                 </div>
                 <div>
                     <h3>3.Tags</h3>
-                    <form>
+                    {/* <form>
                         <select 
                             value={this.state.tag} 
                             onChange={this.handleChange} 
                             name="tag"
                         >
                             <option value="none">Select a Tag</option>
-                            {/* multi select 구현은 나중에 하겠습니다 ㅜㅜ */}
                             <option value="tag1_1">#tag1_1</option>
                             <option value="tag1_2">#tag1_2</option>
                             <option value="tag2_1">#tag2_1</option>
@@ -100,7 +123,13 @@ class ReportAction extends React.Component {
                             <option value="tag5_1">#tag5_1</option>
                             <option value="tag5_2">#tag5_2</option>
                         </select>
-                    </form>
+                    </form> */}
+                    <Select 
+                        isMulti={true}
+                        value = {selectedOption}
+                        onChange={this.handleTagChange}
+                        options={options}
+                    />
                 </div>
                 <div>
                     <h3>4. Comment(Optional)</h3>
