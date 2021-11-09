@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 
 import Header from '../Container/Header/Header';
 import Searchbar from '../Component/Searchbar/Searchbar';
-import TagView from '../Component/CommonSearch/TagView/TagView';
-import CommonSearch from '../Component/CommonSearch/CommonSearch';
-import MatchInfo from '../Component/MatchInfo/MatchInfo';
+// import TagView from '../Component/CommonSearch/TagView/TagView';
+// import CommonSearch from '../Component/CommonSearch/CommonSearch';
+// import MatchInfo from '../Component/MatchInfo/MatchInfo';
 
 class SingleSearchResultPage extends Component {
     
-    // TODO: back에서 내 tier, recent history 따로 빼주기
+    // TODO: 우선 연결 작업을 위해 singleSearch api 구현되지 않은 부분은 주석처리해둠.
     state = {
         searchType : '',
         summonerName : '',
@@ -19,112 +19,112 @@ class SingleSearchResultPage extends Component {
             tag_pentagon : 'img of tag_pentagon',
         },
         numMatches: 5,
-        matches : [
-            {
-                match_result : 'A',
-                matchers : [
-                    // TEAM A
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                ],
-                kill_score : ["team A score", "team B score"],
-                items : "items list",
-                rune: "rune list",
-                spell : "spell list",
-            },
-            {
-                match_result : 'B',
-                matchers : [
-                    // TEAM A
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                    {
-                        summoner_name : "summoner_name(String)",
-                        tier : "tier(String)",
-                        KDA : "kda(Integer)",
-                        champion : "champion(String->Image)",
-                        lane : "lane(String->Image)"
-                    },
-                ],
-                kill_score : ["team A score", "team B score"],
-                items : "items list",
-                rune: "rune list",
-                spell : "spell list",
-            },
-        ],
+    //     matches : [
+    //         {
+    //             match_result : 'A',
+    //             matchers : [
+    //                 // TEAM A
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //             ],
+    //             kill_score : ["team A score", "team B score"],
+    //             items : "items list",
+    //             rune: "rune list",
+    //             spell : "spell list",
+    //         },
+    //         {
+    //             match_result : 'B',
+    //             matchers : [
+    //                 // TEAM A
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //                 {
+    //                     summoner_name : "summoner_name(String)",
+    //                     tier : "tier(String)",
+    //                     KDA : "kda(Integer)",
+    //                     champion : "champion(String->Image)",
+    //                     lane : "lane(String->Image)"
+    //                 },
+    //             ],
+    //             kill_score : ["team A score", "team B score"],
+    //             items : "items list",
+    //             rune: "rune list",
+    //             spell : "spell list",
+    //         },
+    //     ],
         clickMoreMatch : false,
     }
 
@@ -158,11 +158,11 @@ class SingleSearchResultPage extends Component {
         console.log(splitResult);
         this.state.summonerName = splitResult[2];
 
-        const matches = this.state.matches.map((match) => {
-            return (
-                <MatchInfo matches={this.state.matches} />
-            )
-        })
+        // const matches = this.state.matches.map((match) => {
+        //     return (
+        //         <MatchInfo matches={this.state.matches} />
+        //     )
+        // })
         
         return (
             <div className='SingleSearchResultPage'>
@@ -170,13 +170,13 @@ class SingleSearchResultPage extends Component {
                 <h2>SingleSearchResultPage</h2>
                 <Searchbar />
                 {/* tier={this.state.tier} recentHistory = {this.state.recentHistory} 추가하기  */}
-                <CommonSearch summonerID={this.state.summonerName} 
+                {/* <CommonSearch summonerID={this.state.summonerName} 
                     mannerPoint={this.state.manner.manner_point} 
                     taglist={this.state.manner.tag} 
                     comment = {this.state.manner.comment} 
                     tag_img={this.state.manner.tag_pentagon}
                     />
-                {matches}
+                {matches} */}
                 <button onClick={() => this.onClickMoreMatchInfoButton()}>More match Info</button>
             </div>
         )

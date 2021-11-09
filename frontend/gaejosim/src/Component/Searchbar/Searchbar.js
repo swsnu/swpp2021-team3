@@ -39,6 +39,7 @@ class Searchbar extends Component {
                 summonerStr = summonerArr.join('-');
             } 
             else {
+                console.log(summonerArr)
                 alert('You have to put five summoners for multiSearch')
             }
             this.setState({ summonerList : summonerStr })
