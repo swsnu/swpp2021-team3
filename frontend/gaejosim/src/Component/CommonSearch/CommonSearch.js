@@ -6,8 +6,8 @@ import TagView from "./TagView/TagView";
 const CommonSearch = (props) => {
     return (
         <div className='commonSearch'>            
-            <NavLink className = 'summonerIDh' exact to = {`/singleSearchResult/${props.summonerID}`}  
-                >{props.summonerID}</NavLink>
+            <NavLink className = 'summonerID' exact to = {`/singleSearchResult/${props.summonerName}`}  
+                >{props.summonerName}</NavLink>
             <text className = 'tier'>{props.tier}</text> 
             <div className ='mannerPoint'>
                 <img className = 'mannerPoint-img' alt = 'mannerPoint-img' src = '../../../public/images/imagename' />    
