@@ -34,6 +34,7 @@ class Statistic extends Component {
     }
 
     render() {
+        // getStatisticData();
         return (
             <div className='Statistic'>
                 <div className='NumReports'>All Reports: {this.state.numReports}</div>

@@ -29,7 +29,7 @@ class Header extends Component {
             <div className='Header'>
                 {redirect}
                 <img className = 'logo-img' alt = 'logo-img' src = '../../../public/images/imagename' />
-                <h1 className = 'logo-text'>Gaejosim</h1>
+                <h3 className = 'logo-text'>Gaejosim</h3>
                 <button onClick={() => this.onClickLoginButton()}>Login</button>
                 <button onClick={() => this.onClickMyPageButton()}>MyPage</button>
             </div>
