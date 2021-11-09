@@ -27,7 +27,7 @@ function App() {
             <Route path='/my' exact component={MyPage} />
             <Route path='/myReport' exact component={MyReportPage} />
             <Route path='/reportAuth' exact component={ReportAuthPage} />
-            <Route path='/reportAction' exact component={ReportActionPage} />
+            <Route path='/reportAction/:summonerID' exact component={ReportActionPage} />
             <Route path='/signup' exact component={SignupPage} />
             <Route path='/singleSearchResult/:summonerID' exact component={SingleSearchResultPage} />
             <Route render={() => <h1>Not Found</h1>} />
