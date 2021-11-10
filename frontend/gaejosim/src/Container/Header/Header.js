@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+
 import './Header.css';
 
-// TODO: Sprint4에 reducer와 함께 구현 예정
 class Header extends Component {
     state = {
         clickLogin : false,
@@ -29,8 +28,7 @@ class Header extends Component {
         return (
             <div className='Header'>
                 {redirect}
-                <img className = 'logo-img' alt = 'logo-img' src = '../../../public/images/logo.png' />
-                {/* <h3 className = 'logo-text'>Gaejosim</h3> */}
+                <img className = 'logoImage' alt = 'logo-img' src = './images/logo.png' />
                 <button className='loginButton'
                     onClick={() => this.onClickLoginButton()}>
                     Login

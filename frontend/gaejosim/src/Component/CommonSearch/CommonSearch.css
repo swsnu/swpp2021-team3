@@ -1,54 +1,35 @@
-.commonSearch {
-    position: absolute;
-    height: 782px;
+.boxStyle1{
     width: 253px;
-    border-radius: 40px;
+    height: 550px;
+    background-color: #ffffff;
+    border-radius: 32px;
+    position: absolute;
+    top: 600px; 
+    left: 61px;
     filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
-    background-color: #e5e5e4;
 }
 
-.summoner_name {
-    /* Name1 */
-    position: absolute;
-    width: 116px;
-    height: 34px;
-
-    /* Desktop / Display Small Bold */
-    /* font-family: Poppins; */
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 34px;
-
-    /* identical to box height, or 106% */
-    letter-spacing: 1px;
-
-    /* Grayscale / Title-Active */
-    color: #14142B;
+.nameStyle1{
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 40px;
+    color: #000000;
+    text-decoration-line: none;
 }
 
-.rank {
-    /* Tier */
-    position: absolute;
-    width: 31px;
-    height: 28px;
-    left: 172px;
-    top: 962.54px;
-
-    /* Desktop / Text Small */
-
-    /* font-family: Poppins; */
-    /* font-style: normal; */
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 28px;
-    /* identical to box height, or 175% */
-
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.75px;
-
-    /* Grayscale / Body */
-    color: #4E4B66;
+.rankMP{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 40px;
 }
 
+.manner_point_text{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.tierImg{
+    width: 40px;
+    height: 40px;
+}

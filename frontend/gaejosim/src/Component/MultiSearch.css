@@ -1,0 +1,32 @@
+.class1 {
+    position: absolute;
+    left : -19px;
+}
+
+.class2 {
+    position: absolute;
+    left : 247px;
+}
+
+.class3 {
+    position: absolute;
+    left : 513px;
+}
+
+.class4 {
+    position: absolute;
+    left : 779px;
+}
+
+.class5 {
+    position: absolute;
+    left : 1045px;
+}
+
+.loading {
+    position: absolute;
+    left : 600px;
+    bottom: 700px;
+    font-size : 30px;
+    font-weight: 800;
+}
