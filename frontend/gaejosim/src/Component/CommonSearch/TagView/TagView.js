@@ -1,14 +1,23 @@
 import React, { Component } from "react";
 
 class TagView extends Component {
-    state = {
-        tags : ["tag1", "tag2", "tag3", "tag4", "tag5"],
-        tag_values : []
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            tags : ["tag1", "tag2", "tag3", "tag4", "tag5"],
+            tag_values : props.tag_values
+        }
     }
 
-    static getDerivedStateFromProps = (props, state) => {
-        state.tag_values = props.tag_values
-    }
+    // state = {
+    //     tags : ["tag1", "tag2", "tag3", "tag4", "tag5"],
+    //     tag_values : []
+    // }
+
+    // static getDerivedStateFromProps = (props, state) => {
+    //     state.tag_values = props.tag_values
+    // }
 
     render () {
 
