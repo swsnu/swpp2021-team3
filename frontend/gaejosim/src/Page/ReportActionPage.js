@@ -6,11 +6,16 @@ import ReportAction from '../Component/ReportAction/ReportAction';
 class ReportActionPage extends Component {
 
     render () {
+        const path = this.props.location.pathname; 
+        const splitResult = path.split('/');
+        const reported_summoner = splitResult[2];
+        console.log("reported summoner" ,reported_summoner)
+
         return (
             <div className='ReportActionPage'>
                 <Header />
                 ReportActionPage
-                <ReportAction />
+                <ReportAction reported_summoner = {reported_summoner}/>
             </div>
         )
     }

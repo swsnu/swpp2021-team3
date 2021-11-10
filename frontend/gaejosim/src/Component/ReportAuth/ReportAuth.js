@@ -19,6 +19,7 @@ class ReportAuth extends Component {
         this.postAuthData()
     }
 
+    // Post auth by /api/reports/auth/ call.
     postAuthData = async () => {
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
