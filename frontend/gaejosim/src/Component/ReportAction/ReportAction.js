@@ -207,7 +207,6 @@ class ReportAction extends Component {
                         onChange={(event) => this.setState({ comment: event.target.value })} />
                 </div>
                 <button onClick={() => this.onClickSubmitButton()}>Submit</button>
-                <button onClick={() => this.onClickCancelButton()}>Cancel</button>
             </div>
         )
     }

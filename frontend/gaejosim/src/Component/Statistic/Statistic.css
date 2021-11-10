@@ -1,0 +1,26 @@
+/* style={{
+    position: 'absolute',
+    left: '25%',
+    bottom: '10px',
+    fontWeight: 800,
+    fontSize: '30px',
+    lineHeight: '41px',
+}}  */
+
+.NumReports{
+    position: absolute;
+    left: 25%;
+    bottom: 10px;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 41px;
+}
+ 
+.NumPrevents{
+    position: absolute;
+    right: 25%;
+    bottom: 10px;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 41px;
+}
