@@ -7,23 +7,21 @@ import MultiSearch from '../Component/MultiSearch';
 class MultiSearchResultPage extends Component {
 
     state = {
-        summoners : ''
+        summoners_str : ''
     }
 
     render () {
-        // Set summoners 
         const path = this.props.location.pathname; 
         const splitResult = path.split('/');
         const summonerList = splitResult[2].split('-');
-        this.state.summoners = summonerList.join(',');
-        console.log(this.state.summoners);
+        this.state.summoners_str = summonerList.join(',');
 
         return (
             <div className='MultiSearchResultPage'>
                 <Header />
                 <Searchbar />
                 <h1>MultiSearchResultPage</h1>
-                <MultiSearch summoners={this.state.summoners}/>
+                <MultiSearch summoners={this.state.summoners_str}/>
             </div>
         )
     }

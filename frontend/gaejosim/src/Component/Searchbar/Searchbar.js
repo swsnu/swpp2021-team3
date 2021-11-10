@@ -69,26 +69,21 @@ class Searchbar extends Component {
                 {router}
                 {redirect}
                 {(this.state.search_type==='Single') && 
-                    <input 
-                        style = {{
-                            position: "absolute",
-                            left: "18.96%",
-                            right: "33.06%",
-                            top: "40.11%",
-                            bottom: "43.89%",
-                            // width: "691px",
-                            // height: "144px",
-                            background: "white",
-                            border: "2px solid #5F2EEA",
-                            boxSizing: "border-box",
-                            borderRadius: "16px",
-                        }}
-                        type='text'
-                        placeholder='SummonerID' 
+                    <input style = {{
+                        position: "absolute",
+                        left: "18.96%",
+                        right: "33.06%",
+                        top: "40.11%",
+                        bottom: "43.89%",
+                        background: "white",
+                        border: "2px solid #5F2EEA",
+                        boxSizing: "border-box",
+                        borderRadius: "16px"}}
+                        type='text' placeholder='SummonerID' 
                         value={this.state.summoner_name_single}
                         onChange={(event) => this.setState({ summoner_name_single: event.target.value })} />}
                 {(this.state.search_type==='Multi') && 
-                    <textarea
+                    <textarea type='text' row='10'  
                         style = {{
                             position: "absolute",
                             left: "18.96%",
@@ -100,9 +95,7 @@ class Searchbar extends Component {
                             background: "white",
                             border: "2px solid #5F2EEA",
                             boxSizing: "border-box",
-                            borderRadius: "16px",
-                        }}
-                        type='text' row='10'  
+                            borderRadius: "16px"}}
                         placeholder={`Summoner1 joined the room.\nSummoner2 joined the room.\nSummoner3 joined the room.\nSummoner4 joined the room.\nSummoner5 joined the room.`}
                         value={this.state.summoner_names_multi}
                         onChange={(event) => this.setState({ summoner_names_multi: event.target.value })} />}
@@ -113,12 +106,9 @@ class Searchbar extends Component {
                         right: "18.91%",
                         top: "40.11%",
                         bottom: "52.78%",
-                        // width: "181.63px",
-                        // height: "64px",
                         background: "#5F2EEA",
                         borderRadius: "16px",
-                        color: "white",
-                    }}
+                        color: "white",}}
                     onClick={() => this.onClickSingleOrMultiButton ()}>
                     {(this.state.search_type==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
                 </button>

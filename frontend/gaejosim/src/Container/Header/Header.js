@@ -28,7 +28,7 @@ class Header extends Component {
         return (
             <div className='Header'>
                 {redirect}
-                <img className = 'logo-img' alt = 'logo-img' src = '../../../public/images/imagename' />
+                <img className = 'logo-img' alt = 'logo-img' src = '../../../public/images/logo.png' />
                 {/* <h3 className = 'logo-text'>Gaejosim</h3> */}
                 <button 
                     style={{

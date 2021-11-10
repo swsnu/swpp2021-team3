@@ -38,6 +38,7 @@ class MultiSearch extends Component {
             matchers : response.data.matchers,
             getResult : true
         })
+        
     }
 
     render() {
