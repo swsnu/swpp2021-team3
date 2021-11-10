@@ -1,7 +1,7 @@
 .NumReports{
     position: absolute;
     left: 25%;
-    bottom: 10px;
+    bottom: 600px;
     font-weight: 800;
     font-size: 30px;
     line-height: 41px;
@@ -10,7 +10,7 @@
 .NumPrevents{
     position: absolute;
     right: 25%;
-    bottom: 10px;
+    bottom: 600px;
     font-weight: 800;
     font-size: 30px;
     line-height: 41px;

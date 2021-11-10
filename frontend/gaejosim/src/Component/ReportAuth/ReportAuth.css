@@ -41,12 +41,33 @@
 
 .authStyle{
     position: absolute;
-    background: #EFF0F7;
-    color: black;
-    font-weight: 800;
-    font-size: 30px;
-    bottom: 230px;
-    right: 25%;
-    border: 0;
-    outline: 0;
+    width: 120px;
+    height: 38.4px;
+    background: #76747c;
+    border-radius: 40px;
+    color: #FFFFFF;
+    bottom: 800px;
+    left: 810px
+}
+
+.buttonStyle{
+    position: absolute;
+    width: 120px;
+    height: 38.4px;
+    background: #5F2EEA;
+    border-radius: 40px;
+    color: #FFFFFF;
+    bottom: 800px;
+    left: 950px
+}
+
+.buttonAuthStyle{
+    position: absolute;
+    width: 120px;
+    height: 38.4px;
+    background: #5F2EEA;
+    border-radius: 40px;
+    color: #FFFFFF;
+    bottom: 800px;
+    left: 810px
 }
