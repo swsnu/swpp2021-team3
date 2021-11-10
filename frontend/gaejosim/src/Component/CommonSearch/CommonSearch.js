@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import ResultView from "./ResultView/ResultView";
 import TagView from "./TagView/TagView";
 
+import './CommonSearch.css';
 
  class CommonSearch extends Component {
     constructor(props) {
