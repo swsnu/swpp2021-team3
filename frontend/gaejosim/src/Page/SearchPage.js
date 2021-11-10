@@ -6,6 +6,8 @@ import Searchbar from '../Component/Searchbar/Searchbar';
 import Statistic from '../Component/Statistic/Statistic';
 import ReportedUserList from '../Component/ReportedUser/ReportedUserList';
 
+import './SearchPage.css';
+
 class SearchPage extends Component {
     state = {
         clickReport : false
@@ -24,19 +26,10 @@ class SearchPage extends Component {
             <div className='SearchPage'>
                 {redirect}
                 <Header />
-                SearchPage
+                <div className='Background'></div>
+                <p id = "PageName">Search</p>
                 <Searchbar />
-                <button 
-                    style={{
-                        position: 'absolute',
-                        left: '68.19%',
-                        right: '23.47%',
-                        top: '5.78%',
-                        bottom: '89.96%',
-                        background: '#5F2EEA',
-                        borderRadius: '40px',
-                        color: 'white',
-                    }}
+                <button className = 'gotoReport'
                     onClick={() => this.onClickReportButton()}>
                     Go to Report
                 </button>

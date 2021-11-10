@@ -1,9 +1,9 @@
 .singleInput{
+    width: 691px;
+    height: 144px;
     position: absolute;
-    left: 18.96%;
-    right: 33.06%;
-    top: 40.11%;
-    bottom: 43.89%;
+    left: 273px;
+    top: 311px;
     background-color: white;
     border: 2px solid #5F2EEA;
     box-sizing: border-box;
@@ -11,11 +11,11 @@
 }
 
 .multiInput{
+    width: 691px;
+    height: 144px;
     position: absolute;
-    left: 18.96%;
-    right: 33.06%;
-    top: 40.11%;
-    bottom: 43.89%;
+    left: 273px;
+    top: 311px;
     background-color: white;
     border: 2px solid #5F2EEA;
     box-sizing: border-box;
@@ -23,22 +23,26 @@
 }
 
 .singleormulti{
+    width: 181.63px;
+    height: 64px;
     position: absolute;
-    left: 68.47%;
-    right: 18.91%;
-    top: 40.11%;
-    bottom: 52.78%;
+    left: 986px;
+    top: 311px;
+    outline: 0;
+    border : 0;
     background-color: #5F2EEA;
     color: white;
     border-radius: 16px;
 }
 
 .search{
+    width: 181.63px;
+    height: 64px;
     position: absolute;
-    left: 68.47%;
-    right: 18.91%;
-    top: 49%;
-    bottom: 43.89%;
+    left: 986px;
+    top: 391px;
+    outline: 0;
+    border : 0;
     background-color: #5F2EEA;
     color: white;
     border-radius: 16px;

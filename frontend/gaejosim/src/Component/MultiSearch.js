@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import CommonSearch from "./CommonSearch/CommonSearch";
 import axios from 'axios';
 
+import './MultiSearch.css';
+
 
 class MultiSearch extends Component {
 
@@ -48,23 +50,30 @@ class MultiSearch extends Component {
             this.getMatchers()
         }
         else {
+            let idx = 0
             console.log("finished")
             matcherInfos = this.state.matchers.map((matcher) => {
+                idx = idx + 1
+                let classIdx = 'class' + idx
                 return (
-                <CommonSearch summoner_name = {matcher.summoner_name} 
-                    tier = {matcher.tier}
-                    rank = {matcher.rank}
-                    manner_point = {matcher.manner_point}
-                    tag_values = {matcher.tag_values}
-                    win_lose = {matcher.win_lose}
-                    recent_result = {matcher.recent_result}
-                />
+                <div className = {classIdx}>
+                    <CommonSearch 
+                        summoner_name = {matcher.summoner_name} 
+                        tier = {matcher.tier}
+                        rank = {matcher.rank}
+                        manner_point = {matcher.manner_point}
+                        tag_values = {matcher.tag_values}
+                        win_lose = {matcher.win_lose}
+                        recent_result = {matcher.recent_result}
+                        num = {idx}
+                    />
+                </div>
                 )
             }) 
         }
         return (
             <div className='MultiSearch'>
-                {(!this.state.getResult) && <h3>loading</h3>}
+                {(!this.state.getResult) && <div className = 'loading'>loading...</div>}
                 {(this.state.getResult) && <div className='matchInfos'>{matcherInfos}</div>}
             </div>
         )

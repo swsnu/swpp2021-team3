@@ -1,0 +1,35 @@
+.boxStyle1{
+    width: 253px;
+    height: 550px;
+    background-color: #ffffff;
+    border-radius: 32px;
+    position: absolute;
+    top: 600px; 
+    left: 61px;
+    filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
+}
+
+.nameStyle1{
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 40px;
+    color: #000000;
+    text-decoration-line: none;
+}
+
+.rankMP{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.manner_point_text{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.tierImg{
+    width: 40px;
+    height: 40px;
+}

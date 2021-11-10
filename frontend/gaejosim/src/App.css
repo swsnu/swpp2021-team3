@@ -1,11 +1,13 @@
 .App {
-    position: relative;
-    width: 1440px;
-    height: 1300px;
-    left: 0px;
-    top: 0px;
-    background: #E5E5E5;
+  text-align: center;
+  position: absolute;
+  width: 1440px;
+  height: 1300px;
+  left: 0px;
+  top: 0px;
+  background: #EBECFE;
 }
+
 
 .App-logo {
   height: 40vmin;
