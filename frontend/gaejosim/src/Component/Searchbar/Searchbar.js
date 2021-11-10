@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Redirect, Route } from 'react-router-dom';
+
 import './Searchbar.css'
 
-// TODO: corner case 처리 (1) 이름 적지 않고 내기
-// 질문: multiSearch api search call: 5명 안들어가도 처리 되는지?
 
 class Searchbar extends Component {
     state = {

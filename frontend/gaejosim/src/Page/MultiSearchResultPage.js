@@ -4,6 +4,9 @@ import Header from '../Container/Header/Header';
 import Searchbar from '../Component/Searchbar/Searchbar';
 import MultiSearch from '../Component/MultiSearch';
 
+
+import './MultiSearchResultPage.css';
+
 class MultiSearchResultPage extends Component {
 
     state = {
@@ -17,10 +20,11 @@ class MultiSearchResultPage extends Component {
         this.state.summoners_str = summonerList.join(',');
 
         return (
-            <div className='MultiSearchResultPage'>
+            <div className='MultiSearchResultPageMulti'>
                 <Header />
                 <Searchbar />
-                <h1>MultiSearchResultPage</h1>
+                {/* <h1>MultiSearchResultPage</h1> */}
+                <text className='titleTextStyleMulti'>MultiSearchResultPage</text>
                 <MultiSearch summoners={this.state.summoners_str}/>
             </div>
         )

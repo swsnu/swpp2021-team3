@@ -10,15 +10,6 @@ class TagView extends Component {
         }
     }
 
-    // state = {
-    //     tags : ["tag1", "tag2", "tag3", "tag4", "tag5"],
-    //     tag_values : []
-    // }
-
-    // static getDerivedStateFromProps = (props, state) => {
-    //     state.tag_values = props.tag_values
-    // }
-
     render () {
 
         return (

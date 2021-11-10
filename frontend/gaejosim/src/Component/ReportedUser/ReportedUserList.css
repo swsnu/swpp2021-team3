@@ -1,0 +1,9 @@
+.ReportedUserList {
+    position: absolute;
+    right: 25%;
+    bottom: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 41px;
+    display: inline;
+}
