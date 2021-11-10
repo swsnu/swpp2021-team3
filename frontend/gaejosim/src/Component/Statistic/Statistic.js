@@ -37,8 +37,32 @@ class Statistic extends Component {
         // getStatisticData();
         return (
             <div className='Statistic'>
-                <div className='NumReports'>All Reports: {this.state.numReports}</div>
-                <div className='NumPrevents'>All Prevents: {this.state.numPrevents}</div>
+                <div
+                    style={{
+                        position: 'absolute',
+                        left: '25%',
+                        top: '10px',
+                        fontWeight: 800,
+                        fontSize: '30px',
+                        lineHeight: '41px',
+                    }} 
+                    className='NumReports'>
+
+                    All Reports: {this.state.numReports}
+                    
+                </div>
+                <div
+                    style={{
+                        position: 'absolute',
+                        right: '25%',
+                        bottom: '10px',
+                        fontWeight: 800,
+                        fontSize: '30px',                        
+                        lineHeight: '41px',
+                    }} 
+                    className='NumPrevents'>
+                    All Prevents: {this.state.numPrevents}
+                </div>
             </div>
         )
     }

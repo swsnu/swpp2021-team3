@@ -29,9 +29,35 @@ class Header extends Component {
             <div className='Header'>
                 {redirect}
                 <img className = 'logo-img' alt = 'logo-img' src = '../../../public/images/imagename' />
-                <h3 className = 'logo-text'>Gaejosim</h3>
-                <button onClick={() => this.onClickLoginButton()}>Login</button>
-                <button onClick={() => this.onClickMyPageButton()}>MyPage</button>
+                {/* <h3 className = 'logo-text'>Gaejosim</h3> */}
+                <button 
+                    style={{
+                        position: 'absolute',
+                        left: '77.92%',
+                        right: '13.75%',
+                        top: '5.78%',
+                        bottom: '89.96%',
+                        background: '#5F2EEA',
+                        borderRadius: '40px',
+                        color: 'white',
+                    }}
+                    onClick={() => this.onClickLoginButton()}>
+                    Login
+                </button>
+                <button 
+                    style={{
+                        position: 'absolute',
+                        left: '87.64%',
+                        right: '4.03%',
+                        top: '5.78%',
+                        bottom: '89.96%',
+                        background: '#5F2EEA',
+                        borderRadius: '40px',
+                        color: 'white',
+                    }}
+                    onClick={() => this.onClickMyPageButton()}>
+                    MyPage
+                </button>
             </div>
         )
     }

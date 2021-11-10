@@ -2,88 +2,140 @@ import React, { Component } from "react";
 import { Redirect, Route } from 'react-router-dom';
 
 // TODO: corner case 처리 (1) 이름 적지 않고 내기
-
+// 질문: multiSearch api search call: 5명 안들어가도 처리 되는지?
 
 class Searchbar extends Component {
     state = {
-        summonerName: '',
-        summonerList: '',
-        searchType: 'Single',
-        clickSearch: false
+        summoner_name_single: '',
+        summoner_names_multi: '',
+        summoner_list: '',
+        summoners_str : '',
+        search_type: 'Single',
+        click_search: false
     }
     
     onClickSearchButton = () => {
-        this.setState({ clickSearch: true });
+        this.setState({ click_search: true });
     }
 
     onClickSingleOrMultiButton = () => {
-        if(this.state.searchType === 'Single') {
-            this.setState({ searchType : 'Multi'});
+        if(this.state.search_type === 'Single') {
+            this.setState({ search_type : 'Multi'});
         }
         else {
-            this.setState({ searchType : 'Single'});
+            this.setState({ search_type : 'Single'});
         }
     }
 
-    // TODO: MultiSearch parsing 구현하기: 한국어로 할건지 영어로 할건지 논의
-    // https://regexr.com/
     parseSummoner = () => {
-        if(this.state.searchType === 'Multi') {
-            let summonerArr = []
-            let summonerStr =''
-            if(this.state.summonerList) {
-                summonerArr = this.state.summonerList.split(' joined the room.')
+        if(this.state.search_type === 'Multi') {
+            let summoners_arr = []
+            if(this.state.summoner_names_multi != '') {
+                summoners_arr = this.state.summoner_names_multi.split(' joined the room.')
+                summoners_arr = summoners_arr.map((summoner) => (summoner).includes('\n')? (summoner).replace('\n', '') : (summoner))
             }
-            if(summonerArr.length === 6) {
-                summonerArr.pop()
-                summonerStr = summonerArr.join('-');
+            if(summoners_arr.length === 6) {
+                summoners_arr.pop()
+                this.state.summoners_str = summoners_arr.join('-');
             } 
             else {
-                console.log(summonerArr)
                 alert('You have to put five summoners for multiSearch')
             }
-            this.setState({ summonerList : summonerStr })
         }
         else {
-            if(this.state.summonerName === '')
-                alert('You cannot search summoner without typing summonerName')
+            if(this.state.summoner_name_single === '')
+                alert('You cannot search summoner without typing any summonerName')
         }
     }
 
     render() {
         let redirect = null;
         let router = null;
-        if (this.state.clickSearch) {
-            if(this.state.searchType === 'Single') {
-                if(this.state.summonerName != '') {
-                    redirect = <Redirect to = {`/singleSearchResult/${this.state.summonerName}`} />
+        if (this.state.click_search) {
+            if(this.state.search_type === 'Single') {
+                if(this.state.summoner_name_single != '') {
+                    redirect = <Redirect to = {`/singleSearchResult/${this.state.summoner_name_single}`} />
                 }
                 else {
-                    this.setState({ clickSearch : false})
+                    this.setState({ click_search : false })
                     redirect = <Redirect to ={'/search'} />
                 }
             } else {
-                // SummonerList는 Summoner1-Summoner2-Summoner3-Summoner4-Summoner5 형태로 전달됨.
-                redirect = <Redirect to = {`/multiSearchResult/${this.state.summonerList}`}/>
+                redirect = <Redirect to = {`/multiSearchResult/${this.state.summoners_str}`}/>
             }
         }
         return (
             <div className='Searchbar'>
                 {router}
                 {redirect}
-                {(this.state.searchType==='Single') && 
-                    <input type='text' placeholder='SummonerID' 
-                        value={this.state.summonerName}
-                        onChange={(event) => this.setState({ summonerName: event.target.value })} />}
-                {(this.state.searchType==='Multi') && 
-                    <textarea type='text' row='10'  
+                {(this.state.search_type==='Single') && 
+                    <input 
+                        style = {{
+                            position: "absolute",
+                            left: "18.96%",
+                            right: "33.06%",
+                            top: "40.11%",
+                            bottom: "43.89%",
+                            // width: "691px",
+                            // height: "144px",
+                            background: "white",
+                            border: "2px solid #5F2EEA",
+                            boxSizing: "border-box",
+                            borderRadius: "16px",
+                        }}
+                        type='text'
+                        placeholder='SummonerID' 
+                        value={this.state.summoner_name_single}
+                        onChange={(event) => this.setState({ summoner_name_single: event.target.value })} />}
+                {(this.state.search_type==='Multi') && 
+                    <textarea
+                        style = {{
+                            position: "absolute",
+                            left: "18.96%",
+                            right: "33.06%",
+                            top: "40.11%",
+                            bottom: "43.89%",
+                            // width: "691px",
+                            // height: "144px",
+                            background: "white",
+                            border: "2px solid #5F2EEA",
+                            boxSizing: "border-box",
+                            borderRadius: "16px",
+                        }}
+                        type='text' row='10'  
                         placeholder={`Summoner1 joined the room.\nSummoner2 joined the room.\nSummoner3 joined the room.\nSummoner4 joined the room.\nSummoner5 joined the room.`}
-                        value={this.state.summonerList}
-                        onChange={(event) => this.setState({ summonerList: event.target.value })} />}
-                <button onClick={() => this.onClickSingleOrMultiButton ()}>
-                    {(this.state.searchType==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
+                        value={this.state.summoner_names_multi}
+                        onChange={(event) => this.setState({ summoner_names_multi: event.target.value })} />}
+                <button 
+                    style={{
+                        position: "absolute",
+                        left: "68.47%",
+                        right: "18.91%",
+                        top: "40.11%",
+                        bottom: "52.78%",
+                        // width: "181.63px",
+                        // height: "64px",
+                        background: "#5F2EEA",
+                        borderRadius: "16px",
+                        color: "white",
+                    }}
+                    onClick={() => this.onClickSingleOrMultiButton ()}>
+                    {(this.state.search_type==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
                 </button>
-                <button onClick={() => { 
+                <button 
+                    style={{
+                        position: "absolute",
+                        left: "68.47%",
+                        right: "18.91%",
+                        top: "49%",
+                        bottom: "43.89%",
+                        // width: "181.63px",
+                        // height: "64px",
+                        background: "#5F2EEA",
+                        borderRadius: "16px",
+                        color: "white",
+                    }}
+                    onClick={() => { 
                     this.parseSummoner() 
                     this.onClickSearchButton()}}>Search</button>
             </div>

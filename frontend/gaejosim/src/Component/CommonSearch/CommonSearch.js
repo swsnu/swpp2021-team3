@@ -6,29 +6,21 @@ import TagView from "./TagView/TagView";
 
 
  class CommonSearch extends Component {
-    state = {
-        summoner_name : '',
-        tier : '',
-        rank: '',
-        manner_point : '',
-        tag_values : [],
-        recent_result : [],
-        win_lose : [],
+    constructor(props) {
+        super(props)
+        this.state = {
+            summoner_name : props.summoner_name,
+            tier : props.tier,
+            rank : props.rank,
+            manner_point : props.manner_point,
+            tag_values : props.tag_values,
+            recent_result : props.recent_result,
+            win_lose : props.win_lose
+        }
     }
-
-    static getDerivedStateFromProps = (props, state) => {
-        state.summoner_name = props.summoner_name
-        state.tier = props.tier
-        state.rank = props.rank
-        state.manner_point = props.manner_point
-        state.tag_values = props.tag_values
-        state.recent_result = props.recent_result
-        state.win_lose = props.win_lose
-    }
-
+    
     render() {
         const winLoseArr = this.state.win_lose
-        console.log(winLoseArr)
         let idx = -1;
         const resultViews = this.state.recent_result.map((result) => {
             idx = idx + 1;
@@ -36,8 +28,6 @@ import TagView from "./TagView/TagView";
                 <ResultView win_lose = {winLoseArr[idx]} recent_result = {result}/>
             )
         })
-
-
         return (
             <div className='commonSearch'>            
                 <NavLink className = 'summoner_name' exact to = {`/singleSearchResult/${this.state.summoner_name}`}>

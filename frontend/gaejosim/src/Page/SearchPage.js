@@ -26,7 +26,20 @@ class SearchPage extends Component {
                 <Header />
                 SearchPage
                 <Searchbar />
-                <button onClick={() => this.onClickReportButton()}>Go to Report</button>
+                <button 
+                    style={{
+                        position: 'absolute',
+                        left: '68.19%',
+                        right: '23.47%',
+                        top: '5.78%',
+                        bottom: '89.96%',
+                        background: '#5F2EEA',
+                        borderRadius: '40px',
+                        color: 'white',
+                    }}
+                    onClick={() => this.onClickReportButton()}>
+                    Go to Report
+                </button>
                 <Statistic />
                 <ReportedUserList />
             </div>
