@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import './Statistic.css'
 
 // TODO: /api/statistics/ 만들어 져야 완성 가능
 
@@ -14,8 +15,12 @@ class Statistic extends Component {
     render() {
         return (
             <div className='Statistic'>
-                <div className='NumReports'>All Reports: {this.state.numReports}</div>
-                <div className='NumPrevents'>All Prevents: {this.state.numPrevents}</div>
+                <div className='NumReports'>
+                    All Reports: {this.state.numReports}
+                </div>
+                <div className='NumPrevents'>
+                    All Prevents: {this.state.numPrevents}
+                </div>
             </div>
         )
     }

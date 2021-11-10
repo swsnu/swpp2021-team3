@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
+import './ReportAuth.css';
 
 class ReportAuth extends Component {
 
@@ -51,18 +52,35 @@ class ReportAuth extends Component {
        if(this.state.clickNext === true) {
         redirect = <Redirect to={`/ReportAction/${this.state.report_summoner}`} />
        }
+       const buttonStyle = {
+            position: 'absolute', width: '120px', height: '38.4px', background: '#5F2EEA', borderRadius: '40px', color: 'white', bottom: '60px', left: '660px'
+       }
+       const authStyle = {
+            position: 'absolute',
+            background: '#EFF0F7',
+            color: 'black',
+            fontWeight: 800,
+            fontSize: '30px',
+            bottom: '230px',
+            right: '25%', 
+            border: 0,
+            outline: 0,
+        }
         return (
             <div className='ReportAuth'>
                 {redirect}
+                <text className='titleTextStyle'>Report</text>
+                <div className='boxStyle' />
+                <text className='subtitleTextStyle'>Select A Troll</text>
                 <input className='reportSummoner'
-                    type='text'
+                    type='text' 
                     placeholder='Pick SummonerID want to report'
                     onChange={(event) => this.setState({ report_summoner : event.target.value })}
                 />
-                {(!this.state.authenticated) && <button onClick={() => this.onClickAuthenticateButton()}>Authenticate</button>}
-                {(this.state.authenticated) && <div>Authenticated</div>}
-                {(this.state.authenticated) && <button onClick={() => this.onClickNextButton()}>Next</button>}
-                {(!this.state.authenticated) && <button onClick={() => alert("Not authenticated")}>Next</button>}
+                {(!this.state.authenticated) && <button style={authStyle} onClick={() => this.onClickAuthenticateButton()}>Authenticate</button>}
+                {(this.state.authenticated) && <div style={authStyle}>Authenticated</div>}
+                {(this.state.authenticated) && <button style={buttonStyle} onClick={() => this.onClickNextButton()}>Next</button>}
+                {(!this.state.authenticated) && <button style={buttonStyle} onClick={() => alert("Not authenticated")}>Next</button>}
             </div>
         )
     }

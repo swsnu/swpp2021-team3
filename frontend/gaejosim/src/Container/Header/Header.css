@@ -1,0 +1,21 @@
+.loginButton{
+    position: absolute;
+    left: 77.92%;
+    right: 13.75%;
+    top: 5.78%;
+    bottom: 89.96%;
+    background: #5F2EEA;
+    border-radius: 40px;
+    color: white;
+}
+
+.mypageButton{
+    position: absolute;
+    left: 87.64%;
+    right: 4.03%;
+    top: 5.78%;
+    bottom: 89.96%;
+    background: #5F2EEA;
+    border-radius: 40px;
+    color: white;
+}
