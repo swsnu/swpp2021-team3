@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Route } from 'react-router-dom';
+import './Searchbar.css'
 
 // TODO: corner case 처리 (1) 이름 적지 않고 내기
 // 질문: multiSearch api search call: 5명 안들어가도 처리 되는지?
@@ -69,62 +70,20 @@ class Searchbar extends Component {
                 {router}
                 {redirect}
                 {(this.state.search_type==='Single') && 
-                    <input style = {{
-                        position: "absolute",
-                        left: "18.96%",
-                        right: "33.06%",
-                        top: "40.11%",
-                        bottom: "43.89%",
-                        background: "white",
-                        border: "2px solid #5F2EEA",
-                        boxSizing: "border-box",
-                        borderRadius: "16px"}}
+                    <input className='singleInput'
                         type='text' placeholder='SummonerID' 
                         value={this.state.summoner_name_single}
                         onChange={(event) => this.setState({ summoner_name_single: event.target.value })} />}
                 {(this.state.search_type==='Multi') && 
-                    <textarea type='text' row='10'  
-                        style = {{
-                            position: "absolute",
-                            left: "18.96%",
-                            right: "33.06%",
-                            top: "40.11%",
-                            bottom: "43.89%",
-                            // width: "691px",
-                            // height: "144px",
-                            background: "white",
-                            border: "2px solid #5F2EEA",
-                            boxSizing: "border-box",
-                            borderRadius: "16px"}}
+                    <textarea className='multiInput' type='text' row='10'  
                         placeholder={`Summoner1 joined the room.\nSummoner2 joined the room.\nSummoner3 joined the room.\nSummoner4 joined the room.\nSummoner5 joined the room.`}
                         value={this.state.summoner_names_multi}
                         onChange={(event) => this.setState({ summoner_names_multi: event.target.value })} />}
-                <button 
-                    style={{
-                        position: "absolute",
-                        left: "68.47%",
-                        right: "18.91%",
-                        top: "40.11%",
-                        bottom: "52.78%",
-                        background: "#5F2EEA",
-                        borderRadius: "16px",
-                        color: "white",}}
+                <button className='singleormulti'
                     onClick={() => this.onClickSingleOrMultiButton ()}>
                     {(this.state.search_type==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
                 </button>
-                <button 
-                    style={{
-                        position: "absolute",
-                        left: "68.47%",
-                        right: "18.91%",
-                        top: "49%",
-                        bottom: "43.89%",
-                        // width: "181.63px",
-                        // height: "64px",
-                        background: "#5F2EEA",
-                        borderRadius: "16px",
-                        color: "white",
-                    }}
+                <button className='search'
                     onClick={() => { 
                     this.parseSummoner() 
                     this.onClickSearchButton()}}>Search</button>

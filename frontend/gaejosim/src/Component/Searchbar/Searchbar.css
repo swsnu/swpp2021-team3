@@ -1,0 +1,45 @@
+.singleInput{
+    position: absolute;
+    left: 18.96%;
+    right: 33.06%;
+    top: 40.11%;
+    bottom: 43.89%;
+    background-color: white;
+    border: 2px solid #5F2EEA;
+    box-sizing: border-box;
+    border-radius: 16px;
+}
+
+.multiInput{
+    position: absolute;
+    left: 18.96%;
+    right: 33.06%;
+    top: 40.11%;
+    bottom: 43.89%;
+    background-color: white;
+    border: 2px solid #5F2EEA;
+    box-sizing: border-box;
+    border-radius: 16px;
+}
+
+.singleormulti{
+    position: absolute;
+    left: 68.47%;
+    right: 18.91%;
+    top: 40.11%;
+    bottom: 52.78%;
+    background-color: #5F2EEA;
+    color: white;
+    border-radius: 16px;
+}
+
+.search{
+    position: absolute;
+    left: 68.47%;
+    right: 18.91%;
+    top: 49%;
+    bottom: 43.89%;
+    background-color: #5F2EEA;
+    color: white;
+    border-radius: 16px;
+}

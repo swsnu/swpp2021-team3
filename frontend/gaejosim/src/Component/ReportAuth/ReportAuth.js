@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
+import './ReportAuth.css';
 
 class ReportAuth extends Component {
 
@@ -68,49 +69,11 @@ class ReportAuth extends Component {
         return (
             <div className='ReportAuth'>
                 {redirect}
-                <text
-                    style={{
-                        position: 'absolute',
-                        top: '100px',
-                        left: '610px', 
-                        fontWeight: 800,
-                        fontSize: '64px',
-                        lineHeight: '66px',
-                    }}>Report</text>
-                <div
-                style={{
-                    width: '840px',
-                    height: '360px',
-                    background: '#F8F8F8',
-                    borderRadius: '32px',
-                    position: 'absolute',
-                    left: '20.83%', right: '20.83%',
-                    top: '200px', 
-                    filter: 'drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04))',
-                }} />
-                <text
-                    style={{
-                        // display: 'flex',
-                        position: 'absolute',
-                        top: '280px',
-                        left: '25.97%', 
-                        fontWeight: 800,
-                        fontSize: '40px',
-                        lineHeight: '66px',
-                    }}>Select A Troll</text>
+                <text className='titleTextStyle'>Report</text>
+                <div className='boxStyle' />
+                <text className='subtitleTextStyle'>Select A Troll</text>
                 <input className='reportSummoner'
-                    type='text'
-                    style={{
-                        width: '691px',
-                        height: '64px',
-                        position: 'absolute',
-                        left: '25.97%', 
-                        right: '26.04%', 
-                        top: '350px', 
-                        // bottom: '38.89%', 
-                        background: '#EFF0F7', 
-                        borderRadius: '16px'
-                    }}
+                    type='text' 
                     placeholder='Pick SummonerID want to report'
                     onChange={(event) => this.setState({ report_summoner : event.target.value })}
                 />
