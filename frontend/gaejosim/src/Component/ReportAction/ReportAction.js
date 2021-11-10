@@ -1,32 +1,30 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
-// import ReportAuth from '../ReportAuth/ReportAuth';
-import Select from 'react-select';
 
-//todo: axios post
-
-class ReportAction extends React.Component {
-    state = {
-        curr_user: '',
-        tag: [],
-        comment: '',
-        reported_summoner: '서울대',
-        evaluation: 0,
-        clickCancel: false,
-        clickSubmit: false,
-        clickTag1_1: false,
-        clickTag1_2: false,
-        clickTag2_1: false,
-        clickTag2_2: false,
-        clickTag3_1: false,
-        clickTag3_2: false,
-        clickTag4_1: false,
-        clickTag4_2: false,
-        clickTag5_1: false,
-        clickTag5_2: false,
-        clickTags: []
-    };
+class ReportAction extends Component {
+    
+    constructor(props) {
+        super(props)
+        this.state = {
+            reported_summoner: props.reported_summoner,
+            comment: '',
+            evaluation: 0,
+            clickTag1_1: false,
+            clickTag1_2: false,
+            clickTag2_1: false,
+            clickTag2_2: false,
+            clickTag3_1: false,
+            clickTag3_2: false,
+            clickTag4_1: false,
+            clickTag4_2: false,
+            clickTag5_1: false,
+            clickTag5_2: false,
+            clickTags: [],
+            clickCancel: false,
+            clickSubmit: false,
+        }
+    }
 
 
     onClickCancelButton = () => {
@@ -34,27 +32,35 @@ class ReportAction extends React.Component {
     }
 
     onClickSubmitButton = () => {
-        this.postReportData()
-        this.setState({ clickSubmit: true })
+        let tagList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
+            this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
+        tagList = tagList.filter(tag => { return tag })
+        this.state.clickTags = tagList    
+
+        console.log(this.state.clickTags)
+        if(this.state.clickTags.length === 0) {
+            alert('You should check at least one tag')
+            this.setState({ clickSubmit: false })
+        }
+        else {
+            this.postReportData()
+            this.setState({ clickSubmit: true })
+        }
     }
 
+    // Post auth by /api/reports/auth/ call.
     postReportData = () => {
 
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
-        let tagList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
-        this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
-
-        tagList = tagList.filter(tag => { return tag })
-        this.state.clickTags = tagList
-        console.log(this.state.clickTags)
+        
+        
         console.log(this.state.evaluation)
+        console.log(this.state.reported_summoner)
 
-        let tagListString = tagList.join(',');
+        let tagListString = this.state.clickTags.join(',');
 
         axios.get('/api/token/').then(
-            console.log("set token")
         )
 
         axios.post('/api/signin/', {
@@ -136,7 +142,7 @@ class ReportAction extends React.Component {
     }
 
     render() {
-        let redirect = null;
+        let redirect
 
         if (this.state.clickCancel) {
             redirect = <Redirect to={`/`} />
@@ -147,16 +153,15 @@ class ReportAction extends React.Component {
 
         return (
             <div className='ReportAction'>
-
+                {redirect}
                 <div className='Process'>
                     <h3>1. Choose Manner Point of reporting player.</h3>
-                    <text>Select a number between 1 to 10</text>
+                    <text>Select a number between 0 to 100</text>
                     <input
                         type='number'
                         placeholder="Evaluate Manner Point of reporting player"
                         max='10'
-                        min='1'
-                        value={this.state.evaluation}
+                        min='100'
                         onChange={(event) => this.setState({ evaluation: event.target.value })} />
                 </div>
                 <div className='Process'>
@@ -192,7 +197,6 @@ class ReportAction extends React.Component {
                         <button onClick={() => this.onClickTag5_2Button()}>
                             {(this.state.clickTag5_2 !== false) ? '라인 거부 : [라인 스왑] V' : '라인 거부 : [라인 스왑]'}
                         </button>
-                        
                     </div>
                 </div>
                 <div className='Process'>
