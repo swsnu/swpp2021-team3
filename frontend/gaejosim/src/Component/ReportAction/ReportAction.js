@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
+import './ReportAction.css';
 
 class ReportAction extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {
-            reported_summoner: props.reported_summoner,
+            reported_summoner: "2625", // props.reported_summoner,
             comment: '',
             evaluation: 0,
             clickTag1_1: false,
@@ -33,12 +34,12 @@ class ReportAction extends Component {
 
     onClickSubmitButton = () => {
         let tagList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
-            this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
+        this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
         tagList = tagList.filter(tag => { return tag })
-        this.state.clickTags = tagList    
+        this.state.clickTags = tagList
 
         console.log(this.state.clickTags)
-        if(this.state.clickTags.length === 0) {
+        if (this.state.clickTags.length === 0) {
             alert('You should check at least one tag')
             this.setState({ clickSubmit: false })
         }
@@ -53,8 +54,8 @@ class ReportAction extends Component {
 
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-        
-        
+
+
         console.log(this.state.evaluation)
         console.log(this.state.reported_summoner)
 
@@ -154,60 +155,61 @@ class ReportAction extends Component {
         return (
             <div className='ReportAction'>
                 {redirect}
-                <div className='Process'>
-                    <h3>1. Choose Manner Point of reporting player.</h3>
-                    <text>Select a number between 0 to 100</text>
+                <div className='Box1'>
+                    <h3 id="MannerPoint">1. Choose Manner Point of reporting player.</h3>
+                    <text id="MannerPointDescription">Select a number between 0 to 100</text>
                     <input
+                        id="MannerPointInput"
                         type='number'
                         placeholder="Evaluate Manner Point of reporting player"
                         max='10'
                         min='100'
                         onChange={(event) => this.setState({ evaluation: event.target.value })} />
                 </div>
-                <div className='Process'>
-                    <h3>2.Choose all Tags appropriate to describe behavior of reporting player if you want.</h3>
+                <div className='Box2'>
+                    <h3 id="Tag">2.Choose all Tags appropriate to describe behavior of reporting player if you want.</h3>
                     <div className='tags'>
-                        <button onClick={() => this.onClickTag1_1Button()}>
-                            {(this.state.clickTag1_1 !== false) ? '언행 : [과격한 언행] V' : '언행 : [과격한 언행]'}
+                        <button id="button" onClick={() => this.onClickTag1_1Button()}>
+                            {(this.state.clickTag1_1 !== false) ? '과격한 언행 V' : '과격한 언행'}
                         </button>
-                        <button onClick={() => this.onClickTag1_2Button()}>
-                            {(this.state.clickTag1_2 !== false) ? '언행 : [비속어 사용] V' : '언행 : [비속어 사용]'}
+                        <button id="button" onClick={() => this.onClickTag1_2Button()}>
+                            {(this.state.clickTag1_2 !== false) ? '비속어 사용 V' : '비속어 사용'}
                         </button>
-                        <button onClick={() => this.onClickTag2_1Button()}>
-                            {(this.state.clickTag2_1 !== false) ? '게임 폭파 : [고의성 게임 던짐] V' : '게임 폭파 : [고의성 게임 던짐]'}
+                        <button id="button" onClick={() => this.onClickTag2_1Button()}>
+                            {(this.state.clickTag2_1 !== false) ? '고의성 게임 던짐 V' : '고의성 게임 던짐'}
                         </button>
-                        <button onClick={() => this.onClickTag2_2Button()}>
-                            {(this.state.clickTag2_2 !== false) ? '게임 폭파 : [탈주/닷지] V' : '게임 폭파 : [탈주/닷지]'}
+                        <button id="button" onClick={() => this.onClickTag2_2Button()}>
+                            {(this.state.clickTag2_2 !== false) ? '탈주/닷지 V' : '탈주/닷지'}
                         </button>
-                        <button onClick={() => this.onClickTag3_1Button()}>
-                            {(this.state.clickTag3_1 !== false) ? '게임 시작 전 : [대리 게임] V' : '게임 시작 전 : [대리 게임]'}
+                        <button id="button" onClick={() => this.onClickTag3_1Button()}>
+                            {(this.state.clickTag3_1 !== false) ? '대리 게임 V' : '대리 게임'}
                         </button>
-                        <button onClick={() => this.onClickTag3_2Button()}>
-                            {(this.state.clickTag3_2 !== false) ? '게임 시작 전 : [픽 상황 갑질] V' : '게임 시작 전 : [픽 상황 갑질]'}
+                        <button id="button" onClick={() => this.onClickTag3_2Button()}>
+                            {(this.state.clickTag3_2 !== false) ? '픽 상황 갑질 V' : '픽 상황 갑질'}
                         </button>
-                        <button onClick={() => this.onClickTag4_1Button()}>
-                            {(this.state.clickTag4_1 !== false) ? '게임 중 : [cs 스틸] V' : '게임 중 : [cs 스틸]'}
+                        <button id="button" onClick={() => this.onClickTag4_1Button()}>
+                            {(this.state.clickTag4_1 !== false) ? 'cs 스틸 V' : 'cs 스틸'}
                         </button>
-                        <button onClick={() => this.onClickTag4_2Button()}>
-                            {(this.state.clickTag4_2 !== false) ? '게임 중 : [정치] V' : '게임 중 : [정치]'}
+                        <button id="button" onClick={() => this.onClickTag4_2Button()}>
+                            {(this.state.clickTag4_2 !== false) ? '정치 V' : '정치'}
                         </button>
-                        <button onClick={() => this.onClickTag5_1Button()}>
-                            {(this.state.clickTag5_1 !== false) ? '게임 중 : [방관] V' : '게임 중 : [방관]'}
+                        <button id="button" onClick={() => this.onClickTag5_1Button()}>
+                            {(this.state.clickTag5_1 !== false) ? '방관 V' : '방관'}
                         </button>
-                        <button onClick={() => this.onClickTag5_2Button()}>
-                            {(this.state.clickTag5_2 !== false) ? '라인 거부 : [라인 스왑] V' : '라인 거부 : [라인 스왑]'}
+                        <button id="button" onClick={() => this.onClickTag5_2Button()}>
+                            {(this.state.clickTag5_2 !== false) ? '라인 스왑 V' : '라인 스왑'}
                         </button>
                     </div>
                 </div>
-                <div className='Process'>
-                    <h3>4. Write down Comment if you want</h3>
-                    <input
+                <div className='Box3'>
+                    <h3 id="Comment">3. Write down Comment if you want</h3>
+                    <input id="CommentInput"
                         placeholder="Enter Comments on reported player if you want"
                         value={this.state.comment}
                         onChange={(event) => this.setState({ comment: event.target.value })} />
                 </div>
-                <button onClick={() => this.onClickSubmitButton()}>Submit</button>
-                <button onClick={() => this.onClickCancelButton()}>Cancel</button>
+                <button id="submit" onClick={() => this.onClickSubmitButton()}>Submit</button>
+                <button id="cancel" onClick={() => this.onClickCancelButton()}>Cancel</button>
             </div>
         )
     }

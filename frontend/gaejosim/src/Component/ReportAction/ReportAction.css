@@ -1,0 +1,224 @@
+/* .Process {
+    position: absolute;
+    height: 840px;
+    width: 480px;
+    left: 300px;
+    right: 300px;
+    top: 278px;
+    bottom: 1227px;
+} */
+
+.ReportAction{
+    background-color: aquamarine;
+}
+
+.Box1{
+    position: absolute;
+    height: 240px;
+    width: 840px;
+    left: 300px;
+    right: 300px;
+    border-radius: 32px;
+    top: 278px;
+    bottom: 1227px;
+    background-color: #FFFFFF;
+}
+.Box1 #MannerPoint{
+    position : absolute;
+    height: 50px;
+    width: 1000px;
+    top: 20px;
+    left: 54px;
+    right: 863px;
+    bottom: 1510px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.Box1 #MannerPointDescription{
+    position : absolute;
+    height: 50px;
+    width: 1000px;
+    top: 425px;
+    left: 380px;
+    right: 863px;
+    bottom: 1510px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.Box1 #MannerPointInput{
+    position : absolute;
+    height: 80px;
+    width: 691px;
+    left: 74px;
+    top: 88px;
+    border-radius: 16px;
+    outline:0;
+    border:0;
+    background-color: #EFF0F7;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.Box2{
+    position: absolute;
+    height: 240px;
+    width: 840px;
+    border-radius: 32px;
+    left: 300px;
+    right: 300px;
+    top: 577px;
+    bottom: 688px;
+    background-color: #FFFFFF;
+}
+
+.Box2 #Tag{
+    position : absolute;
+    height: 50px;
+    width: 1000px;
+    top: 20px;
+    left: 54px;
+    right: 863px;
+    bottom: 1510px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+.Box2 .tags{
+    position : absolute;
+    height: 120px;
+    width: 750px;
+    top: 80px;
+    left: 54px;
+    right: 863px;
+    bottom: 1510px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.Box2 #button{
+    position : relative;
+    height: 44px;
+    width: 140px;
+    left: 10px;
+    right: 10px;
+    top: 0px;
+    border-radius: 16px;
+    background-color: #5F2EEA;
+    outline:0;
+    border:0;
+    padding: 3px;
+    margin-left:6px;
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.Box3{
+    position: absolute;
+    height: 240px;
+    width: 840px;
+    border-radius: 32px;
+    left: 300px;
+    right: 300px;
+    top: 876px;
+    bottom: 149px;
+    background-color: #FFFFFF;
+}
+
+.Box3 #Comment{
+    position : absolute;
+    height: 50px;
+    width: 1000px;
+    top: 20px;
+    left: 54px;
+    right: 863px;
+    bottom: 1510px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.Box3 #CommentInput{
+    position : absolute;
+    height: 80px;
+    width: 691px;
+    left: 74px;
+    top: 88px;
+    border-radius: 16px;
+    outline:0;
+    border:0;
+    background-color: #EFF0F7;
+
+}
+
+#submit{
+    position: absolute;
+    height: 38.4px;
+    width: 108px;
+    left: 596px;
+    top: 1150px;
+    border-radius: 16px;
+    background-color: #5F2EEA;
+    outline:0;
+    border:0;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+    text-align: center;
+    color: #FFFFFF;
+
+}
+
+#cancel{
+    position: absolute;
+    height: 38.4px;
+    width: 108px;
+    left: 740px;
+    top: 1150px;
+    border-radius: 16px;
+    background-color: #5F2EEA;
+    outline:0;
+    border:0;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+    text-align: center;
+    color: #FFFFFF;
+}
