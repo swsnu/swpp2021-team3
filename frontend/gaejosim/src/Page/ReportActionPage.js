@@ -15,7 +15,7 @@ class ReportActionPage extends Component {
         return (
             <div className='ReportActionPage'>
                 <Header />
-                <p id="PageName">Report</p>
+                <p id="ReportPageName">Report</p>
                 <ReportAction reported_summoner={reported_summoner} />
             </div>
         )
