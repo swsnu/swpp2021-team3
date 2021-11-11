@@ -20,10 +20,10 @@ import './Result.css'
 
 
 const Result = (props) => {
-    let url_cham = ''
-    let url_lane = ''
-    url_cham = `./images/champion_${props.result.champion_id}.png`
-    url_lane = `./images/lane_${props.result.lane}.png`
+    // let url_cham = ''
+    // let url_lane = ''
+    // url_cham = `./images/champion_${props.result.champion_id}.png`
+    // url_lane = `./images/lane_${props.result.lane}.png`
     let random_champion = props.result.champion_id % 10
     return (
         <div className='result'>
