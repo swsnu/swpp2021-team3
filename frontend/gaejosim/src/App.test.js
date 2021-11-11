@@ -12,6 +12,12 @@ import SearchPage from './Page/SearchPage';
 import SignupPage from './Page/SignupPage';
 import SingleSearchResultPage from './Page/SingleSearchResultPage';
 
+test('renders app', () => {
+  render(<App />);
+  const linkElement = screen.getByText();
+  expect(linkElement).toBeInTheDocument();
+});
+
 test('renders finduserinfo page', () => {
   render(<FindUserInfoPage />);
   const linkElement = screen.getByText(/FindUserInfoPage/);

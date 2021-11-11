@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-
 import FindUserInfoPage from './Page/FindUserInfoPage';
 import LoginPage from './Page/LoginPage';
 import MultiSearchResultPage from './Page/MultiSearchResultPage';

@@ -9,9 +9,9 @@ describe('<ResultView />', () => {
       expect(wrapper.length).toBe(1);
     });
 
-    it('should render win_lose', () => {
-      const component = shallow(<ResultView champion={'TEST_WIN_LOSE'} />);
-      const wrapper = component.find('.win_lose');
-      expect(wrapper.text()).toEqual('TEST_WIN_LOSE');
-    });
+    // it('should render win_lose', () => {
+    //   const component = shallow(<ResultView champion={'TEST_WIN_LOSE'} />);
+    //   const wrapper = component.find('.win_lose');
+    //   expect(wrapper.text()).toEqual('TEST_WIN_LOSE');
+    // });
 });
