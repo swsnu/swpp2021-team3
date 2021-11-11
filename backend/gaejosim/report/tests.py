@@ -30,10 +30,11 @@ class ReportTestCase(TestCase):
         self.manner_point2 = MannerPoint.objects.create()
         self.test_summoner2 = Summoner.objects.create(
             summoner_puuid=(
-                "5cy3XVto0WOTsiAMd9mE13XXNXkiuTgGpBZd-WgiTWmc"
-                "RahE7w4dZx5MgdDZ5e1conNMGEh1cVnOPQ"
+                "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
+                "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("op3Xht8bvZReuy-aF1ItNnDiUkGx-bloo8q9df1ctlN55DQ9quBfn8VpUw"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
