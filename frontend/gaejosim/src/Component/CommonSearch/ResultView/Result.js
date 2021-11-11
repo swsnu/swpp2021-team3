@@ -51,10 +51,6 @@ const Result = (props) => {
             </b>
             <b className='KDA'>
                 {props.result.kills}/{props.result.deaths}/{props.result.assists}
-                {/* <div className='K'>{props.result.kills}</div>
-                <div className='D'>{props.result.deaths}</div>
-                <div className='A'>{props.result.assists}</div>
-                 */}
             </b>
             {/* <div className='win'>{props.result.win}</div> */}
         </div>

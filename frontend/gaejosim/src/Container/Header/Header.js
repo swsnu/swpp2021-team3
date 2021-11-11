@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 
 import './Header.css';
+import logo from './logo.png';
 
 class Header extends Component {
     state = {
@@ -28,7 +29,7 @@ class Header extends Component {
         return (
             <div className='Header'>
                 {redirect}
-                <img className='logoImage' alt='logo-img' src='./images/logo.png' />
+                <img className='logoImage' alt='logo-img' src={logo} />
                 <button className='loginButton'
                     onClick={() => this.onClickLoginButton()}>
                     Login
