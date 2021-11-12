@@ -177,7 +177,7 @@ class SingleSearchResultPage extends Component {
                     tag_img={this.state.manner.tag_pentagon}
                     />
                 {matches} */}
-                <button onClick={() => this.onClickMoreMatchInfoButton()}>More match Info</button>
+                <button className={moreMatchButton} onClick={() => this.onClickMoreMatchInfoButton()}>More match Info</button>
             </div>
         )
     }
