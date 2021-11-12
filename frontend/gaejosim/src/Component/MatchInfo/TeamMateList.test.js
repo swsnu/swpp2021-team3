@@ -8,4 +8,5 @@ describe('<TeamMateList />', () => {
       const wrapper = component.find('.TeamMateList');
       expect(wrapper.length).toBe(1);
     });
+
 });

@@ -8,5 +8,4 @@ describe('<MatchInfo />', () => {
       const wrapper = component.find('.MatchInfo');
       expect(wrapper.length).toBe(1);
     });
-
 });
