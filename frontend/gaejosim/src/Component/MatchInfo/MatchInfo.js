@@ -10,17 +10,17 @@ class MatchInfo extends Component {
         match: this.props.match,
         // matchMateList : this.props.matchMatelist,
         // teamMateList : this.props.teamMateList,
-        clickDetail : false 
+        // clickDetail : false 
     }
     
-    onClickSingleOrMultiButton = () => {
-        if(this.state.clickDetail === false) {
-            this.setState({ clickDetail : true });
-        }
-        else {
-            this.setState({ clickDetail : false });
-        }
-    }
+    // onClickSingleOrMultiButton = () => {
+    //     if(this.state.clickDetail === false) {
+    //         this.setState({ clickDetail : true });
+    //     }
+    //     else {
+    //         this.setState({ clickDetail : false });
+    //     }
+    // }
 
     componentDidMount() {
         console.log('In componentDidMount!: MatchInfo')

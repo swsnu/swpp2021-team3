@@ -8,7 +8,7 @@ class MyPage extends Component {
         return (
             <div className='MyPage'>
                 <Header />
-                MyPage
+                My Page
             </div>
         )
     }

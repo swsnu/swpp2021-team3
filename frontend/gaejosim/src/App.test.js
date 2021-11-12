@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
-// import App from './App';
-import ReportAuthPage from './Page/ReportAuthPage'
+import { shallow } from 'enzyme';
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+import App from './App';
 
-test('renders report auth link', () => {
-  render(<ReportAuthPage />);
-  const linkElement = screen.getByText(/ReportAuthPage/i);
-  expect(linkElement).toBeInTheDocument();
+describe('<App />', () => {
+  it('should render without errors', () => {
+    const component = shallow(<App />);
+    const wrapper = component.find('.App')
+    expect(wrapper.length).toBe(1);
+  });
+
+  //TODO: 404 message test code
+  
 });
