@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import ResultView from "./ResultView/ResultView";
 import TagView from "./TagView/TagView";
 
+<<<<<<< HEAD
 import tier_bronze from "./tiers/tier_BRONZE.png";
 import tier_challenger from "./tiers/tier_CHALLENGER.png";
 import tier_diamond from "./tiers/tier_DIAMOND.png";
@@ -21,6 +22,8 @@ import tagdiagram_4 from "./tagDiagrams/diagram_4.png";
 import tagdiagram_5 from "./tagDiagrams/diagram_5.png";
 
 
+=======
+>>>>>>> curr branch status
 import './CommonSearch.css';
 
  class CommonSearch extends Component {
