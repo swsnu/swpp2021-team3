@@ -10,13 +10,13 @@ describe('<TagView />', () => {
     });
 
     it('should render tagDiagram', () => {
-      const component = shallow(<TagView champion={'TEST_TAGDIAGRAM'} />);
+      const component = shallow(<TagView tagdiagram={'TEST_TAGDIAGRAM'} />);
       const wrapper = component.find('.tagDiagram');
       expect(wrapper.text()).toEqual('TEST_TAGDIAGRAM');
     });
 
     it('should render tags', () => {
-      const component = shallow(<TagView champion={'TEST_TAGS'} />);
+      const component = shallow(<TagView tag={'TEST_TAGS'} />);
       const wrapper = component.find('.tags');
       expect(wrapper.text()).toEqual('TEST_TAGS');
     });

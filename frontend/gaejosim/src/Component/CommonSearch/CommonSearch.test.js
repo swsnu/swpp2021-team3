@@ -11,7 +11,6 @@ describe('<CommonSearch />', () => {
 
   it('should render states without errors.', () => {
     const wrapper = shallow(<CommonSearch />);
-    expect(wrapper.find('#summoner_name').length).toEqual(1);
+    expect(wrapper.find('#tier').length).toEqual(1);
   });
-
 });

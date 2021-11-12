@@ -14,7 +14,7 @@ class TagView extends Component {
 
         return (
             <div className='tagView'>            
-                <div className = 'tagDiagrm'>
+                <div className = 'tagDiagram'>
                     <img className = 'tag_diagram_img' alt = 'tag_diagram_img' src = '../../../public/images/imagename' />
                 </div>
                 <div className = 'tags'>
