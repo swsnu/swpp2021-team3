@@ -10,4 +10,3 @@ test('renders ReportAction page', () => {
   const linkElement = screen.getByText(/Report/);
   expect(linkElement).toBeInTheDocument();
 });
-

@@ -14,4 +14,5 @@ describe('<ResultView />', () => {
       const wrapper = component.find('.win_lose');
       expect(wrapper.text()).toEqual('TEST_WIN_LOSE');
     });
+
 });

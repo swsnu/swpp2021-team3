@@ -30,22 +30,8 @@ describe('<ReportAuth />', () => {
       wrapper.simulate('click');
       expect(mockNext).toHaveBeenCalledTimes(0);
     });
-
 });
 
-// describe('router reportaction page', () => {
-//   test('should pass', () => {
-//     const history = createMemoryHistory({ initialEntries: ['/reportAuth/i'] });
-//     const { getByText } = render(
-//       <Router history={history}>
-//         <ReportActionPage />
-//       </Router>
-//     );
-//     expect(history.location.pathname).toBe('/');
-//     fireEvent.click(getByText('Report'));
-//     expect(history.location.pathname).toBe('/ReportAction/i');
-//   });
-// }); ???
 
 //clicknextbutton true/false
 // input reported summoner

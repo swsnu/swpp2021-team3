@@ -8,6 +8,7 @@ import ReportAction from './ReportAction';
 import SearchPage from '../../Page/SearchPage'
 
 describe('<ReportAction />', () => {
+
   it('should render without errors', () => {
     const component = shallow(<ReportAction />);
     const wrapper = component.find('.ReportAction');
@@ -112,4 +113,3 @@ describe('<ReportAction />', () => {
 
 
 });
-
