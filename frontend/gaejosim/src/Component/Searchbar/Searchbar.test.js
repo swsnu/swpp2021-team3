@@ -9,3 +9,13 @@ describe('<Searchbar />', () => {
       expect(wrapper.length).toBe(1);
     });
 });
+
+// clickSearchButton
+
+// clickSingleOrMultiButton
+
+// parseSummoner
+
+// Singlesearch router
+
+// Multi search router

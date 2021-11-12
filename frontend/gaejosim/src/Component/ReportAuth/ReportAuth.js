@@ -75,6 +75,7 @@ class ReportAuth extends Component {
                 <input className='reportSummoner'
                     type='text'
                     placeholder='Pick SummonerID want to report'
+                    data-testid='summoner-input'
                     onChange={(event) => this.setState({ report_summoner: event.target.value })}
                 />
                 {(!this.state.authenticated) && <button className="buttonAuthStyle" onClick={() => this.onClickAuthenticateButton()}>Authenticate</button>}

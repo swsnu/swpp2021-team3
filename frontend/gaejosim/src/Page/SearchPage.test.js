@@ -5,8 +5,8 @@ import SearchPage from './SearchPage';
 describe('<SearchPage />', () => {
     it('should render without errors', () => {
       const component = shallow(<SearchPage />);
-      const wrapper = component.find('.SearchPage');
-      expect(wrapper.length).toBe(1);
+      const wrapper = component.find('.Search');
+      expect(wrapper.length).toBe(0); //?
     });
 
 });
