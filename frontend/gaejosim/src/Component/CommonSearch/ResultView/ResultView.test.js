@@ -5,7 +5,7 @@ import ResultView from './ResultView';
 describe('<ResultView />', () => {
     it('should render without errors', () => {
       const component = shallow(<ResultView />);
-      const wrapper = component.find('.ResultView');
+      const wrapper = component.find('');
       expect(wrapper.length).toBe(1);
     });
 

@@ -7,5 +7,7 @@ describe('<ReportAction />', () => {
       const component = shallow(<ReportAction />);
       const wrapper = component.find('.ReportAction');
       expect(wrapper.length).toBe(1);
+
     });
 });
+

@@ -20,4 +20,9 @@ describe('<TagView />', () => {
       const wrapper = component.find('.tags');
       expect(wrapper.text()).toEqual('TEST_TAGS');
     });
+
+    it('should render states without errors.', () => {
+      const wrapper = shallow(<TagView />);
+      expect(wrapper.find('#tag_values').length).toEqual(1);
+    });
 });

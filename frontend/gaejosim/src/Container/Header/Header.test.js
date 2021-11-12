@@ -8,4 +8,5 @@ describe('<Header />', () => {
       const wrapper = component.find('.Header');
       expect(wrapper.length).toBe(1);
     });
+
 });
