@@ -1,9 +1,9 @@
 """user views"""
 import json
-import requests
 import secrets
-
 from string import ascii_letters, digits, punctuation
+
+import requests
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
@@ -105,6 +105,7 @@ def sign_up(request):
 
 @require_http_methods('POST')
 def find_username(request):
+    """find username"""
     data = json.loads(request.body.decode())
     email = data["email"]
 
@@ -122,6 +123,7 @@ def find_username(request):
 
 @require_http_methods('POST')
 def find_password(request):
+    """find password"""
     data = json.loads(request.body.decode())
     email = data["email"]
     username = data["username"]
@@ -142,11 +144,12 @@ def find_password(request):
         email_message.send()
         return JsonResponse({"message": "Please check your email."}, status=200)
 
-    return JsonResponse({"error": "There is no registered user who has such username and email address"},
+    return JsonResponse({"error": "No registered user who has such username and email address"},
                         status=400)
 
 
 def new_password():
+    """generate temporary password"""
     string_pool = ascii_letters + digits + punctuation
 
     while True:

@@ -288,7 +288,6 @@ class UserTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 400)
 
-        """no user who has the username and email"""
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
