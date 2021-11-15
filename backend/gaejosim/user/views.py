@@ -6,13 +6,14 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
+from django.core.mail.message import EmailMessage
 
 from .models import Summoner, User, MannerPoint
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-65a865e9-4b0f-4fcb-a51d-f26b05960485",  # updated 11/13 14:40
+    "key": "RGAPI-c7b1091b-f232-4184-ba59-1eaaf0e5466e",  # updated 11/13 14:40
 }
 
 
@@ -97,3 +98,20 @@ def sign_up(request):
         return JsonResponse({"error": "This email already exists."}, status=400)
 
     return JsonResponse({"message": "User is created!"}, status=201)
+
+
+@require_http_methods('POST')
+def find_username(request):
+    data = json.loads(request.body.decode())
+    email = data["email"]
+
+    user = User.objects.filter(email=email).first()
+
+    if user is not None:
+        email_message = EmailMessage(
+            "[Gaejosim] Find your ID", user.username, to=[email])
+        email_message.send()
+        return JsonResponse({"message": "Please check your email."}, status=200)
+
+    return JsonResponse({"error": "Such mail address is not registered in our service."},
+                        status=400)
