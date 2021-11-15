@@ -16,7 +16,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-c7b1091b-f232-4184-ba59-1eaaf0e5466e",  # updated 11/13 14:40
+    "key": "RGAPI-c7b1091b-f232-4184-ba59-1eaaf0e5466e",  # updated 11/15 08:40
 }
 
 
