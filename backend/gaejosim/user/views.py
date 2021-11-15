@@ -1,6 +1,9 @@
 """user views"""
 import json
 import requests
+import secrets
+
+from string import ascii_letters, digits, punctuation
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
@@ -115,3 +118,44 @@ def find_username(request):
 
     return JsonResponse({"error": "Such mail address is not registered in our service."},
                         status=400)
+
+
+@require_http_methods('POST')
+def find_password(request):
+    data = json.loads(request.body.decode())
+    email = data["email"]
+    username = data["username"]
+
+    user = User.objects.filter(email=email, username=username).first()
+
+    if user is not None:
+        temp_password = new_password()
+        user.set_password(temp_password)
+        user.save()
+
+        message = (f"Your new password is \n--------------\n{temp_password}\n--------------\n"
+                   "After login, please change your password at mypage/change_password tab.")
+
+        email_message = EmailMessage(
+            "[Gaejosim] Find your Password", message, to=[email])
+
+        email_message.send()
+        return JsonResponse({"message": "Please check your email."}, status=200)
+
+    return JsonResponse({"error": "There is no registered user who has such username and email address"},
+                        status=400)
+
+
+def new_password():
+    string_pool = ascii_letters + digits + punctuation
+
+    while True:
+        temp_password = "".join(secrets.choice(string_pool) for i in range(10))
+        if (
+            any(c.islower() for c in temp_password)
+            and any(c.isupper() for c in temp_password)
+            and sum(c.isdigit() for c in temp_password) >= 2
+        ):
+            break
+
+    return temp_password
