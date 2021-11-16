@@ -6,13 +6,14 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.hashers import check_password
 
 from .models import Summoner, User, MannerPoint
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-c7b1091b-f232-4184-ba59-1eaaf0e5466e",  # updated 11/15 08:40
+    "key": "RGAPI-83c6da17-f110-4e3c-a8c0-906fabd6698d",  # updated 11/16 08:40
 }
 
 
@@ -97,3 +98,35 @@ def sign_up(request):
         return JsonResponse({"error": "This email already exists."}, status=400)
 
     return JsonResponse({"message": "User is created!"}, status=201)
+
+
+@require_http_methods(["POST"])
+def change_password(request):
+    """change password"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "You need to login before accessing my page"}, status=400)
+
+    data = json.loads(request.body.decode())
+
+    old_password = data["old_password"]
+    new_password = data["new_password"]
+    password_confirm = data["password_confirm"]
+
+    is_correct = check_password(old_password, user.password)
+
+    if not is_correct:
+        return JsonResponse(
+            {"error": "Please enter your old password correctly"}, status=400)
+
+    if password_confirm != new_password:
+        return JsonResponse(
+            {"error": "Please enter password confirm correctly"}, status=400)
+
+    user.set_password(new_password)
+    user.save()
+
+    return JsonResponse({
+        "message": "You password is changed."
+    }, status=200)
