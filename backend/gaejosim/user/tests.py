@@ -221,3 +221,109 @@ class UserTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 400)
+
+    def test_success_change_password(self):
+        """change password"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        login = self.client.login(username="test1", password="password")
+        self.assertTrue(login)
+
+        response = self.client.post(
+            "/api/change/password/",
+            json.dumps(
+                {
+                    "old_password": "password",
+                    "new_password": "password1",
+                    "password_confirm": "password1"
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username="test1", password="password1")
+        self.assertTrue(login)
+
+        response = self.client.post(
+            "/api/change/password/",
+            json.dumps(
+                {
+                    "old_password": "password1",
+                    "new_password": "password",
+                    "password_confirm": "password"
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_change_password_without_login(self):
+        """try to change password without login, but fail"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/change/password/",
+            json.dumps(
+                {
+                    "old_password": "login",
+                    "new_password": "logout",
+                    "password_confirm": "logout"
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_fail_change_password_old_wrong(self):
+        """try to change password with wrong old password"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        login = self.client.login(username="test1", password="password")
+        self.assertTrue(login)
+
+        response = self.client.post(
+            "/api/change/password/",
+            json.dumps(
+                {
+                    "old_password": "login",
+                    "new_password": "password1",
+                    "password_confirm": "password1"
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_fail_change_password_confirm_wrong(self):
+        """try to change password with wrong old password"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        login = self.client.login(username="test1", password="password")
+        self.assertTrue(login)
+
+        response = self.client.post(
+            "/api/change/password/",
+            json.dumps(
+                {
+                    "old_password": "password",
+                    "new_password": "password1",
+                    "password_confirm": "wrongpassword"
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
