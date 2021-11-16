@@ -2,6 +2,7 @@
 import json
 from django.test import TestCase, Client
 from user.models import Summoner, User, MannerPoint
+from report.models import Report
 
 
 class ReportTestCase(TestCase):
@@ -36,6 +37,29 @@ class ReportTestCase(TestCase):
             summoner_id=(
                 "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
+        )
+
+        self.test_user2 = User.objects.create_user(
+            username="test2",
+            email="test2@swpp.com",
+            password="password",
+            summoner=self.test_summoner2,
+        )
+
+        self.report_1 = Report.objects.create(
+            tag="tag1tag2",
+            comment="test_comment",
+            reported_summoner=self.test_summoner1,
+            reporting_user=self.test_user2,
+            evaluation=60
+        )
+
+        self.report_2 = Report.objects.create(
+            tag="tag3tag4",
+            comment="test_comment",
+            reported_summoner=self.test_summoner1,
+            reporting_user=self.test_user2,
+            evaluation=70
         )
 
     def test_success_get_recent_players(self):
@@ -205,3 +229,23 @@ class ReportTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 201)
+
+    def test_success_my_reports(self):
+        """list of my reports"""
+        self.client.login(username="test2", password="password")
+        response = self.client.get(
+            "/api/my/reports/"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()["reports"]), 2)
+
+        reports = response.json()["reports"]
+        self.assertEqual(reports[0]["evaluation"], 60)
+        self.assertEqual(reports[1]["evaluation"], 70)
+
+    def test_fail_my_reports_without_login(self):
+        """list of my reports"""
+        response = self.client.get(
+            "/api/my/reports/"
+        )
+        self.assertEqual(response.status_code, 401)
