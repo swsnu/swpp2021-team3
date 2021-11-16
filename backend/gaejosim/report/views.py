@@ -177,3 +177,22 @@ def post_report(request):
         },
         status=201,
     )
+
+
+@require_http_methods(["GET"])
+def my_reports(request):
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "You need to login before accessing my page"}, status=401)
+
+    reports = [{
+        "id": report.id,
+        "tag": report.tag,
+        "comment": report.comment,
+        "reported_summoner": report.reported_summoner.id,  # name으로 수정할 것.
+        "evaluation": report.evaluation
+    } for report in Report.objects.filter(
+        reporting_user=user)]
+
+    return JsonResponse({"reports": reports}, status=200)
