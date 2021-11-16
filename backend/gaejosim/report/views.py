@@ -181,6 +181,7 @@ def post_report(request):
 
 @require_http_methods(["GET"])
 def my_reports(request):
+    """list of my reports"""
     user = request.user
 
     if not user.is_authenticated:
