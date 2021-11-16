@@ -106,7 +106,7 @@ def change_password(request):
     user = request.user
 
     if not user.is_authenticated:
-        return JsonResponse({"error": "You need to login before accessing my page"}, status=400)
+        return JsonResponse({"error": "You need to login before accessing my page"}, status=401)
 
     data = json.loads(request.body.decode())
 

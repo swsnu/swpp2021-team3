@@ -280,7 +280,7 @@ class UserTestCase(TestCase):
             content_type="application/json",
             HTTP_X_CSRFTOKEN=csrftoken,
         )
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 401)
 
     def test_fail_change_password_old_wrong(self):
         """try to change password with wrong old password"""
