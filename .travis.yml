@@ -36,8 +36,8 @@ jobs:
     - mysql -e "CREATE DATABASE gaejosim;"
     - mysql -e "CREATE USER 'gaejosim'@'localhost' IDENTIFIED BY 'bingo123!';"
     - mysql -e "GRANT ALL PRIVILEGES ON *.* to 'gaejosim'@'localhost';"
-    - mysql -e "set character_set_database = utf8;"
-    - mysql -e "set character_set_server = utf8;"
+    - mysql -e "SET GLOBAL character_set_server = 'utf8mb4'"
+    - mysql -e "SET GLOBAL character_set_database = 'utf8mb4'"
     - mysql -e "show variables like 'c%';"
     - pylint **/*.py --disable=W0613,E1101,R0801,R0914,R0902 --load-plugins pylint_django
     - coverage run --source='.' --omit=manage.py,gaejosim/asgi.py,gaejosim/wsgi.py manage.py test
