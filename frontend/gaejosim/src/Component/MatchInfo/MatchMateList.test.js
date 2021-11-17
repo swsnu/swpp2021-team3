@@ -7,5 +7,5 @@ describe('<MatchMateList />', () => {
     const component = shallow(<MatchMateList />);
     const wrapper = component.find('.MatchMateList');
     expect(wrapper.length).toBe(1);
-  });
+  }); // map error
 });

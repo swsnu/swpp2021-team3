@@ -4,8 +4,8 @@ import Result from './Result';
 import ReactDOM from 'react-dom';
 
 describe('<Result />', () => {
-  xit('should render without errors', () => {
-    const component = shallow(<Result />);
+  it('should render without errors', () => {
+    const component = shallow(<Result result={{champion_id: 'foo'}} />);
     const wrapper = component.find('.Result');
     expect(wrapper.length).toBe(0);
   });

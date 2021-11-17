@@ -29,7 +29,6 @@ describe('<ReportAction />', () => {
   it('should handle tag1_1', () => {
     const mockClickTag1_1 = jest.fn();
     const component = shallow(<ReportAction clickDone={mockClickTag1_1} />);
-    component.setProps({clickTag1_1: false});
     const wrapper = component.find('.Tag1_1Button');
     wrapper.simulate('click');
     expect(mockClickTag1_1).toHaveBeenCalledTimes(0);

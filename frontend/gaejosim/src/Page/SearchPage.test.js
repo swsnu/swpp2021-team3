@@ -9,10 +9,10 @@ describe('<SearchPage />', () => {
       expect(wrapper.length).toBe(0); //?
     });
 
-    xit('should gotoreport button', () => {
+    it('should handle go report button', () => {
       const mockGoToReport = jest.fn();
       const component = shallow(<SearchPage clickDone={mockGoToReport} />);
-      const wrapper = component.find('.gotoreport');
+      const wrapper = component.find('.GoToReport');
       wrapper.simulate('click');
       expect(mockGoToReport).toHaveBeenCalledTimes(0);
     });

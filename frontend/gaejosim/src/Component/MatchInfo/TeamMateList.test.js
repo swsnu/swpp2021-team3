@@ -7,7 +7,7 @@ describe('<TeamMateList />', () => {
       const component = shallow(<TeamMateList />);
       const wrapper = component.find('.TeamMateList');
       expect(wrapper.length).toBe(1);
-    });
+    }); //map error
 
 });
 

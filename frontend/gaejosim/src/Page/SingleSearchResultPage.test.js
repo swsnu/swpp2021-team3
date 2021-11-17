@@ -7,7 +7,7 @@ test.skip('renders SingleSearchResult page', () => {
   render(<SingleSearchResultPage />);
   const linkElement = screen.getByText(/SingleSearchResultPage/);
   expect(linkElement).toBeInTheDocument();
-});
+}); //pathname
 
 describe('<SingleSearchResultPage />', () => {
   xit('should handle single or multi button', () => {
@@ -16,5 +16,5 @@ describe('<SingleSearchResultPage />', () => {
     const wrapper = component.find('.matchMoreButton');
     wrapper.simulate('click');
     expect(mockMoreMatchButton).toHaveBeenCalledTimes(0);
-  });
+  }); //pathname
 });
