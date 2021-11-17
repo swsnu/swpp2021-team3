@@ -52,20 +52,7 @@ class ReportAuth extends Component {
         if (this.state.clickNext === true) {
             redirect = <Redirect to={`/ReportAction/${this.state.report_summoner}`} />
         }
-        const buttonStyle = {
-            position: 'absolute', width: '120px', height: '38.4px', background: '#5F2EEA', borderRadius: '40px', color: 'white', bottom: '60px', left: '660px'
-        }
-        const authStyle = {
-            position: 'absolute',
-            background: '#EFF0F7',
-            color: 'black',
-            fontWeight: 800,
-            fontSize: '30px',
-            bottom: '230px',
-            right: '25%',
-            border: 0,
-            outline: 0,
-        }
+
         return (
             <div className='ReportAuth'>
                 {redirect}
@@ -80,7 +67,7 @@ class ReportAuth extends Component {
                 />
                 {(!this.state.authenticated) && <button className="buttonAuthStyle" onClick={() => this.onClickAuthenticateButton()}>Authenticate</button>}
                 {(this.state.authenticated) && <button className="authStyle">Authenticated</button>}
-                {(this.state.authenticated) && <button className="buttonStyle" onClick={() => this.onClickNextButton()}>Next</button>}
+                {(this.state.authenticated) && <button className="buttontyle" onClick={() => this.onClickNextButton()}>Next</button>}
                 {(!this.state.authenticated) && <button className="buttonStyle" onClick={() => alert("Not authenticated")}>Next</button>}
             </div>
         )

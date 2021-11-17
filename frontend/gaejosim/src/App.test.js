@@ -11,5 +11,4 @@ describe('<App />', () => {
   });
 
   //TODO: 404 message test code
-  
 });
