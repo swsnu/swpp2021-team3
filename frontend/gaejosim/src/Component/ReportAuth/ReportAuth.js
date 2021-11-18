@@ -67,7 +67,7 @@ class ReportAuth extends Component {
                 />
                 {(!this.state.authenticated) && <button className="buttonAuthStyle" onClick={() => this.onClickAuthenticateButton()}>Authenticate</button>}
                 {(this.state.authenticated) && <button className="authStyle">Authenticated</button>}
-                {(this.state.authenticated) && <button className="buttontyle" onClick={() => this.onClickNextButton()}>Next</button>}
+                {(this.state.authenticated) && <button className="buttonStyle" onClick={() => this.onClickNextButton()}>Next</button>}
                 {(!this.state.authenticated) && <button className="buttonStyle" onClick={() => alert("Not authenticated")}>Next</button>}
             </div>
         )
