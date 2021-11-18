@@ -78,6 +78,7 @@ def sign_up(request):
     else:
         manner_point = MannerPoint.objects.create()
         summoner = Summoner.objects.create(
+            name=summoner_name,
             summoner_puuid=summoner_puuid,
             summoner_id=summoner_id,
             manner_point=manner_point,
@@ -134,7 +135,6 @@ def change_password(request):
     return JsonResponse({
         "message": "You password is changed."
     }, status=200)
-
 
 @require_http_methods('POST')
 def find_username(request):

@@ -131,6 +131,7 @@ def post_report(request):
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
+            name=name,
             summoner_id=reported_summoner_id,
             summoner_puuid=reported_summoner_puuid,
             manner_point=reported_manner_point,
@@ -177,3 +178,23 @@ def post_report(request):
         },
         status=201,
     )
+
+
+@require_http_methods(["GET"])
+def my_reports(request):
+    """list of my reports"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "You need to login before accessing my page"}, status=401)
+
+    reports = [{
+        "id": report.id,
+        "tag": report.tag,
+        "comment": report.comment,
+        "reported_summoner": report.reported_summoner.name,
+        "evaluation": report.evaluation
+    } for report in Report.objects.filter(
+        reporting_user=user)]
+
+    return JsonResponse({"reports": reports}, status=200)
