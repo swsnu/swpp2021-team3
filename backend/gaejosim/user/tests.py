@@ -327,3 +327,84 @@ class UserTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 400)
+
+    def test_sucess_find_username(self):
+        """find username"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/forgot/id/",
+            json.dumps({
+                "email": "test1@swpp.com"
+            }),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_find_username(self):
+        """not registed email"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/forgot/id/",
+            json.dumps({
+                "email": "test100@swpp.com"
+            }),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken)
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_success_find_password(self):
+        """find password"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/forgot/password/",
+            json.dumps({
+                "email": "test1@swpp.com",
+                "username": "test1"
+            }),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_find_password(self):
+        """no user who has the username and email"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/forgot/password/",
+            json.dumps({
+                "email": "test100@swpp.com",
+                "username": "test1"
+            }),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken
+        )
+        self.assertEqual(response.status_code, 400)
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/forgot/password/",
+            json.dumps({
+                "email": "test1@swpp.com",
+                "username": "test100"
+            }),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken
+        )
+        self.assertEqual(response.status_code, 400)
