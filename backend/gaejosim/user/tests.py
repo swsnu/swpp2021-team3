@@ -227,7 +227,7 @@ class UserTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
-        
+
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
@@ -269,7 +269,7 @@ class UserTestCase(TestCase):
         csrftoken = response.cookies["csrftoken"].value
 
         response = client.post(
-           "/api/change/password/",
+            "/api/change/password/",
             json.dumps(
                 {
                     "old_password": "login",
@@ -287,7 +287,7 @@ class UserTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
-        
+
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
@@ -310,7 +310,7 @@ class UserTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
-        
+
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
@@ -333,7 +333,6 @@ class UserTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
-
 
         response = client.post(
             "/api/forgot/id/",
@@ -383,7 +382,7 @@ class UserTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
-        
+
         response = client.post(
             "/api/forgot/password/",
             json.dumps({

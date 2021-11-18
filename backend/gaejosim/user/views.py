@@ -135,6 +135,7 @@ def change_password(request):
         "message": "You password is changed."
     }, status=200)
 
+
 @require_http_methods('POST')
 def find_username(request):
     """find username"""
@@ -163,7 +164,7 @@ def find_password(request):
     user = User.objects.filter(email=email, username=username).first()
 
     if user is not None:
-        temp_password = new_password()
+        temp_password = generate_temp_password()
         user.set_password(temp_password)
         user.save()
 
@@ -180,7 +181,7 @@ def find_password(request):
                         status=400)
 
 
-def new_password():
+def generate_temp_password():
     """generate temporary password"""
     string_pool = ascii_letters + digits + punctuation
 
