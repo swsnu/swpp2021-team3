@@ -9,6 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.hashers import check_password
 from django.core.mail.message import EmailMessage
 
 from .models import Summoner, User, MannerPoint
@@ -103,6 +104,38 @@ def sign_up(request):
     return JsonResponse({"message": "User is created!"}, status=201)
 
 
+@require_http_methods(["POST"])
+def change_password(request):
+    """change password"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "You need to login before accessing my page"}, status=401)
+
+    data = json.loads(request.body.decode())
+
+    old_password = data["old_password"]
+    new_password = data["new_password"]
+    password_confirm = data["password_confirm"]
+
+    is_correct = check_password(old_password, user.password)
+
+    if not is_correct:
+        return JsonResponse(
+            {"error": "Please enter your old password correctly"}, status=400)
+
+    if password_confirm != new_password:
+        return JsonResponse(
+            {"error": "Please enter password confirm correctly"}, status=400)
+
+    user.set_password(new_password)
+    user.save()
+
+    return JsonResponse({
+        "message": "You password is changed."
+    }, status=200)
+
+
 @require_http_methods('POST')
 def find_username(request):
     """find username"""
@@ -131,7 +164,7 @@ def find_password(request):
     user = User.objects.filter(email=email, username=username).first()
 
     if user is not None:
-        temp_password = new_password()
+        temp_password = generate_temp_password()
         user.set_password(temp_password)
         user.save()
 
@@ -148,7 +181,7 @@ def find_password(request):
                         status=400)
 
 
-def new_password():
+def generate_temp_password():
     """generate temporary password"""
     string_pool = ascii_letters + digits + punctuation
 
