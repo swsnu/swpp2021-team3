@@ -1,5 +1,8 @@
 """user views"""
 import json
+import secrets
+from string import ascii_letters, digits, punctuation
+
 import requests
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -7,6 +10,7 @@ from django.http import HttpResponse, JsonResponse
 from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import check_password
+from django.core.mail.message import EmailMessage
 
 from .models import Summoner, User, MannerPoint
 
@@ -130,3 +134,63 @@ def change_password(request):
     return JsonResponse({
         "message": "You password is changed."
     }, status=200)
+
+@require_http_methods('POST')
+def find_username(request):
+    """find username"""
+    data = json.loads(request.body.decode())
+    email = data["email"]
+
+    user = User.objects.filter(email=email).first()
+
+    if user is not None:
+        email_message = EmailMessage(
+            "[Gaejosim] Find your ID", user.username, to=[email])
+        email_message.send()
+        return JsonResponse({"message": "Please check your email."}, status=200)
+
+    return JsonResponse({"error": "Such mail address is not registered in our service."},
+                        status=400)
+
+
+@require_http_methods('POST')
+def find_password(request):
+    """find password"""
+    data = json.loads(request.body.decode())
+    email = data["email"]
+    username = data["username"]
+
+    user = User.objects.filter(email=email, username=username).first()
+
+    if user is not None:
+        temp_password = new_password()
+        user.set_password(temp_password)
+        user.save()
+
+        message = (f"Your new password is \n--------------\n{temp_password}\n--------------\n"
+                   "After login, please change your password at mypage/change_password tab.")
+
+        email_message = EmailMessage(
+            "[Gaejosim] Find your Password", message, to=[email])
+
+        email_message.send()
+        return JsonResponse({"message": "Please check your email."}, status=200)
+
+    return JsonResponse({"error": "No registered user who has such username and email address"},
+                        status=400)
+
+
+def new_password():
+    """generate temporary password"""
+    string_pool = ascii_letters + digits + punctuation
+
+    while True:
+        temp_password = "".join(secrets.choice(string_pool) for i in range(10))
+        if (
+            any(c.islower() for c in temp_password)
+            and any(c.isupper() for c in temp_password)
+            and sum(c.isdigit() for c in temp_password) >= 2
+        ):
+            break
+
+    return temp_password
