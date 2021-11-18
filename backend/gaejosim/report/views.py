@@ -11,7 +11,9 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
+
     "key": "RGAPI-8cfb37e5-811e-4fe3-ba0c-6b4c28018951",  # updated 11/18
+
 }
 
 tag_dict = {
@@ -126,10 +128,12 @@ def post_report(request):
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
     if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
-        reported_summoner = Summoner.objects.get(summoner_puuid=reported_summoner_puuid)
+        reported_summoner = Summoner.objects.get(
+            summoner_puuid=reported_summoner_puuid)
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
+            name=name,
             summoner_id=reported_summoner_id,
             summoner_puuid=reported_summoner_puuid,
             manner_point=reported_manner_point,
@@ -145,7 +149,8 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
@@ -175,3 +180,23 @@ def post_report(request):
         },
         status=201,
     )
+
+
+@require_http_methods(["GET"])
+def my_reports(request):
+    """list of my reports"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "You need to login before accessing my page"}, status=401)
+
+    reports = [{
+        "id": report.id,
+        "tag": report.tag,
+        "comment": report.comment,
+        "reported_summoner": report.reported_summoner.name,
+        "evaluation": report.evaluation
+    } for report in Report.objects.filter(
+        reporting_user=user)]
+
+    return JsonResponse({"reports": reports}, status=200)
