@@ -23,14 +23,25 @@ describe('<ReportAuth />', () => {
       expect(mockButtonAuth).toHaveBeenCalledTimes(0);
     });
 
-    it('should handle Next', () => {
+    it('should handle NextButton', () => {
       const mockNext = jest.fn();
       const component = shallow(<ReportAuth clickDone={mockNext} />);
       const wrapper = component.find('.buttonStyle');
       wrapper.simulate('click');
       expect(mockNext).toHaveBeenCalledTimes(0);
     });
+
+    it("properly change the value of clickNext", () => {
+      const wrapper = shallow(<ReportAuth />)
+      expect(wrapper.state("clickNext")).toBe(false)
+  
+      wrapper.instance().onClickNextButton()
+      expect(wrapper.state("clickNext")).toBe(true)
+    })
+
+    //todo: input, redirect to reportaction, setState true/false, axios with user
 });
+
 
 
 //clicknextbutton true/false

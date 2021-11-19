@@ -29,7 +29,7 @@ class SearchPage extends Component {
                 <div className='Background'></div>
                 <p id="PageName">Search</p>
                 <Searchbar />
-                <button className='gotoReport'
+                <button className='GoToReport' id='button'
                     onClick={() => this.onClickReportButton()}>
                     Go to Report
                 </button>

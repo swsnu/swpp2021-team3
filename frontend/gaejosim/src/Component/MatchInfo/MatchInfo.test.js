@@ -9,3 +9,6 @@ describe('<MatchInfo />', () => {
       expect(wrapper.length).toBe(1);
     });
 });
+
+//todo: componentdidmount
+
