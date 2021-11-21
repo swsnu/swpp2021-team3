@@ -1,7 +1,7 @@
 """report views"""
 import json
-import requests
 from datetime import datetime, timedelta
+import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods

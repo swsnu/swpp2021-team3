@@ -1,10 +1,10 @@
 """test for report"""
 import json
+from datetime import datetime, timedelta
+from pytz import timezone
 from django.test import TestCase, Client
 from user.models import Summoner, User, MannerPoint
 from report.models import Report
-from datetime import datetime, timedelta
-from pytz import timezone
 
 
 class ReportTestCase(TestCase):
@@ -248,6 +248,7 @@ class ReportTestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_success_with_statistics(self):
+        """Test statistics success"""
         self.report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(
             days=-2
         )
@@ -307,6 +308,7 @@ class HomePageTest(TestCase):
         )
 
     def test_success_without_total_reports(self):
+        """Test statistics without total reports"""
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
@@ -321,17 +323,16 @@ class HomePageTest(TestCase):
         self.assertEqual(response.json()["today_reports"], 0)
 
     def test_success_without_today_reports(self):
-        self.report_1 = Report.objects.create(
+        """Test statistics without today reports"""
+        report_1 = Report.objects.create(
             tag="tag3tag4",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
             evaluation=70,
         )
-        self.report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(
-            days=-2
-        )
-        self.report_1.save()
+        report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(days=-2)
+        report_1.save()
 
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
