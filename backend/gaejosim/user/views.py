@@ -17,8 +17,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-8cfb37e5-811e-4fe3-ba0c-6b4c28018951",  # updated 11/18
-
+    "key": "RGAPI-1d887aa4-2333-452f-8b1e-b4e884434cd1",  # updated 11/22
 }
 
 
@@ -112,7 +111,9 @@ def change_password(request):
     user = request.user
 
     if not user.is_authenticated:
-        return JsonResponse({"error": "You need to login before accessing my page"}, status=401)
+        return JsonResponse(
+            {"error": "You need to login before accessing my page"}, status=401
+        )
 
     data = json.loads(request.body.decode())
 
@@ -124,20 +125,21 @@ def change_password(request):
 
     if not is_correct:
         return JsonResponse(
-            {"error": "Please enter your old password correctly"}, status=400)
+            {"error": "Please enter your old password correctly"}, status=400
+        )
 
     if password_confirm != new_password:
         return JsonResponse(
-            {"error": "Please enter password confirm correctly"}, status=400)
+            {"error": "Please enter password confirm correctly"}, status=400
+        )
 
     user.set_password(new_password)
     user.save()
 
-    return JsonResponse({
-        "message": "You password is changed."
-    }, status=200)
+    return JsonResponse({"message": "You password is changed."}, status=200)
 
-@require_http_methods('POST')
+
+@require_http_methods("POST")
 def find_username(request):
     """find username"""
     data = json.loads(request.body.decode())
@@ -147,15 +149,17 @@ def find_username(request):
 
     if user is not None:
         email_message = EmailMessage(
-            "[Gaejosim] Find your ID", user.username, to=[email])
+            "[Gaejosim] Find your ID", user.username, to=[email]
+        )
         email_message.send()
         return JsonResponse({"message": "Please check your email."}, status=200)
 
-    return JsonResponse({"error": "Such mail address is not registered in our service."},
-                        status=400)
+    return JsonResponse(
+        {"error": "Such mail address is not registered in our service."}, status=400
+    )
 
 
-@require_http_methods('POST')
+@require_http_methods("POST")
 def find_password(request):
     """find password"""
     data = json.loads(request.body.decode())
@@ -169,17 +173,22 @@ def find_password(request):
         user.set_password(temp_password)
         user.save()
 
-        message = (f"Your new password is \n--------------\n{temp_password}\n--------------\n"
-                   "After login, please change your password at mypage/change_password tab.")
+        message = (
+            f"Your new password is \n--------------\n{temp_password}\n--------------\n"
+            "After login, please change your password at mypage/change_password tab."
+        )
 
         email_message = EmailMessage(
-            "[Gaejosim] Find your Password", message, to=[email])
+            "[Gaejosim] Find your Password", message, to=[email]
+        )
 
         email_message.send()
         return JsonResponse({"message": "Please check your email."}, status=200)
 
-    return JsonResponse({"error": "No registered user who has such username and email address"},
-                        status=400)
+    return JsonResponse(
+        {"error": "No registered user who has such username and email address"},
+        status=400,
+    )
 
 
 def generate_temp_password():

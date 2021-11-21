@@ -17,3 +17,12 @@ class Report(models.Model):
     evaluation = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Apology(models.Model):
+    """Apology model"""
+
+    report = models.OneToOneField(Report, on_delete=models.CASCADE, null=True)
+    content = models.CharField(max_length=5000, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
