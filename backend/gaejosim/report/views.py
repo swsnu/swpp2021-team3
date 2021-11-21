@@ -217,9 +217,6 @@ def reports_statistics(request):
         created_at__range=(yesterday, tomorrow)
     ).count()
 
-    print(total_report_num)
-    print(today_report_num)
-
     return JsonResponse(
         {"accumulated_reports": total_report_num, "today_reports": today_report_num},
         status=200,
