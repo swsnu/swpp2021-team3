@@ -120,6 +120,7 @@
   align-items: center;
   color: #ffffff;
 }
+
 .boxText2 {
   position: absolute;
   bottom: 23%;
@@ -168,7 +169,7 @@
 .seemoreText1 {
   position: absolute;
   /* left: 76%; */
-  right: 22.5%;
+  right: 22.7%;
   top: 32.9%;
   /* transform: translateX(-50%); */
 
@@ -183,10 +184,11 @@
 
   color: #ffffff;
 }
+
 .seemoreText2 {
   position: absolute;
   /* left: 76%; */
-  right: 22.5%;
+  right: 22.7%;
   top: 53.4%;
   /* transform: translateX(-50%); */
 
@@ -200,4 +202,22 @@
   text-align: right;
 
   color: #ffffff;
+}
+
+.Pencil {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
 }
