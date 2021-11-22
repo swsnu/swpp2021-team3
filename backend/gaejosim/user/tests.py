@@ -237,7 +237,7 @@ class UserTestCase(TestCase):
                 {
                     "old_password": "password",
                     "new_password": "password1",
-                    "password_confirm": "password1"
+                    "password_confirm": "password1",
                 }
             ),
             content_type="application/json",
@@ -254,7 +254,7 @@ class UserTestCase(TestCase):
                 {
                     "old_password": "password1",
                     "new_password": "password",
-                    "password_confirm": "password"
+                    "password_confirm": "password",
                 }
             ),
             content_type="application/json",
@@ -274,7 +274,7 @@ class UserTestCase(TestCase):
                 {
                     "old_password": "login",
                     "new_password": "logout",
-                    "password_confirm": "logout"
+                    "password_confirm": "logout",
                 }
             ),
             content_type="application/json",
@@ -297,7 +297,7 @@ class UserTestCase(TestCase):
                 {
                     "old_password": "login",
                     "new_password": "password1",
-                    "password_confirm": "password1"
+                    "password_confirm": "password1",
                 }
             ),
             content_type="application/json",
@@ -320,7 +320,7 @@ class UserTestCase(TestCase):
                 {
                     "old_password": "password",
                     "new_password": "password1",
-                    "password_confirm": "wrongpassword"
+                    "password_confirm": "wrongpassword",
                 }
             ),
             content_type="application/json",
@@ -336,11 +336,10 @@ class UserTestCase(TestCase):
 
         response = client.post(
             "/api/forgot/id/",
-            json.dumps({
-                "email": "test1@swpp.com"
-            }),
+            json.dumps({"email": "test1@swpp.com"}),
             content_type="application/json",
-            HTTP_X_CSRFTOKEN=csrftoken)
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
 
         self.assertEqual(response.status_code, 200)
 
@@ -352,11 +351,10 @@ class UserTestCase(TestCase):
 
         response = client.post(
             "/api/forgot/id/",
-            json.dumps({
-                "email": "test100@swpp.com"
-            }),
+            json.dumps({"email": "test100@swpp.com"}),
             content_type="application/json",
-            HTTP_X_CSRFTOKEN=csrftoken)
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
 
         self.assertEqual(response.status_code, 400)
 
@@ -368,12 +366,9 @@ class UserTestCase(TestCase):
 
         response = client.post(
             "/api/forgot/password/",
-            json.dumps({
-                "email": "test1@swpp.com",
-                "username": "test1"
-            }),
+            json.dumps({"email": "test1@swpp.com", "username": "test1"}),
             content_type="application/json",
-            HTTP_X_CSRFTOKEN=csrftoken
+            HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 200)
 
@@ -385,12 +380,9 @@ class UserTestCase(TestCase):
 
         response = client.post(
             "/api/forgot/password/",
-            json.dumps({
-                "email": "test100@swpp.com",
-                "username": "test1"
-            }),
+            json.dumps({"email": "test100@swpp.com", "username": "test1"}),
             content_type="application/json",
-            HTTP_X_CSRFTOKEN=csrftoken
+            HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 400)
 
@@ -400,11 +392,53 @@ class UserTestCase(TestCase):
 
         response = client.post(
             "/api/forgot/password/",
-            json.dumps({
-                "email": "test1@swpp.com",
-                "username": "test100"
-            }),
+            json.dumps({"email": "test1@swpp.com", "username": "test100"}),
             content_type="application/json",
-            HTTP_X_CSRFTOKEN=csrftoken
+            HTTP_X_CSRFTOKEN=csrftoken,
         )
+        self.assertEqual(response.status_code, 400)
+
+    def test_success_logout(self):
+        """test success logout"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/signin/",
+            json.dumps(
+                {
+                    "username": "test1",
+                    "password": "password",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/logout/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_logout(self):
+        """test failed logout"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.post(
+            "/api/logout/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
         self.assertEqual(response.status_code, 400)

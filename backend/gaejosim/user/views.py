@@ -4,7 +4,7 @@ import secrets
 from string import ascii_letters, digits, punctuation
 
 import requests
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 from django.db.utils import IntegrityError
@@ -205,3 +205,16 @@ def generate_temp_password():
             break
 
     return temp_password
+
+
+@require_http_methods(["POST"])
+def log_out(request):
+    """sign out"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "The user is not logged in."}, status=400)
+
+    logout(request)
+
+    return JsonResponse({"message": "Logout Success"}, status=200)
