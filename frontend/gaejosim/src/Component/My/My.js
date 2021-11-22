@@ -33,16 +33,18 @@ class My extends Component {
           <text className="recentText1">Recent Reported Logs</text>
           <text className="seemoreText1">더보기</text>
           <div className="box1">
-            <text className="boxText">
+            <text className="boxText1">
               Recent Reported Log1 : ReportedSummoner
-              <br />
+            </text>
+            <text className="boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
           </div>
           <div className="box2">
-            <text className="boxText">
+            <text className="boxText1">
               Recent Reported Log1 : ReportedSummoner
-              <br />
+            </text>
+            <text className="boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
           </div>
@@ -51,16 +53,18 @@ class My extends Component {
           <text className="recentText2">Recent Reporting Logs</text>
           <text className="seemoreText2">더보기</text>
           <div className="box3">
-            <text className="boxText">
+            <text className="boxText1">
               Recent Reporting Log1 : ReportedSummoner
-              <br />
+            </text>
+            <text className="boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
           </div>
           <div className="box4">
-            <text className="boxText">
+            <text className="boxText1">
               Recent Reporting Log1 : ReportedSummoner
-              <br />
+            </text>
+            <text className="boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
           </div>

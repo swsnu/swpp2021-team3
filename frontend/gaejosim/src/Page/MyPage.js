@@ -5,7 +5,7 @@ class MyPage extends Component {
   render() {
     return (
       <div className="MyPage">
-        My Page
+        {/* My Page */}
         <My />
       </div>
     );

@@ -57,7 +57,7 @@
 .box1 {
   position: absolute;
   width: 40%;
-  height: 51px;
+  height: 7.2%;
   left: 38%;
   top: 35.5%;
   background: #282a30;
@@ -67,7 +67,7 @@
 .box2 {
   position: absolute;
   width: 40%;
-  height: 51px;
+  height: 7.2%;
   left: 38%;
   /* top: 45%; */
   top: 43.5%;
@@ -78,7 +78,7 @@
 .box3 {
   position: absolute;
   width: 40%;
-  height: 51px;
+  height: 7.2%;
   left: 38%;
   top: 56%;
   background: #282a30;
@@ -88,7 +88,7 @@
 .box4 {
   position: absolute;
   width: 40%;
-  height: 51px;
+  height: 7.2%;
   left: 38%;
   top: 64%;
   /* margin-top: 100px; */
@@ -98,8 +98,32 @@
 
 .boxText {
   position: absolute;
-  top: 20%;
-  left: 3%;
+  top: 22%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+.boxText1 {
+  position: absolute;
+  top: 22%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+.boxText2 {
+  position: absolute;
+  bottom: 23%;
+  left: 2%;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
