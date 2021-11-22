@@ -1,6 +1,8 @@
 """report views"""
 import json
+from datetime import datetime, timedelta
 import requests
+from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
@@ -11,7 +13,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-8cfb37e5-811e-4fe3-ba0c-6b4c28018951",  # updated 11/18
+    "key": "RGAPI-1d887aa4-2333-452f-8b1e-b4e884434cd1",  # updated 11/22
 }
 
 tag_dict = {
@@ -130,6 +132,7 @@ def post_report(request):
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
+            name=name,
             summoner_id=reported_summoner_id,
             summoner_puuid=reported_summoner_puuid,
             manner_point=reported_manner_point,
@@ -174,4 +177,47 @@ def post_report(request):
             "evaluation": report.evaluation,
         },
         status=201,
+    )
+
+
+@require_http_methods(["GET"])
+def my_reports(request):
+    """list of my reports"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse(
+            {"error": "You need to login before accessing my page"}, status=401
+        )
+
+    reports = [
+        {
+            "id": report.id,
+            "tag": report.tag,
+            "comment": report.comment,
+            "reported_summoner": report.reported_summoner.name,
+            "evaluation": report.evaluation,
+        }
+        for report in Report.objects.filter(reporting_user=user)
+    ]
+
+    return JsonResponse({"reports": reports}, status=200)
+
+
+@require_http_methods(["GET"])
+def reports_statistics(request):
+    """total reports statistics"""
+    today = datetime.now(timezone("Asia/Seoul"))
+    yesterday = today + timedelta(days=-1)
+    tomorrow = today + timedelta(days=1)
+    reports = Report.objects.all()
+
+    total_report_num = reports.count()
+    today_report_num = Report.objects.filter(
+        created_at__range=(yesterday, tomorrow)
+    ).count()
+
+    return JsonResponse(
+        {"accumulated_reports": total_report_num, "today_reports": today_report_num},
+        status=200,
     )
