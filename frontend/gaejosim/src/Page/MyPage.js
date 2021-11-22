@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
-
-import Header from '../Container/Header/Header';
+import React, { Component } from "react";
+import My from "../Component/My/My";
 
 class MyPage extends Component {
-
-    render () {
-        return (
-            <div className='MyPage'>
-                <Header />
-                My Page
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="MyPage">
+        My Page
+        <My />
+      </div>
+    );
+  }
 }
 
 export default MyPage;
