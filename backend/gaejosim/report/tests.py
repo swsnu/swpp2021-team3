@@ -63,6 +63,23 @@ class ReportTestCase(TestCase):
             evaluation=70,
         )
 
+        self.manner_point3 = MannerPoint.objects.create()
+        self.test_summoner3 = Summoner.objects.create(
+            summoner_puuid=(
+                "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
+                "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
+            ),
+            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            manner_point=self.manner_point3,
+        )
+
+        self.test_user3 = User.objects.create_user(
+            username="test3",
+            email="test3@swpp.com",
+            password="password",
+            summoner=self.test_summoner3,
+        )
+
     def test_success_get_recent_players(self):
         """test success to get recent teamplayers"""
         login = self.client.login(username="test1", password="password")
@@ -93,6 +110,14 @@ class ReportTestCase(TestCase):
             content_type="application/json",
             HTTP_X_CSRFTOKEN=csrftoken,
         )
+
+    def test_failed_authentication(self):
+        """authenticate fail with no records"""
+        self.client.login(username="test3", password="password")
+
+        response = self.client.get("/api/reports/auth/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["recent_players"], [])
 
     def test_fail_post_report_without_login(self):
         """test fail to post report without login"""

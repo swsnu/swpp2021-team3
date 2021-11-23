@@ -5,7 +5,7 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-
+from core.utils import is_json_key_present, is_riot_timeout
 from user.models import Summoner, MannerPoint
 from .models import Report
 
@@ -42,7 +42,8 @@ def report_authentication(request):
     recent_10_game_players = []
 
     for match_id in recent_matches_list:
-        recent_10_game_players += get_team_players(user, match_id)
+        team_players = get_team_players(user, match_id)
+        recent_10_game_players += team_players
 
     if request.method == "POST":
 
@@ -59,8 +60,8 @@ def report_authentication(request):
 def get_recent_matches(user):
     """get recent 10 matches id"""
     recent_matches_url = (
-        f"{api_default['asia']}/lol/match/v5/matches/by-puuid/"
-        + f"{user.summoner.summoner_puuid}/ids?start=0&count=10&api_key={api_default['key']}"
+        f"{api_default['asia']}/lol/match/v5/matches/by-puuid/{user.summoner.summoner_puuid}/"
+        + f"ids?type=ranked&start=0&count=10&api_key={api_default['key']}"
     )
     recent_matches_req = requests.get(recent_matches_url)
     recent_matches_list = recent_matches_req.json()
@@ -74,7 +75,17 @@ def get_team_players(user, match_id):
         f"{api_default['asia']}/lol/match/v5/matches/"
         + f"{match_id}?api_key={api_default['key']}"
     )
-    match_participants = requests.get(match_url).json()["info"]["participants"]
+
+    match_result = requests.get(match_url).json()
+
+    if is_json_key_present(match_result, "status"):
+        if match_result["status"]["status_code"] == 404:
+            return None
+
+    if is_riot_timeout(match_result):
+        return None
+
+    match_participants = match_result["info"]["participants"]
 
     team_100 = []
     team_200 = []
@@ -122,6 +133,8 @@ def post_report(request):
 
     if reported_summoner_req.status_code != 200:
         return JsonResponse({"error": "Such summoner does not exist."}, status=400)
+    if is_riot_timeout(reported_summoner_req.json()):
+        return JsonResponse({"error": "RIOT API timeout"}, status=429)
 
     reported_summoner_json = reported_summoner_req.json()
     reported_summoner_id = reported_summoner_json["id"]
