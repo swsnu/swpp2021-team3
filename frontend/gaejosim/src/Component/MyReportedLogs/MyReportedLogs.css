@@ -16,7 +16,7 @@
   color: #ffffff;
 }
 
-.box1 {
+.reportedlogs_box1 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -28,7 +28,7 @@
   border-radius: 12px;
 }
 
-.box2 {
+.reportedlogs_box2 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -39,7 +39,7 @@
   border-radius: 12px;
 }
 
-.box3 {
+.reportedlogs_box3 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -50,7 +50,7 @@
   border-radius: 12px;
 }
 
-.box4 {
+.reportedlogs_box4 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -62,7 +62,7 @@
   border-radius: 12px;
 }
 
-.box5 {
+.reportedlogs_box5 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -74,7 +74,7 @@
   border-radius: 12px;
 }
 
-.box6 {
+.reportedlogs_box6 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -86,7 +86,7 @@
   border-radius: 12px;
 }
 
-.boxText {
+.reportedlogs_boxText {
   position: absolute;
   top: 22%;
   left: 2%;
@@ -100,7 +100,7 @@
   text-align: left;
   white-space: pre-line;
 }
-.boxText1 {
+.reportedlogs_boxText1 {
   position: absolute;
   top: 22%;
   left: 2%;
@@ -115,7 +115,7 @@
   white-space: pre-line;
 }
 
-.boxText2 {
+.reportedlogs_boxText2 {
   position: absolute;
   bottom: 23%;
   left: 2%;
@@ -130,19 +130,19 @@
   white-space: pre-line;
 }
 
-.Pencil {
+.reportedlogs_Pencil {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.Delete {
+.reportedlogs_Delete {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.Paper {
+.reportedlogs_Paper {
   position: absolute;
   right: 6%;
   top: 30%;

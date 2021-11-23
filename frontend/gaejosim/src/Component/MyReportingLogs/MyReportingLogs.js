@@ -13,65 +13,65 @@ class MyReportingLogs extends Component {
         {/* {redirect} */}
         <text className="myReportingLogsTitle">작성한 리포트</text>
         <div style={{ left: "38.5%" }}>
-          <div className="box1">
-            <text className="boxText1">
+          <div className="reportinglogs_box1">
+            <text className="reportinglogs_boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportinglogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Paper" src={Paper} alt={Paper} />
-            <img className="Delete" src={Delete} alt={Delete} />
+            <img className="reportinglogs_Paper" src={Paper} alt={Paper} />
+            <img className="reportinglogs_Delete" src={Delete} alt={Delete} />
           </div>
-          <div className="box2">
-            <text className="boxText1">
+          <div className="reportinglogs_box2">
+            <text className="reportinglogs_boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportinglogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Paper" src={Paper} alt={Paper} />
-            <img className="Delete" src={Delete} alt={Delete} />
+            <img className="reportinglogs_Paper" src={Paper} alt={Paper} />
+            <img className="reportinglogs_Delete" src={Delete} alt={Delete} />
           </div>
-          <div className="box3">
-            <text className="boxText1">
+          <div className="reportinglogs_box3">
+            <text className="reportinglogs_boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportinglogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Paper" src={Paper} alt={Paper} />
-            <img className="Delete" src={Delete} alt={Delete} />
+            <img className="reportinglogs_Paper" src={Paper} alt={Paper} />
+            <img className="reportinglogs_Delete" src={Delete} alt={Delete} />
           </div>
-          <div className="box4">
-            <text className="boxText1">
+          <div className="reportinglogs_box4">
+            <text className="reportinglogs_boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportinglogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Paper" src={Paper} alt={Paper} />
-            <img className="Delete" src={Delete} alt={Delete} />
+            <img className="reportinglogs_Paper" src={Paper} alt={Paper} />
+            <img className="reportinglogs_Delete" src={Delete} alt={Delete} />
           </div>
-          <div className="box5">
-            <text className="boxText1">
+          <div className="reportinglogs_box5">
+            <text className="reportinglogs_boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportinglogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Paper" src={Paper} alt={Paper} />
-            <img className="Delete" src={Delete} alt={Delete} />
+            <img className="reportinglogs_Paper" src={Paper} alt={Paper} />
+            <img className="reportinglogs_Delete" src={Delete} alt={Delete} />
           </div>
-          <div className="box6">
-            <text className="boxText1">
+          <div className="reportinglogs_box6">
+            <text className="reportinglogs_boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportinglogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Paper" src={Paper} alt={Paper} />
-            <img className="Delete" src={Delete} alt={Delete} />
+            <img className="reportinglogs_Paper" src={Paper} alt={Paper} />
+            <img className="reportinglogs_Delete" src={Delete} alt={Delete} />
           </div>
         </div>
       </div>

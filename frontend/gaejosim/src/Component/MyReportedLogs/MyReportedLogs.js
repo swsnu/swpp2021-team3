@@ -13,60 +13,60 @@ class MyReportedLogs extends Component {
         {/* {redirect} */}
         <text className="myReportedLogsTitle">작성된 리포트</text>
         <div style={{ left: "38.5%" }}>
-          <div className="box1">
-            <text className="boxText1">
+          <div className="reportedlogs_box1">
+            <text className="reportedlogs_boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportedlogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
 
-            <img className="Pencil" src={Pencil} alt={Pencil} />
+            <img className="reportedlogs_Pencil" src={Pencil} alt={Pencil} />
           </div>
-          <div className="box2">
-            <text className="boxText1">
+          <div className="reportedlogs_box2">
+            <text className="reportedlogs_boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportedlogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
+            <img className="reportedlogs_Pencil" src={Pencil} alt={Pencil} />
           </div>
-          <div className="box3">
-            <text className="boxText1">
+          <div className="reportedlogs_box3">
+            <text className="reportedlogs_boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportedlogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
+            <img className="reportedlogs_Pencil" src={Pencil} alt={Pencil} />
           </div>
-          <div className="box4">
-            <text className="boxText1">
+          <div className="reportedlogs_box4">
+            <text className="reportedlogs_boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportedlogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
+            <img className="reportedlogs_Pencil" src={Pencil} alt={Pencil} />
           </div>
-          <div className="box5">
-            <text className="boxText1">
+          <div className="reportedlogs_box5">
+            <text className="reportedlogs_boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportedlogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
+            <img className="reportedlogs_Pencil" src={Pencil} alt={Pencil} />
           </div>
-          <div className="box6">
-            <text className="boxText1">
+          <div className="reportedlogs_box6">
+            <text className="reportedlogs_boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className="reportedlogs_boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
+            <img className="reportedlogs_Pencil" src={Pencil} alt={Pencil} />
           </div>
         </div>
       </div>
