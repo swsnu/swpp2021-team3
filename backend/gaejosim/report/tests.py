@@ -36,7 +36,8 @@ class ReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -69,7 +70,8 @@ class ReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=(
+                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -131,7 +133,7 @@ class ReportTestCase(TestCase):
                 {
                     "name": "서울대",
                     "evaluation": 60,
-                    "tag": "tag1_1,tag2_2,tag4_1,tag5_2",
+                    "tag": "과격한 언행,탈주/닷지,cs 스틸,라인 거부",
                     "comment": "졸린데",
                 }
             ),
@@ -172,7 +174,7 @@ class ReportTestCase(TestCase):
                 {
                     "name": "swpp2021fall",
                     "evaluation": 40,
-                    "tag": "tag1_1,tag4_2",
+                    "tag": "과격한 언행,팀킬",
                     "comment": "comment_2",
                 }
             ),
@@ -195,7 +197,7 @@ class ReportTestCase(TestCase):
                 {
                     "name": "조이26",
                     "evaluation": 40,
-                    "tag": "tag1_1,tag4_2",
+                    "tag": "과격한 언행,팀킬",
                     "comment": "comment_2",
                 }
             ),
@@ -218,7 +220,7 @@ class ReportTestCase(TestCase):
                 {
                     "name": "서울대",
                     "evaluation": 40,
-                    "tag": "tag1_1,tag2_2,tag3_1,tag5_1,tag4_2",
+                    "tag": "과격한 언행,탈주/닷지,대리 게임,정치,라인 거부",
                     "comment": "comment_2",
                 }
             ),
@@ -231,8 +233,8 @@ class ReportTestCase(TestCase):
             summoner_id="KsbxDVlM72XHWA0ZFkAdbCHkXIScc3bRH8Qjb2qJRwDo9CI"
         )
         self.assertEqual(test_summoner.manner_point.point, 60)
-        self.assertEqual(test_summoner.manner_point.tag1, 4)
-        self.assertEqual(test_summoner.manner_point.tag2, 4)
+        self.assertEqual(test_summoner.manner_point.tag1, 4.8)
+        self.assertEqual(test_summoner.manner_point.tag2, 4.8)
 
     def test_success_poist_with_empty_comment(self):
         """make a report with empty string comment"""
@@ -247,7 +249,7 @@ class ReportTestCase(TestCase):
                 {
                     "name": "연세대",
                     "evaluation": 40,
-                    "tag": "tag1_1,tag2_2,tag3_1,tag5_1,tag4_2",
+                    "tag": "과격한 언행,탈주/닷지,대리 게임,정치,팀킬",
                     "comment": "",
                 }
             ),
@@ -321,7 +323,8 @@ class HomePageTest(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -356,7 +359,8 @@ class HomePageTest(TestCase):
             reporting_user=self.test_user2,
             evaluation=70,
         )
-        report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(days=-2)
+        report_1.created_at = datetime.now(
+            timezone("Asia/Seoul")) + timedelta(days=-2)
         report_1.save()
 
         client = Client(enforce_csrf_checks=True)
