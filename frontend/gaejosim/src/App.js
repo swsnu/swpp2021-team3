@@ -7,6 +7,8 @@ import MultiSearchResultPage from "./Page/MultiSearchResultPage";
 import MyPage from "./Page/MyPage";
 import MyReportedLogsPage from "./Page/MyReportedLogsPage";
 import MyReportingLogsPage from "./Page/MyReportingLogsPage";
+import MyApologyCheckPage from "./Page/MyApologyCheckPage";
+import MyApologyWritePage from "./Page/MyApologyWritePage";
 import MyReportPage from "./Page/MyReportPage";
 import ReportAuthPage from "./Page/ReportAuthPage";
 import ReportActionPage from "./Page/ReportActionPage";
@@ -35,6 +37,8 @@ function App() {
             exact
             component={MyReportingLogsPage}
           />
+          <Route path="/myApologyCheck" exact component={MyApologyCheckPage} />
+          <Route path="/myApologyWrite" exact component={MyApologyWritePage} />
           <Route path="/myReport" exact component={MyReportPage} />
           <Route path="/reportAuth" exact component={ReportAuthPage} />
           <Route
