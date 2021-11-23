@@ -34,7 +34,7 @@ class My extends Component {
         <div style={{ left: "38.5%" }}>
           <text className="recentText1">Recent Reporting Logs</text>
           <text className="seemoreText1">더보기</text>
-          <div className="box1">
+          <div className="mypage_box1">
             <text className="boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
@@ -44,7 +44,7 @@ class My extends Component {
             <img className="Paper" src={Paper} alt={Paper} />
             <img className="Delete" src={Delete} alt={Delete} />
           </div>
-          <div className="box2">
+          <div className="mypage_box2">
             <text className="boxText1">
               Recent Reporting Log1 : ReportedSummoner
             </text>
@@ -58,7 +58,7 @@ class My extends Component {
         <div>
           <text className="recentText2">Recent Reported Logs</text>
           <text className="seemoreText2">더보기</text>
-          <div className="box3">
+          <div className="mypage_box3">
             <text className="boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
@@ -67,7 +67,7 @@ class My extends Component {
             </text>
             <img className="Pencil" src={Pencil} alt={Pencil} />
           </div>
-          <div className="box4">
+          <div className="mypage_box4">
             <text className="boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>

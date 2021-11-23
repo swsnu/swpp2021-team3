@@ -54,7 +54,7 @@
   border-radius: 40px;
 }
 
-.box1 {
+.mypage_box1 {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -64,7 +64,7 @@
   border-radius: 12px;
 }
 
-.box2 {
+.mypage_box2 {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -75,7 +75,7 @@
   border-radius: 12px;
 }
 
-.box3 {
+.mypage_box3 {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -85,7 +85,7 @@
   border-radius: 12px;
 }
 
-.box4 {
+.mypage_box4 {
   position: absolute;
   width: 40%;
   height: 7.2%;

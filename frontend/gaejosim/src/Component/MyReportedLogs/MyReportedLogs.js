@@ -69,26 +69,6 @@ class MyReportedLogs extends Component {
             <img className="Pencil" src={Pencil} alt={Pencil} />
           </div>
         </div>
-        {/* <div>
-          <div className="box3">
-            <text className="boxText1">
-              Recent Reported Log1 : ReportedSummoner
-            </text>
-            <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
-            </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
-          </div>
-          <div className="box4">
-            <text className="boxText1">
-              Recent Reported Log1 : ReportedSummoner
-            </text>
-            <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
-            </text>
-            <img className="Pencil" src={Pencil} alt={Pencil} />
-          </div>
-        </div> */}
       </div>
     );
   }
