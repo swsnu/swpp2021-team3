@@ -10,7 +10,7 @@ class MyApologyWrite extends Component {
         {/* {redirect} */}
         <text className="myApologyWriteTitle">반성문 작성</text>
         <div>
-          <div className="box1">
+          <div className="apology_box1">
             <text className="boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
