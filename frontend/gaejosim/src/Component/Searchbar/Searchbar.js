@@ -1,94 +1,66 @@
 import React, { Component } from "react";
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import './Searchbar.css'
 
+// TODO: searchInput guide 문구 줄지 생각해보기. http://fow.kr/multi
 
 class Searchbar extends Component {
     state = {
-        summoner_name_single: '',
-        summoner_names_multi: '',
-        summoner_list: '',
-        summoners_str : '',
-        search_type: 'Single',
-        click_search: false
+        searchInput : '',
+        summonerList : '',
+        summonerNum : 0,
     }
     
     onClickSearchButton = () => {
-        this.setState({ click_search: true });
-    }
-
-    onClickSingleOrMultiButton = () => {
-        if(this.state.search_type === 'Single') {
-            this.setState({ search_type : 'Multi'});
+        if(this.state.summonerNum < 1) {
+            alert('검색을 위해서는 한 명 이상의 소환사를 입력해야합니다.')
+            this.props.history.push('/search')
+        }
+        else if(this.state.summonerNum > 5) {
+            alert('한 번에 최대 다섯 명의 소환사까지 검색할 수 있습니다.')
+            this.props.history.push('/search')
         }
         else {
-            this.setState({ search_type : 'Single'});
+            console.log(this.state.summonerList)
+            this.props.history.push(`/searchresult/${this.state.summonerList}`)
+            
         }
     }
 
     parseSummoner = () => {
-        if(this.state.search_type === 'Multi') {
-            let summoners_arr = []
-            if(this.state.summoner_names_multi != '') {
-                summoners_arr = this.state.summoner_names_multi.split(' joined the room.')
-                summoners_arr = summoners_arr.map((summoner) => (summoner).includes('\n')? (summoner).replace('\n', '') : (summoner))
+        let summonerArr = []
+        if(this.state.searchInput !== '') {
+            if(this.state.searchInput.includes('님이 방에 참가했습니다.')) {
+                summonerArr = this.state.searchInput.split('님이 방에 참가했습니다.') 
+                summonerArr = summonerArr.map((summoner) => summoner.replace(/\s/g, ''))    
+                summonerArr.pop()
             }
-            if(summoners_arr.length === 6) {
-                summoners_arr.pop()
-                this.state.summoners_str = summoners_arr.join('-');
-            } 
             else {
-                alert('You have to put five summoners for multiSearch')
+                summonerArr = this.state.searchInput.split(',')
+                summonerArr = summonerArr.map((summoner) => summoner.replace(/\s/g, ''))
             }
+            this.state.summonerNum = summonerArr.length
+            this.state.summonerList = summonerArr.join('-')
         }
-        else {
-            if(this.state.summoner_name_single === '')
-                alert('You cannot search summoner without typing any summonerName')
-        }
+        else return
     }
 
     render() {
-        let redirect = null;
-        let router = null;
-        if (this.state.click_search) {
-            if(this.state.search_type === 'Single') {
-                if(this.state.summoner_name_single != '') {
-                    redirect = <Redirect to = {`/singleSearchResult/${this.state.summoner_name_single}`} />
-                }
-                else {
-                    this.setState({ click_search : false })
-                    redirect = <Redirect to ={'/search'} />
-                }
-            } else {
-                redirect = <Redirect to = {`/multiSearchResult/${this.state.summoners_str}`}/>
-            }
-        }
         return (
             <div className='Searchbar'>
-                {router}
-                {redirect}
-                {(this.state.search_type==='Single') && 
-                    <input className='singleInput'
-                        type='text' placeholder='SummonerID' 
-                        value={this.state.summoner_name_single}
-                        onChange={(event) => this.setState({ summoner_name_single: event.target.value })} />}
-                {(this.state.search_type==='Multi') && 
-                    <textarea className='multiInput' type='text' row='10'  
-                        placeholder={`Summoner1 joined the room.\nSummoner2 joined the room.\nSummoner3 joined the room.\nSummoner4 joined the room.\nSummoner5 joined the room.`}
-                        value={this.state.summoner_names_multi}
-                        onChange={(event) => this.setState({ summoner_names_multi: event.target.value })} />}
-                <button className='singleormulti'
-                    onClick={() => this.onClickSingleOrMultiButton ()}>
-                    {(this.state.search_type==='Single') ? 'Go to MultiSearch' : 'Go to SingleSearch'}
-                </button>
+                <textarea className='multiInput' type='text' 
+                    placeholder=
+                        {`소환사1님이 방에 참가했습니다.\n소환사2님이 방에 참가했습니다.\n소환사3님이 방에 참가했습니다.\n소환사4님이 방에 참가했습니다.\n소환사5님이 방에 참가했습니다.\n또는\n소환사1, 소환사2, 소환사3, 소환사4, 소환사5`}
+                    value={this.state.searchInput}
+                    onChange={(event) => this.setState({ searchInput : event.target.value })} />
                 <button className='search'
                     onClick={() => { 
                     this.parseSummoner() 
-                    this.onClickSearchButton()}}>Search</button>
+                    this.onClickSearchButton()}}>검색</button>
             </div>
         )
     }
 }
 
-export default Searchbar;
+export default withRouter(Searchbar)
