@@ -10,21 +10,22 @@ import './MultiSearchResultPage.css';
 class MultiSearchResultPage extends Component {
 
     state = {
-        summoners_str : ''
+        summonerList : '',
+    }
+
+    constructor (props) {
+        super(props)
+        let summonerArr = this.props.match.params.summonerList.split('-')
+        this.state.summonerList = summonerArr.join(',')
     }
 
     render () {
-        const path = this.props.location.pathname; 
-        const splitResult = path.split('/');
-        const summonerList = splitResult[2].split('-');
-        this.state.summoners_str = summonerList.join(',');
-
         return (
             <div className='MultiSearchResultPageMulti'>
                 <Header />
                 <Searchbar />
                 <text className='titleTextStyleMulti'>MultiSearchResultPage</text>
-                <MultiSearch summoners={this.state.summoners_str}/>
+                <MultiSearch summoners={this.state.summonerList}/>
             </div>
         )
     }

@@ -15,6 +15,8 @@ import ReportActionPage from "./Page/ReportActionPage";
 import SearchPage from "./Page/SearchPage";
 import SignupPage from "./Page/SignupPage";
 
+// TODO: page 내부에 폴더 만들어 가시성 높이기
+
 function App() {
   return (
     <div className = "App">
