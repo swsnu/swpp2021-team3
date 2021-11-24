@@ -1,13 +1,26 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 // import axios from "axios";
 import "./MyApologyCheck.css";
 
 class MyApologyCheck extends Component {
+  state = {
+    GotoMyPage: false,
+  };
+
+  onClickGotoMyPage = () => {
+    this.setState({ GotoMyPage: true });
+  };
+
   render() {
+    let redirect = null;
+    if (this.state.GotoMyPage === true) {
+      redirect = <Redirect to={`/my`} />;
+    }
+
     return (
       <div className="myReportedLogsPage">
-        {/* {redirect} */}
+        {redirect}
         <text className="myApologyCheckTitle">반성문 확인</text>
         <div>
           <div className="apology_box1">
@@ -27,7 +40,12 @@ class MyApologyCheck extends Component {
             </text>
           </div>
         </div>
-        <button className="apology_check_completed_button">확인</button>
+        <button
+          className="apology_check_completed_button"
+          onClick={() => this.onClickGotoMyPage()}
+        >
+          확인
+        </button>
       </div>
     );
   }
