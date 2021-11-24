@@ -2,6 +2,7 @@
 import json
 
 from django.test import TestCase, Client
+from report.models import Report
 from .models import User, Summoner, MannerPoint
 
 
