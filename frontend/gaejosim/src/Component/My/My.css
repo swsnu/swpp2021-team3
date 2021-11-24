@@ -1,0 +1,233 @@
+.mypageTitle {
+  position: absolute;
+  width: 110px;
+  height: 36px;
+  left: 23%;
+  top: 27%;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.mypageContent {
+  position: absolute;
+  width: 178px;
+  height: 273px;
+  left: 23%;
+  /* margin-top: 10%; */
+  top: 36%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 23px;
+  text-align: left;
+
+  color: #ffffff;
+}
+
+.mpGraphAll {
+  position: absolute;
+  top: 85%;
+  width: 60%;
+  height: 8px;
+  background: #767676;
+  opacity: 20%;
+  border-radius: 40px;
+}
+
+.mpGraphPercent {
+  position: absolute;
+  top: 85%;
+  width: 50%;
+  height: 8px;
+  background: #fc0174;
+  opacity: 100%;
+  border-radius: 40px;
+}
+
+.mypage_box1 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 35.5%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.mypage_box2 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  /* top: 45%; */
+  top: 43.5%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.mypage_box3 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 56%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.mypage_box4 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 64%;
+  /* margin-top: 100px; */
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.boxText {
+  position: absolute;
+  top: 22%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: left;
+  white-space: pre-line;
+}
+.boxText1 {
+  position: absolute;
+  top: 22%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.boxText2 {
+  position: absolute;
+  bottom: 23%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.recentText1 {
+  position: absolute;
+  left: 38.5%;
+  top: 32.9%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 19px;
+  /* identical to box height */
+
+  text-align: left;
+
+  color: #ffffff;
+  white-space: pre-line;
+}
+
+.recentText2 {
+  position: absolute;
+  left: 38.5%;
+  top: 53.4%;
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 19px;
+  /* identical to box height */
+
+  text-align: left;
+
+  color: #ffffff;
+  white-space: pre-line;
+}
+.seemoreText1 {
+  position: absolute;
+  /* left: 76%; */
+  right: 22.7%;
+  top: 32.9%;
+  /* transform: translateX(-50%); */
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 19px;
+  /* identical to box height */
+
+  text-align: right;
+
+  color: #ffffff;
+  white-space: pre-line;
+}
+
+.seemoreText2 {
+  position: absolute;
+  /* left: 76%; */
+  right: 22.5%;
+  top: 53.4%;
+  /* transform: translateX(-50%); */
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 19px;
+  /* identical to box height */
+
+  text-align: right;
+
+  color: #ffffff;
+  white-space: pre-line;
+}
+
+.Pencil {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}

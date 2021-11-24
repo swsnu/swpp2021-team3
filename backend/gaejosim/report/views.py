@@ -17,16 +17,16 @@ api_default = {
 }
 
 tag_dict = {
-    "tag1_1": 1,
-    "tag1_2": 1,
-    "tag2_1": 2,
-    "tag2_2": 2,
-    "tag3_1": 3,
-    "tag3_2": 3,
-    "tag4_1": 4,
-    "tag4_2": 4,
-    "tag5_1": 5,
-    "tag5_2": 5,
+    "과격한 언행": 1,
+    "비속어 사용": 1,
+    "고의성 던짐": 2,
+    "탈주/닷지": 2,
+    "대리 게임": 3,
+    "픽 상황 갑질": 3,
+    "cs 스틸": 4,
+    "팀킬": 4,
+    "정치": 5,
+    "라인 거부": 5,
 }
 
 
@@ -139,7 +139,8 @@ def post_report(request):
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
     if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
-        reported_summoner = Summoner.objects.get(summoner_puuid=reported_summoner_puuid)
+        reported_summoner = Summoner.objects.get(
+            summoner_puuid=reported_summoner_puuid)
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
@@ -159,7 +160,8 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
@@ -167,15 +169,15 @@ def post_report(request):
     tag_list = tag.split(",")
     for tag_key in tag_list:
         if tag_dict[tag_key] == 1:
-            manner_point.tag1 -= 1
+            manner_point.tag1 -= 0.5
         elif tag_dict[tag_key] == 2:
-            manner_point.tag2 -= 1
+            manner_point.tag2 -= 0.5
         elif tag_dict[tag_key] == 3:
-            manner_point.tag3 -= 1
+            manner_point.tag3 -= 0.5
         elif tag_dict[tag_key] == 4:
-            manner_point.tag4 -= 1
+            manner_point.tag4 -= 0.5
         else:
-            manner_point.tag5 -= 1
+            manner_point.tag5 -= 0.5
 
     manner_point.save()
 
@@ -252,6 +254,7 @@ def reports_statistics(request):
     ).count()
 
     return JsonResponse(
-        {"accumulated_reports": total_report_num, "today_reports": today_report_num},
+        {"accumulated_reports": total_report_num,
+            "today_reports": today_report_num},
         status=200,
     )
