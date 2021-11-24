@@ -10,4 +10,6 @@ urlpatterns = [
     path("change/password/", views.change_password, name="change_password"),
     path("forgot/id/", views.find_username, name="find username"),
     path("forgot/password/", views.find_password, name="find password"),
+    path("update/summoner/", views.update_summoner_name,
+         name="update summoner name")
 ]
