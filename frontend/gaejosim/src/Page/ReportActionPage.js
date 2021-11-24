@@ -12,6 +12,9 @@ class ReportActionPage extends Component {
         const reported_summoner = splitResult[2];
         console.log("reported summoner", reported_summoner)
 
+        const name = this.props.location.params.summonerID
+        console.log("name", name)
+
         return (
             <div className='ReportActionPage'>
                 <Header />

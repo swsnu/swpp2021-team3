@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import Header from '../Container/Header/Header';
 import Searchbar from '../Component/Searchbar/Searchbar';
 import Statistic from '../Component/Statistic/Statistic';
-import ReportedUserList from '../Component/ReportedUser/ReportedUserList';
 
 import './SearchPage.css';
 
@@ -14,30 +13,25 @@ class SearchPage extends Component {
     }
 
     onClickReportButton = () => {
-        this.setState({ clickReport: true });
+        this.setState({ clickReport: true })
+        this.props.history.push('/reportAuth')
     }
 
     render() {
-        let redirect = null;
-        if (this.state.clickReport) {
-            redirect = <Redirect to='/reportAuth' />
-        }
         return (
-            <div className='SearchPage'>
-                {redirect}
+            <div className = 'SearchPage'>
                 <Header />
-                <div className='Background'></div>
-                <p id="PageName">Search</p>
+                <div className = 'Background'></div>
+                <p id = 'PageName'>Search</p>
                 <Searchbar />
-                <button className='GoToReport' id='button'
+                <button className = 'GoToReport' id = 'button'
                     onClick={() => this.onClickReportButton()}>
-                    Go to Report
+                    Report
                 </button>
                 <Statistic />
-                {/* <ReportedUserList /> */}
             </div>
         )
     }
 }
 
-export default SearchPage;
+export default withRouter(SearchPage)

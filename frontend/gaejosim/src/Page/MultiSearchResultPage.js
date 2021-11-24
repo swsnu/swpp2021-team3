@@ -23,7 +23,6 @@ class MultiSearchResultPage extends Component {
             <div className='MultiSearchResultPageMulti'>
                 <Header />
                 <Searchbar />
-                {/* <h1>MultiSearchResultPage</h1> */}
                 <text className='titleTextStyleMulti'>MultiSearchResultPage</text>
                 <MultiSearch summoners={this.state.summoners_str}/>
             </div>
