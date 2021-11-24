@@ -442,3 +442,55 @@ class UserTestCase(TestCase):
         )
 
         self.assertEqual(response.status_code, 400)
+
+    def test_update_summoner_name_success(self):
+        """update summoner name successfully """
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        login = self.client.login(username="test1", password="password")
+        self.assertTrue(login)
+
+        response = self.client.put(
+            "/api/update/summoner/",
+            json.dumps({"new_summoner_name": "301동여신"}),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_summoner_name_without_login_fail(self):
+        """update summoner name without login"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.put(
+            "/api/update/summoner/",
+            json.dumps({"new_summoner_name": "301동여신"}),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_update_incorrect_summoner_name_fail(self):
+        """update incorrect summoner name"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        login = self.client.login(username="test1", password="password")
+        self.assertTrue(login)
+
+        response = self.client.put(
+            "/api/update/summoner/",
+            json.dumps({"new_summoner_name": "서모너서모너"}),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+
+        self.assertEqual(response.status_code, 400)
