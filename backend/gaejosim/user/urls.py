@@ -11,4 +11,6 @@ urlpatterns = [
     path("forgot/id/", views.find_username, name="find username"),
     path("forgot/password/", views.find_password, name="find password"),
     path("mypage/", views.my_page, name="my page"),
+    path("update/summoner/", views.update_summoner_name,
+         name="update summoner name")
 ]

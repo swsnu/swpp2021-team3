@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import MyPage from "./MyPage";
+import MyApologyWritePage from "./MyApologyWritePage";
 
-describe("<MyPage />", () => {
+describe("<MyApologyWritePage />", () => {
   it("should render without errors", () => {
-    const component = shallow(<MyPage />);
+    const component = shallow(<MyApologyWritePage />);
     const wrapper = component.find(".My");
     expect(wrapper.length).toBe(0);
   });
