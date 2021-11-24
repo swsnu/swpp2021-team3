@@ -37,6 +37,7 @@ class ReportAuth extends Component {
                 "summoner_name": this.state.report_summoner
             })
 
+
             if (response.data.authenticated === false) alert("Please check the summoner name. This summoner is not one of player whom you played with in recent five games")
             this.setState({ authenticated: response.data.authenticated })
         }
@@ -44,8 +45,6 @@ class ReportAuth extends Component {
             alert('User should log in')
         }
     }
-
-
 
     render() {
         let redirect = null
