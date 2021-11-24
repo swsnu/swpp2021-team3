@@ -32,11 +32,11 @@ class Header extends Component {
                 <img className='logoImage' alt='logo-img' src={logo} />
                 <button className='loginButton'
                     onClick={() => this.onClickLoginButton()}>
-                    Login
+                    로그인
                 </button>
                 <button className='mypageButton'
                     onClick={() => this.onClickMyPageButton()}>
-                    MyPage
+                    마이 페이지
                 </button>
             </div>
         )
