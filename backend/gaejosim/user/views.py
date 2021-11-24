@@ -218,3 +218,32 @@ def log_out(request):
     logout(request)
 
     return JsonResponse({"message": "Logout Success"}, status=200)
+
+
+@require_http_methods(["PUT"])
+def update_summoner_name(request):
+    """update summoner name"""
+    user = request.user
+    data = json.loads(request.body.decode())
+
+    if not user.is_authenticated:
+        return JsonResponse({"error": "User is not logged in."}, status=401)
+
+    new_summoner_name = data["new_summoner_name"]
+
+    summoner_puuid = user.summoner.summoner_puuid
+
+    summoner_url = (
+        f"{api_default['region']}/lol/summoner/v4/summoners"
+        + f"/by-puuid/{summoner_puuid}?api_key={api_default['key']}"
+    )
+
+    summoner_req = requests.get(summoner_url)
+    summoner_info = summoner_req.json()
+
+    if summoner_info["name"] == new_summoner_name:
+        user.summoner.name = new_summoner_name
+        user.summoner.save()
+        return JsonResponse({"message": "Successfully update your summoner name."}, status=200)
+
+    return JsonResponse({"error": "This name does not match your current summoner name."}, status=400)
