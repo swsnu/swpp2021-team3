@@ -4,8 +4,9 @@ import Header from '../Container/Header/Header';
 import Searchbar from '../Component/Searchbar/Searchbar';
 import MultiSearch from '../Component/MultiSearch';
 
-
 import './MultiSearchResultPage.css';
+
+// TODO: multisearch result 페이지 명칭 searchResult 로 변경하기
 
 class MultiSearchResultPage extends Component {
 
@@ -24,7 +25,7 @@ class MultiSearchResultPage extends Component {
             <div className='MultiSearchResultPageMulti'>
                 <Header />
                 <Searchbar />
-                <text className='titleTextStyleMulti'>MultiSearchResultPage</text>
+                {/* <text className='titleTextStyleMulti'>MultiSearchResultPage</text> */}
                 <MultiSearch summoners={this.state.summonerList}/>
             </div>
         )
