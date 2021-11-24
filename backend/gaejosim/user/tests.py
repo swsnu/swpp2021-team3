@@ -463,6 +463,7 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_update_summoner_name_without_login_fail(self):
+        """update summoner name without login"""
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
@@ -477,6 +478,7 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_update_incorrect_summoner_name_fail(self):
+        """update incorrect summoner name"""
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value

@@ -37,7 +37,7 @@ jobs:
     - mysql -e "SET GLOBAL character_set_server = 'utf8mb4'"
     - mysql -e "SET GLOBAL character_set_database = 'utf8mb4'"
     - mysql -e "show variables like 'c%';"
-    - pylint **/*.py --disable=W0613,E1101,R0801,R0914,R0902,E0402 --load-plugins pylint_django
+    - pylint **/*.py --disable=W0613,E1101,R0801,R0914,R0902,E0402,R0904,C0301 --load-plugins pylint_django
     - coverage run --source='.' --omit=manage.py,gaejosim/asgi.py,gaejosim/wsgi.py manage.py test
     - coverage xml
     - cd $REPO_ROOT

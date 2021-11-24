@@ -233,8 +233,8 @@ class ReportTestCase(TestCase):
             summoner_id="KsbxDVlM72XHWA0ZFkAdbCHkXIScc3bRH8Qjb2qJRwDo9CI"
         )
         self.assertEqual(test_summoner.manner_point.point, 60)
-        self.assertEqual(test_summoner.manner_point.tag1, 4.8)
-        self.assertEqual(test_summoner.manner_point.tag2, 4.8)
+        self.assertEqual(test_summoner.manner_point.tag1, 4.5)
+        self.assertEqual(test_summoner.manner_point.tag2, 4.5)
 
     def test_success_poist_with_empty_comment(self):
         """make a report with empty string comment"""
