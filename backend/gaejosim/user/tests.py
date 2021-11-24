@@ -444,7 +444,7 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_update_summoner_name_success(self):
-        """update summoner name successfully"""
+        """update summoner name successfully """
 
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
