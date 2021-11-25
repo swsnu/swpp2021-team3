@@ -243,6 +243,7 @@ def my_page(request):
                 "comment": report.comment,
                 "reported_summoner": report.reported_summoner.name,
                 "evaluation": report.evaluation,
+                "apology": bool(report.apology),
             }
             for report in Report.objects.filter(reporting_user=user).order_by("-id")[:5]
         ]
@@ -253,6 +254,7 @@ def my_page(request):
                 "tag": report.tag,
                 "comment": report.comment,
                 "evaluation": report.evaluation,
+                "apology": bool(report.apology),
             }
             for report in Report.objects.filter(reported_summoner=summoner).order_by(
                 "-id"
@@ -300,6 +302,10 @@ def update_summoner_name(request):
     if summoner_info["name"] == new_summoner_name:
         user.summoner.name = new_summoner_name
         user.summoner.save()
-        return JsonResponse({"message": "Successfully update your summoner name."}, status=200)
+        return JsonResponse(
+            {"message": "Successfully update your summoner name."}, status=200
+        )
 
-    return JsonResponse({"error": "This name does not match your current summoner name."}, status=400)
+    return JsonResponse(
+        {"error": "This name does not match your current summoner name."}, status=400
+    )
