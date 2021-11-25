@@ -49,7 +49,7 @@ class ReportTestCase(TestCase):
         )
 
         self.report_1 = Report.objects.create(
-            tag="tag1tag2",
+            tag="과격한 언행,고의성 던짐",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
@@ -57,7 +57,7 @@ class ReportTestCase(TestCase):
         )
 
         self.report_2 = Report.objects.create(
-            tag="tag3tag4",
+            tag="대리 게임,팀킬",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
@@ -65,7 +65,7 @@ class ReportTestCase(TestCase):
         )
 
         self.report_3 = Report.objects.create(
-            tag="tag3tag4",
+            tag="대리 게임,팀킬",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
@@ -354,7 +354,7 @@ class HomePageTest(TestCase):
     def test_success_without_today_reports(self):
         """Test statistics without today reports"""
         report_1 = Report.objects.create(
-            tag="tag3tag4",
+            tag="대리 게임,팀킬",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
@@ -420,7 +420,7 @@ class MyReportTestCase(TestCase):
         )
 
         self.report_1 = Report.objects.create(
-            tag="tag1tag2",
+            tag="과격한 언행,고의성 던짐",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
@@ -428,7 +428,7 @@ class MyReportTestCase(TestCase):
         )
 
         self.report_2 = Report.objects.create(
-            tag="tag3tag4",
+            tag="대리 게임,팀킬",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user2,
@@ -454,7 +454,7 @@ class MyReportTestCase(TestCase):
         )
 
         self.report_3 = Report.objects.create(
-            tag="tag3tag4",
+            tag="대리 게임,cs 스틸",
             comment="test_comment",
             reported_summoner=self.test_summoner1,
             reporting_user=self.test_user3,
@@ -462,7 +462,7 @@ class MyReportTestCase(TestCase):
         )
 
         self.report_4 = Report.objects.create(
-            tag="tag3tag4",
+            tag="대리 게임,cs 스틸",
             comment="test_comment",
             reported_summoner=self.test_summoner3,
             reporting_user=self.test_user1,
@@ -523,7 +523,7 @@ class MyReportTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(data["reports"]), 3)
-        self.assertEqual(data["reports"][0]["tag"], "tag1tag2")
+        self.assertEqual(data["reports"][0]["tag"], "과격한 언행,고의성 던짐")
         self.assertEqual(data["reports"][0]["comment"], "test_comment")
         self.assertEqual(data["reports"][0]["evaluation"], 60)
 
