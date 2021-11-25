@@ -34,7 +34,7 @@ class SearchTestCase(TestCase):
         csrftoken = response.cookies["csrftoken"].value
 
         response = client.get(
-            "/api/search/?type=multi&summoners=알루미늄,얼루미늄,니꼬치삼센치,삼센치아님,nooooosuchuserrrrrrrrrr",
+            "/api/search/?summoners=알루미늄,얼루미늄,니꼬치삼센치,삼센치아님,nooooosuchuserrrrrrrrrr",
             content_type="application/json; charset=utf-8",
             HTTP_X_CSRFTOKEN=csrftoken,
         )
@@ -93,14 +93,7 @@ class SearchTestCase(TestCase):
         csrftoken = response.cookies["csrftoken"].value
 
         response = client.get(
-            "/api/search/?type=&summoners=알루미늄,얼루미늄,니꼬치삼센치,삼센치아님,nooooosuchuserrrrrrrrrr",
-            content_type="application/json; charset=utf-8",
-            HTTP_X_CSRFTOKEN=csrftoken,
-        )
-        self.assertEqual(response.status_code, 400)
-
-        response = client.get(
-            "/api/search/?type=multi&summoners=",
+            "/api/search/?summoners=",
             content_type="application/json; charset=utf-8",
             HTTP_X_CSRFTOKEN=csrftoken,
         )

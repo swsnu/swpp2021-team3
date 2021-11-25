@@ -15,11 +15,8 @@ api_default = {
 @require_http_methods(["GET"])
 def search(request):
     """single/multi search"""
-    search_type = request.GET["type"]
     summoners = request.GET["summoners"]
 
-    if search_type == "":
-        return HttpResponse(status=400)
     if summoners == "":
         return HttpResponse(status=400)
 
