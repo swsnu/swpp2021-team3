@@ -442,7 +442,7 @@ class UserTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
 
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 401)
 
     def test_update_summoner_name_success(self):
         """update summoner name successfully """
