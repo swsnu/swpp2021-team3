@@ -305,7 +305,11 @@ def apology(request, report_id):
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
+        if len(content) == 0:
+            return JsonResponse({"error": "내용을 입력해주세요."}, status=400)
+
         translated_content = papago_translate(content)
+
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
@@ -315,6 +319,31 @@ def apology(request, report_id):
         apology.save()
         report.apology = apology
         report.save()
+
+        report_tag_list = report.tag.split(",")
+        report_evaluation = report.evaluation
+
+        manner_point = user.summoner.manner_point
+
+        for tag_key in report_tag_list:
+            if tag_dict[tag_key] == 1:
+                manner_point.tag1 += 0.5
+            elif tag_dict[tag_key] == 2:
+                manner_point.tag2 += 0.5
+            elif tag_dict[tag_key] == 3:
+                manner_point.tag3 += 0.5
+            elif tag_dict[tag_key] == 4:
+                manner_point.tag4 += 0.5
+            else:
+                manner_point.tag5 += 0.5
+
+        reports_cnt = Report.objects.filter(
+            reported_summoner=user.summoner).count()
+
+        manner_point.point = (manner_point.point * reports_cnt - report.evaluation) / (
+            reports_cnt - 1
+        )
+        manner_point.save()
 
         return JsonResponse(
             {
@@ -347,7 +376,11 @@ def apology(request, report_id):
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
+        if len(content) == 0:
+            return JsonResponse({"error": "내용을 입력해주세요."}, status=400)
+
         translated_content = papago_translate(content)
+
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
@@ -356,6 +389,31 @@ def apology(request, report_id):
         apology.content = content
         apology.is_verified = True
         apology.save()
+
+        report_tag_list = report.tag.split(",")
+        report_evaluation = report.evaluation
+
+        manner_point = user.summoner.manner_point
+
+        for tag_key in report_tag_list:
+            if tag_dict[tag_key] == 1:
+                manner_point.tag1 += 0.5
+            elif tag_dict[tag_key] == 2:
+                manner_point.tag2 += 0.5
+            elif tag_dict[tag_key] == 3:
+                manner_point.tag3 += 0.5
+            elif tag_dict[tag_key] == 4:
+                manner_point.tag4 += 0.5
+            else:
+                manner_point.tag5 += 0.5
+
+        reports_cnt = Report.objects.filter(
+            reported_summoner=user.summoner).count()
+
+        manner_point.point = (manner_point.point * reports_cnt - report.evaluation) / (
+            reports_cnt - 1
+        )
+        manner_point.save()
 
         return JsonResponse(
             {
