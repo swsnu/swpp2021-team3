@@ -1,6 +1,6 @@
 """Util functions for the service"""
-from django.http import JsonResponse
 from functools import wraps
+from django.http import JsonResponse
 
 
 def is_json_key_present(json, key):
@@ -23,6 +23,8 @@ def is_riot_timeout(riot_response):
 
 
 def check_logged_in(func):
+    """check whether user is logged in"""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         if args and args[0].user.is_authenticated:
