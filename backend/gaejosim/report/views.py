@@ -5,7 +5,7 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from core.utils import is_json_key_present, is_riot_timeout
+from core.utils import is_riot_timeout
 from user.models import Summoner, MannerPoint
 from .models import Report
 
@@ -43,6 +43,8 @@ def report_authentication(request):
 
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
+        if not team_players:
+            JsonResponse({"error": "RIOT API timeout"}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":
@@ -61,7 +63,7 @@ def get_recent_matches(user):
     """get recent 10 matches id"""
     recent_matches_url = (
         f"{api_default['asia']}/lol/match/v5/matches/by-puuid/{user.summoner.summoner_puuid}/"
-        + f"ids?type=ranked&start=0&count=10&api_key={api_default['key']}"
+        + f"ids?start=0&count=10&api_key={api_default['key']}"
     )
     recent_matches_req = requests.get(recent_matches_url)
     recent_matches_list = recent_matches_req.json()
@@ -77,10 +79,6 @@ def get_team_players(user, match_id):
     )
 
     match_result = requests.get(match_url).json()
-
-    if is_json_key_present(match_result, "status"):
-        if match_result["status"]["status_code"] == 404:
-            return None
 
     if is_riot_timeout(match_result):
         return None
@@ -214,6 +212,29 @@ def my_reports(request):
             "evaluation": report.evaluation,
         }
         for report in Report.objects.filter(reporting_user=user)
+    ]
+
+    return JsonResponse({"reports": reports}, status=200)
+
+
+@require_http_methods(["GET"])
+def my_received_reports(request):
+    """list of reports I've got"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse(
+            {"error": "You need to login before accessing my page"}, status=401
+        )
+
+    reports = [
+        {
+            "id": report.id,
+            "tag": report.tag,
+            "comment": report.comment,
+            "evaluation": report.evaluation,
+        }
+        for report in Report.objects.filter(reported_summoner=user.summoner)
     ]
 
     return JsonResponse({"reports": reports}, status=200)
