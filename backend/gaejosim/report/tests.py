@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from pytz import timezone
 from django.test import TestCase, Client
 from user.models import Summoner, User, MannerPoint
-from report.models import Report, Apology
+from report.models import Report
 
 
 class ReportTestCase(TestCase):
