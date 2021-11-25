@@ -24,7 +24,11 @@ function App() {
           <Route path="/" exact component={SearchPage} />
 
           <Route path="/search" exact component={SearchPage} />
-          <Route path="/multiSearchResult/:summonerList" exact component={MultiSearchResultPage}/>
+          <Route
+            path="/searchresult/:summonerList"
+            exact
+            component={MultiSearchResultPage}
+          />
 
           <Route path="/signup" exact component={SignupPage} />
           <Route path="/login" exact component={LoginPage} />

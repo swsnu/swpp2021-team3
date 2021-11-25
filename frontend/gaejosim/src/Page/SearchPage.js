@@ -25,11 +25,10 @@ class SearchPage extends Component {
                 <Header />
                 <div className = 'Background'></div>
                 <div className = 'Logo'>Gaejosim</div>
-                <p id = 'PageName'>Search</p>
                 <Searchbar />
                 <button className = 'GoToReport' id = 'button'
                     onClick={() => this.onClickReportButton()}>
-                    Report
+                    신고하기
                 </button>
                 <Statistic />
             </div>
