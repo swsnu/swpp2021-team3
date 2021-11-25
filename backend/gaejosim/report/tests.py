@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from pytz import timezone
 from django.test import TestCase, Client
 from user.models import Summoner, User, MannerPoint
-from report.models import Report
+from report.models import Report, Apology
 
 
 class ReportTestCase(TestCase):
@@ -36,7 +36,8 @@ class ReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -63,13 +64,22 @@ class ReportTestCase(TestCase):
             evaluation=70,
         )
 
+        self.report_3 = Report.objects.create(
+            tag="tag3tag4",
+            comment="test_comment",
+            reported_summoner=self.test_summoner1,
+            reporting_user=self.test_user2,
+            evaluation=30,
+        )
+
         self.manner_point3 = MannerPoint.objects.create()
         self.test_summoner3 = Summoner.objects.create(
             summoner_puuid=(
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=(
+                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -253,7 +263,7 @@ class ReportTestCase(TestCase):
         self.client.login(username="test2", password="password")
         response = self.client.get("/api/my/reports/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()["reports"]), 2)
+        self.assertEqual(len(response.json()["reports"]), 3)
 
         reports = response.json()["reports"]
         self.assertEqual(reports[0]["evaluation"], 60)
@@ -280,8 +290,8 @@ class ReportTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["accumulated_reports"], 2)
-        self.assertEqual(response.json()["today_reports"], 1)
+        self.assertEqual(response.json()["accumulated_reports"], 3)
+        self.assertEqual(response.json()["today_reports"], 2)
         self.assertEqual(response.json()["not_answered_reports"], 0)
 
 
@@ -314,7 +324,8 @@ class HomePageTest(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -349,7 +360,8 @@ class HomePageTest(TestCase):
             reporting_user=self.test_user2,
             evaluation=70,
         )
-        report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(days=-2)
+        report_1.created_at = datetime.now(
+            timezone("Asia/Seoul")) + timedelta(days=-2)
         report_1.save()
 
         client = Client(enforce_csrf_checks=True)
@@ -395,7 +407,8 @@ class MyReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -428,7 +441,8 @@ class MyReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=(
+                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -576,7 +590,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -585,9 +599,53 @@ class MyReportTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
 
         data = response.json()
-        self.assertEqual(data["content"], "I'm sorry.")
-        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["content"], "정말 죄송합니다. 다음부터 안 그러겠습니다.")
+        self.assertEqual(data["is_verified"], True)
         self.assertEqual(data["report_id"], self.report_1.id)
+
+    def test_fail_post_apology_ml(self):
+        """test fail POST apology due to ml analysis"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_3.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "신난다.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_3.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
 
     def test_fail_post_apology(self):
         """test fail POST apology"""
@@ -599,7 +657,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -616,7 +674,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + "100" + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -631,7 +689,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -640,8 +698,8 @@ class MyReportTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
 
         data = response.json()
-        self.assertEqual(data["content"], "I'm sorry.")
-        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["content"], "정말 죄송합니다. 다음부터 안 그러겠습니다.")
+        self.assertEqual(data["is_verified"], True)
         self.assertEqual(data["report_id"], self.report_1.id)
 
         response = client.get("/api/token/")
@@ -651,7 +709,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -668,7 +726,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -691,7 +749,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -706,7 +764,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm really sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -715,8 +773,8 @@ class MyReportTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         data = response.json()
-        self.assertEqual(data["content"], "I'm really sorry.")
-        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["content"], "정말 죄송합니다. 다음부터 안 그러겠습니다.")
+        self.assertEqual(data["is_verified"], True)
         self.assertEqual(data["report_id"], self.report_1.id)
 
     def test_fail_put_apology(self):
@@ -729,7 +787,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -746,7 +804,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_2.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -763,13 +821,65 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 401)
+
+    def test_fail_put_apology_ml(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_3.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.put(
+            "/api/reports/" + str(self.report_3.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.put(
+            "/api/reports/" + str(self.report_3.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "너나 잘하세요.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
 
     def test_success_get_apology(self):
         """test success GET apology"""
@@ -793,7 +903,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm really sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",
@@ -811,8 +921,8 @@ class MyReportTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual(data["content"], "I'm really sorry.")
-        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["content"], "정말 죄송합니다. 다음부터 안 그러겠습니다.")
+        self.assertEqual(data["is_verified"], True)
         self.assertEqual(data["report_id"], self.report_1.id)
 
     def test_fail_get_apology(self):
@@ -849,7 +959,7 @@ class MyReportTestCase(TestCase):
             "/api/reports/" + str(self.report_1.id) + "/apology/",
             json.dumps(
                 {
-                    "content": "I'm really sorry.",
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
                 }
             ),
             content_type="application/json",

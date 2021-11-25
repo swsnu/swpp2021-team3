@@ -6,6 +6,7 @@ import ssl
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, EmotionOptions
+from ibm_cloud_sdk_core.api_exception import ApiException
 
 
 def papago_translate(ko_text):
@@ -52,14 +53,17 @@ def watson_nlu_emotion(en_text):
 
     vocabs = en_text.split(' ')
 
-    response = natural_language_understanding.analyze(
-        text=f'{en_text}',
-        language="en",
-        features=Features(emotion=EmotionOptions(targets=vocabs))).get_result()
+    try:
+        response = natural_language_understanding.analyze(
+            text=f'{en_text}',
+            language="en",
+            features=Features(emotion=EmotionOptions(targets=vocabs))).get_result()
+
+    except ApiException as e:
+        return False
 
     text_emotion_json = response['emotion']['document']['emotion']
 
-    print(text_emotion_json)
     sadness = text_emotion_json['sadness']
     fear = text_emotion_json['fear']
 
