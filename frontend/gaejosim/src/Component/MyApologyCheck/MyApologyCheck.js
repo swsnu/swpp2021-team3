@@ -41,7 +41,7 @@ class MyApologyCheck extends Component {
           </div>
         </div>
         <button
-          className="apology_check_completed_button"
+          className="Apology_check_completed_button"
           onClick={() => this.onClickGotoMyPage()}
         >
           확인

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import "./My.css";
 import Pencil from "../../Assets/Images/icon-pencil.png";
 import Paper from "../../Assets/Images/icon-paper.png";

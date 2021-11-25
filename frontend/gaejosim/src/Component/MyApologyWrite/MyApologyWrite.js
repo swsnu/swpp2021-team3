@@ -46,7 +46,7 @@ class MyApologyWrite extends Component {
           />
         </div>
         <button
-          className="apology_check_completed_button"
+          className="Apology_write_completed_button"
           onClick={() => this.onClickGotoMyPage()}
         >
           제출

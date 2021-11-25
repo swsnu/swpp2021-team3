@@ -3,8 +3,6 @@ import { Redirect } from "react-router-dom";
 // import axios from "axios";
 import "./MyReportedLogs.css";
 import Pencil from "../../Assets/Images/icon-pencil.png";
-// import Paper from "../../Assets/Images/icon-paper.png";
-// import Delete from "../../Assets/Images/icon-delete.png";
 
 class MyReportedLogs extends Component {
   state = {
@@ -40,7 +38,7 @@ class MyReportedLogs extends Component {
             </text>
 
             <img
-              className="reportedlogs_Pencil"
+              className="Reportedlogs1_Pencil"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
@@ -54,7 +52,7 @@ class MyReportedLogs extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="reportedlogs_Pencil"
+              className="Reportedlogs2_Pencil"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
@@ -68,7 +66,7 @@ class MyReportedLogs extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="reportedlogs_Pencil"
+              className="Reportedlogs3_Pencil"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
@@ -82,7 +80,7 @@ class MyReportedLogs extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="reportedlogs_Pencil"
+              className="Reportedlogs4_Pencil"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
@@ -96,7 +94,7 @@ class MyReportedLogs extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="reportedlogs_Pencil"
+              className="Reportedlogs5_Pencil"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
@@ -110,7 +108,7 @@ class MyReportedLogs extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="reportedlogs_Pencil"
+              className="Reportedlogs6_Pencil"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
