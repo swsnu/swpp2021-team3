@@ -1,17 +1,75 @@
-.NumReports{
-    position: absolute;
-    left: 25%;
-    bottom: 600px;
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 41px;
+.AllReports {
+  position: absolute;
+  /* width: 65px; */
+  /* height: 20px; */
+  left: 57px;
+  bottom: 73px;
+
+  /* font-family: Noto Sans; */
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
- 
-.NumPrevents{
-    position: absolute;
-    right: 25%;
-    bottom: 600px;
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 41px;
+
+.TodayReports {
+  position: absolute;
+  /* width: 88px; */
+  /* height: 20px; */
+  left: 215px;
+  bottom: 73px;
+
+  /* font-family: Noto Sans; */
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.NumReports {
+  position: absolute;
+  width: 66px;
+  height: 54px;
+  left: 56px;
+  bottom: 19px;
+
+  /* font-family: Noto Sans; */
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 54px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.NumPrevents {
+  position: absolute;
+  width: 24px;
+  height: 54px;
+  left: 247px;
+  bottom: 19px;
+
+  /* font-family: Noto Sans; */
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 54px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }

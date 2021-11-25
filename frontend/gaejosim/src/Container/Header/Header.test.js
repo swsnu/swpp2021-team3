@@ -24,7 +24,7 @@ describe("router login page", () => {
       </Router>
     );
     expect(history.location.pathname).toBe("/");
-    fireEvent.click(getByText("Login"));
+    fireEvent.click(getByText("로그인"));
     expect(history.location.pathname).toBe("/login");
   });
 });

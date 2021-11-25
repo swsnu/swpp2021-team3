@@ -1,31 +1,30 @@
+/* #PageName {
+  position: absolute;
+  height: 1000px;
+  width: 224px;
+  left: 568px;
+  top: 153px;
+  bottom: 608px;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 66px;
+  letter-spacing: 0.9999998807907104px;
+  text-align: left;
+} */
 
-#PageName{
-    position: absolute;
-    height: 1000px;
-    width: 224px;
-    left: 568px;
-    top: 153px;
-    bottom: 608px;
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 66px;
-    letter-spacing: 0.9999998807907104px;
-    text-align: left;
+.GoToReport {
+  position: absolute;
+  width: 202px;
+  height: 65px;
+  right: 64px;
+  bottom: 24px;
+  background: #fc0174;
+  border-radius: 40px;
 
-}
-
-.gotoReport {
-    width: 120px;
-    height: 38.4px; 
-    position: absolute;
-    left: 68.19%;
-    right: 23.47%;
-    top: 5.78%;
-    bottom: 89.96%;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: white;
-    outline: 0;
-    border : 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  outline: 0;
+  border: 0;
 }

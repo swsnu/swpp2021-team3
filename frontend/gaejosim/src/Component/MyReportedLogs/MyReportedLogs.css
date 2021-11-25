@@ -130,20 +130,38 @@
   white-space: pre-line;
 }
 
-.reportedlogs_Pencil {
+.Reportedlogs1_Pencil {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.reportedlogs_Delete {
+.Reportedlogs2_Pencil {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.reportedlogs_Paper {
+.Reportedlogs3_Pencil {
   position: absolute;
-  right: 6%;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportedlogs4_Pencil {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportedlogs5_Pencil {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportedlogs6_Pencil {
+  position: absolute;
+  right: 2%;
   top: 30%;
 }

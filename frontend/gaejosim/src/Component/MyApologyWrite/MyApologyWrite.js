@@ -1,13 +1,25 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 // import axios from "axios";
 import "./MyApologyWrite.css";
 
 class MyApologyWrite extends Component {
+  state = {
+    GotoMyPage: false,
+  };
+
+  onClickGotoMyPage = () => {
+    this.setState({ GotoMyPage: true });
+  };
+
   render() {
+    let redirect = null;
+    if (this.state.GotoMyPage === true) {
+      redirect = <Redirect to={`/my`} />;
+    }
     return (
       <div className="myReportedLogsPage">
-        {/* {redirect} */}
+        {redirect}
         <text className="myApologyWriteTitle">반성문 작성</text>
         <div>
           <div className="apology_box1">
@@ -33,7 +45,12 @@ class MyApologyWrite extends Component {
             //   }
           />
         </div>
-        <button className="apology_check_completed_button">제출</button>
+        <button
+          className="Apology_write_completed_button"
+          onClick={() => this.onClickGotoMyPage()}
+        >
+          제출
+        </button>
       </div>
     );
   }

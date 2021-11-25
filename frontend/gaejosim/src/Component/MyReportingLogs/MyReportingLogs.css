@@ -16,7 +16,7 @@
   color: #ffffff;
 }
 
-.reportinglogs_box1 {
+.Reportinglogs_box1 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -28,7 +28,7 @@
   border-radius: 12px;
 }
 
-.reportinglogs_box2 {
+.Reportinglogs_box2 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -39,7 +39,7 @@
   border-radius: 12px;
 }
 
-.reportinglogs_box3 {
+.Reportinglogs_box3 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -50,7 +50,7 @@
   border-radius: 12px;
 }
 
-.reportinglogs_box4 {
+.Reportinglogs_box4 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -62,7 +62,7 @@
   border-radius: 12px;
 }
 
-.reportinglogs_box5 {
+.Reportinglogs_box5 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -74,7 +74,7 @@
   border-radius: 12px;
 }
 
-.reportinglogs_box6 {
+.Reportinglogs_box6 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -86,7 +86,7 @@
   border-radius: 12px;
 }
 
-.reportinglogs_boxText {
+.Reportinglogs_boxText {
   position: absolute;
   top: 22%;
   left: 2%;
@@ -100,7 +100,7 @@
   text-align: left;
   white-space: pre-line;
 }
-.reportinglogs_boxText1 {
+.Reportinglogs_boxText1 {
   position: absolute;
   top: 22%;
   left: 2%;
@@ -115,7 +115,7 @@
   white-space: pre-line;
 }
 
-.reportinglogs_boxText2 {
+.Reportinglogs_boxText2 {
   position: absolute;
   bottom: 23%;
   left: 2%;
@@ -130,19 +130,73 @@
   white-space: pre-line;
 }
 
-.reportinglogs_Pencil {
+.Reportinglogs1_Delete {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.reportinglogs_Delete {
+.Reportinglogs2_Delete {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.reportinglogs_Paper {
+.Reportinglogs3_Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportinglogs4_Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportinglogs5_Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportinglogs6_Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Reportinglogs1_Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}
+
+.Reportinglogs2_Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}
+
+.Reportinglogs3_Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}
+
+.Reportinglogs4_Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}
+
+.Reportinglogs5_Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}
+
+.Reportinglogs6_Paper {
   position: absolute;
   right: 6%;
   top: 30%;
