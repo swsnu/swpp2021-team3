@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
-import "./Statistic.css";
 
-// TODO: /api/statistics/ 만들어 져야 완성 가능
+import './Statistic.css'
 
 class Statistic extends Component {
   state = {
