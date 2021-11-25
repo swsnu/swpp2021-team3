@@ -174,7 +174,7 @@
   color: #ffffff;
   white-space: pre-line;
 }
-.seemoreText1 {
+.SeemoreText1 {
   position: absolute;
   /* left: 76%; */
   right: 22.7%;
@@ -194,7 +194,7 @@
   white-space: pre-line;
 }
 
-.seemoreText2 {
+.SeemoreText2 {
   position: absolute;
   /* left: 76%; */
   right: 22.5%;
@@ -214,19 +214,37 @@
   white-space: pre-line;
 }
 
-.Pencil {
+.Pencil1 {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.Delete {
+.Pencil2 {
   position: absolute;
   right: 2%;
   top: 30%;
 }
 
-.Paper {
+.Delete1 {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Delete2 {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.Paper1 {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}
+
+.Paper2 {
   position: absolute;
   right: 6%;
   top: 30%;

@@ -6,70 +6,64 @@ import Pencil from "../../Assets/Images/icon-pencil.png";
 import Paper from "../../Assets/Images/icon-paper.png";
 import Delete from "../../Assets/Images/icon-delete.png";
 
-//TODO: mypage + apology backend 구현되면 + 서버 돌아가는 것 확인하면 확실하게 개발하기
+//TODO: 서버 돌아가는 것 확인하면 확실하게 개발하기
 
 class My extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // user model
-      username: props.username,
-      email: props.email,
-      summoner_name: props.summoner_name,
-      manner_point: props.manner_point,
+      // username: props.username,
+      // email: props.email,
+      // summoner_name: props.summoner_name,
+      // manner_point: props.manner_point,
 
-      reports: [],
+      // reports_for_user: [],
+      // reports_by_user: [],
 
-      getMyPageDataBoolean: false,
+      // getMyPageDataBoolean: false,
 
       // button routers
       ApologyCheck: false,
       ApologyWrite: false,
       ReportedLogs: false,
       ReportingLogs: false,
-      // DeleteReport: false,
     };
   }
 
-  // state = {
-  //   ApologyCheck: false,
-  //   ApologyWrite: false,
-  //   ReportedLogs: false,
-  //   ReportingLogs: false,
-  //   // DeleteReport: false,
+  // getMyPageData = async () => {
+  //   console.log("call of getMyPageData");
+  //   console.log("state of getMyPageData: " + this.state.getMyPageDataBoolean);
+
+  //   axios.defaults.xsrfCookieName = "csrftoken";
+  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+  //   console.log(this.state.username);
+  //   console.log(this.state.email);
+  //   console.log(this.state.summoner_name);
+  //   console.log(this.state.manner_point);
+
+  //   axios.get("/api/token/").then();
+
+  //   const url = `http://localhost:3000/api/me/mypage`;
+  //   console.log("call get request");
+
+  //   const response = await axios.get(url, {
+  //     params: {
+  //       username: this.state.username,
+  //       email: this.state.email,
+  //       summoner_name: this.state.summoner_name,
+  //       manner_point: this.state.manner_point,
+  //     },
+  //   });
+
+  //   this.setState({
+  //     reports_for_user: response.data.reports_for_user,
+  //     reports_by_user: response.data.reports_by_user,
+  //     getMyPageDataBoolean: true,
+  //   });
+
   // };
-
-  getMyPageData = async () => {
-    console.log("call of getMyPageData");
-    console.log("state of getMyPageData: " + this.state.getMyPageDataBoolean);
-
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-    console.log(this.state.username);
-    console.log(this.state.email);
-    console.log(this.state.summoner_name);
-    console.log(this.state.manner_point);
-
-    axios.get("/api/token/").then();
-
-    const url = `http://localhost:3000/api/me/mypage`;
-    console.log("call get request");
-
-    const response = await axios.get(url, {
-      params: {
-        username: this.state.username,
-        email: this.state.email,
-        summoner_name: this.state.summoner_name,
-        manner_point: this.state.manner_point,
-      },
-    });
-
-    this.setState({
-      reports: response.data.reports,
-      getMyPageDataBoolean: true,
-    });
-  };
 
   onClickApologyCheck = () => {
     this.setState({ ApologyCheck: true });
@@ -87,12 +81,28 @@ class My extends Component {
     this.setState({ ReportingLogs: true });
   };
 
-  // onClickDeleteReport = () => {
-  //   this.setState({ DeleteReport: true });
-  // };
+  onClickDeleteHandler = () => {
+    // DELETE request with axios
+    // axios
+    // .delete("/api/reports/:id/")
+    // .then(() => this.setState({ status: "Your report is deleted" }));
+    alert("해당하는 리포트가 삭제되었습니다");
+  };
 
   render() {
     let redirect = null;
+
+    // let mypageInfos;
+    // if (this.state.mypageInfos === false) {
+    //   console.log("call getMyPageData");
+    //   this.getMyPageData();
+    // } else {
+    //   mypageInfos = this.state.reports_by_user.map((reports_by_user) => {
+    //     return (
+    //       <div>{this.state.reports_by_user}</div>
+    //     );
+    //   });
+    // }
 
     if (this.state.ApologyCheck === true) {
       redirect = <Redirect to={`/myApologyCheck`} />;
@@ -113,31 +123,35 @@ class My extends Component {
     return (
       <div className="myPage">
         {redirect}
+        {/* <div>{mypageInfos}</div> */}
         <text className="mypageTitle">마이페이지</text>
         <text className="mypageContent">
           <text style={{ fontWeight: "bold" }}>유저네임</text>
-          <br /> XXXXXXXX {this.state.username}
+          <br /> XXXXXXXX
+          {/* {this.state.username} */}
           <br />
           <br />
           <text style={{ fontWeight: "bold" }}>이메일</text>
           <br />
-          Email@email.com {this.state.email}
+          Email@email.com
+          {/* {this.state.email} */}
           <br />
           <br />
           <text style={{ fontWeight: "bold" }}>소환사이름</text>
           <br />
-          XXXXXXXX {this.state.summoner_name}
+          XXXXXXXX
+          {/* {this.state.summoner_name} */}
           <br />
           <br />
           <text style={{ fontWeight: "bold" }}>매너포인트</text> 80%{" "}
-          {this.state.manner_point}
+          {/* {this.state.manner_point} */}
           <div className="mpGraphPercent" />
           <div className="mpGraphAll" />
         </text>
         <div style={{ left: "38.5%" }}>
           <text className="recentText1">Recent Reporting Logs</text>
           <text
-            className="seemoreText1"
+            className="SeemoreText1"
             onClick={() => this.onClickReportingLogs()}
           >
             더보기
@@ -150,15 +164,16 @@ class My extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="Paper"
+              className="Paper1"
               src={Paper}
               alt={Paper}
               onClick={() => this.onClickApologyCheck()}
             />
             <img
-              className="Delete"
+              className="Delete1"
               src={Delete}
               alt={Delete}
+              // onClick={() => this.onClickDeleteHandler()}
               onClick={() => alert("해당하는 리포트가 삭제되었습니다")}
             />
           </div>
@@ -170,15 +185,16 @@ class My extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="Paper"
+              className="Paper2"
               src={Paper}
               alt={Paper}
               onClick={() => this.onClickApologyCheck()}
             />
             <img
-              className="Delete"
+              className="Delete2"
               src={Delete}
               alt={Delete}
+              // onClick={() => this.onClickDeleteHandler()}
               onClick={() => alert("해당하는 리포트가 삭제되었습니다")}
             />
           </div>
@@ -186,7 +202,7 @@ class My extends Component {
         <div>
           <text className="recentText2">Recent Reported Logs</text>
           <text
-            className="seemoreText2"
+            className="SeemoreText2"
             onClick={() => this.onClickReportedLogs()}
           >
             더보기
@@ -199,7 +215,7 @@ class My extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="Pencil"
+              className="Pencil1"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
@@ -213,7 +229,7 @@ class My extends Component {
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
             <img
-              className="Pencil"
+              className="Pencil2"
               src={Pencil}
               alt={Pencil}
               onClick={() => this.onClickApologyWrite()}
