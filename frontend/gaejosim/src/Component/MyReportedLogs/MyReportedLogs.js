@@ -20,10 +20,6 @@ class MyReportedLogs extends Component {
       redirect = <Redirect to={`/myApologyWrite`} />;
     }
 
-    if (this.state.MyPage === true) {
-      redirect = <Redirect to={`/my`} />;
-    }
-
     return (
       <div className="myReportedLogsPage">
         {redirect}
