@@ -12,12 +12,13 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import check_password
 from django.core.mail.message import EmailMessage
 
+from report.models import Report
 from .models import Summoner, User, MannerPoint
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-9c8c097c-d1ef-4751-be48-eab86b791b2b",  # updated 11/23
+    "key": "RGAPI-e80d9501-3b0b-4766-9419-b548c17b906a",  # updated 11/24
 }
 
 
@@ -218,6 +219,61 @@ def log_out(request):
     logout(request)
 
     return JsonResponse({"message": "Logout Success"}, status=200)
+
+
+@require_http_methods(["GET"])
+def my_page(request):
+    """My page with user information and report logs"""
+    user = request.user
+    if not user.is_authenticated:
+        return JsonResponse(
+            {"error": "You need to login before accessing my page"}, status=401
+        )
+
+    summoner = Summoner.objects.select_related("manner_point").get(user=user)
+
+    reports_by_user = []
+    reports_for_user = []
+
+    if summoner:
+        reports_by_user = [
+            {
+                "id": report.id,
+                "tag": report.tag,
+                "comment": report.comment,
+                "reported_summoner": report.reported_summoner.name,
+                "evaluation": report.evaluation,
+            }
+            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:5]
+        ]
+
+        reports_for_user = [
+            {
+                "id": report.id,
+                "tag": report.tag,
+                "comment": report.comment,
+                "evaluation": report.evaluation,
+            }
+            for report in Report.objects.filter(reported_summoner=summoner).order_by(
+                "-id"
+            )[:5]
+        ]
+
+    return JsonResponse(
+        {
+            "user": {
+                "username": user.username,
+                "email": user.email,
+                "summoner_name": user.summoner.name,
+                "manner_point": user.summoner.manner_point.point,
+            },
+            "reports": {
+                "reports_for_user": reports_for_user,
+                "reports_by_user": reports_by_user,
+            },
+        },
+        status=200,
+    )
 
 
 @require_http_methods(["PUT"])
