@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from core.utils import is_riot_timeout
 from user.models import Summoner, MannerPoint
-from .models import Report
+from .models import Apology, Report
 
 api_default = {
     "region": "https://kr.api.riotgames.com",
@@ -139,8 +139,7 @@ def post_report(request):
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
     if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
-        reported_summoner = Summoner.objects.get(
-            summoner_puuid=reported_summoner_puuid)
+        reported_summoner = Summoner.objects.get(summoner_puuid=reported_summoner_puuid)
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
@@ -160,8 +159,7 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(
-        reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
@@ -200,7 +198,7 @@ def my_reports(request):
 
     if not user.is_authenticated:
         return JsonResponse(
-            {"error": "You need to login before accessing my page"}, status=401
+            {"error": "You need to login before accessing this apology."}, status=401
         )
 
     reports = [
@@ -210,6 +208,7 @@ def my_reports(request):
             "comment": report.comment,
             "reported_summoner": report.reported_summoner.name,
             "evaluation": report.evaluation,
+            "apology": bool(report.apology),
         }
         for report in Report.objects.filter(reporting_user=user)
     ]
@@ -224,7 +223,7 @@ def my_received_reports(request):
 
     if not user.is_authenticated:
         return JsonResponse(
-            {"error": "You need to login before accessing my page"}, status=401
+            {"error": "You need to login before accessing this apology."}, status=401
         )
 
     reports = [
@@ -233,6 +232,7 @@ def my_received_reports(request):
             "tag": report.tag,
             "comment": report.comment,
             "evaluation": report.evaluation,
+            "apology": bool(report.apology),
         }
         for report in Report.objects.filter(reported_summoner=user.summoner)
     ]
@@ -253,8 +253,126 @@ def reports_statistics(request):
         created_at__range=(yesterday, tomorrow)
     ).count()
 
+    user = request.user
+    reports_list = []
+
+    if user.is_authenticated:
+        if user.summoner:
+            reports_list = Report.objects.filter(
+                reported_summoner=user.summoner
+            ).exclude(apology__isnull=False)
+
     return JsonResponse(
-        {"accumulated_reports": total_report_num,
-            "today_reports": today_report_num},
+        {
+            "accumulated_reports": total_report_num,
+            "today_reports": today_report_num,
+            "not_answered_reports": len(reports_list),
+        },
         status=200,
     )
+
+
+@require_http_methods(["GET", "POST", "PUT"])
+def apology(request, report_id):
+    """get, post, put an apology"""
+    user = request.user
+
+    if not user.is_authenticated:
+        return JsonResponse(
+            {"error": "You need to login before accessing this apology."}, status=401
+        )
+
+    try:
+        report = Report.objects.get(id=report_id)
+    except Report.DoesNotExist:
+        return JsonResponse({"error": "This report does not exist."}, status=404)
+
+    if request.method == "POST":
+        if user.summoner != report.reported_summoner:
+            return JsonResponse(
+                {"error": "You are not allowed to write an apology to this report."},
+                status=401,
+            )
+
+        if report.apology:
+            return JsonResponse(
+                {"error": "You already wrote an apology for this report."}, status=400
+            )
+
+        req_data = json.loads(request.body.decode())
+        content = req_data["content"]
+
+        apology = Apology(content=content)
+        apology.save()
+        report.apology = apology
+        report.save()
+
+        return JsonResponse(
+            {
+                "id": apology.id,
+                "content": apology.content,
+                "is_verified": apology.is_verified,
+                "report_id": report.id,
+            },
+            status=201,
+        )
+
+    if request.method == "PUT":
+        if user.summoner != report.reported_summoner:
+            return JsonResponse(
+                {"error": "You are not allowed to write an apology to this report."},
+                status=401,
+            )
+
+        if not report.apology:
+            return JsonResponse(
+                {"error": "You haven't written an apology for this report."}, status=404
+            )
+
+        try:
+            apology = Apology.objects.get(id=report.apology.id)
+        except Apology.DoesNotExist:
+            return JsonResponse(
+                {"error": "This report does not have any apology."}, status=404
+            )
+        req_data = json.loads(request.body.decode())
+        content = req_data["content"]
+
+        apology.content = content
+        apology.save()
+
+        return JsonResponse(
+            {
+                "id": apology.id,
+                "content": apology.content,
+                "is_verified": apology.is_verified,
+                "report_id": report.id,
+            },
+            status=200,
+        )
+
+    if request.method == "GET":
+        if not (
+            (user.summoner == report.reported_summoner)
+            or (user == report.reporting_user)
+        ):
+            return JsonResponse(
+                {"error": "You are not allowed to read this apology."}, status=401
+            )
+
+        if not report.apology:
+            return JsonResponse(
+                {"error": "This report does not have any apology."}, status=404
+            )
+
+        apology = Apology.objects.get(id=report.apology.id)
+
+        return JsonResponse(
+            {
+                "id": apology.id,
+                "content": apology.content,
+                "is_verified": apology.is_verified,
+                "report_id": report.id,
+            },
+            status=200,
+        )

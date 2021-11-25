@@ -36,8 +36,7 @@ class ReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=(
-                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -70,8 +69,7 @@ class ReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=(
-                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -284,6 +282,7 @@ class ReportTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["accumulated_reports"], 2)
         self.assertEqual(response.json()["today_reports"], 1)
+        self.assertEqual(response.json()["not_answered_reports"], 0)
 
 
 class HomePageTest(TestCase):
@@ -315,8 +314,7 @@ class HomePageTest(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=(
-                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -351,8 +349,7 @@ class HomePageTest(TestCase):
             reporting_user=self.test_user2,
             evaluation=70,
         )
-        report_1.created_at = datetime.now(
-            timezone("Asia/Seoul")) + timedelta(days=-2)
+        report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(days=-2)
         report_1.save()
 
         client = Client(enforce_csrf_checks=True)
@@ -516,6 +513,20 @@ class MyReportTestCase(TestCase):
         self.assertEqual(data["reports"][0]["comment"], "test_comment")
         self.assertEqual(data["reports"][0]["evaluation"], 60)
 
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = client.get(
+            "/api/home/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        data = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data["accumulated_reports"], 4)
+        self.assertEqual(data["today_reports"], 4)
+        self.assertEqual(data["not_answered_reports"], 3)
+
     def test_success_myreceivedreports(self):
         """test success my received reports"""
         client = Client(enforce_csrf_checks=True)
@@ -549,3 +560,331 @@ class MyReportTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(data["reports"]), 0)
+
+    def test_success_post_apology(self):
+        """test success POST apology"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        data = response.json()
+        self.assertEqual(data["content"], "I'm sorry.")
+        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["report_id"], self.report_1.id)
+
+    def test_fail_post_apology(self):
+        """test fail POST apology"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 401)
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + "100" + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 404)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        data = response.json()
+        self.assertEqual(data["content"], "I'm sorry.")
+        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["report_id"], self.report_1.id)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 400)
+
+        self.client.login(username="test2", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 401)
+
+    def test_success_put_apology(self):
+        """test success PUT apology"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.put(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm really sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 200)
+
+        data = response.json()
+        self.assertEqual(data["content"], "I'm really sorry.")
+        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["report_id"], self.report_1.id)
+
+    def test_fail_put_apology(self):
+        """test fail PUT apology"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.put(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 401)
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.put(
+            "/api/reports/" + str(self.report_2.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 404)
+
+        self.client.login(username="test2", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 401)
+
+    def test_success_get_apology(self):
+        """test success GET apology"""
+        client = Client(enforce_csrf_checks=True)
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 404)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm really sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data["content"], "I'm really sorry.")
+        self.assertEqual(data["is_verified"], False)
+        self.assertEqual(data["report_id"], self.report_1.id)
+
+    def test_fail_get_apology(self):
+        """test fail GET apology"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 401)
+
+        self.client.login(username="test3", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 401)
+
+        self.client.login(username="test1", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.post(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "I'm really sorry.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_2.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 404)
+
+        self.client.login(username="test2", password="password")
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        response = self.client.get(
+            "/api/reports/" + str(self.report_1.id) + "/apology/",
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 200)
