@@ -3,6 +3,15 @@ from django.db import models
 from user.models import Summoner, User
 
 
+class Apology(models.Model):
+    """Apology model"""
+
+    content = models.CharField(max_length=5000, null=False)
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class Report(models.Model):
     """Report model"""
 
@@ -15,14 +24,6 @@ class Report(models.Model):
         User, on_delete=models.CASCADE, related_name="reporting", null=True
     )
     evaluation = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
-class Apology(models.Model):
-    """Apology model"""
-
-    report = models.OneToOneField(Report, on_delete=models.CASCADE, null=True)
-    content = models.CharField(max_length=5000, null=False)
+    apology = models.OneToOneField(Apology, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
