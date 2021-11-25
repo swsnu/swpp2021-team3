@@ -163,6 +163,7 @@ def post_report(request):
     manner_point = reported_summoner.manner_point
     reports_cnt = Report.objects.filter(
         reported_summoner=reported_summoner).count()
+
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
@@ -340,9 +341,12 @@ def apology(request, report_id):
         reports_cnt = Report.objects.filter(
             reported_summoner=user.summoner).count()
 
-        manner_point.point = (manner_point.point * reports_cnt - report.evaluation) / (
-            reports_cnt - 1
-        )
+        if reports_cnt == 1:
+            manner_point.point = 80
+        else:
+            manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
+                reports_cnt - 1
+            )
         manner_point.save()
 
         return JsonResponse(
@@ -369,6 +373,7 @@ def apology(request, report_id):
 
         try:
             apology = Apology.objects.get(id=report.apology.id)
+
         except Apology.DoesNotExist:
             return JsonResponse(
                 {"error": "This report does not have any apology."}, status=404
@@ -389,31 +394,6 @@ def apology(request, report_id):
         apology.content = content
         apology.is_verified = True
         apology.save()
-
-        report_tag_list = report.tag.split(",")
-        report_evaluation = report.evaluation
-
-        manner_point = user.summoner.manner_point
-
-        for tag_key in report_tag_list:
-            if tag_dict[tag_key] == 1:
-                manner_point.tag1 += 0.5
-            elif tag_dict[tag_key] == 2:
-                manner_point.tag2 += 0.5
-            elif tag_dict[tag_key] == 3:
-                manner_point.tag3 += 0.5
-            elif tag_dict[tag_key] == 4:
-                manner_point.tag4 += 0.5
-            else:
-                manner_point.tag5 += 0.5
-
-        reports_cnt = Report.objects.filter(
-            reported_summoner=user.summoner).count()
-
-        manner_point.point = (manner_point.point * reports_cnt - report.evaluation) / (
-            reports_cnt - 1
-        )
-        manner_point.save()
 
         return JsonResponse(
             {

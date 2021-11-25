@@ -830,6 +830,7 @@ class MyReportTestCase(TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_fail_put_apology_ml(self):
+        """test fail put apology due to ml feature"""
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
@@ -998,3 +999,77 @@ class MyReportTestCase(TestCase):
             HTTP_X_CSRFTOKEN=csrftoken,
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_success_apology_increases_manner_point(self):
+        """test whether manner point increaeses by apology"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test1", password="password")
+
+        response = self.client.post(
+            "/api/reports/",
+            json.dumps(
+                {
+                    "name": "조이26",
+                    "evaluation": 40,
+                    "tag": "과격한 언행,팀킬,라인 거부",
+                    "comment": "comment_2",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+        report_id = response.json()["id"]
+
+        report = Report.objects.get(id=report_id)
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        summoner2 = Summoner.objects.get(
+            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA")
+
+        past_point = summoner2.manner_point.point
+        past_tag1 = summoner2.manner_point.tag1
+        past_tag4 = summoner2.manner_point.tag4
+
+        self.assertEqual(past_point, 60)
+        self.assertEqual(past_tag1, 4.5)
+        self.assertEqual(past_tag4, 4.5)
+
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        self.client.login(username="test2", password="password")
+
+        response = self.client.post(
+            "/api/reports/" + str(report.id) + "/apology/",
+            json.dumps(
+                {
+                    "content": "정말 죄송합니다. 다음부터 안 그러겠습니다.",
+                }
+            ),
+            content_type="application/json",
+            HTTP_X_CSRFTOKEN=csrftoken,
+        )
+        self.assertEqual(response.status_code, 201)
+
+        data = response.json()
+        self.assertEqual(data["content"], "정말 죄송합니다. 다음부터 안 그러겠습니다.")
+        self.assertEqual(data["is_verified"], True)
+        self.assertEqual(data["report_id"], report.id)
+
+        summoner2 = Summoner.objects.get(
+            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA")
+
+        changed_point = summoner2.manner_point.point
+        changed_tag1 = summoner2.manner_point.tag1
+        changed_tag4 = summoner2.manner_point.tag4
+
+        self.assertEqual(changed_point, 80)
+        self.assertEqual(changed_tag1, 5)
+        self.assertEqual(changed_tag4, 5)
