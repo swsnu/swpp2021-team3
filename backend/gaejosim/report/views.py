@@ -6,6 +6,7 @@ from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from core.utils import is_riot_timeout
+from core.ml import papago_translate, watson_nlu_emotion
 from user.models import Summoner, MannerPoint
 from .models import Apology, Report
 
@@ -13,7 +14,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-e80d9501-3b0b-4766-9419-b548c17b906a",  # updated 11/24
+    "key": "RGAPI-d47f8e2f-c1f6-4ef2-8323-64b461d511b7",  # updated 11/25
 }
 
 tag_dict = {
@@ -139,7 +140,8 @@ def post_report(request):
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
     if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
-        reported_summoner = Summoner.objects.get(summoner_puuid=reported_summoner_puuid)
+        reported_summoner = Summoner.objects.get(
+            summoner_puuid=reported_summoner_puuid)
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
@@ -159,7 +161,8 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
@@ -302,7 +305,13 @@ def apology(request, report_id):
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
-        apology = Apology(content=content)
+        translated_content = papago_translate(content)
+        passed = watson_nlu_emotion(translated_content)
+
+        if not passed:
+            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+
+        apology = Apology(content=content, is_verified=True)
         apology.save()
         report.apology = apology
         report.save()
@@ -338,7 +347,14 @@ def apology(request, report_id):
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
+        translated_content = papago_translate(content)
+        passed = watson_nlu_emotion(translated_content)
+
+        if not passed:
+            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+
         apology.content = content
+        apology.is_verified = True
         apology.save()
 
         return JsonResponse(
