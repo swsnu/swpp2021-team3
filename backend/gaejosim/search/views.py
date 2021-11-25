@@ -1,4 +1,8 @@
 """search views"""
+import ssl
+import asyncio
+import aiohttp
+import certifi
 import requests
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
@@ -10,6 +14,34 @@ api_default = {
     # api key : needs to regenerate every 24hr
     "key": "RGAPI-d47f8e2f-c1f6-4ef2-8323-64b461d511b7",  # updated 11/25
 }
+
+
+async def get_match_result(match_key, summoner_puuid, recent_result, recent_win_lose):
+    """async method to get each match result"""
+    ssl_context = ssl.create_default_context(cafile=certifi.where())
+    conn = aiohttp.TCPConnector(ssl=ssl_context)
+
+    async with aiohttp.ClientSession(connector=conn) as session:
+        async with session.get(
+            f"{api_default['asia']}/lol/match/v5/matches/{match_key}?api_key={api_default['key']}"
+        ) as resp:
+            match_metadata = await resp.json()
+            summoner_index = match_metadata["metadata"]["participants"].index(
+                summoner_puuid
+            )
+            summoner_metadata = match_metadata["info"]["participants"][summoner_index]
+            recent_result.append(
+                {
+                    "lane": summoner_metadata["lane"],
+                    "kills": summoner_metadata["kills"],
+                    "assists": summoner_metadata["assists"],
+                    "deaths": summoner_metadata["deaths"],
+                    "champion_id": summoner_metadata["championId"],
+                    "win": summoner_metadata["win"],
+                }
+            )
+
+            recent_win_lose.append("W" if summoner_metadata["win"] else "L")
 
 
 @require_http_methods(["GET"])
@@ -36,7 +68,6 @@ def search(request):
                 }
             )
             continue
-        # print(summoner_name_req.json())
         summoner_puuid = summoner_name_req.json()["puuid"]
 
         summoner_league_url = (
@@ -61,28 +92,12 @@ def search(request):
         recent_result = []
         recent_win_lose = []
 
-        for match in matches_by_summoner_list:
-            match_metadata_url = (
-                f"{api_default['asia']}/lol/match/v5/matches/"
-                + f"{match}?api_key={api_default['key']}"
-            )
-            match_metadata_req = requests.get(match_metadata_url)
-            match_metadata = match_metadata_req.json()
-            summoner_index = match_metadata["metadata"]["participants"].index(
-                summoner_puuid
-            )
-            summoner_metadata = match_metadata["info"]["participants"][summoner_index]
-            recent_result.append(
-                {
-                    "lane": summoner_metadata["lane"],
-                    "kills": summoner_metadata["kills"],
-                    "assists": summoner_metadata["assists"],
-                    "deaths": summoner_metadata["deaths"],
-                    "champion_id": summoner_metadata["championId"],
-                    "win": summoner_metadata["win"],
-                }
-            )
-            recent_win_lose.append("W" if summoner_metadata["win"] else "L")
+        if matches_by_summoner_list != []:
+            task = [
+                get_match_result(match, summoner_puuid, recent_result, recent_win_lose)
+                for match in matches_by_summoner_list
+            ]
+            asyncio.run(asyncio.wait(task))
 
         if Summoner.objects.filter(summoner_puuid=summoner_puuid).exists():
             manner_point_obj = Summoner.objects.get(

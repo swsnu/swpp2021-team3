@@ -5,8 +5,8 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from core.utils import is_riot_timeout
 from core.ml import papago_translate, watson_nlu_emotion
+from core.utils import is_riot_timeout, check_logged_in
 from user.models import Summoner, MannerPoint
 from .models import Apology, Report
 
@@ -31,12 +31,11 @@ tag_dict = {
 }
 
 
+@check_logged_in
 @require_http_methods(["GET", "POST"])
 def report_authentication(request):
     """report authentication"""
     user = request.user
-    if not user.is_authenticated:
-        return JsonResponse({"error": "User is not logged in"}, status=401)
 
     recent_matches_list = get_recent_matches(user)
 
@@ -108,12 +107,10 @@ def get_team_players(user, match_id):
 
 
 @require_http_methods(["POST"])
+@check_logged_in
 def post_report(request):
     """make a report"""
     user = request.user
-
-    if not user.is_authenticated:
-        return JsonResponse({"error": "User is not logged in"}, status=401)
 
     data = json.loads(request.body.decode())
     name = data["name"]
@@ -140,8 +137,10 @@ def post_report(request):
     reported_summoner_puuid = reported_summoner_json["puuid"]
 
     if Summoner.objects.filter(summoner_puuid=reported_summoner_puuid).exists():
-        reported_summoner = Summoner.objects.get(
-            summoner_puuid=reported_summoner_puuid)
+        reported_summoner = Summoner.objects.select_related("manner_point").get(
+            summoner_puuid=reported_summoner_puuid
+        )
+
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
@@ -195,15 +194,11 @@ def post_report(request):
     )
 
 
+@check_logged_in
 @require_http_methods(["GET"])
 def my_reports(request):
     """list of my reports"""
     user = request.user
-
-    if not user.is_authenticated:
-        return JsonResponse(
-            {"error": "You need to login before accessing this apology."}, status=401
-        )
 
     reports = [
         {
@@ -220,15 +215,11 @@ def my_reports(request):
     return JsonResponse({"reports": reports}, status=200)
 
 
+@check_logged_in
 @require_http_methods(["GET"])
 def my_received_reports(request):
     """list of reports I've got"""
     user = request.user
-
-    if not user.is_authenticated:
-        return JsonResponse(
-            {"error": "You need to login before accessing this apology."}, status=401
-        )
 
     reports = [
         {
@@ -276,15 +267,11 @@ def reports_statistics(request):
     )
 
 
+@check_logged_in
 @require_http_methods(["GET", "POST", "PUT"])
 def apology(request, report_id):
     """get, post, put an apology"""
     user = request.user
-
-    if not user.is_authenticated:
-        return JsonResponse(
-            {"error": "You need to login before accessing this apology."}, status=401
-        )
 
     try:
         report = Report.objects.get(id=report_id)
