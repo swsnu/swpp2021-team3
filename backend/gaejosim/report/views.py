@@ -5,6 +5,7 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from core.ml import papago_translate, watson_nlu_emotion
 from core.utils import is_riot_timeout, check_logged_in
 from user.models import Summoner, MannerPoint
 from .models import Apology, Report
@@ -139,6 +140,7 @@ def post_report(request):
         reported_summoner = Summoner.objects.select_related("manner_point").get(
             summoner_puuid=reported_summoner_puuid
         )
+
     else:
         reported_manner_point = MannerPoint.objects.create()
         reported_summoner = Summoner.objects.create(
@@ -158,7 +160,9 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
+
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
     )
@@ -289,10 +293,48 @@ def apology(request, report_id):
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
-        apology = Apology(content=content)
+        if len(content) == 0:
+            return JsonResponse({"error": "내용을 입력해주세요."}, status=400)
+
+        translated_content = papago_translate(content)
+
+        passed = watson_nlu_emotion(translated_content)
+
+        if not passed:
+            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+
+        apology = Apology(content=content, is_verified=True)
         apology.save()
         report.apology = apology
         report.save()
+
+        report_tag_list = report.tag.split(",")
+        report_evaluation = report.evaluation
+
+        manner_point = user.summoner.manner_point
+
+        for tag_key in report_tag_list:
+            if tag_dict[tag_key] == 1:
+                manner_point.tag1 += 0.5
+            elif tag_dict[tag_key] == 2:
+                manner_point.tag2 += 0.5
+            elif tag_dict[tag_key] == 3:
+                manner_point.tag3 += 0.5
+            elif tag_dict[tag_key] == 4:
+                manner_point.tag4 += 0.5
+            else:
+                manner_point.tag5 += 0.5
+
+        reports_cnt = Report.objects.filter(
+            reported_summoner=user.summoner).count()
+
+        if reports_cnt == 1:
+            manner_point.point = 80
+        else:
+            manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
+                reports_cnt - 1
+            )
+        manner_point.save()
 
         return JsonResponse(
             {
@@ -318,6 +360,7 @@ def apology(request, report_id):
 
         try:
             apology = Apology.objects.get(id=report.apology.id)
+
         except Apology.DoesNotExist:
             return JsonResponse(
                 {"error": "This report does not have any apology."}, status=404
@@ -325,7 +368,18 @@ def apology(request, report_id):
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
+        if len(content) == 0:
+            return JsonResponse({"error": "내용을 입력해주세요."}, status=400)
+
+        translated_content = papago_translate(content)
+
+        passed = watson_nlu_emotion(translated_content)
+
+        if not passed:
+            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+
         apology.content = content
+        apology.is_verified = True
         apology.save()
 
         return JsonResponse(

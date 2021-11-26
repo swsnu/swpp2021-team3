@@ -9,12 +9,11 @@ import MyReportedLogsPage from "./Page/MyReportedLogsPage";
 import MyReportingLogsPage from "./Page/MyReportingLogsPage";
 import MyApologyCheckPage from "./Page/MyApologyCheckPage";
 import MyApologyWritePage from "./Page/MyApologyWritePage";
-import MyReportPage from "./Page/MyReportPage";
 import ReportAuthPage from "./Page/ReportAuthPage";
 import ReportActionPage from "./Page/ReportActionPage";
 import SearchPage from "./Page/SearchPage";
 import SignupPage from "./Page/SignupPage";
-import SingleSearchResultPage from "./Page/SingleSearchResultPage";
+
 
 function App() {
   return (
@@ -22,7 +21,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={SearchPage} />
-
+          
           <Route path="/search" exact component={SearchPage} />
           <Route
             path="/searchresult/:summonerList"

@@ -4,6 +4,8 @@ import axios from "axios";
 
 import "./MultiSearch.css";
 
+// TODO: api call 시 type 요소 뺄지 논의하기
+
 class MultiSearch extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,6 @@ class MultiSearch extends Component {
     };
   }
 
-  // Get five matchers information by /api/search/ call.
   getMatchers = async () => {
     console.log("call of getMatchers");
     console.log("state of getResult", this.state.getResult);
@@ -24,8 +25,8 @@ class MultiSearch extends Component {
 
     axios.get("/api/token/").then();
 
-    const url = `http://localhost:3000/api/search/`;
-    console.log("call get request");
+    const url = "http://localhost:3000/api/search/";
+    console.log("call axios.get request");
     const response = await axios.get(url, {
       params: {
         type: "multi",
@@ -42,24 +43,22 @@ class MultiSearch extends Component {
   render() {
     let matcherInfos;
     if (this.state.getResult === false) {
-      console.log("call getMatchers");
       this.getMatchers();
     } else {
       let idx = 0;
-      console.log("finished");
       matcherInfos = this.state.matchers.map((matcher) => {
         idx = idx + 1;
-        let classIdx = "class" + idx;
+        let summonerIdx = "summoner" + idx;
         return (
-          <div className={classIdx}>
+          <div className={summonerIdx}>
             <CommonSearch
-              summoner_name={matcher.summoner_name}
+              summonerName={matcher.summoner_name}
               tier={matcher.tier}
               rank={matcher.rank}
-              manner_point={matcher.manner_point}
-              tag_values={matcher.tag_values}
-              win_lose={matcher.win_lose}
-              recent_result={matcher.recent_result}
+              mannerPoint={matcher.manner_point}
+              tagValues={matcher.tag_values}
+              winLose={matcher.win_lose}
+              recentResults={matcher.recent_result}
               num={idx}
             />
           </div>
