@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
 // import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
-
-// TODO: axios 해결
 
 class SignUp extends Component {
     state = {
@@ -51,6 +47,11 @@ class SignUp extends Component {
 
     postSignUpData = async () => {
         console.log("postSignUpData")
+
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+        axios.get('/api/token/').then()
        
         const response = await axios.post('/api/signup/', {
             "username" : this.state.id,
@@ -58,17 +59,14 @@ class SignUp extends Component {
 	        "summoner_name" : this.state.summonerID,
 	        "password" : this.state.password,
         })
-        
-        if(response.status === 201) {
-            alert(response.data.message)
+        .then((response) => {
+            alert(`${response.data.message}\n로그인 페이지로 이동합니다.`)
             this.props.history.push('/login')
-        }
-        else if(response.status === 400) {
-            console.log(response.data)
-            alert(response.data.error)
-        }
+        })
+        .catch((error) => {
+            alert(error.response.data.error)
+        })
     }
-
 
     render() {
         return (
@@ -117,4 +115,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp)
