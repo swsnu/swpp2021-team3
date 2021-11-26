@@ -5,33 +5,59 @@ import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
 
-// TODO: axios 연결
+// TODO: 로그인 한 유저만 접근 가능하게 변경
 
 class ChangePassword extends Component {
     state = {
-        prevPW : '',
+        oldPW : '',
         newPW : '', 
         newPWConfirm : '',
     }
 
+    putChangePWData = async () => {
+        console.log("postchangePWData")
+
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+        axios.get('/api/token/').then()
+       
+        const response = await axios.post('/api/change/password/', {
+            "old_password" : this.state.oldPW,
+            "new_password" : this.state.newPW,
+            "password_confirm" : this.state.newPWConfirm,
+        })
+        .then((response) => {
+            alert(response.data.message)
+            this.props.history.push('/login')
+        })
+        .catch((error) => {
+            alert(error.response.data.error)
+            if(error.response.status === 401) this.props.history.push('/login')
+        })
+    }
+
+    // TODO: password confirm을 back에서 수행하므로 해당 if 문 삭제 필요?
     onClickChangePWButton = () => {
-        if(!(this.state.newPW  === this.state.newPWConfirm)) {
-            alert('신규로 입력한 비밀번호가 같지 않습니다.')
+        if(!this.state.oldPW || !this.state.newPW || !this.state.newPWConfirm){
+            alert('모든 필드 값을 다 입력해주셔야 비밀번호를 변경할 수 있습니다.')
             return
         }
         else {
-            console.log('비밀번호 변경')
+            this.putChangePWData()
         }
     }
 
     render() {
         return (
             <div className = 'ChangePW'> 
+                <NavLink exact to = '/login'>로그인</NavLink>
+                <NavLink exact to = '/finduserinfo'>아이디 비밀번호 찾기</NavLink>
                 <input
                     className = 'inputField'
                     type = 'string'
                     placeholder = '기존 비밀번호'
-                    onChange={(event) => this.setState({ prevPW : event.target.value })} />
+                    onChange={(event) => this.setState({ oldPW : event.target.value })} />
                 <input
                     className = 'inputField'
                     type = 'string'
