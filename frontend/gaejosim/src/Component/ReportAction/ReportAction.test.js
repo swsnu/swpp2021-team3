@@ -128,8 +128,8 @@ describe("<ReportAction />", () => {
       </Router>
     );
     expect(history.location.pathname).toBe("/");
-    fireEvent.click(getAllByText("Search")[0]);
-    expect(history.location.pathname).toBe("/");
+    fireEvent.click(getAllByText("검색")[0]);
+    expect(history.location.pathname).toBe("/search");
   });
 });
 
