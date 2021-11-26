@@ -1,10 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { fireEvent, render } from "@testing-library/react";
-import { Router } from "react-router-dom";
+// import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import clickTag1_1 from "./ReportAction";
+// import clickTag1_1 from "./ReportAction";
 
 import ReportAction from "./ReportAction";
 import SearchPage from "../../Page/SearchPage";
@@ -127,7 +128,23 @@ describe("<ReportAction />", () => {
     );
     expect(history.location.pathname).toBe("/");
     fireEvent.click(getAllByText("검색")[0]);
-    expect(history.location.pathname).toBe("/search");
+    expect(history.location.pathname).toBe("/");
+  });
+
+  it("changes input", () => {
+    const { getByPlaceholderText } = render(
+      <Router>
+        <ReportAction />
+      </Router>
+    );
+    const input = getByPlaceholderText(
+      "Enter Comments on reported player if you want"
+    );
+    fireEvent.change(input, {
+      target: {
+        value: "TDD 배우기",
+      },
+    });
   });
 });
 

@@ -41,6 +41,20 @@ describe("router login page", () => {
   });
 });
 
+describe("router login page2", () => {
+  test("should pass", () => {
+    const history = createMemoryHistory({ initialEntries: ["/"] });
+    const { getAllByText } = render(
+      <Router history={history}>
+        <LoginPage />
+      </Router>
+    );
+    expect(history.location.pathname).toBe("/");
+    fireEvent.click(getAllByText("로그인")[1]);
+    expect(history.location.pathname).toBe("/");
+  });
+});
+
 describe("router my page", () => {
   test("should pass", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
