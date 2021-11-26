@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -40,14 +40,22 @@ class ReportAction extends Component {
     }
 
     onClickSubmitButton = () => {
-        let tagList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
+        let clickList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
         this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
-        tagList = tagList.filter(tag => { return tag })
-        this.state.clickTags = tagList
-
+        
+        let tagList = ["과격한 언행", "비속어 사용", "고의성 던짐", "탈주/닷지", "대리 게임", "픽 상황 갑질", "cs 스틸", "팀킬", "정치", "라인 거부"]
+        
+        let clickArr = []
+        for(let idx = 0; idx < 10; idx++) {
+            if(clickList[idx]) clickArr.push(tagList[idx])
+        }
+        
+        console.log(clickArr)
+        this.state.clickTags = clickArr.join(',')
         console.log(this.state.clickTags)
+        
         if (this.state.clickTags.length === 0) {
-            alert('You should check at least one tag')
+            alert('제출을 위해 하나 이상의 태그를 선택하셔야 합니다.')
             this.setState({ clickSubmit: false })
         }
         else {
@@ -56,16 +64,11 @@ class ReportAction extends Component {
         }
     }
 
-    // Post auth by /api/reports/auth/ call.
+
     postReportData = async () => {
 
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
-        console.log(this.state.evaluation)
-        console.log(this.state.reported_summoner)
-
-        let tagListString = this.state.clickTags.join(',');
 
         axios.get('/api/token/').then(
         )
@@ -73,7 +76,7 @@ class ReportAction extends Component {
         const response = await axios.post('/api/reports/', {
             "name": this.state.reported_summoner,
             "evaluation": parseInt(this.state.evaluation),
-            "tag": tagListString,
+            "tag": this.state.clickTags,
             "comment": this.state.comment
         })
         .then((response) => {
@@ -134,6 +137,7 @@ class ReportAction extends Component {
         if (this.state.clickSubmit) {
             redirect = <Redirect to={`/`} />
         }
+        
         const marks = [
             {
                 value: 0,
@@ -217,4 +221,4 @@ class ReportAction extends Component {
 
 }
 
-export default ReportAction;
+export default withRouter(ReportAction)
