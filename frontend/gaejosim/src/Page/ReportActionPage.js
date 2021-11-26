@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import Header from '../Container/Header/Header';
+import Progressbar from '../Component/Progressbar/Progressbar';
 import ReportAction from '../Component/ReportAction/ReportAction';
+
 import './ReportActionPage.css';
 
 class ReportActionPage extends Component {
@@ -13,7 +15,7 @@ class ReportActionPage extends Component {
         return (
             <div className='ReportActionPage'>
                 <Header />
-                <p id="ReportPageName">Report</p>
+                <Progressbar process="2"/>
                 <ReportAction reported_summoner={reportedSummoner} />
             </div>
         )
