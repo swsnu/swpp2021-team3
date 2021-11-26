@@ -14,7 +14,7 @@ import ReportAuthPage from "./Page/ReportAuthPage";
 import ReportActionPage from "./Page/ReportActionPage";
 import SearchPage from "./Page/SearchPage";
 import SignupPage from "./Page/SignupPage";
-import SingleSearchResultPage from "./Page/SingleSearchResultPage";
+
 
 function App() {
   return (
@@ -22,14 +22,14 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={SearchPage} />
-
+          
           <Route path="/search" exact component={SearchPage} />
           <Route
             path="/searchresult/:summonerList"
             exact
             component={MultiSearchResultPage}
           />
-
+          
           <Route path="/signup" exact component={SignupPage} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/findUserInfo" exact component={FindUserInfoPage} />

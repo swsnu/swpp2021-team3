@@ -7,8 +7,6 @@ import Statistic from '../Component/Statistic/Statistic';
 
 import './SearchPage.css';
 
-// TODO: PageName이 의미하는 바가 무엇인지 물어보기
-
 class SearchPage extends Component {
     state = {
         clickReport: false
