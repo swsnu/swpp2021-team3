@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
+
+import * as actionTypes from '../../Store/Actions/ActionTypes';
+
 
 // TODO: login 유저 스토어에 저장하기
 
@@ -25,6 +28,7 @@ class Login extends Component {
         })
         .then((response) => {
             console.log("로그인 완료")
+            this.props.onStoreLogin()
             this.props.history.push('/search')
         })
         .catch((error) => {
@@ -72,4 +76,10 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login)
+const mapDispatchToProps = dispatch => {
+    return {
+        onStoreLogin: () => dispatch({ type : actionTypes.SIGNIN_USER })
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Login))
