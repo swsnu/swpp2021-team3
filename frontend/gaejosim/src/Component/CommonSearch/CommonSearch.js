@@ -12,6 +12,7 @@ import './CommonSearch.css';
 
 // TODO: tag diagram 형성하기
 // TODO: rank 값 위치 CSS에서 조정하기
+// TODO : css로 박스값 위치조정하기
 
 class CommonSearch extends Component {
 
