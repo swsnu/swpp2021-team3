@@ -8,6 +8,52 @@ class MyApologyCheck extends Component {
     GotoMyPage: false,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      // id: props.id,
+      // content: props.content,
+      // is_verified: props.is_verified,
+      // report_id: props.report_id,
+
+      // getApologyBoolean: false,
+
+      GotoMyPage: false,
+    };
+  }
+
+  // componentDidMount() {
+  //   if (this.state.getApologyBoolean === false) {
+  //     this.getApology();
+  //   }
+  // }
+
+  // getApology = async () => {
+  //   axios.defaults.xsrfCookieName = "csrftoken";
+  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+  //   axios.get("/api/token/").then();
+
+  //   const response_signin = await axios.post("/api/signin/", {
+  //     username: "test1",
+  //     password: "password",
+  //   });
+
+  //   if (response_signin.status === 200) {
+  //     const response = await axios.get(
+  //       "/api/reports//api/reports/:report_id/apology/"
+  //     );
+
+  //     this.setState({
+  //       id: response.data.id,
+  //       content: response.data.content,
+  //       is_verified: response.data.is_verified,
+  //       report_id: response.data.report_id,
+  //       getMyPageDataBoolean: true,
+  //     });
+  //   }
+  // };
+
   onClickGotoMyPage = () => {
     this.setState({ GotoMyPage: true });
   };
@@ -25,19 +71,18 @@ class MyApologyCheck extends Component {
         <div>
           <div className="apology_box1">
             <text className="boxText1">
-              Recent Reported Log1 : ReportedSummoner
+              Recent Reporting Log reports_for_user.id :
+              reports_by_user.reported_summoner
             </text>
             <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
+              reports_by_user.tag, reports_by_user.evaluation,
+              reports_by_user.comment{" "}
             </text>
           </div>
         </div>
         <div>
           <div className="apology_check_box">
-            <text className="apology_check_text">
-              asdf asdfasdfas dfasdfasdfasdfasdfasdfasdfasdfasd
-              fasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfa sdfasdfasdf
-            </text>
+            <text className="apology_check_text">apology.content</text>
           </div>
         </div>
         <button
