@@ -6,7 +6,9 @@ import CommonSearch from "./CommonSearch";
 describe("<CommonSearch />", () => {
   //todo done : Cannot read property 'map' of undefined
   xit("should render without errors", () => {
-    const component = shallow(<CommonSearch recent_result={[]} />);
+    const component = shallow(
+      <CommonSearch result={{ recent_result: "result" }} />
+    );
     const wrapper = component.find(".CommonSearch");
     expect(wrapper.length).toBe(0);
   });

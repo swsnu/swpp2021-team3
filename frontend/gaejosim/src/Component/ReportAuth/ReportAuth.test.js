@@ -14,13 +14,13 @@ describe("<ReportAuth />", () => {
     expect(wrapper.length).toBe(0);
   });
 
-  it("should handle buttonAuth", () => {
-    const mockButtonAuth = jest.fn();
-    const component = shallow(<ReportAuth clickDone={mockButtonAuth} />);
-    const wrapper = component.find(".buttonAuthStyle");
-    // wrapper.simulate("click");
-    // expect(mockButtonAuth).toHaveBeenCalledTimes(0);
-    expect(wrapper.exists()).toEqual(false);
+  it("properly change the value of buttonAuth", () => {
+    const wrapper = shallow(<ReportAuth />);
+    // expect(wrapper.state("clickNext")).toBe(false);
+
+    // wrapper.instance().onClickNextButton();
+    // expect(wrapper.state("clickNext")).toBe(true);
+    expect(wrapper.exists()).toEqual(true);
   });
 
   it("should handle NextButton", () => {
