@@ -8,12 +8,20 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';  
 import thunk from 'redux-thunk';
 
+import userReducer from './Store/Reducers/UserReducer';
 
+const rootReducer = combineReducers({
+    userR : userReducer
+})
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store = {store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
