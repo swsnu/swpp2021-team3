@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select';
-
+// import TextField from '@mui/material/TextField';
+// import Autocomplete from '@mui/material/Autocomplete';
 
 import './ReportAuth.css';
 
@@ -97,7 +98,7 @@ class ReportAuth extends Component {
         }
 
         console.log(options)
-
+        
         return (
             <div className='ReportAuth'>
                 <text className='titleTextStyle'>Report</text>
@@ -111,6 +112,19 @@ class ReportAuth extends Component {
                     options={options}
                 />
                 
+                {/* <Autocomplete
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                    onChange={(event, newValue) => {
+                      this.setValue(newValue);
+                    }}
+                    className = 'reportSummoner'
+                    placeholder='리포트 대상 플레이어를 선택하세요.'
+                    disablePortal
+                    id="combo-box-demo"
+                    options={options}
+                    sx={{ width: 700 }}
+                    renderInput={(params) => <TextField {...params} label = "신고할 소환사명을 써주세요." />}
+                /> */}
     
                 {(!this.state.authenticated) && <button className="buttonAuthStyle" onClick={() => this.onClickAuthenticateButton()}>인증하기</button>}
                 {(this.state.authenticated) && <button className="authStyle">인증됨</button>}
