@@ -31,7 +31,11 @@ class SignUp extends Component {
     }
 
     onClickSignUpButton = () => {
-        if(!this.state.checkPassword) {
+        if(!this.state.id || !this.state.email || !this.state.summonerID || !this.state.password) {
+            alert('모든 필드의 값들을 다 기입해주셔야 회원가입이 가능합니다.')
+            return
+        }
+        if(!this.state.passwordConfirm) {
             alert('기입한 비밀번호와 비밀번호 체크 영역의 값이 동일하지 않습니다.')
             return
         }
@@ -56,12 +60,12 @@ class SignUp extends Component {
         })
         
         if(response.status === 201) {
-            alert(response.body.message)
+            alert(response.data.message)
             this.props.history.push('/login')
         }
         else if(response.status === 400) {
-            console.log(response.body)
-            alert(response.body.error)
+            console.log(response.data)
+            alert(response.data.error)
         }
     }
 
@@ -69,7 +73,8 @@ class SignUp extends Component {
     render() {
         return (
             <div className = 'SignUp'>
-                <NavLink exact to = '/login'>로그인으로</NavLink>
+                <h3>회원가입</h3>
+                <NavLink exact to = '/login'>로그인하기</NavLink>
                 <input
                     className = 'inputField'
                     type = 'string'

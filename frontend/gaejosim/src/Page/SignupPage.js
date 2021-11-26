@@ -8,7 +8,7 @@ class SignupPage extends Component {
     render () {
         return (
             <div className='SignupPage'>
-                <Header /> 
+                {/* <Header />  */}
                 <SignUp />
             </div>
         )
