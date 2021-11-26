@@ -16,13 +16,13 @@ describe("<ReportAction />", () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it("properly change the value if clickTag1_1", () => {
-    const wrapper = shallow(<ReportAction />);
-    expect(wrapper.state("clickTag1_1")).toBe(false);
+  // it("properly change the value if clickTag1_1", () => {
+  //   const wrapper = shallow(<ReportAction />);
+  //   expect(wrapper.state("clickTag1_1")).toBe(false);
 
-    wrapper.instance().onClickTag1_1Button();
-    expect(wrapper.state("clickTag1_1")).toBe("tag1_1");
-  });
+  //   wrapper.instance().onClickTag1_1Button();
+  //   expect(wrapper.state("clickTag1_1")).toBe("tag1_1");
+  // });
 
   it("should handle tag1_1", () => {
     const mockClickTag1_1 = jest.fn();
