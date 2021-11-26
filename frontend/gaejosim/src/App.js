@@ -9,7 +9,6 @@ import MyReportedLogsPage from "./Page/MyReportedLogsPage";
 import MyReportingLogsPage from "./Page/MyReportingLogsPage";
 import MyApologyCheckPage from "./Page/MyApologyCheckPage";
 import MyApologyWritePage from "./Page/MyApologyWritePage";
-import MyReportPage from "./Page/MyReportPage";
 import ReportAuthPage from "./Page/ReportAuthPage";
 import ReportActionPage from "./Page/ReportActionPage";
 import SearchPage from "./Page/SearchPage";
@@ -29,7 +28,7 @@ function App() {
             exact
             component={MultiSearchResultPage}
           />
-          
+
           <Route path="/signup" exact component={SignupPage} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/findUserInfo" exact component={FindUserInfoPage} />
