@@ -64,6 +64,7 @@ class ReportAction extends Component {
         }
     }
 
+
     postReportData = async () => {
 
         axios.defaults.xsrfCookieName = 'csrftoken';
