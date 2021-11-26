@@ -86,7 +86,6 @@ class ReportAuth extends Component {
     }
 
     setValue = (newValue) => {
-        console.log(newValue)
         this.setState({reportedSummoner: newValue})
     }
 
