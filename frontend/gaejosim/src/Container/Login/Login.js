@@ -19,7 +19,7 @@ class Login extends Component {
 
         axios.get('/api/token/').then()
 
-        const response = await axios.post('/api/login/', {
+        const response = await axios.post('/api/signin/', {
             "username" : this.state.id,
 	        "password" : this.state.password,
         })
@@ -72,4 +72,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login)
