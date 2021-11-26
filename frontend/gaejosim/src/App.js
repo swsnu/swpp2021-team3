@@ -22,36 +22,27 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={SearchPage} />
+
           <Route path="/search" exact component={SearchPage} />
-          <Route path="/findUserInfo" exact component={FindUserInfoPage} />
-          <Route path="/login" exact component={LoginPage} />
           <Route
-            path="/multiSearchResult/:summonerList"
+            path="/searchresult/:summonerList"
             exact
             component={MultiSearchResultPage}
           />
+
+          <Route path="/signup" exact component={SignupPage} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/findUserInfo" exact component={FindUserInfoPage} />
+          
           <Route path="/my" exact component={MyPage} />
           <Route path="/myReportedLogs" exact component={MyReportedLogsPage} />
-          <Route
-            path="/myReportingLogs"
-            exact
-            component={MyReportingLogsPage}
-          />
+          <Route path="/myReportingLogs" exact component={MyReportingLogsPage} />
           <Route path="/myApologyCheck" exact component={MyApologyCheckPage} />
           <Route path="/myApologyWrite" exact component={MyApologyWritePage} />
-          <Route path="/myReport" exact component={MyReportPage} />
+
           <Route path="/reportAuth" exact component={ReportAuthPage} />
-          <Route
-            path="/reportAction/:summonerID"
-            exact
-            component={ReportActionPage}
-          />
-          <Route path="/signup" exact component={SignupPage} />
-          <Route
-            path="/singleSearchResult/:summonerID"
-            exact
-            component={SingleSearchResultPage}
-          />
+          <Route path="/reportAction/:summonerID" exact component={ReportActionPage}/>
+          
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </BrowserRouter>

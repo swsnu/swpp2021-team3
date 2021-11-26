@@ -13,12 +13,13 @@ from django.contrib.auth.hashers import check_password
 from django.core.mail.message import EmailMessage
 
 from report.models import Report
+from core.utils import check_logged_in
 from .models import Summoner, User, MannerPoint
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-e80d9501-3b0b-4766-9419-b548c17b906a",  # updated 11/24
+    "key": "RGAPI-d47f8e2f-c1f6-4ef2-8323-64b461d511b7",  # updated 11/25
 }
 
 
@@ -106,15 +107,11 @@ def sign_up(request):
     return JsonResponse({"message": "User is created!"}, status=201)
 
 
+@check_logged_in
 @require_http_methods(["POST"])
 def change_password(request):
     """change password"""
     user = request.user
-
-    if not user.is_authenticated:
-        return JsonResponse(
-            {"error": "You need to login before accessing my page"}, status=401
-        )
 
     data = json.loads(request.body.decode())
 
@@ -208,27 +205,20 @@ def generate_temp_password():
     return temp_password
 
 
+@check_logged_in
 @require_http_methods(["POST"])
 def log_out(request):
     """sign out"""
-    user = request.user
-
-    if not user.is_authenticated:
-        return JsonResponse({"error": "The user is not logged in."}, status=400)
-
     logout(request)
 
     return JsonResponse({"message": "Logout Success"}, status=200)
 
 
+@check_logged_in
 @require_http_methods(["GET"])
 def my_page(request):
     """My page with user information and report logs"""
     user = request.user
-    if not user.is_authenticated:
-        return JsonResponse(
-            {"error": "You need to login before accessing my page"}, status=401
-        )
 
     summoner = Summoner.objects.select_related("manner_point").get(user=user)
 
@@ -266,8 +256,8 @@ def my_page(request):
             "user": {
                 "username": user.username,
                 "email": user.email,
-                "summoner_name": user.summoner.name,
-                "manner_point": user.summoner.manner_point.point,
+                "summoner_name": summoner.name,
+                "manner_point": summoner.manner_point.point,
             },
             "reports": {
                 "reports_for_user": reports_for_user,
@@ -278,14 +268,12 @@ def my_page(request):
     )
 
 
+@check_logged_in
 @require_http_methods(["PUT"])
 def update_summoner_name(request):
     """update summoner name"""
     user = request.user
     data = json.loads(request.body.decode())
-
-    if not user.is_authenticated:
-        return JsonResponse({"error": "User is not logged in."}, status=401)
 
     new_summoner_name = data["new_summoner_name"]
 
