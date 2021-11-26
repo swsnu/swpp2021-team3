@@ -8,7 +8,7 @@ import Slider from '@mui/material/Slider';
 import './ReportAction.css';
 
 // TODO : Check here if you want to how to visualize MUI : https://mui.com/components/slider/
-
+// TODO : check axios api post 
 class ReportAction extends Component {
 
     constructor(props) {
@@ -138,15 +138,13 @@ class ReportAction extends Component {
 
 
     render() {
-        let redirect
-
+        let redirect = null
         if (this.state.clickCancel) {
             redirect = <Redirect to={`/`} />
         }
         if (this.state.clickSubmit) {
             redirect = <Redirect to={`/`} />
         }
-
         const marks = [
             {
                 value: 0,
@@ -162,8 +160,7 @@ class ReportAction extends Component {
             <div className='ReportAction'>
                 {redirect}
                 <div className='Box1'>
-                    <h3 id="MannerPoint">1. Choose Manner Point of reporting player.</h3>
-                    <div id="MannerPointDescription">Select a number between 0 to 100</div>
+                    <h3 id="MannerPoint">매너포인트</h3>
                     <Box 
                         id="MannerPointInput"
                         sx={{ width: 700 }}>
@@ -182,7 +179,7 @@ class ReportAction extends Component {
                     </Box>
                 </div>
                 <div className='Box2'>
-                    <h3 id="Tag">2.Choose all Tags appropriate to describe behavior of reporting player if you want.</h3>
+                    <h3 id="Tag">태그</h3>
                     <div className='tags'>
                         <button className="Tag1_1Button" id="button" onClick={() => this.onClickTagButton("1_1")}>
                             {(this.state.clickTag1_1 !== false) ? '과격한 언행 V' : '과격한 언행'}
@@ -217,14 +214,14 @@ class ReportAction extends Component {
                     </div>
                 </div>
                 <div className='Box3'>
-                    <h3 id="Comment">3. Write down Comment if you want</h3>
+                    <h3 id="Comment">한줄평</h3>
                     <input id="CommentInput"
                         placeholder="Enter Comments on reported player if you want"
                         value={this.state.comment}
                         onChange={(event) => this.setState({ comment: event.target.value })} />
                 </div>
-                <button className="submitButton" id="submit" onClick={() => this.onClickSubmitButton()}>Submit</button>
-                <button className="cancelButton" id="cancel" onClick={() => this.onClickCancelButton()}>Cancel</button>
+                <button className="submitButton" id="submit" onClick={() => this.onClickSubmitButton()}>제출</button>
+                <button className="cancelButton" id="cancel" onClick={() => this.onClickCancelButton()}>취소</button>
             </div>
         )
     }
