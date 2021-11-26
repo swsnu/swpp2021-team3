@@ -5,9 +5,6 @@ import axios from 'axios';
 
 import * as actionTypes from '../../Store/Actions/ActionTypes';
 
-
-// TODO: login 유저 스토어에 저장하기
-
 class Login extends Component {
     state = {
         id : '',  
