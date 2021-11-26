@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Header from '../Container/Header/Header';
+import SignUp from '../Component/Signup/Signup';
 
 class SignupPage extends Component {
 
@@ -8,7 +9,7 @@ class SignupPage extends Component {
         return (
             <div className='SignupPage'>
                 <Header /> 
-                SignupPage
+                <SignUp />
             </div>
         )
     }
