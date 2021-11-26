@@ -3,7 +3,7 @@ import React from "react";
 
 const Progressbar = (props) => {
     let process2 = "off"
-    if(this.props.process === 2) {
+    if(props.process === "2") {
         process2 = "on"
     }
     

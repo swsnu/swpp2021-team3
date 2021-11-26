@@ -100,7 +100,7 @@ class ReportAuth extends Component {
         
         return (
             <div className='ReportAuth'>
-                <text className='titleTextStyle'>Report</text>
+                <div className='titleTextStyle'>Report</div>
                 <div className='boxStyle' />
                 <div className='subtitleTextStyle'>트롤을 골라주세요</div>
 
