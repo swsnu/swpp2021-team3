@@ -1,16 +1,35 @@
 import React, { Component } from "react";
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
 // import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
 
-// TODO: axios 해결
+// TODO: login 유저 스토어에 저장하기
 
 class Login extends Component {
     state = {
         id : '',  
         password : '', 
+    }
+
+    postLoginData = async () => {
+        console.log("postSignUpData")
+
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+        axios.get('/api/token/').then()
+
+        const response = await axios.post('/api/login/', {
+            "username" : this.state.id,
+	        "password" : this.state.password,
+        })
+        .then((response) => {
+            console.log("로그인 완료")
+            this.props.history.push('/search')
+        })
+        .catch((error) => {
+            alert(error.response.data.error)
+        })
     }
 
     onClickLoginButton = () => {
@@ -23,7 +42,7 @@ class Login extends Component {
             return
         }
         else {
-            console.log('로그인 시도')
+            this.postLoginData()
         }
     }
 
@@ -33,6 +52,7 @@ class Login extends Component {
                 <NavLink exact to = '/signup'>회원가입</NavLink>
                 <NavLink exact to = '/finduserinfo'>아이디 비밀번호 찾기</NavLink>
                 <NavLink exact to = '/changepassword'>비밀번호 변경</NavLink>
+                
                 <input
                     className = 'inputField'
                     type = 'string'

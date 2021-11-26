@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+// TODO: reducer 연결해 로그인시 접근 불가하게 수정
+// TODO: 각 필드 값 형식 제한하는 validate 함수 추가하기
+
 class SignUp extends Component {
     state = {
         id : '', 
@@ -11,10 +14,6 @@ class SignUp extends Component {
         password : '', 
         passwordConfirm : false,
         agreePolicy : false,
-    }
-
-    componentDidMount() {
-        
     }
 
     passwordHandler = (passwordCheck) => {
