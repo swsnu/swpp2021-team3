@@ -19,7 +19,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-d47f8e2f-c1f6-4ef2-8323-64b461d511b7",  # updated 11/25
+    "key": "RGAPI-7fd97294-d6a6-403f-8a8f-5ca33beaa59e",  # updated 11/26
 }
 
 
@@ -48,7 +48,7 @@ def sign_in(request):
             status=200,
         )
 
-    return JsonResponse({"error": "Wrong username or wrong password"}, status=403)
+    return JsonResponse({"error": "아이디 혹은 비밀번호가 일치하지 않습니다."}, status=403)
 
 
 @require_http_methods(["POST"])
@@ -68,7 +68,7 @@ def sign_up(request):
     validation_req = requests.get(validation_url)
 
     if not validation_req.status_code == 200:
-        return JsonResponse({"error": "This summoner name is invalid"}, status=400)
+        return JsonResponse({"error": "해당 이름의 소환사가 존재하지 않습니다."}, status=400)
 
     summoner_info = validation_req.json()
 
@@ -89,9 +89,7 @@ def sign_up(request):
     exist = User.objects.filter(summoner=summoner).exists()
 
     if exist:
-        return JsonResponse(
-            {"error": "This summoner is already registered in our service"}, status=400
-        )
+        return JsonResponse({"error": "해당 소환사는 이미 계정이 존재합니다."}, status=400)
 
     try:
         User.objects.create_user(
@@ -100,11 +98,11 @@ def sign_up(request):
 
     except (IntegrityError) as invalid_input_error:
         if "username" in str(invalid_input_error):
-            return JsonResponse({"error": "This username already exists."}, status=400)
+            return JsonResponse({"error": "해당 아이디는 중복된 아이디입니다."}, status=400)
 
-        return JsonResponse({"error": "This email already exists."}, status=400)
+        return JsonResponse({"error": "해당 이메일은 중복된 이메일입니다."}, status=400)
 
-    return JsonResponse({"message": "User is created!"}, status=201)
+    return JsonResponse({"message": "회원가입이 완료되었습니다."}, status=201)
 
 
 @check_logged_in
@@ -122,19 +120,15 @@ def change_password(request):
     is_correct = check_password(old_password, user.password)
 
     if not is_correct:
-        return JsonResponse(
-            {"error": "Please enter your old password correctly"}, status=400
-        )
+        return JsonResponse({"error": "기존 비밀번호가 일치하지 않습니다."}, status=400)
 
     if password_confirm != new_password:
-        return JsonResponse(
-            {"error": "Please enter password confirm correctly"}, status=400
-        )
+        return JsonResponse({"error": "비밀번호 확인이 일치하지 않습니다."}, status=400)
 
     user.set_password(new_password)
     user.save()
 
-    return JsonResponse({"message": "You password is changed."}, status=200)
+    return JsonResponse({"message": "비밀번호 변경이 완료되었습니다."}, status=200)
 
 
 @require_http_methods("POST")
@@ -150,11 +144,9 @@ def find_username(request):
             "[Gaejosim] Find your ID", user.username, to=[email]
         )
         email_message.send()
-        return JsonResponse({"message": "Please check your email."}, status=200)
+        return JsonResponse({"message": "메일함을 확인해주세요."}, status=200)
 
-    return JsonResponse(
-        {"error": "Such mail address is not registered in our service."}, status=400
-    )
+    return JsonResponse({"error": "해당 이메일을 사용하는 사용자가 존재하지 않습니다."}, status=400)
 
 
 @require_http_methods("POST")
@@ -181,10 +173,10 @@ def find_password(request):
         )
 
         email_message.send()
-        return JsonResponse({"message": "Please check your email."}, status=200)
+        return JsonResponse({"message": "메일함을 확인해주세요."}, status=200)
 
     return JsonResponse(
-        {"error": "No registered user who has such username and email address"},
+        {"error": "해당 아이디와 이메일로 가입한 사용자가 존재하지 않습니다."},
         status=400,
     )
 
@@ -211,7 +203,7 @@ def log_out(request):
     """sign out"""
     logout(request)
 
-    return JsonResponse({"message": "Logout Success"}, status=200)
+    return JsonResponse({"message": "로그인이 완료되었습니다."}, status=200)
 
 
 @check_logged_in
@@ -290,10 +282,6 @@ def update_summoner_name(request):
     if summoner_info["name"] == new_summoner_name:
         user.summoner.name = new_summoner_name
         user.summoner.save()
-        return JsonResponse(
-            {"message": "Successfully update your summoner name."}, status=200
-        )
+        return JsonResponse({"message": "정보가 업데이트되었습니다."}, status=200)
 
-    return JsonResponse(
-        {"error": "This name does not match your current summoner name."}, status=400
-    )
+    return JsonResponse({"error": "소환사 명이 현재 소환사 명과 일치하지 않습니다."}, status=400)
