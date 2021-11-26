@@ -13,7 +13,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-d47f8e2f-c1f6-4ef2-8323-64b461d511b7",  # updated 11/25
+    "key": "RGAPI-7fd97294-d6a6-403f-8a8f-5ca33beaa59e",  # updated 11/26
 }
 
 tag_dict = {
