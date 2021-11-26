@@ -5,7 +5,6 @@ import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
 
-
 class FindUserInfo extends Component {
     state = {
         emailForID : '',  

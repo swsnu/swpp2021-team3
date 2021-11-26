@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
 // import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
 
-// TODO: 로그인 한 유저만 접근 가능하게 변경
+// TODO: post 요청을 put으로 back에서 바꾸면 axios 코드 변경
 
 class ChangePassword extends Component {
     state = {
