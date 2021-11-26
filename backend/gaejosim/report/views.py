@@ -43,7 +43,7 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
         if not team_players:
-            JsonResponse({"error": "RIOT API timeout"}, status=400)
+            JsonResponse({"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":
@@ -118,7 +118,7 @@ def post_report(request):
     comment = data["comment"]
 
     if tag is None or not tag:
-        return JsonResponse({"error": "No tag selected"}, status=400)
+        return JsonResponse({"error": "태그가 선택되지 않았습니다."}, status=400)
 
     get_reported_summoner_id = (
         f"{api_default['region']}/lol/summoner/v4/summoners"
@@ -127,9 +127,11 @@ def post_report(request):
     reported_summoner_req = requests.get(get_reported_summoner_id)
 
     if reported_summoner_req.status_code != 200:
-        return JsonResponse({"error": "Such summoner does not exist."}, status=400)
+        return JsonResponse({"error": "해당 소환사가 존재하지 않습니다."}, status=400)
     if is_riot_timeout(reported_summoner_req.json()):
-        return JsonResponse({"error": "RIOT API timeout"}, status=429)
+        return JsonResponse(
+            {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=429
+        )
 
     reported_summoner_json = reported_summoner_req.json()
     reported_summoner_id = reported_summoner_json["id"]
@@ -272,19 +274,17 @@ def apology(request, report_id):
     try:
         report = Report.objects.get(id=report_id)
     except Report.DoesNotExist:
-        return JsonResponse({"error": "This report does not exist."}, status=404)
+        return JsonResponse({"error": "해당 신고가 존재하지 않습니다."}, status=404)
 
     if request.method == "POST":
         if user.summoner != report.reported_summoner:
             return JsonResponse(
-                {"error": "You are not allowed to write an apology to this report."},
+                {"error": "해당 신고에 대한 반성문 작성 권한이 없습니다."},
                 status=401,
             )
 
         if report.apology:
-            return JsonResponse(
-                {"error": "You already wrote an apology for this report."}, status=400
-            )
+            return JsonResponse({"error": "이미 해당 신고에 대한 반성문을 작성했습니다."}, status=400)
 
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
@@ -307,21 +307,17 @@ def apology(request, report_id):
     if request.method == "PUT":
         if user.summoner != report.reported_summoner:
             return JsonResponse(
-                {"error": "You are not allowed to write an apology to this report."},
+                {"error": "해당 신고에 대한 반성문 작성 권한이 없습니다."},
                 status=401,
             )
 
         if not report.apology:
-            return JsonResponse(
-                {"error": "You haven't written an apology for this report."}, status=404
-            )
+            return JsonResponse({"error": "아직 해당 신고에 대한 반성문을 작성하지 않았습니다."}, status=404)
 
         try:
             apology = Apology.objects.get(id=report.apology.id)
         except Apology.DoesNotExist:
-            return JsonResponse(
-                {"error": "This report does not have any apology."}, status=404
-            )
+            return JsonResponse({"error": "아직 해당 신고에 대한 반성문을 작성하지 않았습니다."}, status=404)
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
 
@@ -343,14 +339,10 @@ def apology(request, report_id):
             (user.summoner == report.reported_summoner)
             or (user == report.reporting_user)
         ):
-            return JsonResponse(
-                {"error": "You are not allowed to read this apology."}, status=401
-            )
+            return JsonResponse({"error": "해당 신고에 대한 접근 권한이 없습니다."}, status=401)
 
         if not report.apology:
-            return JsonResponse(
-                {"error": "This report does not have any apology."}, status=404
-            )
+            return JsonResponse({"error": "아직 해당 신고에 대한 반성문을 작성하지 않았습니다."}, status=404)
 
         apology = Apology.objects.get(id=report.apology.id)
 
