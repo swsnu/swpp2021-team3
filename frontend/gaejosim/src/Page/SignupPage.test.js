@@ -1,10 +1,11 @@
-import React from 'react';
-// import {shallow} from 'enzyme';
-import { render, screen } from '@testing-library/react';
-import SignupPage from './SignupPage';
+import React from "react";
+import { shallow } from "enzyme";
+import SignupPage from "./SignupPage";
 
-test('renders signup page', () => {
-  render(<SignupPage />);
-  const linkElement = screen.getByText(/SignupPage/);
-  expect(linkElement).toBeInTheDocument();
+describe("<SignupPage />", () => {
+  it("should render without errors", () => {
+    const component = shallow(<SignupPage />);
+    const wrapper = component.find(".SignupPage");
+    expect(wrapper.length).toBe(1);
+  });
 });

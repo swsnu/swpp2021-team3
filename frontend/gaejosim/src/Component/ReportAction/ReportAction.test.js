@@ -16,14 +16,6 @@ describe("<ReportAction />", () => {
     expect(wrapper.length).toBe(1);
   });
 
-  // it("properly change the value if clickTag1_1", () => {
-  //   const wrapper = shallow(<ReportAction />);
-  //   expect(wrapper.state("clickTag1_1")).toBe(false);
-
-  //   wrapper.instance().onClickTag1_1Button();
-  //   expect(wrapper.state("clickTag1_1")).toBe("tag1_1");
-  // });
-
   it("should handle tag1_1", () => {
     const mockClickTag1_1 = jest.fn();
     const component = shallow(<ReportAction clickDone={mockClickTag1_1} />);
@@ -118,6 +110,12 @@ describe("<ReportAction />", () => {
     const wrapper = component.find(".cancelButton");
     wrapper.simulate("click");
     expect(mockClickCancel).toHaveBeenCalledTimes(0);
+  });
+
+  it("should change clickTag1_1 state", () => {
+    const component = shallow(<ReportAction />);
+    component.setState({ clickTag1_1: true });
+    expect(component.length).toBe(1);
   });
 
   it("router search page", () => {

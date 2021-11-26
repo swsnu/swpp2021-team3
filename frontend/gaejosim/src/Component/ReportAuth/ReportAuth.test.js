@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import ReportAuth from "./ReportAuth";
 import ReportActionPage from "../../Page/ReportActionPage";

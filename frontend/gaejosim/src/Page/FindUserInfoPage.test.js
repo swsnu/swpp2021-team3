@@ -1,10 +1,11 @@
-import React from 'react';
-// import {shallow} from 'enzyme';
-import { render, screen } from '@testing-library/react';
-import FindUserInfoPage from './FindUserInfoPage';
+import React from "react";
+import { shallow } from "enzyme";
+import FindUserInfoPage from "./FindUserInfoPage";
 
-test('renders FindUserInfo page', () => {
-  render(<FindUserInfoPage />);
-  const linkElement = screen.getByText(/FindUserInfoPage/);
-  expect(linkElement).toBeInTheDocument();
+describe("<FindUserInfoPage />", () => {
+  it("should render without errors", () => {
+    const component = shallow(<FindUserInfoPage />);
+    const wrapper = component.find(".FindUserInfoPage");
+    expect(wrapper.length).toBe(1);
+  });
 });
