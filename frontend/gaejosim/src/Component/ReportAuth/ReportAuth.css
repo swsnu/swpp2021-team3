@@ -1,73 +1,88 @@
-.titleTextStyle{
+/* .titleTextStyle{
     position: absolute;
     top: 100px;
     left: 610px; 
     font-weight: 800;
     font-size: 64px;
     line-height: 66px;
+} */
+
+.subtitleTextStyle {
+  position: absolute;
+  /* width: 180px;
+height: 36px; */
+  left: 34.7%;
+  top: 40.3%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
-.subtitleTextStyle{
-    position: absolute;
-    top: 280px;
-    left: 25.97%; 
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 66px;
+/* .boxStyle {
+  width: 840px;
+  height: 360px;
+  background: #f8f8f8;
+  border-radius: 32px;
+  position: absolute;
+  left: 20.83%;
+  right: 20.83%;
+  top: 200px;
+  filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
+} */
+
+.reportSummoner {
+  position: relative;
+  width: 30.6%;
+  height: 6%;
+  left: 34.7%;
+  /* top: 45.9%; */
+  /* margin-top: 10px;  */
+  /* bottom: 45.9%; */
+  /* top: 50%; */
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
 }
 
-.boxStyle{
-    width: 840px;
-    height: 360px;
-    background: #F8F8F8;
-    border-radius: 32px;
-    position: absolute;
-    left: 20.83%; 
-    right: 20.83%;
-    top: 200px; 
-    filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
+.authStyle {
+  position: absolute;
+  width: 120px;
+  height: 38.4px;
+  background: #76747c;
+  border-radius: 40px;
+  color: #ffffff;
+  bottom: 800px;
+  left: 810px;
 }
 
-.reportSummoner{
-    width: 691px;
-    height: 64px;
-    position: absolute;
-    left: 25.97%;
-    right: 26.04%;
-    top: 350px;
-    background: #EFF0F7; 
-    border-radius: '16px'
+.buttonStyle {
+  position: absolute;
+  width: 120px;
+  height: 38.4px;
+  background: #5f2eea;
+  border-radius: 40px;
+  color: #ffffff;
+  bottom: 800px;
+  left: 950px;
 }
 
-.authStyle{
-    position: absolute;
-    width: 120px;
-    height: 38.4px;
-    background: #76747c;
-    border-radius: 40px;
-    color: #FFFFFF;
-    bottom: 800px;
-    left: 810px
-}
-
-.buttonStyle{
-    position: absolute;
-    width: 120px;
-    height: 38.4px;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: #FFFFFF;
-    bottom: 800px;
-    left: 950px
-}
-
-.buttonAuthStyle{
-    position: absolute;
-    width: 120px;
-    height: 38.4px;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: #FFFFFF;
-    bottom: 800px;
-    left: 810px
+.buttonAuthStyle {
+  position: absolute;
+  width: 120px;
+  height: 38.4px;
+  background: #5f2eea;
+  border-radius: 40px;
+  color: #ffffff;
+  bottom: 800px;
+  left: 810px;
 }
