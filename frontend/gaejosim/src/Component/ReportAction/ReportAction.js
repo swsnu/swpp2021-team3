@@ -9,6 +9,7 @@ import './ReportAction.css';
 
 // TODO : Check here if you want to how to visualize MUI : https://mui.com/components/slider/
 // TODO : check axios api post 
+
 class ReportAction extends Component {
 
     constructor(props) {
@@ -56,11 +57,10 @@ class ReportAction extends Component {
     }
 
     // Post auth by /api/reports/auth/ call.
-    postReportData = () => {
+    postReportData = async () => {
 
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
 
         console.log(this.state.evaluation)
         console.log(this.state.reported_summoner)
@@ -69,32 +69,21 @@ class ReportAction extends Component {
 
         axios.get('/api/token/').then(
         )
-
-        axios.post('/api/signin/', {
-            "username": "test1",
-            "password": "password"
+        
+        const response = await axios.post('/api/reports/', {
+            "name": this.state.reported_summoner,
+            "evaluation": parseInt(this.state.evaluation),
+            "tag": tagListString,
+            "comment": this.state.comment
         })
-            .then(
-                axios.post('/api/reports/', {
-                    "name": this.state.reported_summoner,
-                    "evaluation": parseInt(this.state.evaluation),
-                    "tag": tagListString,
-                    "comment": this.state.comment
-                })
-                    .then((response) => {
-                        console.log('response get from /api/reports/auth: ' + JSON.stringify(response))
-                    }
-                    )
-                    .catch(err => {
-                        console.log(err)
-                    })
-            )
-            // "User is not logged in."
-            .catch((error) => {
-                console.log(error)
-                alert(error)
-            })
-
+        .then((response) => {
+            console.log(JSON.stringify(response.data))
+            alert('성공적으로 제출하였습니다.')
+            this.props.history.push('/search')
+        })
+        .catch((error) => {
+            alert(error.response.data.error)
+        })
     }
 
 
