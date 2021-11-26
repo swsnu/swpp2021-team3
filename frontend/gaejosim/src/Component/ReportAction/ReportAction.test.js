@@ -1,10 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { fireEvent, render } from "@testing-library/react";
-import { Router } from "react-router-dom";
+// import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import clickTag1_1 from "./ReportAction";
+// import clickTag1_1 from "./ReportAction";
 
 import ReportAction from "./ReportAction";
 import SearchPage from "../../Page/SearchPage";
@@ -14,14 +15,6 @@ describe("<ReportAction />", () => {
     const component = shallow(<ReportAction />);
     const wrapper = component.find(".ReportAction");
     expect(wrapper.length).toBe(1);
-  });
-
-  it("properly change the value if clickTag1_1", () => {
-    const wrapper = shallow(<ReportAction />);
-    expect(wrapper.state("clickTag1_1")).toBe(false);
-
-    wrapper.instance().onClickTag1_1Button();
-    expect(wrapper.state("clickTag1_1")).toBe("tag1_1");
   });
 
   it("should handle tag1_1", () => {
@@ -120,6 +113,12 @@ describe("<ReportAction />", () => {
     expect(mockClickCancel).toHaveBeenCalledTimes(0);
   });
 
+  it("should change clickTag1_1 state", () => {
+    const component = shallow(<ReportAction />);
+    component.setState({ clickTag1_1: true });
+    expect(component.length).toBe(1);
+  });
+
   it("router search page", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
     const { getAllByText } = render(
@@ -128,8 +127,24 @@ describe("<ReportAction />", () => {
       </Router>
     );
     expect(history.location.pathname).toBe("/");
-    fireEvent.click(getAllByText("Search")[0]);
+    fireEvent.click(getAllByText("검색")[0]);
     expect(history.location.pathname).toBe("/");
+  });
+
+  it("changes input", () => {
+    const { getByPlaceholderText } = render(
+      <Router>
+        <ReportAction />
+      </Router>
+    );
+    const input = getByPlaceholderText(
+      "Enter Comments on reported player if you want"
+    );
+    fireEvent.change(input, {
+      target: {
+        value: "TDD 배우기",
+      },
+    });
   });
 });
 

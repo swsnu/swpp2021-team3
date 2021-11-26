@@ -13,19 +13,45 @@ describe("<Header />", () => {
     const wrapper = component.find(".Header");
     expect(wrapper.length).toBe(1);
   });
+
+  it("should change clickLogin state", () => {
+    const component = shallow(<Header />);
+    component.setState({ clickLogin: true });
+    expect(component.length).toBe(1);
+  });
+
+  it("should change clickMyPage state", () => {
+    const component = shallow(<Header />);
+    component.setState({ clickMyPage: true });
+    expect(component.length).toBe(1);
+  });
 });
 
 describe("router login page", () => {
   test("should pass", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
-    const { getByText } = render(
+    const { getAllByText } = render(
       <Router history={history}>
         <LoginPage />
       </Router>
     );
     expect(history.location.pathname).toBe("/");
-    fireEvent.click(getByText("로그인"));
+    fireEvent.click(getAllByText("로그인")[0]);
     expect(history.location.pathname).toBe("/login");
+  });
+});
+
+describe("router login page2", () => {
+  test("should pass", () => {
+    const history = createMemoryHistory({ initialEntries: ["/"] });
+    const { getAllByText } = render(
+      <Router history={history}>
+        <LoginPage />
+      </Router>
+    );
+    expect(history.location.pathname).toBe("/");
+    fireEvent.click(getAllByText("로그인")[1]);
+    expect(history.location.pathname).toBe("/");
   });
 });
 
