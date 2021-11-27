@@ -2,11 +2,11 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 // import { Router } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+// import { createMemoryHistory } from "history";
 import { shallow, mount } from "enzyme";
 
 import ReportAuth from "./ReportAuth";
-import ReportActionPage from "../../Page/ReportActionPage";
+// import ReportActionPage from "../../Page/ReportActionPage";
 
 describe("<ReportAuth />", () => {
   it("should render without errors", () => {
