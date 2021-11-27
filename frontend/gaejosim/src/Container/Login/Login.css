@@ -1,0 +1,125 @@
+.LoginTitle {
+  position: absolute;
+  /* width: 67px; */
+  /* height: 36px; */
+  left: 35.4%;
+  top: 34.5%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Signup_text {
+  position: absolute;
+  /* width: 53px; */
+  /* height: 22px; */
+  /* left: 62%; */
+  right: 34.5%;
+  top: 36%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Finduserinfo_text {
+  position: absolute;
+  /* width: 53px; */
+  /* height: 22px; */
+  left: 35.4%;
+  top: 55.8%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Changepassword_text {
+  position: absolute;
+  /* width: 53px; */
+  /* height: 22px; */
+  right: 34.5%;
+  top: 55.8%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Login_inputField1 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 40.4%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Login_inputField2 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 47.8%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.LoginButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* left: 45.8%; */
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}
