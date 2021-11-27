@@ -20,8 +20,6 @@ services:
       - python manage.py makemigrations
       - python manage.py migrate
       - python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      mysql
 
   mysql:
     image: mysql:8
@@ -36,3 +34,4 @@ services:
     command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
     ports:
       - "3306:3306"
+
