@@ -14,7 +14,7 @@ services:
       - .secrets/base.json
     working_dir: /app
     command:
-      - ls
+      - cd ./backend
 
   mysql:
     image: mysql:8
