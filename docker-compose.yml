@@ -14,6 +14,7 @@ services:
       - .secrets/base.json
     working_dir: /app
     command:
+      - /bin/bash
       - python backend/gaejosim/manage.py makemigrations
       - python backend/gaejosim/manage.py migrate
       - python backend/gaejosim/manage.py runserver 0.0.0.0:8000
