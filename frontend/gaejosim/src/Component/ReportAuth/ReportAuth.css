@@ -1,73 +1,156 @@
-.titleTextStyle{
+/* .titleTextStyle{
     position: absolute;
     top: 100px;
     left: 610px; 
     font-weight: 800;
     font-size: 64px;
     line-height: 66px;
+} */
+
+.subtitleTextStyle {
+  position: absolute;
+  /* width: 180px;
+height: 36px; */
+  left: 34.7%;
+  top: 40.3%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
-.subtitleTextStyle{
-    position: absolute;
-    top: 280px;
-    left: 25.97%; 
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 66px;
+.LeftBarStyle1 {
+  position: absolute;
+  width: 14.6%;
+  height: 8px;
+  left: 34.7%;
+  top: 30.3%;
+  background: #fc0174;
+  border-radius: 40px;
 }
 
-.boxStyle{
-    width: 840px;
-    height: 360px;
-    background: #F8F8F8;
-    border-radius: 32px;
-    position: absolute;
-    left: 20.83%; 
-    right: 20.83%;
-    top: 200px; 
-    filter: drop-shadow(0px 8px 16px rgba(17, 17, 17, 0.04));
+.RightBarStyle1 {
+  position: absolute;
+  width: 14.6%;
+  height: 8px;
+  left: 50.1%;
+  top: 30.3%;
+  background: #767676;
+  border-radius: 40px;
 }
 
-.reportSummoner{
-    width: 691px;
-    height: 64px;
-    position: absolute;
-    left: 25.97%;
-    right: 26.04%;
-    top: 350px;
-    background: #EFF0F7; 
-    border-radius: '16px'
+.LeftBarText1 {
+  position: absolute;
+  /* width: 14.6%; */
+  /* height: 8px; */
+  left: 46%;
+  top: 27%;
+  /* background: #fc0174; */
+  /* border-radius: 40px; */
+
+  /* font-family: Poppins; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
-.authStyle{
-    position: absolute;
-    width: 120px;
-    height: 38.4px;
-    background: #76747c;
-    border-radius: 40px;
-    color: #FFFFFF;
-    bottom: 800px;
-    left: 810px
+.RightBarText1 {
+  position: absolute;
+  /* width: 14.6%; */
+  /* height: 8px; */
+  left: 61.2%;
+  top: 27%;
+  /* background: #fc0174; */
+  /* border-radius: 40px; */
+
+  /* font-family: Poppins; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
-.buttonStyle{
-    position: absolute;
-    width: 120px;
-    height: 38.4px;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: #FFFFFF;
-    bottom: 800px;
-    left: 950px
+.reportSummoner {
+  position: relative;
+  width: 30.6%;
+  /* height: 6%; */
+  left: 34.7%;
+  /* height: 100px; */
+  /* top: 45.9%; */
+  top: 350px;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
 }
 
-.buttonAuthStyle{
-    position: absolute;
-    width: 120px;
-    height: 38.4px;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: #FFFFFF;
-    bottom: 800px;
-    left: 810px
+.authStyle {
+  position: absolute;
+  width: 120px;
+  height: 20px;
+  left: 63%;
+  transform: translateX(-50%);
+  top: 56%;
+  background: transparent;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}
+
+.buttonAuthStyle {
+  position: absolute;
+  width: 120px;
+  height: 20px;
+  left: 63%;
+  transform: translateX(-50%);
+  top: 56%;
+  background: transparent;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}
+
+.buttonStyle {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
 }

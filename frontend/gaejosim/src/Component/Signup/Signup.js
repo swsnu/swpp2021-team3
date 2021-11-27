@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 // import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
-import axios from 'axios';
+
+import { NavLink, withRouter } from "react-router-dom";
+import axios from "axios";
+
+import "./Signup.css";
+
 
 // TODO: reducer 연결해 로그인시 접근 불가하게 수정
 // TODO: 각 필드 값 형식 제한하는 validate 함수 추가하기
 
 class SignUp extends Component {
+
     state = {
         id : '', 
         email : '', 
@@ -70,30 +75,32 @@ class SignUp extends Component {
     render() {
         return (
             <div className = 'SignUp'>
-                <h3>회원가입</h3>
-                <NavLink exact to = '/login'>로그인하기</NavLink>
+                <text className="SignupTitle">회원가입</text>
+                <NavLink exact to="/login">
+                  <text className="Signup_Login_text">로그인하기</text>
+                </NavLink>
                 <input
-                    className = 'inputField'
+                    className="Signup_inputField1"
                     type = 'string'
                     placeholder = '아이디'
                     onChange={(event) => this.setState({ id : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className = 'Signup_inputField2'
                     type = 'string'
                     placeholder = '이메일'
                     onChange={(event) => this.setState({ email : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className = 'Signup_inputField3'
                     type = 'string'
                     placeholder = '소환사 이름'
                     onChange={(event) => this.setState({ summonerID : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className = 'Signup_inputField4'
                     type = 'string'
                     placeholder = '비밀번호'
                     onChange={(event) => this.setState({ password : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className = 'Signup_inputField5'
                     type = 'string'
                     placeholder = '비밀번호 확인'
                     onChange={(event) => this.passwordHandler(event.target.value)} />
@@ -115,3 +122,4 @@ class SignUp extends Component {
 }
 
 export default withRouter(SignUp)
+ 

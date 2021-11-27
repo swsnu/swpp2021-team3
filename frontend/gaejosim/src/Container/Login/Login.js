@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import * as actionTypes from '../../Store/Actions/ActionTypes';
 
+import "./Login.css";
+
 class Login extends Component {
     state = {
         id : '',  
@@ -50,17 +52,24 @@ class Login extends Component {
     render() {
         return (
             <div className = 'Login'>
-                <NavLink exact to = '/signup'>회원가입</NavLink>
-                <NavLink exact to = '/finduserinfo'>아이디 비밀번호 찾기</NavLink>
-                <NavLink exact to = '/changepassword'>비밀번호 변경</NavLink>
+                <div className="LoginTitle">로그인</div>
+                <NavLink exact to="/signup">
+                  <div className="Login_Signup_text">회원가입</div>
+                </NavLink>
+                <NavLink exact to="/finduserinfo">
+                  <div className="Login_Finduserinfo_text">아이디 비밀번호 찾기</div>
+                </NavLink>
+                <NavLink exact to="/changepassword">
+                  <div className="Login_Changepassword_text">비밀번호 변경</div>
+                </NavLink>
                 
                 <input
-                    className = 'inputField'
+                    className = 'Login_inputField1'
                     type = 'string'
                     placeholder = '아이디'
                     onChange={(event) => this.setState({ id : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className = 'Login_inputField2'
                     type = 'string'
                     placeholder = '비밀번호'
                     onChange={(event) => this.setState({ password : event.target.value })} />

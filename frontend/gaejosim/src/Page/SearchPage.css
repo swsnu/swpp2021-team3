@@ -13,6 +13,13 @@
   text-align: left;
 } */
 
+.SearchPageLogo {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .GoToReport {
   position: absolute;
   width: 202px;

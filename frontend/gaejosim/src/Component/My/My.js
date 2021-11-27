@@ -6,13 +6,10 @@ import Pencil from "../../Assets/Images/icon-pencil.png";
 import Paper from "../../Assets/Images/icon-paper.png";
 import Delete from "../../Assets/Images/icon-delete.png";
 
-//TODO: 서버 돌아가는 것 확인하면 확실하게 개발하기
-
 class My extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // user model
       // username: props.username,
       // email: props.email,
       // summoner_name: props.summoner_name,
@@ -23,7 +20,6 @@ class My extends Component {
 
       // getMyPageDataBoolean: false,
 
-      // button routers
       ApologyCheck: false,
       ApologyWrite: false,
       ReportedLogs: false,
@@ -31,39 +27,56 @@ class My extends Component {
     };
   }
 
-  // getMyPageData = async () => {
-  //   console.log("call of getMyPageData");
-  //   console.log("state of getMyPageData: " + this.state.getMyPageDataBoolean);
+  // componentDidMount() {
+  //   if (this.state.getMyPageDataBoolean === false) {
+  //     this.getMyPageData();
+  //   }
+  // }
 
+  // getMyPageData = async () => {
   //   axios.defaults.xsrfCookieName = "csrftoken";
   //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-  //   console.log(this.state.username);
-  //   console.log(this.state.email);
-  //   console.log(this.state.summoner_name);
-  //   console.log(this.state.manner_point);
-
   //   axios.get("/api/token/").then();
 
-  //   const url = `http://localhost:3000/api/me/mypage`;
-  //   console.log("call get request");
-
-  //   const response = await axios.get(url, {
-  //     params: {
-  //       username: this.state.username,
-  //       email: this.state.email,
-  //       summoner_name: this.state.summoner_name,
-  //       manner_point: this.state.manner_point,
-  //     },
+  //   const response_signin = await axios.post("/api/signin/", {
+  //     username: "test1",
+  //     password: "password",
   //   });
 
-  //   this.setState({
-  //     reports_for_user: response.data.reports_for_user,
-  //     reports_by_user: response.data.reports_by_user,
-  //     getMyPageDataBoolean: true,
-  //   });
+  //   if (response_signin.status === 200) {
+  //     const response = await axios.get("/api/me/mypage/");
 
+  //     this.setState({
+  //       username: response.data.username,
+  //       email: response.data.email,
+  //       summoner_name: response.data.summoner_name,
+  //       manner_point: response.data.manner_point,
+  //       reports_for_user: response.data.reports_for_user,
+  //       reports_by_user: response.data.reports_by_user,
+  //       getMyPageDataBoolean: true,
+  //     });
+  //   }
   // };
+
+  deleteReportData = async () => {
+    // axios.defaults.xsrfCookieName = "csrftoken";
+    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+    // axios.get("/api/token/").then();
+
+    // const response_signin = await axios.post("/api/signin/", {
+    //   username: "test1",
+    //   password: "password",
+    // });
+
+    // if (response_signin.status === 200) {
+    //   axios
+    //     .delete("/api/reports/:id/")
+    //     .then(() => this.setState({ status: "Your report is deleted" }));
+    // }
+    alert("리포트가 삭제되었습니다");
+  };
 
   onClickApologyCheck = () => {
     this.setState({ ApologyCheck: true });
@@ -82,26 +95,52 @@ class My extends Component {
   };
 
   onClickDeleteHandler = () => {
-    // DELETE request with axios
-    // axios
-    // .delete("/api/reports/:id/")
-    // .then(() => this.setState({ status: "Your report is deleted" }));
-    alert("해당하는 리포트가 삭제되었습니다");
+    this.deleteReportData();
   };
 
   render() {
     let redirect = null;
 
-    // let mypageInfos;
-    // if (this.state.mypageInfos === false) {
-    //   console.log("call getMyPageData");
+    // let reports_by_user_info;
+    // let reports_for_user_info;
+    // if (
+    //   this.state.reports_by_user_info === false ||
+    //   this.state.reports_for_user_info === false
+    // ) {
     //   this.getMyPageData();
     // } else {
-    //   mypageInfos = this.state.reports_by_user.map((reports_by_user) => {
-    //     return (
-    //       <div>{this.state.reports_by_user}</div>
-    //     );
-    //   });
+    //   reports_by_user_info = this.state.reports_by_user.map(
+    //     (reports_by_user) => {
+    //       return (
+    //         <div className={reports_by_user.id}>
+    //           <div>
+    //             Recent Reporting Log{reports_by_user.id}:{" "}
+    //             {reports_by_user.reported_summoner}
+    //           </div>
+    //           <div>
+    //             {reports_by_user.tag}, {reports_by_user.evaluation},{" "}
+    //             {reports_by_user.comment}
+    //           </div>
+    //         </div>
+    //       );
+    //     }
+    //   );
+    //   reports_for_user_info = this.state.reports_for_user.map(
+    //     (reports_for_user) => {
+    //       return (
+    //         <div className={reports_for_user.id}>
+    //           <div>
+    //             Recent Reporting Log{reports_for_user.id}:
+    //             {reports_for_user.reported_summoner}
+    //           </div>
+    //           <div>
+    //             {reports_for_user.tag}, {reports_for_user.evaluation},
+    //             {reports_for_user.comment}
+    //           </div>
+    //         </div>
+    //       );
+    //     }
+    //   );
     // }
 
     if (this.state.ApologyCheck === true) {
@@ -123,28 +162,24 @@ class My extends Component {
     return (
       <div className="myPage">
         {redirect}
-        {/* <div>{mypageInfos}</div> */}
         <text className="mypageTitle">마이페이지</text>
         <text className="mypageContent">
           <text style={{ fontWeight: "bold" }}>유저네임</text>
-          <br /> XXXXXXXX
-          {/* {this.state.username} */}
+          <br /> this.state.username
           <br />
           <br />
           <text style={{ fontWeight: "bold" }}>이메일</text>
           <br />
-          Email@email.com
-          {/* {this.state.email} */}
+          this.state.email
           <br />
           <br />
           <text style={{ fontWeight: "bold" }}>소환사이름</text>
           <br />
-          XXXXXXXX
-          {/* {this.state.summoner_name} */}
+          this.state.summoner_name
           <br />
           <br />
-          <text style={{ fontWeight: "bold" }}>매너포인트</text> 80%{" "}
-          {/* {this.state.manner_point} */}
+          <text style={{ fontWeight: "bold" }}>매너포인트</text>
+          this.state.manner_point {/* {this.state.manner_point} */}
           <div className="mpGraphPercent" />
           <div className="mpGraphAll" />
         </text>
@@ -158,10 +193,12 @@ class My extends Component {
           </text>
           <div className="mypage_box1">
             <text className="boxText1">
-              Recent Reporting Log1 : ReportedSummoner
+              Recent Reporting Log reports_by_user.id :
+              reports_by_user.reported_summoner
             </text>
             <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
+              reports_by_user.tag, reports_by_user.evaluation,
+              reports_by_user.comment
             </text>
             <img
               className="Paper1"
@@ -173,16 +210,17 @@ class My extends Component {
               className="Delete1"
               src={Delete}
               alt={Delete}
-              // onClick={() => this.onClickDeleteHandler()}
-              onClick={() => alert("해당하는 리포트가 삭제되었습니다")}
+              onClick={() => this.onClickDeleteHandler()}
             />
           </div>
           <div className="mypage_box2">
             <text className="boxText1">
-              Recent Reporting Log1 : ReportedSummoner
+              Recent Reporting Log reports_by_user.id :
+              reports_by_user.reported_summoner
             </text>
             <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
+              reports_by_user.tag, reports_by_user.evaluation,
+              reports_by_user.comment
             </text>
             <img
               className="Paper2"
@@ -194,8 +232,7 @@ class My extends Component {
               className="Delete2"
               src={Delete}
               alt={Delete}
-              // onClick={() => this.onClickDeleteHandler()}
-              onClick={() => alert("해당하는 리포트가 삭제되었습니다")}
+              onClick={() => this.onClickDeleteHandler()}
             />
           </div>
         </div>
@@ -209,10 +246,12 @@ class My extends Component {
           </text>
           <div className="mypage_box3">
             <text className="boxText1">
-              Recent Reported Log1 : ReportedSummoner
+              Recent Reported Log reports_for_user.id :
+              reports_for_user.reported_summoner
             </text>
             <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
+              reports_for_user.tag, reports_for_user.evaluation,
+              reports_for_user.comment
             </text>
             <img
               className="Pencil1"
@@ -223,10 +262,12 @@ class My extends Component {
           </div>
           <div className="mypage_box4">
             <text className="boxText1">
-              Recent Reported Log1 : ReportedSummoner
+              Recent Reported Log reports_for_user.id :
+              reports_for_user.reported_summoner
             </text>
             <text className="boxText2">
-              #tag1, #tag2, #tag3, Evalutation, Comment
+              reports_for_user.tag, reports_for_user.evaluation,
+              reports_for_user.comment
             </text>
             <img
               className="Pencil2"
