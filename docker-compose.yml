@@ -14,7 +14,7 @@ services:
       - .secrets/base.json
     working_dir: /app
     command:
-      - echo This is a test.
+      - ls
       - cd backend
       - cd gaejosim
       - python manage.py makemigrations
