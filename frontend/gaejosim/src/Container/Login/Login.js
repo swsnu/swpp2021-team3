@@ -52,13 +52,13 @@ class Login extends Component {
       <div className="Login">
         <text className="LoginTitle">로그인</text>
         <NavLink exact to="/signup">
-          <text className="Signup_text">회원가입</text>
+          <text className="Login_Signup_text">회원가입</text>
         </NavLink>
         <NavLink exact to="/finduserinfo">
-          <text className="Finduserinfo_text">아이디 비밀번호 찾기</text>
+          <text className="Login_Finduserinfo_text">아이디 비밀번호 찾기</text>
         </NavLink>
         <NavLink exact to="/changepassword">
-          <text className="Changepassword_text">비밀번호 변경</text>
+          <text className="Login_Changepassword_text">비밀번호 변경</text>
         </NavLink>
 
         <input
