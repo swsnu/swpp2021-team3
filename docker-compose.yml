@@ -14,7 +14,9 @@ services:
       - .secrets/base.json
     working_dir: /app
     command:
-      - cd ./backend
+      - python backend/gaejosim/manage.py makemigrations
+      - python backend/gaejosim/manage.py migrate
+      - python backend/gaejosim/manage.py runserver 0.0.0.0:8000
 
   mysql:
     image: mysql:8
