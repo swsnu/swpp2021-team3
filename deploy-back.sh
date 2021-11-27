@@ -4,4 +4,4 @@ docker rm backend_container
 docker rmi backend
 git pull
 docker build -t backend .
-docker run -it -p 0.0.0.0:8000:8000 --name backend_container backend:latest 
+docker run -it -p 0.0.0.0:8000:8000 --name backend_container backend:latest python manage.py runserver
