@@ -15,9 +15,12 @@ services:
     working_dir: /app
     command:
       - /bin/bash
-      - python backend/gaejosim/manage.py makemigrations
-      - python backend/gaejosim/manage.py migrate
-      - python backend/gaejosim/manage.py runserver 0.0.0.0:8000
+      - ls
+      - cd backend
+      - cd gaejosim
+      - python manage.py makemigrations
+      - python manage.py migrate
+      - python manage.py runserver 0.0.0.0:8000
 
   mysql:
     image: mysql:8
