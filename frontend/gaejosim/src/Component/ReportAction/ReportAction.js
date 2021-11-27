@@ -166,6 +166,10 @@ class ReportAction extends Component {
     return (
       <div className="ReportAction">
         {redirect}
+        <div className="LeftBarStyle1" />
+        <div className="RightBarStyle1" />
+        <text className="LeftBarText1">step1</text>
+        <text className="RightBarText1">step2</text>
         <div className="Box1">
           <h3 id="MannerPoint">매너포인트</h3>
           <Box id="MannerPointInput" sx={{ width: 700 }}>
