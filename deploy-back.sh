@@ -1,8 +1,7 @@
 tar xvf secrets.tar
-cd backend
-source venv/bin/activate
-pip install -r requirements.txt
-cd gaejosim
-python manage.py makemigrations
-python manage.py migrate
-python manage.py runserver 0.0.0.0:8000
+docker stop backend_container
+docker rm backend_container
+docker rmi backend
+git pull
+docker build -t backend .
+docker run -it -p 0.0.0.0:8000:8000 --name backend_container backend:latest 
