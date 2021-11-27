@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   backend_container:
@@ -11,7 +11,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - ./.secrets/base.json
+      - .secrets/base.json
     working_dir: /app
     command:
       - echo This is a test.
