@@ -13,7 +13,8 @@ services:
     env_file:
       - ./.secrets/base.json
     working_dir: /app
-    command: 
+    command:
+      - echo This is a test.
       - cd backend
       - cd gaejosim
       - python manage.py makemigrations
@@ -35,6 +36,6 @@ services:
     ports:
       - "3306:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
