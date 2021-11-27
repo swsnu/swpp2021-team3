@@ -27,7 +27,7 @@ services:
   mysql:
     image: mysql:8
     env_file:
-      - .secrets/base.jsons
+      - .env
     environment:
       MYSQL_DATABASE: "${DB_NAME}"
       MYSQL_USER: "${DB_USERNAME}"
