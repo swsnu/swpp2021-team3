@@ -20,7 +20,6 @@ describe("<ReportAction />", () => {
   });
 
   xit("should handle tag1_1", () => {
-
     const mockClickTag1_1 = jest.fn();
     const component = shallow(
       // <Router>
@@ -128,12 +127,6 @@ describe("<ReportAction />", () => {
     wrapper.simulate("click");
     expect(mockClickCancel).toHaveBeenCalledTimes(0);
     expect(wrapper).toBeDefined();
-  });
-
-  it("should change clickTag1_1 state", () => {
-    const component = shallow(<ReportAction />);
-    component.setState({ clickTag1_1: true });
-    expect(component.length).toBe(1);
   });
 
   it("router search page", () => {

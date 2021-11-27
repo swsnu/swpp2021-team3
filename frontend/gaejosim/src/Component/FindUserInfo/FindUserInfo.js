@@ -5,6 +5,9 @@ import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import axios from "axios";
 
+import "./FindUserInfo.css";
+
+
 class FindUserInfo extends Component {
   state = {
     emailForID: "",
@@ -88,9 +91,11 @@ class FindUserInfo extends Component {
           비밀번호 변경
         </NavLink>
         <div className="FindID">
-          <label>아이디 찾기</label>
+
+          <label className="FindIDTitle">아이디 찾기</label>
           <input
-            className="inputField"
+            className="FindID_inputField"
+
             type="string"
             placeholder="이메일"
             onChange={(event) =>
@@ -105,9 +110,11 @@ class FindUserInfo extends Component {
           </button>
         </div>
         <div className="FindPW">
-          <label>비밀번호 찾기</label>
+
+          <label className="FindPWTitle">비밀번호 찾기</label>
           <input
-            className="inputField"
+            className="FindPW_inputField1"
+
             type="string"
             placeholder="이메일"
             onChange={(event) =>
@@ -115,7 +122,9 @@ class FindUserInfo extends Component {
             }
           />
           <input
-            className="inputField"
+
+            className="FindPW_inputField2"
+
             type="string"
             placeholder="아이디"
             onChange={(event) => this.setState({ IDforPW: event.target.value })}
