@@ -15,7 +15,6 @@ services:
     working_dir: /app
     command:
       - /bin/bash
-      - -c /bin/ls
       - cd backend
       - cd gaejosim
       - python manage.py makemigrations
