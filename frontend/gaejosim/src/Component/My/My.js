@@ -7,6 +7,8 @@ import ReportingLog from "../ReportingLog/ReportingLog";
 
 import "./My.css";
 
+//TODO: 리포트 없을 때는 디스플레이 하지 않게 변경
+
 class My extends Component {
 
   constructor(props) {
@@ -34,6 +36,7 @@ class My extends Component {
     .then(res => {
       let userInfo = res.data.user
       let reportInfo = res.data.reports
+      console.log(res.data)
       this.setState({username: userInfo.username, email: userInfo.email, summonerName: userInfo.summoner_name, mannerPoint: userInfo.mannerPoint,
           reportsForUser: reportInfo.reports_for_user, reportsByUser : reportInfo.reports_by_user, getResult : true
       })
@@ -55,15 +58,26 @@ class My extends Component {
       this.getMyInfo()
     } 
     else {
-      let idx = 0
+      let idx1 = 0
+      let idx2 = 0
       reportedLogs = this.state.reportsForUser.map((report) => {
-        idx++
+        idx1++
         return (
-          <ReportedLog key={idx} userID={report.id} userEvaluation={report.userEvaluation}
+          <ReportedLog key={idx1} userID={report.id} userEvaluation={report.userEvaluation}
             tags={report.tags} comment={report.comment} apology={report.apology}
           />
         )
       })
+      reportingLogs = this.state.reportsByUser.map((report) => {
+        idx2++
+        return (
+          <ReportingLog key={idx2} userID={report.id} reportedSummoner={report.reported_summoner}
+            userEvaluation={report.userEvaluation}
+            tags={report.tags} comment={report.comment} apology={report.apology}
+          />
+        )
+      })
+
     }
     return (
       <div className="myPage">
@@ -95,10 +109,10 @@ class My extends Component {
                 더보기
               </div>
               <div className="mypage_box1">
-                {reportedLogs}
+               {reportingLogs[0]}
               </div>
               <div className="mypage_box2">
-                <ReportingLog />
+               {(reportingLogs.length == 2) && reportingLogs[1]}
               </div>
             </div>
             <div>

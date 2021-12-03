@@ -15,6 +15,8 @@ class ReportedLog extends Component {
              <br />
              {this.props.tags},
              {this.props.userEvaluation}
+             {/* {this.props.comments}
+             {this.props.apology} */}
            </div>
            <img className = 'ReportedLog_Pencil' alt = 'pencil_img' 
              src = {process.env.PUBLIC_URL + `/images/icons/icon-pencil.png`}
