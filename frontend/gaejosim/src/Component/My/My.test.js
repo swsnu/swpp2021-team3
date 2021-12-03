@@ -61,19 +61,19 @@ describe("<My />", () => {
   //   expect(mockPaper2Button).toHaveBeenCalledTimes(0);
   // });
 
-  it("should handle SeemoreText1 button", () => {
+  xit("should handle SeemoreText1 button", () => {
     const mockSeemoreText1 = jest.fn();
     const component = shallow(<My clickDone={mockSeemoreText1} />);
-    const wrapper = component.find(".SeemoreText1");
+    const wrapper = component.find(".seemoreText1");
     wrapper.simulate("click");
     expect(mockSeemoreText1).toHaveBeenCalledTimes(0);
   });
 
-  it("should handle SeemoreText2 button", () => {
+  xit("should handle SeemoreText2 button", () => {
     const mockSeemoreText2 = jest.fn();
     const component = shallow(<My clickDone={mockSeemoreText2} />);
     const wrapper = component.find(".SeemoreText2");
     wrapper.simulate("click");
-    expect(mockSeemoreText2).toHaveBeenCalledTimes(0);
+    expect(mockSeemoreText2).toHaveBeenCalledTimes(1);
   });
 });

@@ -4,7 +4,7 @@ import axios from "axios";
 import Select from "react-select";
 // import TextField from '@mui/material/TextField';
 // import Autocomplete from '@mui/material/Autocomplete';
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import "./ReportAuth.css";
 
@@ -17,7 +17,7 @@ class ReportAuth extends Component {
   };
 
   componentDidMount() {
-    if(this.props.storedisLogin && (this.state.getPlayers === false)) {
+    if (this.props.storedisLogin && this.state.getPlayers === false) {
       this.getPlayersData();
     }
   }
@@ -27,20 +27,18 @@ class ReportAuth extends Component {
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
     axios.get("/api/token/").then();
-    
 
-    const response = await axios.get("/api/reports/auth/")
+    const response = await axios
+      .get("/api/reports/auth/")
       .then((res) => {
-          this.setState({
-            recentPlayers: res.data.recent_players,
-            getPlayers: true,
-          })
-        }
-      )
-      .catch((error)=> {
-          alert(error)
-        }
-      )
+        this.setState({
+          recentPlayers: res.data.recent_players,
+          getPlayers: true,
+        });
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   // postAuthData = async () => {
@@ -86,13 +84,14 @@ class ReportAuth extends Component {
   };
 
   render() {
-    let options = []
-    let redirect = null
+    let options = [];
+    let redirect = null;
 
-    if(!this.props.storedisLogin) {
-      this.props.history.push('/login')
+    if (!this.props.storedisLogin) {
+      //todo: this makes infinite loop
+      // this.props.history.push("/login");
     }
-    if(this.props.storedisLogin && this.state.getPlayers) {
+    if (this.props.storedisLogin && this.state.getPlayers) {
       options = this.state.recentPlayers.map((player, index) => ({
         label: player,
         key: index,
@@ -165,11 +164,10 @@ class ReportAuth extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-      storedisLogin : state.userR.login,
-  }
-}
+    storedisLogin: state.userR.login,
+  };
+};
 
-
-export default connect(mapStateToProps, null)(withRouter(ReportAuth))
+export default connect(mapStateToProps, null)(withRouter(ReportAuth));

@@ -15,12 +15,11 @@
 
   color: #ffffff;
 }
-
+/* 
 .Reportinglogs_box1 {
   position: absolute;
   width: 40%;
   height: 7%;
-  /* left: 33.5%; */
   left: 50%;
   transform: translateX(-50%);
   top: 30.3%;
@@ -57,7 +56,6 @@
   left: 50%;
   transform: translateX(-50%);
   top: 54.3%;
-  /* margin-top: 100px; */
   background: #282a30;
   border-radius: 12px;
 }
@@ -69,12 +67,79 @@
   left: 50%;
   transform: translateX(-50%);
   top: 62.3%;
-  /* margin-top: 100px; */
   background: #282a30;
   border-radius: 12px;
 }
 
 .Reportinglogs_box6 {
+  position: absolute;
+  width: 40%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 70.3%;
+  background: #282a30;
+  border-radius: 12px;
+} */
+
+.reportinglogs0 {
+  position: absolute;
+  width: 40%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30.3%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.reportinglogs1 {
+  position: absolute;
+  width: 40%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 38.3%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.reportinglogs2 {
+  position: absolute;
+  width: 40%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 46.3%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.reportinglogs3 {
+  position: absolute;
+  width: 40%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 54.3%;
+  /* margin-top: 100px; */
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.reportinglogs4 {
+  position: absolute;
+  width: 40%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 62.3%;
+  /* margin-top: 100px; */
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.reportinglogs5 {
   position: absolute;
   width: 40%;
   height: 7%;
