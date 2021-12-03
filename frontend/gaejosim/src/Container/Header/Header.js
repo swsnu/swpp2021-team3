@@ -11,27 +11,20 @@ import "./Header.css";
 // TODO: css에 로그아웃 버튼 추가하기
 
 class Header extends Component {
-  state = {
-    clickLogin: false,
-    clickLogout: false,
-    clickMyPage: false,
-  };
 
   postLogoutData = async () => {
-    console.log("postSignUpData")
+    console.log("postSignOutData")
 
     axios.defaults.xsrfCookieName = 'csrftoken';
     axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
     axios.get('/api/token/').then()
 
-    const response = await axios.post('/api/signin/', {
-        "username" : this.state.id,
-      "password" : this.state.password,
+    const response = await axios.post('/api/logout/', {
     })
     .then((response) => {
-        console.log("로그인 완료")
-        this.props.onStoreLogin()
+        console.log("로그아웃 완료")
+        this.props.onStoreLogout()
         this.props.history.push('/search')
     })
     .catch((error) => {
@@ -40,31 +33,20 @@ class Header extends Component {
   }
 
   onClickLogoutButton = () => {
-    this.setState({ clickLogout: true });
+    this.postLogoutData()
   };
 
   onClickLoginButton = () => {
-    this.setState({ clickLogin: true });
+    this.props.history.push('/login')
   };
 
   onClickMyPageButton = () => {
-    this.setState({ clickMyPage: true });
+    this.props.history.push('/my')
   };
 
   render() {
-    let redirect = null;
-    if (this.state.clickLogin) {
-      redirect = <Redirect to="/login" />;
-    }
-    if (this.state.clickMyPage) {
-      redirect = <Redirect to="/my" />;
-    }
-    if(this.state.clickLogout) {
-      redirect = <Redirect to="/search" />;
-    }
     return (
       <div className="Header">
-        {redirect}
         {!this.props.storedisLogin && <button
           className="loginButton"
           onClick={() => this.onClickLoginButton()}
