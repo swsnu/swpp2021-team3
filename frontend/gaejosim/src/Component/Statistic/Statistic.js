@@ -29,12 +29,11 @@ class Statistic extends Component {
     const response = await axios.get("/api/home/", {}).then((res) => {
       console.log("response.data");
       console.log(res.data);
-      this.setState({
-        numReports: res.data.accumulated_reports,
-        numPrevents: res.data.today_reports,
-        numToAswer: res.data.not_answered_reports,
-        getResult: true,
-      });
+      this.state.numReports = res.data.accumulated_reports;
+      this.state.numPrevents = res.data.today_reports;
+      this.state.numToAnswer = res.data.not_answered_reports;
+      this.state.getResult = true;
+      // this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, numToAswer: res.data.not_answered_reports, getResult: true})
     });
   };
 
