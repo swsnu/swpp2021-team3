@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
@@ -221,10 +220,5 @@ class ReportAction extends Component {
       }
 }
 
-const mapStateToProps = state => {
-  return {
-      storedisLogin : state.userR.login,
-  }
-}
 
-export default connect()(withRouter(ReportAction))
+export default (withRouter(ReportAction))
