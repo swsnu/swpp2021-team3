@@ -6,6 +6,7 @@
 //     process2 = "on";
 //   }
 
+
 //   return (
 //     <div className="progressbar">
 //       <img
@@ -21,5 +22,6 @@
 //     </div>
 //   );
 // };
+
 
 // export default Progressbar;
