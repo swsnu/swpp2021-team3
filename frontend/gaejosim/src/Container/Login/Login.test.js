@@ -5,9 +5,24 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import Login from "./Login";
 
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 describe("<Login />", () => {
-  xit("should render without errors", () => {
-    const component = shallow(<Login />);
+  it("should render without errors", () => {
+    const component = shallow(
+      <Provider store={store}>
+        <Login />
+      </Provider>
+    );
     const wrapper = component.find(".Login");
     expect(wrapper.length).toBe(0);
   });

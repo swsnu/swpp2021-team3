@@ -67,7 +67,9 @@ describe("<ReportAuth />", () => {
   xit("changes input", () => {
     const { getByPlaceholderText } = render(
       <Router>
-        <ReportAuth />
+        <Provider store={store}>
+          <ReportAuth />
+        </Provider>
       </Router>
     );
     const input = getByPlaceholderText("리포트 대상 플레이어를 선택하세요.");
