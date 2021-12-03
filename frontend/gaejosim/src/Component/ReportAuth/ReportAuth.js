@@ -110,17 +110,17 @@ class ReportAuth extends Component {
         <div className="RightBarStyle1" />
         <text className="LeftBarText1">step1</text>
         <text className="RightBarText1">step2</text>
+        <div className="selectBox">
+          <div className="subtitleTextStyle">트롤을 골라주세요</div>
 
-        <div className="subtitleTextStyle">트롤을 골라주세요</div>
-
-        <Select
-          className="reportSummoner"
-          placeholder="리포트 대상 플레이어를 선택하세요."
-          defaultValue={this.state.reportedSummoner}
-          onChange={(selected) => this.handleReportSummoner(selected)}
-          options={options}
-        />
-
+          <Select
+            id="reportSummoner"
+            placeholder="리포트 대상 플레이어를 선택하세요."
+            defaultValue={this.state.reportedSummoner}
+            onChange={(selected) => this.handleReportSummoner(selected)}
+            options={options}
+          />
+        </div>
         {/* <Autocomplete
                     isOptionEqualToValue={(option, value) => option.id === value.id}
                     onChange={(event, newValue) => {

@@ -1,8 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-
 import { fireEvent, render, mount } from "@testing-library/react";
-
 // import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { BrowserRouter as Router } from "react-router-dom";

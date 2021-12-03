@@ -179,9 +179,10 @@ class My extends Component {
           <br />
           <br />
           <text style={{ fontWeight: "bold" }}>매너포인트</text>
+          <br />
           this.state.manner_point {/* {this.state.manner_point} */}
-          <div className="mpGraphPercent" />
-          <div className="mpGraphAll" />
+          {/* <div className="mpGraphPercent" />
+          <div className="mpGraphAll" /> */}
         </text>
         <div style={{ left: "38.5%" }}>
           <text className="recentText1">Recent Reporting Logs</text>
