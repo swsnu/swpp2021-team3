@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// yarn add @nivo/core @nivo/radar
+import { ResponsiveRadar } from '@nivo/radar'
 
 class TagView extends Component {
 
