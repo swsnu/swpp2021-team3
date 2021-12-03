@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-import ReportedLog from "../ReportedLog/ReportedLog";
-import ReportingLog from "../ReportingLog/ReportingLog";
+import ReportedLog from "./ReportedLog/ReportedLog";
+import ReportingLog from "./ReportingLog/ReportingLog";
 
 import "./My.css";
 
@@ -121,7 +121,7 @@ class My extends Component {
               </div>
               <div className="mypage_box1">{reportingLogs[0]}</div>
               <div className="mypage_box2">
-                {reportingLogs.length == 2 && reportingLogs[1]}
+                {reportingLogs.length === 2 && reportingLogs[1]}
               </div>
             </div>
             <div>
@@ -133,10 +133,12 @@ class My extends Component {
                 더보기
               </div>
               <div className="mypage_box3">
-                <ReportedLog />
+                {/* <ReportedLog /> */}
+                {reportedLogs[0]}
               </div>
               <div className="mypage_box4">
-                <ReportedLog />
+                {/* <ReportedLog /> */}
+                {reportedLogs.length === 2 && reportingLogs[1]}
               </div>
             </div>
           </div>

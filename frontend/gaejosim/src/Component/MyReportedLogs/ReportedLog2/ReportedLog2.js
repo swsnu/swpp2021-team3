@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-import "./ReportingLog.css";
+import "./ReportedLog2.css";
 
-class ReportingLog extends Component {
+class ReportingLog2 extends Component {
   render() {
     console.log(this.props);
     return (
-      <div className="ReportingLog">
-        <div className="ReportingLog_Box">
-          <div className="ReportingLog_Text">
+      <div className="ReportingLog2">
+        <div className="ReportingLog2_Box">
+          <div className="ReportingLog2_Text">
             Recent Reporting Log :{this.props.userID}
             {this.props.reportedSummoner}
             <br />
@@ -17,13 +17,13 @@ class ReportingLog extends Component {
              {this.props.apology} */}
           </div>
           <img
-            className="ReportingLog_Paper"
+            className="ReportingLog2_Paper"
             alt="paper_img"
             src={process.env.PUBLIC_URL + `/images/icons/icon-paper.png`}
             onClick={() => this.props.clicked}
           />
           <img
-            className="ReportingLog_Delete"
+            className="ReportingLog2_Delete"
             alt="delete_img"
             src={process.env.PUBLIC_URL + `/images/icons/icon-delete.png`}
             onClick={() => this.props.clicked}
@@ -34,4 +34,4 @@ class ReportingLog extends Component {
   }
 }
 
-export default ReportingLog;
+export default ReportingLog2;

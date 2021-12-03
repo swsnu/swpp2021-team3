@@ -107,10 +107,10 @@ class ReportAuth extends Component {
       <div className="ReportAuth">
         {/* <text className='titleTextStyle'>Report</text> */}
         <div className="LeftBarStyle1">
-          <text className="LeftText1">step1</text>
+          <div className="LeftText1">step1</div>
         </div>
         <div className="RightBarStyle1">
-          <text className="RightText1">step2</text>
+          <div className="RightText1">step2</div>
         </div>
 
         <div className="selectBox">

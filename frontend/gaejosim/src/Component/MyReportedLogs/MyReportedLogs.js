@@ -1,101 +1,78 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import "./MyReportedLogs.css";
 
-import ReportedLog from "../ReportedLog/ReportedLog";
+import ReportedLog2 from "./ReportedLog2/ReportedLog2";
 
 class MyReportedLogs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // reports: [],
-      // getReportsBoolean: false,
-
-      ApologyWrite: false,
+      reports: [],
+      getResult: false,
     };
   }
 
-  // componentDidMount() {
-  //   if (this.state.getReportsBoolean === false) {
-  //     this.getReports();
-  //   }
-  // }
+  getReportedLogs = async () => {
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-  // getReports = async () => {
-  //   axios.defaults.xsrfCookieName = "csrftoken";
-  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.get("/api/token/").then();
 
-  //   axios.get("/api/token/").then();
-
-  //   const response_signin = await axios.post("/api/signin/", {
-  //     username: "test1",
-  //     password: "password",
-  //   });
-
-  //   if (response_signin.status === 200) {
-  //     const response = await axios.get("/api/my/received_reports/");
-
-  //     this.setState({
-  //       reports: response.data.reports,
-  //       getReports: true,
-  //     });
-  //   }
-  // };
-
-  onClickApologyWrite = () => {
-    this.setState({ ApologyWrite: true });
+    console.log("getReportedLogs");
+    const response = await axios
+      .get("/api/my/received_reports/", {})
+      .then((res) => {
+        // let userInfo = res.data.user;
+        let reportInfo = res.data.reports;
+        console.log(res.data);
+        this.setState({
+          // username: userInfo.username,
+          // email: userInfo.email,
+          // summonerName: userInfo.summoner_name,
+          // mannerPoint: userInfo.mannerPoint,
+          // reportsForUser: reportInfo.reports_for_user,
+          // reportsByUser: reportInfo.reports_by_user,
+          reports: reportInfo.reports,
+          getResult: true,
+        });
+      });
   };
 
   render() {
-    let redirect = null;
+    let reports = [];
 
-    // let reports_info;
-
-    // if (this.state.reports_info === false) {
-    //   this.getReports();
-    // } else {
-    //   reports_info = this.state.reports.map((reports) => {
-    //     return (
-    //       <div className={reports.id}>
-    //         <div>
-    //           Recent Reported Log{reports.id}: {reports.reported_summoner}
-    //         </div>
-    //         <div>
-    //           {reports.tag}, {reports.evaluation}, {reports.comment}
-    //         </div>
-    //       </div>
-    //     );
-    //   });
-    // }
-
-    if (this.state.ApologyWrite === true) {
-      redirect = <Redirect to={`/myApologyWrite`} />;
+    if (this.state.getREsult === false) {
+      this.getReportedLogs();
+    } else {
+      let idx = 0;
+      reports = this.state.reports.map((report) => {
+        idx++;
+        return (
+          <ReportedLog2
+            key={idx}
+            userID={report.id}
+            userEvaluation={report.userEvaluation}
+            tags={report.tags}
+            comment={report.comment}
+            apology={report.apology}
+          />
+        );
+      });
     }
+
+    let i = 0;
 
     return (
       <div className="myReportedLogsPage">
-        {redirect}
         <text className="myReportedLogsTitle">작성된 리포트</text>
         <div style={{ left: "38.5%" }}>
-          <div className="reportedlogs_box1">
-            <ReportedLog />
-          </div>
-          <div className="reportedlogs_box2">
-            <ReportedLog />
-          </div>
-          <div className="reportedlogs_box3">
-            <ReportedLog />
-          </div>
-          <div className="reportedlogs_box4">
-            <ReportedLog />
-          </div>
-          <div className="reportedlogs_box5">
-            <ReportedLog />
-          </div>
-          <div className="reportedlogs_box6">
-            <ReportedLog />
-          </div>
+          <div className="reportedlogs_box1">{reports[0]}</div>
+          <div className="reportedlogs_box2">{reports[1]}</div>
+          <div className="reportedlogs_box3">{reports[2]}</div>
+          <div className="reportedlogs_box4">{reports[3]}</div>
+          <div className="reportedlogs_box5">{reports[4]}</div>
+          <div className="reportedlogs_box6">{reports[5]}</div>
         </div>
       </div>
     );
