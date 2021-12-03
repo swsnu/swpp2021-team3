@@ -7,25 +7,6 @@
     line-height: 66px;
 } */
 
-.subtitleTextStyle {
-  position: absolute;
-  /* width: 180px;
-height: 36px; */
-  left: 34.7%;
-  top: 40.3%;
-
-  /* font-family: Noto Sans KR; */
-  font-style: normal;
-  font-weight: bold;
-  font-size: 25px;
-  line-height: 36px;
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.05em;
-
-  color: #ffffff;
-}
-
 .LeftBarStyle1 {
   position: absolute;
   width: 14.6%;
@@ -70,15 +51,13 @@ height: 36px; */
 }
 
 .RightBarText1 {
-  position: absolute;
+  position: relative;
   /* width: 14.6%; */
   /* height: 8px; */
-  left: 61.2%;
+  left: 64.2%;
+  /* left: 70%; */
   top: 27%;
-  /* background: #fc0174; */
-  /* border-radius: 40px; */
 
-  /* font-family: Poppins; */
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -92,19 +71,44 @@ height: 36px; */
   color: #ffffff;
 }
 
-.reportSummoner {
-  position: relative;
-  width: 30.6%;
-  /* height: 6%; */
+.selectBox {
+  position: absolute;
+  /* width: 180px;
+height: 36px; */
   left: 34.7%;
-  /* height: 100px; */
-  /* top: 45.9%; */
-  top: 350px;
+  top: 40.3%;
+  width: 30%;
+}
+.subtitleTextStyle {
+  position: absolute;
+  /* width: 180px;
+height: 36px; */
+  /* left: 34.7%;
+  top: 40.3%; */
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+#reportSummoner {
+  position: relative;
+
+  height: 5%;
+  top: 53px;
 
   background: #ffffff;
   border: 1px solid #fc0174;
   box-sizing: border-box;
   border-radius: 12px;
+
+  font-size: 15px;
 }
 
 .authStyle {
