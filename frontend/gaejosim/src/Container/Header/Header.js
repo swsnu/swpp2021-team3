@@ -1,50 +1,85 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+import axios from 'axios';
+import { connect } from 'react-redux';
+
+import * as actionTypes from '../../Store/Actions/ActionTypes';
 
 import "./Header.css";
-// import logo from './logo.png';
+
+// TODO: login 상태일 때는 로그아웃 버튼으로 디스플레이, 아니면 login 버튼으로 디스플레이.
+// TODO: css에 로그아웃 버튼 추가하기
 
 class Header extends Component {
-  state = {
-    clickLogin: false,
-    clickMyPage: false,
+
+  postLogoutData = async () => {
+    console.log("postSignOutData")
+
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+    axios.get('/api/token/').then()
+
+    const response = await axios.post('/api/logout/', {
+    })
+    .then((response) => {
+        console.log("로그아웃 완료")
+        this.props.onStoreLogout()
+        this.props.history.push('/search')
+    })
+    .catch((error) => {
+        alert(error.response.data.error)
+    })
+  }
+
+  onClickLogoutButton = () => {
+    this.postLogoutData()
   };
 
   onClickLoginButton = () => {
-    this.setState({ clickLogin: true });
+    this.props.history.push('/login')
   };
 
   onClickMyPageButton = () => {
-    this.setState({ clickMyPage: true });
+    this.props.history.push('/my')
   };
 
   render() {
-    let redirect = null;
-    if (this.state.clickLogin) {
-      redirect = <Redirect to="/login" />;
-    }
-    if (this.state.clickMyPage) {
-      redirect = <Redirect to="/my" />;
-    }
     return (
       <div className="Header">
-        {redirect}
-        {/* <img className='logoImage' alt='logo-img' src={logo} /> */}
-        <button
+        {!this.props.storedisLogin && <button
           className="loginButton"
           onClick={() => this.onClickLoginButton()}
         >
           로그인
-        </button>
-        <button
+        </button>}
+        {this.props.storedisLogin && <button
+          className="loginButton"
+          onClick={() => this.onClickLogoutButton()}
+        >
+          로그아웃
+        </button>}
+        {this.props.storedisLogin && <button
           className="mypageButton"
           onClick={() => this.onClickMyPageButton()}
         >
           마이페이지
-        </button>
+        </button>}
       </div>
     );
   }
 }
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+  return {
+      onStoreLogout: () => dispatch({ type : actionTypes.SIGNOUT_USER }),
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+      storedisLogin : state.userR.login,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

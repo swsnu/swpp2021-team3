@@ -1,52 +1,63 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
 
-import './ReportAction.css';
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+
+import "./ReportAction.css";
 
 // TODO : Check here if you want to how to visualize MUI : https://mui.com/components/slider/
-// TODO : check axios api post 
+
 class ReportAction extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reported_summoner: "2625", // props.reported_summoner,
+      comment: "",
+      evaluation: 50,
+      clickTag1_1: false,
+      clickTag1_2: false,
+      clickTag2_1: false,
+      clickTag2_2: false,
+      clickTag3_1: false,
+      clickTag3_2: false,
+      clickTag4_1: false,
+      clickTag4_2: false,
+      clickTag5_1: false,
+      clickTag5_2: false,
+      clickTags: [],
+      clickCancel: false,
+      clickSubmit: false,
+    };
+  }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            reported_summoner: "2625", // props.reported_summoner,
-            comment: '',
-            evaluation: 50,
-            clickTag1_1: false,
-            clickTag1_2: false,
-            clickTag2_1: false,
-            clickTag2_2: false,
-            clickTag3_1: false,
-            clickTag3_2: false,
-            clickTag4_1: false,
-            clickTag4_2: false,
-            clickTag5_1: false,
-            clickTag5_2: false,
-            clickTags: [],
-            clickCancel: false,
-            clickSubmit: false,
-        }
-    }
+  onClickCancelButton = () => {
+    this.setState({ clickCancel: true });
+  };
 
+//   onClickSubmitButton = () => {
+    
 
-    onClickCancelButton = () => {
-        this.setState({ clickCancel: true });
-    }
-
+    
     onClickSubmitButton = () => {
-        let tagList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
+        let clickList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
         this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
-        tagList = tagList.filter(tag => { return tag })
-        this.state.clickTags = tagList
-
+        
+        let tagList = ["과격한 언행", "비속어 사용", "고의성 던짐", "탈주/닷지", "대리 게임", "픽 상황 갑질", "cs 스틸", "팀킬", "정치", "라인 거부"]
+        
+        let clickArr = []
+        for(let idx = 0; idx < 10; idx++) {
+            if(clickList[idx]) clickArr.push(tagList[idx])
+        }
+        
+        console.log(clickArr)
+        this.state.clickTags = clickArr.join(',')
         console.log(this.state.clickTags)
+        
         if (this.state.clickTags.length === 0) {
-            alert('You should check at least one tag')
+            alert('제출을 위해 하나 이상의 태그를 선택하셔야 합니다.')
             this.setState({ clickSubmit: false })
         }
         else {
@@ -55,87 +66,68 @@ class ReportAction extends Component {
         }
     }
 
-    // Post auth by /api/reports/auth/ call.
-    postReportData = () => {
+    postReportData = async () => {
 
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-
-        console.log(this.state.evaluation)
-        console.log(this.state.reported_summoner)
-
-        let tagListString = this.state.clickTags.join(',');
-
         axios.get('/api/token/').then(
         )
-
-        axios.post('/api/signin/', {
-            "username": "test1",
-            "password": "password"
+        
+        const response = await axios.post('/api/reports/', {
+            "name": this.state.reported_summoner,
+            "evaluation": parseInt(this.state.evaluation),
+            "tag": this.state.clickTags,
+            "comment": this.state.comment
         })
-            .then(
-                axios.post('/api/reports/', {
-                    "name": this.state.reported_summoner,
-                    "evaluation": parseInt(this.state.evaluation),
-                    "tag": tagListString,
-                    "comment": this.state.comment
-                })
-                    .then((response) => {
-                        console.log('response get from /api/reports/auth: ' + JSON.stringify(response))
-                    }
-                    )
-                    .catch(err => {
-                        console.log(err)
-                    })
-            )
-            // "User is not logged in."
-            .catch((error) => {
-                console.log(error)
-                alert(error)
-            })
-
+        .then((response) => {
+            console.log(JSON.stringify(response.data))
+            alert('성공적으로 제출하였습니다.')
+            this.props.history.push('/search')
+        })
+        .catch((error) => {
+            alert(error.response.data.error)
+        })
     }
 
 
-    onClickTagButton = (tag) => {
-        switch (tag) {
-            case "1_1":
-                this.setState({clickTag1_1 : !this.state.clickTag1_1})
-                break
-            case "1_2":
-                this.setState({clickTag1_2 : !this.state.clickTag1_2})
-                break
-            case "2_1":
-                this.setState({clickTag2_1 : !this.state.clickTag2_1})
-                break
-            case "2_2":
-                this.setState({clickTag2_2 : !this.state.clickTag2_2})
-                break
-            case "3_1":
-                this.setState({clickTag3_1 : !this.state.clickTag3_1})
-                break
-            case "3_2":
-                this.setState({clickTag3_2 : !this.state.clickTag3_2})
-                break
-            case "4_1":
-                this.setState({clickTag4_1 : !this.state.clickTag4_1})
-                break
-            case "4_2":
-                this.setState({clickTag4_2 : !this.state.clickTag4_2})
-                break
-            case "5_1":
-                this.setState({clickTag5_1 : !this.state.clickTag5_1})
-                break
-            case "5_2":
-                this.setState({clickTag5_2 : !this.state.clickTag5_2})
-                break
-            default:
-                return
-        }
-        return
+  onClickTagButton = (tag) => {
+    switch (tag) {
+      case "1_1":
+        this.setState({ clickTag1_1: !this.state.clickTag1_1 });
+        break;
+      case "1_2":
+        this.setState({ clickTag1_2: !this.state.clickTag1_2 });
+        break;
+      case "2_1":
+        this.setState({ clickTag2_1: !this.state.clickTag2_1 });
+        break;
+      case "2_2":
+        this.setState({ clickTag2_2: !this.state.clickTag2_2 });
+        break;
+      case "3_1":
+        this.setState({ clickTag3_1: !this.state.clickTag3_1 });
+        break;
+      case "3_2":
+        this.setState({ clickTag3_2: !this.state.clickTag3_2 });
+        break;
+      case "4_1":
+        this.setState({ clickTag4_1: !this.state.clickTag4_1 });
+        break;
+      case "4_2":
+        this.setState({ clickTag4_2: !this.state.clickTag4_2 });
+        break;
+      case "5_1":
+        this.setState({ clickTag5_1: !this.state.clickTag5_1 });
+        break;
+      case "5_2":
+        this.setState({ clickTag5_2: !this.state.clickTag5_2 });
+        break;
+      default:
+        return;
     }
-
+    return;
+  };
 
     render() {
         let redirect = null
@@ -145,6 +137,7 @@ class ReportAction extends Component {
         if (this.state.clickSubmit) {
             redirect = <Redirect to={`/`} />
         }
+        
         const marks = [
             {
                 value: 0,
@@ -159,6 +152,10 @@ class ReportAction extends Component {
         return (
             <div className='ReportAction'>
                 {redirect}
+                <div className="LeftBarStyle1" />
+                <div className="RightBarStyle1" />
+                <div className="LeftBarText1">step1</div>
+                <div className="RightBarText1">step2</div>
                 <div className='Box1'>
                     <h3 id="MannerPoint">매너포인트</h3>
                     <Box 
@@ -224,8 +221,7 @@ class ReportAction extends Component {
                 <button className="cancelButton" id="cancel" onClick={() => this.onClickCancelButton()}>취소</button>
             </div>
         )
-    }
-
+      }
 }
 
-export default ReportAction;
+export default withRouter(ReportAction)
