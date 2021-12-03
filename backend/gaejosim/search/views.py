@@ -94,7 +94,8 @@ def search(request):
 
         if matches_by_summoner_list != []:
             task = [
-                get_match_result(match, summoner_puuid, recent_result, recent_win_lose)
+                get_match_result(match, summoner_puuid,
+                                 recent_result, recent_win_lose)
                 for match in matches_by_summoner_list
             ]
             asyncio.run(asyncio.wait(task))

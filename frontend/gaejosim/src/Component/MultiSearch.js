@@ -37,8 +37,10 @@ class MultiSearch extends Component {
     })
   };
 
+  // TODO: 한번만 콜하게 바꾸기
   render() {
     let matcherInfos;
+    
     if (this.state.getResult === false) {
       this.getMatchers();
     } else {
