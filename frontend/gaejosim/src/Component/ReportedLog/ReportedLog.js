@@ -1,109 +1,32 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-// import axios from "axios";
-import Pencil from "../../Assets/Images/icon-pencil.png";
 
-import "./ReportedLog.css";
+import "./ReportingLog.css";
 
-class ReportedLog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // username: props.username,
-      // email: props.email,
-      // summoner_name: props.summoner_name,
-      // manner_point: props.manner_point,
-
-      // reports_for_user: [],
-      // reports_by_user: [],
-
-      // getMyPageDataBoolean: false,
-
-      // ApologyCheck: false,
-      ApologyWrite: false,
-      // ReportedLogs: false,
-      // ReportingLogs: false,
-    };
-  }
-
-  // componentDidMount() {
-  //   if (this.state.getMyPageDataBoolean === false) {
-  //     this.getMyPageData();
-  //   }
-  // }
-
-  // getMyPageData = async () => {
-  //   axios.defaults.xsrfCookieName = "csrftoken";
-  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-  //   axios.get("/api/token/").then();
-
-  //   const response_signin = await axios.post("/api/signin/", {
-  //     username: "test1",
-  //     password: "password",
-  //   });
-
-  //   if (response_signin.status === 200) {
-  //     const response = await axios.get("/api/me/mypage/");
-
-  //     this.setState({
-  //       username: response.data.username,
-  //       email: response.data.email,
-  //       summoner_name: response.data.summoner_name,
-  //       manner_point: response.data.manner_point,
-  //       reports_for_user: response.data.reports_for_user,
-  //       reports_by_user: response.data.reports_by_user,
-  //       getMyPageDataBoolean: true,
-  //     });
-  //   }
-  // };
-
-  deleteReportData = async () => {
-    // axios.defaults.xsrfCookieName = "csrftoken";
-    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-    // axios.get("/api/token/").then();
-
-    // const response_signin = await axios.post("/api/signin/", {
-    //   username: "test1",
-    //   password: "password",
-    // });
-
-    // if (response_signin.status === 200) {
-    //   axios
-    //     .delete("/api/reports/:id/")
-    //     .then(() => this.setState({ status: "Your report is deleted" }));
-    // }
-    alert("리포트가 삭제되었습니다");
-  };
-
-  onClickApologyWrite = () => {
-    this.setState({ ApologyWrite: true });
-  };
-
+class ReportingLog extends Component {
   render() {
-    let redirect = null;
-
-    if (this.state.ApologyWrite === true) {
-      redirect = <Redirect to={`/myApologyWrite`} />;
-    }
-
+    console.log(this.props);
     return (
-      <div className="ReportedLog">
-        {redirect}
-        <div className="ReportedLog_Box">
-          <div className="ReportedLog_Text">
-            Recent Reported Log reports_for_user.id :
-            reports_for_user.reported_summoner
+      <div className="ReportingLog">
+        <div className="ReportingLog_Box">
+          <div className="ReportingLog_Text">
+            Recent Reporting Log :{this.props.userID}
+            {this.props.reportedSummoner}
             <br />
-            reports_for_user.tag, reports_for_user.evaluation,
-            reports_for_user.comment
+            {this.props.tags},{this.props.userEvaluation}
+            {/* {this.props.comments}
+             {this.props.apology} */}
           </div>
           <img
-            className="ReportedLog_Pencil"
-            src={Pencil}
-            alt={Pencil}
-            onClick={() => this.onClickApologyWrite()}
+            className="ReportingLog_Paper"
+            alt="paper_img"
+            src={process.env.PUBLIC_URL + `/images/icons/icon-paper.png`}
+            onClick={() => this.props.clicked}
+          />
+          <img
+            className="ReportingLog_Delete"
+            alt="delete_img"
+            src={process.env.PUBLIC_URL + `/images/icons/icon-delete.png`}
+            onClick={() => this.props.clicked}
           />
         </div>
       </div>
@@ -111,4 +34,4 @@ class ReportedLog extends Component {
   }
 }
 
-export default ReportedLog;
+export default ReportingLog;
