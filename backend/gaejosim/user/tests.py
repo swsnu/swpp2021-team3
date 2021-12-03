@@ -232,7 +232,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -249,7 +249,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password1")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -269,7 +269,7 @@ class UserTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
-        response = client.post(
+        response = client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -292,7 +292,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -315,7 +315,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -526,7 +526,8 @@ class MyPageTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -559,7 +560,8 @@ class MyPageTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=(
+                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
