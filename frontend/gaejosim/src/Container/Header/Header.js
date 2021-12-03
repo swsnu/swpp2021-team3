@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import "./Header.css";
-// import logo from './logo.png';
 
 // TODO: login 상태일 때는 로그아웃 버튼으로 디스플레이, 아니면 login 버튼으로 디스플레이.
 
@@ -31,7 +31,6 @@ class Header extends Component {
     return (
       <div className="Header">
         {redirect}
-        {/* <img className='logoImage' alt='logo-img' src={logo} /> */}
         <button
           className="loginButton"
           onClick={() => this.onClickLoginButton()}
@@ -49,4 +48,6 @@ class Header extends Component {
   }
 }
 
-export default Header;
+
+
+export default withRouter(Header);
