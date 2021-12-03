@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 // import axios from "axios";
 import "./MyReportedLogs.css";
-import Pencil from "../../Assets/Images/icon-pencil.png";
+
+import ReportedLog from "../ReportedLog/ReportedLog";
 
 class MyReportedLogs extends Component {
   constructor(props) {
@@ -78,89 +79,22 @@ class MyReportedLogs extends Component {
         <text className="myReportedLogsTitle">작성된 리포트</text>
         <div style={{ left: "38.5%" }}>
           <div className="reportedlogs_box1">
-            <text className="reportedlogs_boxText1">
-              Recent Reported Log reports.id : reports.reported_summoner{" "}
-            </text>
-            <text className="reportedlogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment{" "}
-            </text>
-
-            <img
-              className="Reportedlogs1_Pencil"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
           <div className="reportedlogs_box2">
-            <text className="reportedlogs_boxText1">
-              Recent Reported Log reports.id : reports.reported_summoner{" "}
-            </text>
-            <text className="reportedlogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment{" "}
-            </text>
-            <img
-              className="Reportedlogs2_Pencil"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
           <div className="reportedlogs_box3">
-            <text className="reportedlogs_boxText1">
-              Recent Reported Log reports.id : reports.reported_summoner{" "}
-            </text>
-            <text className="reportedlogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment{" "}
-            </text>
-            <img
-              className="Reportedlogs3_Pencil"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
           <div className="reportedlogs_box4">
-            <text className="reportedlogs_boxText1">
-              Recent Reported Log reports.id : reports.reported_summoner{" "}
-            </text>
-            <text className="reportedlogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment{" "}
-            </text>
-            <img
-              className="Reportedlogs4_Pencil"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
           <div className="reportedlogs_box5">
-            <text className="reportedlogs_boxText1">
-              Recent Reported Log reports.id : reports.reported_summoner{" "}
-            </text>
-            <text className="reportedlogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment{" "}
-            </text>
-            <img
-              className="Reportedlogs5_Pencil"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
           <div className="reportedlogs_box6">
-            <text className="reportedlogs_boxText1">
-              Recent Reported Log reports.id : reports.reported_summoner{" "}
-            </text>
-            <text className="reportedlogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment{" "}
-            </text>
-            <img
-              className="Reportedlogs6_Pencil"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
         </div>
       </div>

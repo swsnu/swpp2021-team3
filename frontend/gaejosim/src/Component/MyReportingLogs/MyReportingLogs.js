@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 // import axios from "axios";
 import "./MyReportingLogs.css";
-import Paper from "../../Assets/Images/icon-paper.png";
-import Delete from "../../Assets/Images/icon-delete.png";
+
+import ReportingLog from "../ReportingLog/ReportingLog";
 
 class MyReportingLogs extends Component {
   constructor(props) {
@@ -102,124 +102,22 @@ class MyReportingLogs extends Component {
         <text className="myReportingLogsTitle">작성한 리포트</text>
         <div style={{ left: "38.5%" }}>
           <div className="Reportinglogs_box1">
-            <text className="Reportinglogs_boxText1">
-              Recent Reporting Log reports.id : reports.reported_summoner
-            </text>
-            <text className="Reportinglogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment
-            </text>
-            <img
-              className="Reportinglogs1_Paper"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Reportinglogs1_Delete"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
           <div className="Reportinglogs_box2">
-            <text className="Reportinglogs_boxText1">
-              Recent Reporting Log reports.id : reports.reported_summoner
-            </text>
-            <text className="Reportinglogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment
-            </text>
-            <img
-              className="Reportinglogs2_Paper"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Reportinglogs2_Delete"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
           <div className="Reportinglogs_box3">
-            <text className="Reportinglogs_boxText1">
-              Recent Reporting Log reports.id : reports.reported_summoner
-            </text>
-            <text className="Reportinglogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment
-            </text>
-            <img
-              className="Reportinglogs3_Paper"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Reportinglogs3_Delete"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
           <div className="Reportinglogs_box4">
-            <text className="Reportinglogs_boxText1">
-              Recent Reporting Log reports.id : reports.reported_summoner
-            </text>
-            <text className="Reportinglogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment
-            </text>
-            <img
-              className="Reportinglogs4_Paper"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Reportinglogs4_Delete"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
           <div className="Reportinglogs_box5">
-            <text className="Reportinglogs_boxText1">
-              Recent Reporting Log reports.id : reports.reported_summoner
-            </text>
-            <text className="Reportinglogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment
-            </text>
-            <img
-              className="Reportinglogs5_Paper"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Reportinglogs5_Delete"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
           <div className="Reportinglogs_box6">
-            <text className="Reportinglogs_boxText1">
-              Recent Reporting Log reports.id : reports.reported_summoner
-            </text>
-            <text className="Reportinglogs_boxText2">
-              reports.tag, reports.evaluation, reports.comment
-            </text>
-            <img
-              className="Reportinglogs6_Paper"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Reportinglogs6_Delete"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
         </div>
       </div>

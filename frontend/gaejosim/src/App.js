@@ -20,7 +20,6 @@ import MyApologyWritePage from "./Page/MyApologyWritePage";
 
 // TODO: change url names in lowercase
 
-
 function App() {
   return (
     <div className="App">
@@ -41,14 +40,22 @@ function App() {
           />
 
           <Route path="/reportAuth" exact component={ReportAuthPage} />
-          <Route path="/reportAction/:summonerID" exact component={ReportActionPage}/>
+          <Route
+            path="/reportAction/:summonerID"
+            exact
+            component={ReportActionPage}
+          />
 
           <Route path="/my" exact component={MyPage} />
           <Route path="/myReportedLogs" exact component={MyReportedLogsPage} />
-          <Route path="/myReportingLogs" exact component={MyReportingLogsPage} />
+          <Route
+            path="/myReportingLogs"
+            exact
+            component={MyReportingLogsPage}
+          />
           <Route path="/myApologyCheck" exact component={MyApologyCheckPage} />
           <Route path="/myApologyWrite" exact component={MyApologyWritePage} />
-          
+
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </BrowserRouter>

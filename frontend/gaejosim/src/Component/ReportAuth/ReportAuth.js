@@ -106,10 +106,13 @@ class ReportAuth extends Component {
     return (
       <div className="ReportAuth">
         {/* <text className='titleTextStyle'>Report</text> */}
-        <div className="LeftBarStyle1" />
-        <div className="RightBarStyle1" />
-        <text className="LeftBarText1">step1</text>
-        <text className="RightBarText1">step2</text>
+        <div className="LeftBarStyle1">
+          <text className="LeftText1">step1</text>
+        </div>
+        <div className="RightBarStyle1">
+          <text className="RightText1">step2</text>
+        </div>
+
         <div className="selectBox">
           <div className="subtitleTextStyle">트롤을 골라주세요</div>
 

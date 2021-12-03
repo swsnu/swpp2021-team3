@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 // import axios from "axios";
+
+import ReportedLog from "../ReportedLog/ReportedLog";
+import ReportingLog from "../ReportingLog/ReportingLog";
+
 import "./My.css";
-import Pencil from "../../Assets/Images/icon-pencil.png";
-import Paper from "../../Assets/Images/icon-paper.png";
-import Delete from "../../Assets/Images/icon-delete.png";
 
 class My extends Component {
   constructor(props) {
@@ -20,8 +21,6 @@ class My extends Component {
 
       // getMyPageDataBoolean: false,
 
-      ApologyCheck: false,
-      ApologyWrite: false,
       ReportedLogs: false,
       ReportingLogs: false,
     };
@@ -59,43 +58,12 @@ class My extends Component {
   //   }
   // };
 
-  deleteReportData = async () => {
-    // axios.defaults.xsrfCookieName = "csrftoken";
-    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-    // axios.get("/api/token/").then();
-
-    // const response_signin = await axios.post("/api/signin/", {
-    //   username: "test1",
-    //   password: "password",
-    // });
-
-    // if (response_signin.status === 200) {
-    //   axios
-    //     .delete("/api/reports/:id/")
-    //     .then(() => this.setState({ status: "Your report is deleted" }));
-    // }
-    alert("리포트가 삭제되었습니다");
-  };
-
-  onClickApologyCheck = () => {
-    this.setState({ ApologyCheck: true });
-  };
-
-  onClickApologyWrite = () => {
-    this.setState({ ApologyWrite: true });
-  };
-
   onClickReportedLogs = () => {
     this.setState({ ReportedLogs: true });
   };
 
   onClickReportingLogs = () => {
     this.setState({ ReportingLogs: true });
-  };
-
-  onClickDeleteHandler = () => {
-    this.deleteReportData();
   };
 
   render() {
@@ -143,14 +111,6 @@ class My extends Component {
     //   );
     // }
 
-    if (this.state.ApologyCheck === true) {
-      redirect = <Redirect to={`/myApologyCheck`} />;
-    }
-
-    if (this.state.ApologyWrite === true) {
-      redirect = <Redirect to={`/myApologyWrite`} />;
-    }
-
     if (this.state.ReportedLogs === true) {
       redirect = <Redirect to={`/myReportedLogs`} />;
     }
@@ -180,9 +140,7 @@ class My extends Component {
           <br />
           <text style={{ fontWeight: "bold" }}>매너포인트</text>
           <br />
-          this.state.manner_point {/* {this.state.manner_point} */}
-          {/* <div className="mpGraphPercent" />
-          <div className="mpGraphAll" /> */}
+          this.state.manner_point
         </text>
         <div style={{ left: "38.5%" }}>
           <text className="recentText1">Recent Reporting Logs</text>
@@ -193,48 +151,10 @@ class My extends Component {
             더보기
           </text>
           <div className="mypage_box1">
-            <text className="boxText1">
-              Recent Reporting Log reports_by_user.id :
-              reports_by_user.reported_summoner
-            </text>
-            <text className="boxText2">
-              reports_by_user.tag, reports_by_user.evaluation,
-              reports_by_user.comment
-            </text>
-            <img
-              className="Paper1"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Delete1"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
           <div className="mypage_box2">
-            <text className="boxText1">
-              Recent Reporting Log reports_by_user.id :
-              reports_by_user.reported_summoner
-            </text>
-            <text className="boxText2">
-              reports_by_user.tag, reports_by_user.evaluation,
-              reports_by_user.comment
-            </text>
-            <img
-              className="Paper2"
-              src={Paper}
-              alt={Paper}
-              onClick={() => this.onClickApologyCheck()}
-            />
-            <img
-              className="Delete2"
-              src={Delete}
-              alt={Delete}
-              onClick={() => this.onClickDeleteHandler()}
-            />
+            <ReportingLog />
           </div>
         </div>
         <div>
@@ -246,36 +166,10 @@ class My extends Component {
             더보기
           </text>
           <div className="mypage_box3">
-            <text className="boxText1">
-              Recent Reported Log reports_for_user.id :
-              reports_for_user.reported_summoner
-            </text>
-            <text className="boxText2">
-              reports_for_user.tag, reports_for_user.evaluation,
-              reports_for_user.comment
-            </text>
-            <img
-              className="Pencil1"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
           <div className="mypage_box4">
-            <text className="boxText1">
-              Recent Reported Log reports_for_user.id :
-              reports_for_user.reported_summoner
-            </text>
-            <text className="boxText2">
-              reports_for_user.tag, reports_for_user.evaluation,
-              reports_for_user.comment
-            </text>
-            <img
-              className="Pencil2"
-              src={Pencil}
-              alt={Pencil}
-              onClick={() => this.onClickApologyWrite()}
-            />
+            <ReportedLog />
           </div>
         </div>
       </div>

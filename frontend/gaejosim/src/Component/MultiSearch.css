@@ -1,32 +1,32 @@
-.summoner1 {
-    position: absolute;
-    left : -19px;
+.class1 {
+  position: absolute;
+  left: -19px;
 }
 
-.summoner2 {
-    position: absolute;
-    left : 247px;
+.class2 {
+  position: absolute;
+  left: 247px;
 }
 
-.summoner3 {
-    position: absolute;
-    left : 513px;
+.class3 {
+  position: absolute;
+  left: 513px;
 }
 
-.summoner4 {
-    position: absolute;
-    left : 779px;
+.class4 {
+  position: absolute;
+  left: 779px;
 }
 
-.summoner5 {
-    position: absolute;
-    left : 1045px;
+.class5 {
+  position: absolute;
+  left: 1045px;
 }
 
 .loading {
-    position: absolute;
-    left : 600px;
-    bottom: 700px;
-    font-size : 30px;
-    font-weight: 800;
+  position: absolute;
+  left: 600px;
+  bottom: 700px;
+  font-size: 30px;
+  font-weight: 800;
 }

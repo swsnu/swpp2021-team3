@@ -12,6 +12,7 @@
   width: 14.6%;
   height: 8px;
   left: 34.7%;
+  /* left: 0%; */
   top: 30.3%;
   background: #fc0174;
   border-radius: 40px;
@@ -27,20 +28,35 @@
   border-radius: 40px;
 }
 
-.LeftBarText1 {
-  position: absolute;
-  /* width: 14.6%; */
-  /* height: 8px; */
-  left: 46%;
-  top: 27%;
-  /* background: #fc0174; */
-  /* border-radius: 40px; */
+.LeftText1 {
+  position: relative;
+  left: 83.5%;
+  top: -300%;
 
-  /* font-family: Poppins; */
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 22px;
+  text-align: right;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.RightText1 {
+  position: relative;
+  left: 83%;
+  top: -300%;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: right;
   /* identical to box height */
 
   display: flex;
