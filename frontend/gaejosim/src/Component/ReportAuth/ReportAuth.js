@@ -17,7 +17,7 @@ class ReportAuth extends Component {
   };
 
   componentDidMount() {
-    if (this.state.getPlayers === false) {
+    if(this.props.storedisLogin && (this.state.getPlayers === false)) {
       this.getPlayersData();
     }
   }
@@ -28,15 +28,17 @@ class ReportAuth extends Component {
 
     axios.get("/api/token/").then();
     
+
     const response = await axios.get("/api/reports/auth/")
-      .then(
-        this.setState({
-          recentPlayers: response.data.recent_players,
-          getPlayers: true,
-        })
+      .then((res) => {
+          this.setState({
+            recentPlayers: res.data.recent_players,
+            getPlayers: true,
+          })
+        }
       )
       .catch((error)=> {
-          alert(error.response.data.error)
+          alert(error)
         }
       )
   };
@@ -88,31 +90,27 @@ class ReportAuth extends Component {
     let redirect = null
 
     if(!this.props.storedisLogin) {
-      redirect = <Redirect to ='/login'/>
+      this.props.history.push('/login')
     }
-
-    if (this.state.getPlayers) {
+    if(this.props.storedisLogin && this.state.getPlayers) {
       options = this.state.recentPlayers.map((player, index) => ({
         label: player,
         key: index,
       }));
     }
 
-    console.log(options);
-
     return (
       <div className="ReportAuth">
         {redirect}
         <div className="LeftBarStyle1">
-          <text className="LeftText1">step1</text>
+          <div className="LeftText1">step1</div>
         </div>
         <div className="RightBarStyle1">
-          <text className="RightText1">step2</text>
+          <div className="RightText1">step2</div>
         </div>
 
         <div className="selectBox">
           <div className="subtitleTextStyle">트롤을 골라주세요</div>
-
           <Select
             id="reportSummoner"
             placeholder="리포트 대상 플레이어를 선택하세요."
