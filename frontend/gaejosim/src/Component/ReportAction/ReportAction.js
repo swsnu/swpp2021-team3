@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Redirect, withRouter } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
@@ -37,58 +37,55 @@ class ReportAction extends Component {
     this.setState({ clickCancel: true });
   };
 
-//   onClickSubmitButton = () => {
-    
 
-    
-    onClickSubmitButton = () => {
-        let clickList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
-        this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
-        
-        let tagList = ["과격한 언행", "비속어 사용", "고의성 던짐", "탈주/닷지", "대리 게임", "픽 상황 갑질", "cs 스틸", "팀킬", "정치", "라인 거부"]
-        
-        let clickArr = []
-        for(let idx = 0; idx < 10; idx++) {
-            if(clickList[idx]) clickArr.push(tagList[idx])
-        }
-        
-        console.log(clickArr)
-        this.state.clickTags = clickArr.join(',')
-        console.log(this.state.clickTags)
-        
-        if (this.state.clickTags.length === 0) {
-            alert('제출을 위해 하나 이상의 태그를 선택하셔야 합니다.')
-            this.setState({ clickSubmit: false })
-        }
-        else {
-            this.postReportData()
-            this.setState({ clickSubmit: true })
-        }
-    }
+  onClickSubmitButton = () => {
+      let clickList = [this.state.clickTag1_1, this.state.clickTag1_2, this.state.clickTag2_1, this.state.clickTag2_2,
+      this.state.clickTag3_1, this.state.clickTag3_2, this.state.clickTag4_1, this.state.clickTag4_2, this.state.clickTag5_1, this.state.clickTag5_2];
+      
+      let tagList = ["과격한 언행", "비속어 사용", "고의성 던짐", "탈주/닷지", "대리 게임", "픽 상황 갑질", "cs 스틸", "팀킬", "정치", "라인 거부"]
+      
+      let clickArr = []
+      for(let idx = 0; idx < 10; idx++) {
+          if(clickList[idx]) clickArr.push(tagList[idx])
+      }
+      
+      console.log(clickArr)
+      this.state.clickTags = clickArr.join(',')
+      console.log(this.state.clickTags)
+      
+      if (this.state.clickTags.length === 0) {
+          alert('제출을 위해 하나 이상의 태그를 선택하셔야 합니다.')
+          this.setState({ clickSubmit: false })
+      }
+      else {
+          this.postReportData()
+          this.setState({ clickSubmit: true })
+      }
+  }
 
-    postReportData = async () => {
+  postReportData = async () => {
 
-        axios.defaults.xsrfCookieName = 'csrftoken';
-        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+      axios.defaults.xsrfCookieName = 'csrftoken';
+      axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-        axios.get('/api/token/').then(
-        )
-        
-        const response = await axios.post('/api/reports/', {
-            "name": this.state.reported_summoner,
-            "evaluation": parseInt(this.state.evaluation),
-            "tag": this.state.clickTags,
-            "comment": this.state.comment
-        })
-        .then((response) => {
-            console.log(JSON.stringify(response.data))
-            alert('성공적으로 제출하였습니다.')
-            this.props.history.push('/search')
-        })
-        .catch((error) => {
-            alert(error.response.data.error)
-        })
-    }
+      axios.get('/api/token/').then(
+      )
+      
+      const response = await axios.post('/api/reports/', {
+          "name": this.state.reported_summoner,
+          "evaluation": parseInt(this.state.evaluation),
+          "tag": this.state.clickTags,
+          "comment": this.state.comment
+      })
+      .then((response) => {
+          console.log(JSON.stringify(response.data))
+          alert('성공적으로 제출하였습니다.')
+          this.props.history.push('/search')
+      })
+      .catch((error) => {
+          alert(error.response.data.error)
+      })
+  }
 
 
   onClickTagButton = (tag) => {
@@ -224,4 +221,10 @@ class ReportAction extends Component {
       }
 }
 
-export default withRouter(ReportAction)
+const mapStateToProps = state => {
+  return {
+      storedisLogin : state.userR.login,
+  }
+}
+
+export default connect()(withRouter(ReportAction))
