@@ -54,7 +54,27 @@
   border-radius: 40px;
 } */
 
-.mypage_box1 {
+.reportingLogs0 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 35.5%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.reportingLogs1 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 43.5%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+/* .mypage_box1 {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -69,11 +89,10 @@
   width: 40%;
   height: 7.2%;
   left: 38%;
-  /* top: 45%; */
   top: 43.5%;
   background: #282a30;
   border-radius: 12px;
-}
+} */
 
 .mypage_box3 {
   position: absolute;

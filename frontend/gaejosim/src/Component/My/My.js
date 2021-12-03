@@ -61,35 +61,37 @@ class My extends Component {
       this.getMyInfo();
     } else {
       let idx1 = 0;
-      let idx2 = 0;
       reportedLogs = this.state.reportsForUser.map((report) => {
         idx1++;
         return (
           <ReportedLog
             key={idx1}
             userID={report.id}
-            userEvaluation={report.userEvaluation}
-            tags={report.tags}
+            userEvaluation={report.evaluation}
+            tags={report.tag}
             comment={report.comment}
             apology={report.apology}
           />
         );
       });
-      reportingLogs = this.state.reportsByUser.map((report) => {
-        idx2++;
+      reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
+        let reportingLogsIdx = "reportingLogs" + reportIdx;
         return (
-          <ReportingLog
-            key={idx2}
-            userID={report.id}
-            reportedSummoner={report.reported_summoner}
-            userEvaluation={report.userEvaluation}
-            tags={report.tags}
-            comment={report.comment}
-            apology={report.apology}
-          />
+          <div className={reportingLogsIdx} key={reportIdx}>
+            <ReportingLog
+              key={reportIdx}
+              userID={report.id}
+              reportedSummoner={report.reported_summoner}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
         );
       });
     }
+
     return (
       <div className="myPage">
         <div className="mypageTitle">마이페이지</div>
@@ -120,6 +122,7 @@ class My extends Component {
                 더보기
               </div>
               <div className="mypage_box1">{reportingLogs[0]}</div>
+              {/* <div>{reportingLogs}</div> */}
               <div className="mypage_box2">
                 {reportingLogs.length === 2 && reportingLogs[1]}
               </div>
