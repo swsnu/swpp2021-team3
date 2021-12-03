@@ -7,7 +7,7 @@
     border-radius: nullpx;
 } */
 
-.loginButton {
+.mypageButton {
   position: absolute;
   width: 120px;
   height: 39.81px;
@@ -27,7 +27,27 @@
   border: 0;
 }
 
-.mypageButton {
+.loginButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  right: 58px;
+  /* top: 53.92px; */
+  top: 40px;
+
+  background: #fc0174;
+  border-radius: 40px;
+
+  font-style: normal;
+  font-weight: 600px;
+  font-size: 10px;
+  color: #ffffff;
+
+  outline: 0;
+  border: 0;
+}
+
+.logoutButton {
   position: absolute;
   width: 120px;
   height: 39.81px;

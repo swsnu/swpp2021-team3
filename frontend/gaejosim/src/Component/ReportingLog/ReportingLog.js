@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 // import axios from "axios";
-import Pencil from "../../Assets/Images/icon-pencil.png";
+// import Pencil from "../../Assets/Images/icon-pencil.png";
+import Paper from "../../Assets/Images/icon-paper.png";
+import Delete from "../../Assets/Images/icon-delete.png";
 
-import "./ReportedLog.css";
+import "./ReportingLog.css";
 
 class ReportedLog extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class ReportedLog extends Component {
 
       // getMyPageDataBoolean: false,
 
-      // ApologyCheck: false,
+      ApologyCheck: false,
       ApologyWrite: false,
       // ReportedLogs: false,
       // ReportingLogs: false,
@@ -77,33 +79,43 @@ class ReportedLog extends Component {
     alert("리포트가 삭제되었습니다");
   };
 
-  onClickApologyWrite = () => {
-    this.setState({ ApologyWrite: true });
+  onClickApologyCheck = () => {
+    this.setState({ ApologyCheck: true });
+  };
+
+  onClickDeleteHandler = () => {
+    this.deleteReportData();
   };
 
   render() {
     let redirect = null;
 
-    if (this.state.ApologyWrite === true) {
-      redirect = <Redirect to={`/myApologyWrite`} />;
+    if (this.state.ApologyCheck === true) {
+      redirect = <Redirect to={`/myApologyCheck`} />;
     }
 
     return (
-      <div className="ReportedLog">
+      <div className="ReportingLog">
         {redirect}
-        <div className="ReportedLog_Box">
-          <div className="ReportedLog_Text">
-            Recent Reported Log reports_for_user.id :
+        <div className="ReportingLog_Box">
+          <div className="ReportingLog_Text">
+            Recent Reporting Log reports_for_user.id :
             reports_for_user.reported_summoner
             <br />
             reports_for_user.tag, reports_for_user.evaluation,
             reports_for_user.comment
           </div>
           <img
-            className="ReportedLog_Pencil"
-            src={Pencil}
-            alt={Pencil}
-            onClick={() => this.onClickApologyWrite()}
+            className="ReportingLog_Paper"
+            src={Paper}
+            alt={Paper}
+            onClick={() => this.onClickApologyCheck()}
+          />
+          <img
+            className="ReportingLog_Delete"
+            src={Delete}
+            alt={Delete}
+            onClick={() => this.onClickDeleteHandler()}
           />
         </div>
       </div>
