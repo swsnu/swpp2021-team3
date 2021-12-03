@@ -46,6 +46,8 @@ class MyReportedLogs extends Component {
     this.setState({ ApologyWrite: true });
   };
 
+
+  
   render() {
     let redirect = null;
 

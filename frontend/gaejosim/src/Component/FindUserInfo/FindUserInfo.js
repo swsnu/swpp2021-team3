@@ -2,10 +2,9 @@ import React, { Component } from "react";
 // import Box from '@mui/material/Box';
 // import TextField from '@mui/material/TextField';
 // import { connect } from 'react-redux';
+
 import { NavLink, withRouter } from "react-router-dom";
 import axios from "axios";
-
-import "./FindUserInfo.css";
 
 class FindUserInfo extends Component {
   state = {
