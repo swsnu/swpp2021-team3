@@ -24,9 +24,7 @@ class Statistic extends Component {
 
     axios.get("/api/token/").then();
 
-    const url = "http://localhost:3000/api/statistics/";
-    console.log("call axios.get request");
-    const response = await axios.get('/api/statistics/', {
+    const response = await axios.get('/api/home/', {
     })
     .then(res => {
       console.log("response.data")
@@ -34,7 +32,6 @@ class Statistic extends Component {
       this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, getResult: true})
     })
   };
-
 
   render() {
     return (
