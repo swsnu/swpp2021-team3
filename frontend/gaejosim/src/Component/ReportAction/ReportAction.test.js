@@ -5,14 +5,27 @@ import { fireEvent, render, mount } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { BrowserRouter as Router } from "react-router-dom";
 
-// import clickTag1_1 from "./ReportAction";
-
 import ReportAction from "./ReportAction";
 import SearchPage from "../../Page/SearchPage";
 
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 describe("<ReportAction />", () => {
   it("should render without errors", () => {
-    const component = shallow(<ReportAction />);
+    const component = shallow(
+      <Provider store={store}>
+        <ReportAction />
+      </Provider>
+    );
     const wrapper = component.find(".ReportAction");
     expect(wrapper.length).toBe(0);
   });
@@ -131,18 +144,22 @@ describe("<ReportAction />", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
     const { getAllByText } = render(
       <Router history={history}>
-        <SearchPage />
+        <Provider store={store}>
+          <ReportAction />
+        </Provider>
       </Router>
     );
     expect(history.location.pathname).toBe("/");
-    fireEvent.click(getAllByText("검색")[0]);
+    fireEvent.click(getAllByText("제출")[0]);
     expect(history.location.pathname).toBe("/");
   });
 
   it("changes input", () => {
     const { getByPlaceholderText } = render(
       <Router>
-        <ReportAction />
+        <Provider store={store}>
+          <ReportAction />
+        </Provider>
       </Router>
     );
     const input = getByPlaceholderText(

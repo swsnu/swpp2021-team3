@@ -123,11 +123,7 @@ class My extends Component {
               >
                 더보기
               </div>
-              {/* <div className="mypage_box1">{reportingLogs[0]}</div> */}
               <div>{reportingLogs}</div>
-              {/* <div className="mypage_box2"> */}
-              {/* {reportingLogs.length === 2 && reportingLogs[1]} */}
-              {/* </div> */}
             </div>
             <div>
               <div className="recentText2">Recent Reported Logs</div>
@@ -138,12 +134,6 @@ class My extends Component {
                 더보기
               </div>
               <div>{reportedLogs}</div>
-              {/* <div className="mypage_box3"> */}
-              {/* {reportedLogs[0]} */}
-              {/* </div> */}
-              {/* <div className="mypage_box4"> */}
-              {/* {reportedLogs.length === 2 && reportingLogs[1]} */}
-              {/* </div> */}
             </div>
           </div>
         )}

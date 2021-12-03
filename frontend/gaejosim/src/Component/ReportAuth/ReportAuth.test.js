@@ -6,17 +6,35 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { shallow, mount } from "enzyme";
 
 import ReportAuth from "./ReportAuth";
-// import ReportActionPage from "../../Page/ReportActionPage";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+// import userReducer from "./../Store/Reducers/UserReducer";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<ReportAuth />", () => {
   it("should render without errors", () => {
-    const component = shallow(<ReportAuth />);
+    const component = shallow(
+      <Provider store={store}>
+        <ReportAuth />
+      </Provider>
+    );
     const wrapper = component.find(".ReportAuth");
     expect(wrapper.length).toBe(0);
   });
 
   it("properly change the value of buttonAuth", () => {
-    const wrapper = shallow(<ReportAuth />);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <ReportAuth />
+      </Provider>
+    );
     // expect(wrapper.state("clickNext")).toBe(false);
 
     // wrapper.instance().onClickNextButton();
@@ -34,7 +52,11 @@ describe("<ReportAuth />", () => {
   });
 
   it("properly change the value of clickNext", () => {
-    const wrapper = shallow(<ReportAuth />);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <ReportAuth />
+      </Provider>
+    );
     // expect(wrapper.state("clickNext")).toBe(false);
 
     // wrapper.instance().onClickNextButton();
