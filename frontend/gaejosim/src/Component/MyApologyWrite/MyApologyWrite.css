@@ -1,0 +1,117 @@
+.myApologyWriteTitle {
+  position: absolute;
+  /* width: 110px; */
+  height: 36px;
+  left: 35%;
+  top: 23.4%;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.apology_box1 {
+  position: absolute;
+  width: 30.6%;
+  height: 7%;
+  /* left: 33.5%; */
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30.3%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.boxText1 {
+  position: absolute;
+  top: 22%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.boxText2 {
+  position: absolute;
+  bottom: 23%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.apology_write_box {
+  position: absolute;
+  width: 30.6%;
+  height: 16.9%;
+  top: 38.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.apology_write_box input {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  /* right: 2%; */
+  width: 94%;
+  height: 90%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 14px;
+  display: flex;
+  color: #000000;
+  background-color: transparent;
+  text-align: left;
+  white-space: pre-line;
+  border: none;
+}
+
+.apology_write_text {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  /* right: 2%; */
+  /* width: 100%; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 14px;
+  display: flex;
+  /* align-items: left; */
+  color: #ffffff;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.Apology_write_completed_button {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+}

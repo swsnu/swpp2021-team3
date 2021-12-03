@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Header from '../Container/Header/Header';
+import FindUserInfo from '../Component/FindUserInfo/FindUserInfo';
 
 class FindUserInfoPage extends Component {
 
@@ -8,7 +9,7 @@ class FindUserInfoPage extends Component {
         return (
             <div className='FindUserInfoPage'>
                 <Header />
-                FindUserInfoPage
+                <FindUserInfo />
             </div>
         )
     }

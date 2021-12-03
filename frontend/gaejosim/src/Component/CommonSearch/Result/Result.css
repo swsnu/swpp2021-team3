@@ -17,3 +17,11 @@
 .resultView{
     padding: 1px;
 }
+
+#W{
+    background-color: rgb(112, 112, 221);
+}
+
+#L{
+    background-color: rgb(221, 112, 158);
+}

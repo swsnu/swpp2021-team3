@@ -1,0 +1,147 @@
+.SignupTitle {
+  position: absolute;
+  /* width: 67px; */
+  /* height: 36px; */
+  left: 35.4%;
+  top: 23.2%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Signup_inputField1 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 29.1%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Signup_inputField2 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 36.5%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Signup_inputField3 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 43.9%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Signup_inputField4 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 51.3%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Signup_inputField5 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 59%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Signup_Login_text {
+  position: absolute;
+  /* width: 53px; */
+  /* height: 22px; */
+  left: 35.4%;
+  top: 66.4%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.AgreeButton {
+  position: absolute;
+  /* width: 53px; */
+  height: 22px;
+  right: 34.5%;
+  top: 66.7%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+  background-color: #fc0174;
+  border-radius: 40px;
+
+  color: #ffffff;
+
+  outline: 0;
+  border: 0;
+}
+
+.SignUpButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* left: 45.8%; */
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}

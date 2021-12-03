@@ -1,38 +1,48 @@
-.logoImage{
+/* .logoImage{
     position: absolute;
     height: 68px;
     width: 218px;
     left: 117px;
     top: 26px;
     border-radius: nullpx;
+} */
+
+.loginButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  right: 198px;
+  /* top: 53.92px; */
+  top: 40px;
+
+  background: #fc0174;
+  border-radius: 40px;
+
+  font-style: normal;
+  font-weight: 600px;
+  font-size: 10px;
+  color: #ffffff;
+
+  outline: 0;
+  border: 0;
 }
 
-.loginButton{
-    width: 120px;
-    height: 38.4px; 
-    position: absolute;
-    left: 77.92%;
-    right: 13.75%;
-    top: 5.78%;
-    bottom: 89.96%;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: white;
-    outline: 0;
-    border : 0;
-}
+.mypageButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  right: 58px;
+  /* top: 53.92px; */
+  top: 40px;
 
-.mypageButton{
-    width: 120px;
-    height: 38.4px; 
-    position: absolute;
-    left: 87.64%;
-    right: 4.03%;
-    top: 5.78%;
-    bottom: 89.96%;
-    background: #5F2EEA;
-    border-radius: 40px;
-    color: white;
-    outline: 0;
-    border : 0;
+  background: #fc0174;
+  border-radius: 40px;
+
+  font-style: normal;
+  font-weight: 600px;
+  font-size: 10px;
+  color: #ffffff;
+
+  outline: 0;
+  border: 0;
 }
