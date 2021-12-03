@@ -4,8 +4,6 @@ import axios from "axios";
 
 import "./MultiSearch.css";
 
-// TODO: api call 시 type 요소 뺄지 논의하기
-
 class MultiSearch extends Component {
   constructor(props) {
     super(props);
@@ -29,15 +27,14 @@ class MultiSearch extends Component {
     console.log("call axios.get request");
     const response = await axios.get(url, {
       params: {
-        type: "multi",
         summoners: this.state.summoners,
       },
-    });
-
-    this.setState({
-      matchers: response.data.matchers,
-      getResult: true,
-    });
+    })
+    .then(res => {
+      console.log("response.data.matchers")
+      console.log(res.data.matchers)
+      this.setState({matchers: res.data.matchers, getResult: true})
+    })
   };
 
   render() {
@@ -50,7 +47,7 @@ class MultiSearch extends Component {
         idx = idx + 1;
         let summonerIdx = "summoner" + idx;
         return (
-          <div className={summonerIdx}>
+          <div className={summonerIdx} key={summonerIdx}>
             <CommonSearch
               summonerName={matcher.summoner_name}
               tier={matcher.tier}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios';
 
 import * as actionTypes from '../../Store/Actions/ActionTypes';
@@ -50,6 +50,8 @@ class Login extends Component {
     }
 
     render() {
+        let redirect = null
+        if(this.props.storedisLogin) redirect = <Redirect to = '/search'/>
         return (
             <div className = 'Login'>
                 <div className="LoginTitle">로그인</div>
@@ -84,8 +86,14 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onStoreLogin: () => dispatch({ type : actionTypes.SIGNIN_USER })
+        onStoreLogin: () => dispatch({ type : actionTypes.SIGNIN_USER }),
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Login))
+const mapStateToProps = state => {
+    return {
+        storedisLogin : state.userR.login,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
