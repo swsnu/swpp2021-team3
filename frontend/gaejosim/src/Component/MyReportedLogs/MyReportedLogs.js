@@ -4,6 +4,8 @@ import "./MyReportedLogs.css";
 
 import ReportedLog2 from "./ReportedLog2/ReportedLog2";
 
+//todo: my.js와 유사한 형태로 코드를 작성했지만 나오지를 않음
+
 class MyReportedLogs extends Component {
   constructor(props) {
     super(props);
@@ -23,9 +25,8 @@ class MyReportedLogs extends Component {
     const response = await axios
       .get("/api/my/received_reports/", {})
       .then((res) => {
-        // let userInfo = res.data.user;
         let reportInfo = res.data.reports;
-        console.log(res.data);
+        console.log("res.data : " + res.data);
         this.setState({
           // username: userInfo.username,
           // email: userInfo.email,
@@ -40,39 +41,43 @@ class MyReportedLogs extends Component {
   };
 
   render() {
-    let reports = [];
+    let myReportedLogs = [];
 
     if (this.state.getREsult === false) {
       this.getReportedLogs();
     } else {
-      let idx = 0;
-      reports = this.state.reports.map((report) => {
-        idx++;
+      // let idx = 0;
+      myReportedLogs = this.state.reports.map((report, reportIdx) => {
+        // idx++;
+        let reportedLogsIdx = "reportedLogs" + reportIdx;
+        console.log("reports: " + myReportedLogs);
+
         return (
-          <ReportedLog2
-            key={idx}
-            userID={report.id}
-            userEvaluation={report.userEvaluation}
-            tags={report.tags}
-            comment={report.comment}
-            apology={report.apology}
-          />
+          <div className={reportedLogsIdx} key={reportIdx}>
+            <ReportedLog2
+              key={reportIdx}
+              userID={report.id}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
         );
       });
     }
 
-    let i = 0;
-
     return (
       <div className="myReportedLogsPage">
-        <text className="myReportedLogsTitle">작성된 리포트</text>
+        <div className="myReportedLogsTitle">작성된 리포트</div>
         <div style={{ left: "38.5%" }}>
-          <div className="reportedlogs_box1">{reports[0]}</div>
+          {/* <div className="reportedlogs_box1">{reports[0]}</div>
           <div className="reportedlogs_box2">{reports[1]}</div>
           <div className="reportedlogs_box3">{reports[2]}</div>
           <div className="reportedlogs_box4">{reports[3]}</div>
           <div className="reportedlogs_box5">{reports[4]}</div>
-          <div className="reportedlogs_box6">{reports[5]}</div>
+          <div className="reportedlogs_box6">{reports[5]}</div> */}
+          <div>{myReportedLogs}</div>
         </div>
       </div>
     );

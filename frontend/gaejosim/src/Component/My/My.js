@@ -7,8 +7,6 @@ import ReportingLog from "./ReportingLog/ReportingLog";
 
 import "./My.css";
 
-//TODO: 리포트 없을 때는 디스플레이 하지 않게 변경
-
 class My extends Component {
   constructor(props) {
     super(props);
@@ -60,18 +58,22 @@ class My extends Component {
     if (this.state.getResult === false) {
       this.getMyInfo();
     } else {
-      let idx1 = 0;
-      reportedLogs = this.state.reportsForUser.map((report) => {
-        idx1++;
+      // let idx1 = 0;
+      reportedLogs = this.state.reportsForUser.map((report, reportIdx) => {
+        // idx1++;
+        let reportedLogsIdx = "reportedLogs" + reportIdx;
         return (
-          <ReportedLog
-            key={idx1}
-            userID={report.id}
-            userEvaluation={report.evaluation}
-            tags={report.tag}
-            comment={report.comment}
-            apology={report.apology}
-          />
+          <div className={reportedLogsIdx} key={reportIdx}>
+            <ReportedLog
+              // key={idx1}
+              key={reportIdx}
+              userID={report.id}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
         );
       });
       reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
@@ -121,11 +123,11 @@ class My extends Component {
               >
                 더보기
               </div>
-              <div className="mypage_box1">{reportingLogs[0]}</div>
-              {/* <div>{reportingLogs}</div> */}
-              <div className="mypage_box2">
-                {reportingLogs.length === 2 && reportingLogs[1]}
-              </div>
+              {/* <div className="mypage_box1">{reportingLogs[0]}</div> */}
+              <div>{reportingLogs}</div>
+              {/* <div className="mypage_box2"> */}
+              {/* {reportingLogs.length === 2 && reportingLogs[1]} */}
+              {/* </div> */}
             </div>
             <div>
               <div className="recentText2">Recent Reported Logs</div>
@@ -135,14 +137,13 @@ class My extends Component {
               >
                 더보기
               </div>
-              <div className="mypage_box3">
-                {/* <ReportedLog /> */}
-                {reportedLogs[0]}
-              </div>
-              <div className="mypage_box4">
-                {/* <ReportedLog /> */}
-                {reportedLogs.length === 2 && reportingLogs[1]}
-              </div>
+              <div>{reportedLogs}</div>
+              {/* <div className="mypage_box3"> */}
+              {/* {reportedLogs[0]} */}
+              {/* </div> */}
+              {/* <div className="mypage_box4"> */}
+              {/* {reportedLogs.length === 2 && reportingLogs[1]} */}
+              {/* </div> */}
             </div>
           </div>
         )}

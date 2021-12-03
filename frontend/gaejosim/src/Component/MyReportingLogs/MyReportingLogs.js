@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./MyReportingLogs.css";
 
-// import ReportingLog2 from "../ReportingLog2/ReportingLog2";
 import ReportingLog2 from "./ReportingLog2/ReportingLog2";
+
+//todo: my.js와 유사한 형태로 코드를 작성했지만 나오지를 않음
 
 class MyReportingLogs extends Component {
   constructor(props) {
@@ -39,25 +40,30 @@ class MyReportingLogs extends Component {
   };
 
   render() {
-    let reports = [];
+    let myReportingLogs = [];
+
+    console.log("reports: " + myReportingLogs);
 
     if (this.state.getREsult === false) {
       this.getReportingLogs();
     } else {
-      let idx = 0;
-      reports = this.state.reports.map((report) => {
-        idx++;
+      // let idx = 0;
+      myReportingLogs = this.state.reports.map((report, reportIdx) => {
+        // idx++;
+        let reportingLogsIdx = "reportingLogs2" + reportIdx;
+        console.log("reports: " + myReportingLogs);
         return (
-          <ReportingLog2
-            key={idx}
-            userID={report.id}
-            userEvaluation={report.userEvaluation}
-            tags={report.tags}
-            // "reported_summoner" : "reported summoner name",
-            reportedSummoer={report.reported_summoner}
-            comment={report.comment}
-            apology={report.apology}
-          />
+          <div className={reportingLogsIdx} key={reportIdx}>
+            <ReportingLog2
+              key={reportIdx}
+              userID={report.id}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              reportedSummoer={report.reported_summoner}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
         );
       });
     }
@@ -66,12 +72,13 @@ class MyReportingLogs extends Component {
       <div className="myReportingLogsPage">
         <div className="myReportingLogsTitle">작성한 리포트</div>
         <div style={{ left: "38.5%" }}>
-          <div className="Reportinglogs_box1">{reports[0]}</div>
+          {/* <div className="Reportinglogs_box1">{reports[0]}</div>
           <div className="Reportinglogs_box2">{reports[1]}</div>
           <div className="Reportinglogs_box3">{reports[2]}</div>
           <div className="Reportinglogs_box4">{reports[3]}</div>
           <div className="Reportinglogs_box5">{reports[4]}</div>
-          <div className="Reportinglogs_box6">{reports[5]}</div>
+          <div className="Reportinglogs_box6">{reports[5]}</div> */}
+          <div>{myReportingLogs}</div>
         </div>
       </div>
     );
