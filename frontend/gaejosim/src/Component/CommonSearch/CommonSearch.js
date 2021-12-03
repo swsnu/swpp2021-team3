@@ -11,8 +11,6 @@ import tagdiagram_5 from "./tagDiagrams/diagram_5.png";
 import './CommonSearch.css';
 
 // TODO: tag diagram 형성하기
-// TODO: rank 값 위치 CSS에서 조정하기
-// TODO : css로 박스값 위치조정하기
 
 class CommonSearch extends Component {
 
@@ -37,7 +35,7 @@ class CommonSearch extends Component {
         const resultViews = this.state.recentResults.map((result) => {
             idx = idx + 1;
             return (
-                <Result result={result} winLose={winLoseArr[idx]} />
+                <Result key={idx} result={result} winLose={winLoseArr[idx]} />
             )
         })
         console.log(this.state.num)
@@ -56,13 +54,13 @@ class CommonSearch extends Component {
 
                 <div className = 'SummonerInfo'>
                     <p className = 'Summoner'>
-                        <div className = 'nameStyle1'>{this.state.summonerName}</div>
+                        <b className = 'nameStyle1'>{this.state.summonerName}</b>
                         <img className = 'tierImg' alt = 'tier_img' src = {process.env.PUBLIC_URL + `/images/tiers/tier_${this.state.tier}.png`} />
-                        <text className = 'tier'>{this.state.tier}</text> 
-                        <text className = 'rank'>{this.state.rank}</text>
+                        <b className = 'tier'>{this.state.tier}</b> 
+                        <b className = 'rank'>{this.state.rank}</b>
                     </p>
                     <div className = 'manner_point'>
-                    <text className = 'manner_point_text'>MP: {this.state.mannerPoint}</text>
+                    <div className = 'manner_point_text'>MP: {this.state.mannerPoint}</div>
                     </div> 
                 </div>
 
