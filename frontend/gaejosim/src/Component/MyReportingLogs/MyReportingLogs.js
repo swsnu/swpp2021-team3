@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./MyReportingLogs.css";
 
+<<<<<<< HEAD
 import { withRouter } from "react-router-dom";
 
 import ReportingLog2 from "./ReportingLog2/ReportingLog2";
+=======
+import ReportingLog2 from "./ReportingLog2/ReportingLog2";
+
+//todo: my.js와 유사한 형태로 코드를 작성했지만 나오지를 않음
+>>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
 
 class MyReportingLogs extends Component {
   constructor(props) {
@@ -21,11 +27,19 @@ class MyReportingLogs extends Component {
 
     axios.get("/api/token/").then();
 
+<<<<<<< HEAD
     const response = await axios.get("/api/my/reports/", {}).then((res) => {
       // let userInfo = res.data.user;
       let reportInfo = res.data.reports;
       // console.log("reportInfo:" + reportInfo); // this works
       console.log(res.data); //this works
+=======
+    console.log("getReportingLogs");
+    const response = await axios.get("/api/my/reports/", {}).then((res) => {
+      // let userInfo = res.data.user;
+      let reportInfo = res.data.reports;
+      console.log(res.data);
+>>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
       this.setState({
         // username: userInfo.username,
         // email: userInfo.email,
@@ -33,7 +47,11 @@ class MyReportingLogs extends Component {
         // mannerPoint: userInfo.mannerPoint,
         // reportsForUser: reportInfo.reports_for_user,
         // reportsByUser: reportInfo.reports_by_user,
+<<<<<<< HEAD
         reportinglogs: reportInfo.reports,
+=======
+        reports: reportInfo.reports,
+>>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
         getResult: true,
       });
     });
@@ -61,8 +79,6 @@ class MyReportingLogs extends Component {
           </div>
         );
       });
-      console.log(myReportingLogs);
-      // todo: 이게 데이터를 받지 못하고 있음 map function이 문제인 것 같은데 해결 방법을 모르겠음
     }
 
     console.log("test : " + myReportingLogs);
