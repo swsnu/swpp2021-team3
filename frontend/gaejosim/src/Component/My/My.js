@@ -76,10 +76,7 @@ class My extends Component {
           </div>
         );
       });
-<<<<<<< HEAD
       // console.log(reportedLogs); // this works
-=======
->>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
       reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
         let reportingLogsIdx = "reportingLogs" + reportIdx;
         return (

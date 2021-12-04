@@ -2,15 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./MyReportedLogs.css";
 
-<<<<<<< HEAD
 import { withRouter } from "react-router-dom";
 
 import ReportedLog2 from "./ReportedLog2/ReportedLog2";
-=======
-import ReportedLog2 from "./ReportedLog2/ReportedLog2";
-
-//todo: my.js와 유사한 형태로 코드를 작성했지만 나오지를 않음
->>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
 
 class MyReportedLogs extends Component {
   constructor(props) {
@@ -27,7 +21,6 @@ class MyReportedLogs extends Component {
 
     axios.get("/api/token/").then();
 
-<<<<<<< HEAD
     const response = await axios
       .get("/api/my/received_reports/", {})
       .then((res) => {
@@ -35,14 +28,6 @@ class MyReportedLogs extends Component {
         let reportInfo = res.data.reports;
         // console.log("reportInfo:" + reportInfo); // this works
         console.log(res.data); //this works
-=======
-    console.log("getReportedLogs");
-    const response = await axios
-      .get("/api/my/received_reports/", {})
-      .then((res) => {
-        let reportInfo = res.data.reports;
-        console.log("res.data : " + res.data);
->>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
         this.setState({
           // username: userInfo.username,
           // email: userInfo.email,
@@ -50,11 +35,7 @@ class MyReportedLogs extends Component {
           // mannerPoint: userInfo.mannerPoint,
           // reportsForUser: reportInfo.reports_for_user,
           // reportsByUser: reportInfo.reports_by_user,
-<<<<<<< HEAD
           reportedlogs: reportInfo.reports,
-=======
-          reports: reportInfo.reports,
->>>>>>> 1a46e2f9723512a1a4de794ccf7e8781d3dd3977
           getResult: true,
         });
       });
