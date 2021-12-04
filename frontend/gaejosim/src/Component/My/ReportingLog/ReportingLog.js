@@ -4,17 +4,17 @@ import "./ReportingLog.css";
 
 class ReportingLog extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="ReportingLog">
         <div className="ReportingLog_Box">
           <div className="ReportingLog_Text">
-            Recent Reporting Log :{this.props.userID}
+            Recent Reporting Log : {this.props.userID}
             {this.props.reportedSummoner}
             <br />
-            {this.props.tags},{this.props.userEvaluation}
+            태그:{this.props.tags}, 매너포인트:{this.props.userEvaluation}
             {/* {this.props.comments}
-             {this.props.apology} */}
+            {this.props.apology} */}
           </div>
           <img
             className="ReportingLog_Paper"
