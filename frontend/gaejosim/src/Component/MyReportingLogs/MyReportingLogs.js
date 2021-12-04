@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./MyReportingLogs.css";
 
-import ReportingLog2 from "./ReportingLog2/ReportingLog2";
+import { withRouter } from "react-router-dom";
 
-//todo: my.js와 유사한 형태로 코드를 작성했지만 나오지를 않음
+import ReportingLog2 from "./ReportingLog2/ReportingLog2";
 
 class MyReportingLogs extends Component {
   constructor(props) {
@@ -21,11 +21,11 @@ class MyReportingLogs extends Component {
 
     axios.get("/api/token/").then();
 
-    console.log("getReportingLogs");
     const response = await axios.get("/api/my/reports/", {}).then((res) => {
       // let userInfo = res.data.user;
       let reportInfo = res.data.reports;
-      console.log(res.data);
+      // console.log("reportInfo:" + reportInfo); // this works
+      console.log(res.data); //this works
       this.setState({
         // username: userInfo.username,
         // email: userInfo.email,
@@ -33,7 +33,7 @@ class MyReportingLogs extends Component {
         // mannerPoint: userInfo.mannerPoint,
         // reportsForUser: reportInfo.reports_for_user,
         // reportsByUser: reportInfo.reports_by_user,
-        reports: reportInfo.reports,
+        reportinglogs: reportInfo.reports,
         getResult: true,
       });
     });
@@ -42,18 +42,13 @@ class MyReportingLogs extends Component {
   render() {
     let myReportingLogs = [];
 
-    console.log("reports: " + myReportingLogs);
-
-    if (this.state.getREsult === false) {
+    if (this.state.getResult === false) {
       this.getReportingLogs();
     } else {
-      // let idx = 0;
       myReportingLogs = this.state.reports.map((report, reportIdx) => {
-        // idx++;
-        let reportingLogsIdx = "reportingLogs2" + reportIdx;
-        console.log("reports: " + myReportingLogs);
+        let myreportinglogsIdx = "myreportinglogs" + reportIdx;
         return (
-          <div className={reportingLogsIdx} key={reportIdx}>
+          <div className={myreportinglogsIdx} key={reportIdx}>
             <ReportingLog2
               key={reportIdx}
               userID={report.id}
@@ -68,21 +63,17 @@ class MyReportingLogs extends Component {
       });
     }
 
+    console.log("test : " + myReportingLogs);
+
     return (
       <div className="myReportingLogsPage">
         <div className="myReportingLogsTitle">작성한 리포트</div>
         <div style={{ left: "38.5%" }}>
-          {/* <div className="Reportinglogs_box1">{reports[0]}</div>
-          <div className="Reportinglogs_box2">{reports[1]}</div>
-          <div className="Reportinglogs_box3">{reports[2]}</div>
-          <div className="Reportinglogs_box4">{reports[3]}</div>
-          <div className="Reportinglogs_box5">{reports[4]}</div>
-          <div className="Reportinglogs_box6">{reports[5]}</div> */}
-          <div>{myReportingLogs}</div>
+          {this.state.getResult && <div>{myReportingLogs}</div>}
         </div>
       </div>
     );
   }
 }
 
-export default MyReportingLogs;
+export default withRouter(MyReportingLogs);

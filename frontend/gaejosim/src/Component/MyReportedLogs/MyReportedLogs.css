@@ -16,11 +16,10 @@
   color: #ffffff;
 }
 
-.reportedlogs_box1 {
+.myreportedlogs0 {
   position: absolute;
   width: 40%;
   height: 7%;
-  /* left: 33.5%; */
   left: 50%;
   transform: translateX(-50%);
   top: 30.3%;
@@ -28,7 +27,7 @@
   border-radius: 12px;
 }
 
-.reportedlogs_box2 {
+.myreportedlogs1 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -39,7 +38,7 @@
   border-radius: 12px;
 }
 
-.reportedlogs_box3 {
+.myreportedlogs2 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -50,7 +49,7 @@
   border-radius: 12px;
 }
 
-.reportedlogs_box4 {
+.myreportedlogs3 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -62,7 +61,7 @@
   border-radius: 12px;
 }
 
-.reportedlogs_box5 {
+.myreportedlogs4 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -74,7 +73,7 @@
   border-radius: 12px;
 }
 
-.reportedlogs_box6 {
+.myreportedlogs5 {
   position: absolute;
   width: 40%;
   height: 7%;
@@ -84,84 +83,4 @@
   /* margin-top: 100px; */
   background: #282a30;
   border-radius: 12px;
-}
-
-.reportedlogs_boxText {
-  position: absolute;
-  top: 22%;
-  left: 2%;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 10px;
-  line-height: 14px;
-  display: flex;
-  align-items: center;
-  color: #ffffff;
-  text-align: left;
-  white-space: pre-line;
-}
-.reportedlogs_boxText1 {
-  position: absolute;
-  top: 22%;
-  left: 2%;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 10px;
-  line-height: 14px;
-  display: flex;
-  align-items: center;
-  color: #ffffff;
-  text-align: left;
-  white-space: pre-line;
-}
-
-.reportedlogs_boxText2 {
-  position: absolute;
-  bottom: 23%;
-  left: 2%;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 10px;
-  line-height: 14px;
-  display: flex;
-  align-items: center;
-  color: #ffffff;
-  text-align: left;
-  white-space: pre-line;
-}
-
-.Reportedlogs1_Pencil {
-  position: absolute;
-  right: 2%;
-  top: 30%;
-}
-
-.Reportedlogs2_Pencil {
-  position: absolute;
-  right: 2%;
-  top: 30%;
-}
-
-.Reportedlogs3_Pencil {
-  position: absolute;
-  right: 2%;
-  top: 30%;
-}
-
-.Reportedlogs4_Pencil {
-  position: absolute;
-  right: 2%;
-  top: 30%;
-}
-
-.Reportedlogs5_Pencil {
-  position: absolute;
-  right: 2%;
-  top: 30%;
-}
-
-.Reportedlogs6_Pencil {
-  position: absolute;
-  right: 2%;
-  top: 30%;
 }

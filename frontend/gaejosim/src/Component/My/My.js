@@ -76,6 +76,7 @@ class My extends Component {
           </div>
         );
       });
+      // console.log(reportedLogs); // this works
       reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
         let reportingLogsIdx = "reportingLogs" + reportIdx;
         return (
@@ -92,6 +93,7 @@ class My extends Component {
           </div>
         );
       });
+      // console.log(reportingLogs); // this works
     }
 
     return (

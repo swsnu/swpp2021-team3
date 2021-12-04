@@ -4,7 +4,7 @@ import "./ReportedLog2.css";
 
 class ReportingLog2 extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="ReportingLog2">
         <div className="ReportingLog2_Box">
@@ -12,7 +12,7 @@ class ReportingLog2 extends Component {
             Recent Reporting Log :{this.props.userID}
             {this.props.reportedSummoner}
             <br />
-            {this.props.tags},{this.props.userEvaluation}
+            태그:{this.props.tags}, 매너포인트:{this.props.userEvaluation}
             {/* {this.props.comments}
              {this.props.apology} */}
           </div>

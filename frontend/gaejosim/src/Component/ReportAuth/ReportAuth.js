@@ -88,8 +88,7 @@ class ReportAuth extends Component {
     let redirect = null;
 
     if (!this.props.storedisLogin) {
-      //todo: this makes infinite loop
-      // this.props.history.push("/login");
+      this.props.history.push("/login");
     }
     if (this.props.storedisLogin && this.state.getPlayers) {
       options = this.state.recentPlayers.map((player, index) => ({

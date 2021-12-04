@@ -151,127 +151,127 @@ class ReportAction extends Component {
       redirect = <Redirect to={`/`} />;
     }
 
-    const marks = [
-      {
-        value: 0,
-        label: "0점",
-      },
-      {
-        value: 100,
-        label: "100점",
-      },
-    ];
+    // const marks = [
+    //   {
+    //     value: 0,
+    //     label: "0점",
+    //   },
+    //   {
+    //     value: 100,
+    //     label: "100점",
+    //   },
+    // ];
 
     return (
       <div className="ReportAction">
         {redirect}
-        <div className="LeftBarStyle1" />
-        <div className="RightBarStyle1" />
-        <div className="LeftBarText1">step1</div>
-        <div className="RightBarText1">step2</div>
-        <div className="Box1">
-          <h3 id="MannerPoint">매너포인트</h3>
-          <Box id="MannerPointInput" sx={{ width: 700 }}>
-            <Slider
-              aria-label="Temperature"
-              defaultValue={50}
-              valueLabelDisplay="auto"
-              step={10}
-              marks={marks}
-              min={0}
-              max={100}
-              color="secondary"
-              onChange={(event) =>
-                this.setState({ evaluation: event.target.value })
-              }
-            />
-            <div className="evaluation">{this.state.evaluation}점</div>
-          </Box>
+        <div className="LeftBarStyle2">
+          <div className="LeftText2">step1</div>
         </div>
-        <div className="Box2">
-          <h3 id="Tag">태그</h3>
-          <div className="tags">
-            <button
-              className="Tag1_1Button"
-              id="button"
-              onClick={() => this.onClickTagButton("1_1")}
-            >
-              {this.state.clickTag1_1 !== false
-                ? "과격한 언행 V"
-                : "과격한 언행"}
-            </button>
-            <button
-              className="Tag1_2Button"
-              id="button"
-              onClick={() => this.onClickTagButton("1_2")}
-            >
-              {this.state.clickTag1_2 !== false
-                ? "비속어 사용 V"
-                : "비속어 사용"}
-            </button>
-            <button
-              className="Tag2_1Button"
-              id="button"
-              onClick={() => this.onClickTagButton("2_1")}
-            >
-              {this.state.clickTag2_1 !== false
-                ? "고의성 게임 던짐 V"
-                : "고의성 게임 던짐"}
-            </button>
-            <button
-              className="Tag2_2Button"
-              id="button"
-              onClick={() => this.onClickTagButton("2_1")}
-            >
-              {this.state.clickTag2_2 !== false ? "탈주/닷지 V" : "탈주/닷지"}
-            </button>
-            <button
-              className="Tag3_1Button"
-              id="button"
-              onClick={() => this.onClickTagButton("3_1")}
-            >
-              {this.state.clickTag3_1 !== false ? "대리 게임 V" : "대리 게임"}
-            </button>
-            <button
-              className="Tag3_2Button"
-              id="button"
-              onClick={() => this.onClickTagButton("3_2")}
-            >
-              {this.state.clickTag3_2 !== false
-                ? "픽 상황 갑질 V"
-                : "픽 상황 갑질"}
-            </button>
-            <button
-              className="Tag4_1Button"
-              id="button"
-              onClick={() => this.onClickTagButton("4_1")}
-            >
-              {this.state.clickTag4_1 !== false ? "cs 스틸 V" : "cs 스틸"}
-            </button>
-            <button
-              className="Tag4_2Button"
-              id="button"
-              onClick={() => this.onClickTagButton("4_2")}
-            >
-              {this.state.clickTag4_2 !== false ? "정치 V" : "정치"}
-            </button>
-            <button
-              className="Tag5_1Button"
-              id="button"
-              onClick={() => this.onClickTagButton("5_1")}
-            >
-              {this.state.clickTag5_1 !== false ? "방관 V" : "방관"}
-            </button>
-            <button
-              className="Tag5_2Button"
-              id="button"
-              onClick={() => this.onClickTagButton("5_2")}
-            >
-              {this.state.clickTag5_2 !== false ? "라인 스왑 V" : "라인 스왑"}
-            </button>
-          </div>
+        <div className="RightBarStyle2">
+          <div className="RightText2">step2</div>
         </div>
-        <div className="Box3">
+        {/* <div className="Box1"> */}
+        <h3 id="MannerPoint">매너포인트</h3>
+        <Box id="MannerPointInput" sx={{ width: 700 }}>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={50}
+            valueLabelDisplay="auto"
+            step={10}
+            // marks={marks}
+            min={0}
+            max={100}
+            color="secondary"
+            // color="#000000"
+            onChange={(event) =>
+              this.setState({ evaluation: event.target.value })
+            }
+          />
+          {/* <div id="evaluation">{this.state.evaluation}점</div> */}
+          <div id="evaluation_0">0</div>
+          <div id="evaluation_100">100</div>
+        </Box>
+        {/* </div> */}
+        {/* <div className="Box2"> */}
+        <h3 id="Tag">태그</h3>
+        <div className="TagsButtonContainer">
+          <button
+            className="Tag1_1Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("1_1")}
+          >
+            {this.state.clickTag1_1 !== false ? "과격한 언행 V" : "과격한 언행"}
+          </button>
+          <button
+            className="Tag1_2Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("1_2")}
+          >
+            {this.state.clickTag1_2 !== false ? "비속어 사용 V" : "비속어 사용"}
+          </button>
+          <button
+            className="Tag2_1Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("2_1")}
+          >
+            {this.state.clickTag2_1 !== false
+              ? "고의성 게임 던짐 V"
+              : "고의성 게임 던짐"}
+          </button>
+          <button
+            className="Tag2_2Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("2_1")}
+          >
+            {this.state.clickTag2_2 !== false ? "탈주/닷지 V" : "탈주/닷지"}
+          </button>
+          <button
+            className="Tag3_1Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("3_1")}
+          >
+            {this.state.clickTag3_1 !== false ? "대리 게임 V" : "대리 게임"}
+          </button>
+          <button
+            className="Tag3_2Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("3_2")}
+          >
+            {this.state.clickTag3_2 !== false
+              ? "픽 상황 갑질 V"
+              : "픽 상황 갑질"}
+          </button>
+          <button
+            className="Tag4_1Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("4_1")}
+          >
+            {this.state.clickTag4_1 !== false ? "cs 스틸 V" : "cs 스틸"}
+          </button>
+          <button
+            className="Tag4_2Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("4_2")}
+          >
+            {this.state.clickTag4_2 !== false ? "정치 V" : "정치"}
+          </button>
+          <button
+            className="Tag5_1Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("5_1")}
+          >
+            {this.state.clickTag5_1 !== false ? "방관 V" : "방관"}
+          </button>
+          <button
+            className="Tag5_2Button"
+            id="tagbutton"
+            onClick={() => this.onClickTagButton("5_2")}
+          >
+            {this.state.clickTag5_2 !== false ? "라인 스왑 V" : "라인 스왑"}
+          </button>
+        </div>
+        <div>
           <h3 id="Comment">한줄평</h3>
           <input
             id="CommentInput"
@@ -287,7 +287,13 @@ class ReportAction extends Component {
         >
           제출
         </button>
-        {/* <button className="cancelButton" id="cancel" onClick={() => this.onClickCancelButton()}>취소</button> */}
+        <button
+          className="cancelButton"
+          id="cancel"
+          onClick={() => this.onClickCancelButton()}
+        >
+          취소
+        </button>
       </div>
     );
   }
