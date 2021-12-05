@@ -52,6 +52,34 @@ describe("<Header />", () => {
     component.setState({ clickMyPage: true });
     expect(component.length).toBe(1);
   });
+
+  it("should handle loginButton", () => {
+    const mockloginButton = jest.fn();
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <Header clickDone={mockloginButton} />
+        </Provider>
+      </Router>
+    );
+    const wrapper = component.find(".loginButton");
+    wrapper.simulate("click");
+    expect(mockloginButton).toHaveBeenCalledTimes(0);
+  });
+
+  xit("should handle mypageButton", () => {
+    const mockmypageButton = jest.fn();
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <Header clickDone={mockmypageButton} />
+        </Provider>
+      </Router>
+    );
+    const wrapper = component.find(".mypageButton");
+    wrapper.simulate("click");
+    expect(mockmypageButton).toHaveBeenCalledTimes(0);
+  });
 });
 
 describe("router login page", () => {

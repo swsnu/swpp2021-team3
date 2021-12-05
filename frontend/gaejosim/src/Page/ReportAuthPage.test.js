@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-xit("renders ReportAuthPage without crashing", () => {
+it("renders ReportAuthPage without crashing", () => {
   const div = document.createElement("div");
 
   ReactDom.render(
