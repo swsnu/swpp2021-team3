@@ -1,6 +1,9 @@
-.class1 {
+.summoner0 {
   position: absolute;
-  left: -19px;
+  /* left: -19px; */
+  top: 40.8%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .class2 {
@@ -25,8 +28,10 @@
 
 .loading {
   position: absolute;
-  left: 600px;
-  bottom: 700px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 36%;
   font-size: 30px;
   font-weight: 800;
+  color: #ffffff;
 }

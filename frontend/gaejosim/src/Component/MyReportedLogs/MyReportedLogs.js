@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useRef, Component } from "react";
 import axios from "axios";
 import "./MyReportedLogs.css";
 
