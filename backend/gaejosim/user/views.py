@@ -227,7 +227,7 @@ def my_page(request):
                 "evaluation": report.evaluation,
                 "apology": bool(report.apology),
             }
-            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:5]
+            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:2]
         ]
 
         reports_for_user = [
@@ -240,7 +240,7 @@ def my_page(request):
             }
             for report in Report.objects.filter(reported_summoner=summoner).order_by(
                 "-id"
-            )[:5]
+            )[:2]
         ]
 
     return JsonResponse(
