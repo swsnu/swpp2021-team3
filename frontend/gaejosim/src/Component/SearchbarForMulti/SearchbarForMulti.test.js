@@ -67,7 +67,7 @@ describe("<SearchbarForMulti />", () => {
 });
 
 describe("router search page", () => {
-  test("should pass", () => {
+  xit("should pass", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
     const { getByText } = render(
       // <Provider>
