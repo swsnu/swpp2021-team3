@@ -9,7 +9,6 @@ import ReportAuth from "./ReportAuth";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-// import userReducer from "./../Store/Reducers/UserReducer";
 import userReducer from "./../../Store/Reducers/UserReducer";
 
 const rootReducer = combineReducers({
@@ -50,6 +49,20 @@ describe("<ReportAuth />", () => {
     const wrapper = component.find(".buttonStyle");
     wrapper.simulate("change");
     expect(mockNext).toHaveBeenCalledTimes(0);
+  });
+
+  it("should handle AuthButton", () => {
+    const mockAuth = jest.fn();
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <ReportAuth clickDone={mockAuth} />
+        </Provider>
+      </Router>
+    );
+    const wrapper = component.find(".buttonAuthStyle");
+    wrapper.simulate("change");
+    expect(mockAuth).toHaveBeenCalledTimes(0);
   });
 
   xit("changes input", () => {
