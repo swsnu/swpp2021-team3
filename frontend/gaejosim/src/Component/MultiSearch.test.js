@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+
 import MultiSearch from "./MultiSearch";
 
 describe("<MultiSearch />", () => {
