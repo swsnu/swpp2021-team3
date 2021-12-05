@@ -67,6 +67,7 @@ class MyReportedLogs extends Component {
 
     // console.log("test : " + myReportedLogs);
 
+
     return (
       <div className="myReportedLogsPage">
         <div className="myReportedLogsTitle">작성된 리포트</div>
