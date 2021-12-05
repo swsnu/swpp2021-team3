@@ -1,8 +1,8 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
-import { Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import Header from "./Header";
 import LoginPage from "../../Page/LoginPage";
 import MyPage from "../../Page/MyPage";
@@ -29,21 +29,25 @@ describe("<Header />", () => {
     expect(wrapper.length).toBe(0);
   });
 
-  xit("should change clickLogin state", () => {
-    const component = shallow(
-      <Provider store={store}>
-        <Header />
-      </Provider>
+  it("should change clickLogin state", () => {
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </Router>
     );
     component.setState({ clickLogin: true });
     expect(component.length).toBe(1);
   });
 
-  xit("should change clickMyPage state", () => {
-    const component = shallow(
-      <Provider store={store}>
-        <Header />
-      </Provider>
+  it("should change clickMyPage state", () => {
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </Router>
     );
     component.setState({ clickMyPage: true });
     expect(component.length).toBe(1);

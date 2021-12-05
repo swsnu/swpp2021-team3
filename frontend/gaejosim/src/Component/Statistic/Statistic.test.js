@@ -43,3 +43,5 @@ describe("<Statistic />", () => {
     expect(wrapper.find(".numReports").length).toEqual(0);
   });
 });
+
+//todo: axios get

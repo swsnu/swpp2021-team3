@@ -31,7 +31,7 @@ class My extends Component {
     const response = await axios.get("/api/mypage/", {}).then((res) => {
       let userInfo = res.data.user;
       let reportInfo = res.data.reports;
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({
         username: userInfo.username,
         email: userInfo.email,

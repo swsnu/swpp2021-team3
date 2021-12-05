@@ -35,36 +35,25 @@ describe("<ReportAuth />", () => {
         <ReportAuth />
       </Provider>
     );
-    // expect(wrapper.state("clickNext")).toBe(false);
-
-    // wrapper.instance().onClickNextButton();
-    // expect(wrapper.state("clickNext")).toBe(true);
     expect(wrapper.exists()).toEqual(true);
   });
 
-  xit("should handle NextButton", () => {
+  it("should handle NextButton", () => {
     const mockNext = jest.fn();
-    const component = shallow(<ReportAuth clickDone={mockNext} />);
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <ReportAuth clickDone={mockNext} />
+        </Provider>
+      </Router>
+    );
     const wrapper = component.find(".buttonStyle");
     wrapper.simulate("change");
     expect(mockNext).toHaveBeenCalledTimes(0);
-    // expect(wrapper.exists()).toEqual(true);
-  });
-
-  it("properly change the value of clickNext", () => {
-    const wrapper = shallow(
-      <Provider store={store}>
-        <ReportAuth />
-      </Provider>
-    );
-    // expect(wrapper.state("clickNext")).toBe(false);
-
-    // wrapper.instance().onClickNextButton();
-    // expect(wrapper.state("clickNext")).toBe(true);
-    expect(wrapper.exists()).toEqual(true);
   });
 
   xit("changes input", () => {
+    //text 인식을 못함
     const { getByPlaceholderText } = render(
       <Router>
         <Provider store={store}>
@@ -80,5 +69,5 @@ describe("<ReportAuth />", () => {
     });
   });
 
-  //todo: input, redirect to reportaction, setState true/false, axios with user
+  //todo: axios post, axios get, functions
 });
