@@ -32,12 +32,14 @@ describe("<ReportAction />", () => {
 
   xit("should handle tag1_1", () => {
     const mockClickTag1_1 = jest.fn();
-    const component = shallow(
-      // <Router>
-      <ReportAction clickDone={mockClickTag1_1} />
-      // </Router>
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <ReportAction clickDone={mockClickTag1_1} />
+        </Provider>
+      </Router>
     );
-    const wrapper = component.find(".Tag1_1");
+    const wrapper = component.find(".Tag1_1Button");
     wrapper.simulate("click");
     expect(mockClickTag1_1).toHaveBeenCalledTimes(0);
   });

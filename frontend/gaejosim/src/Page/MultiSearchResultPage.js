@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Header from "../Container/Header/Header";
-import SearchbarForMulti from "../Component/SearchbarForMulti/SearchbarForMulti";
+import Searchbar from "../Component/Searchbar/Searchbar";
 import MultiSearch from "../Component/MultiSearch";
 
 import "./MultiSearchResultPage.css";
@@ -21,7 +21,7 @@ class MultiSearchResultPage extends Component {
     return (
       <div className="MultiSearchResultPageMulti">
         <Header />
-        <SearchbarForMulti />
+        <Searchbar />
         <MultiSearch summoners={this.state.summonerList} />
       </div>
     );

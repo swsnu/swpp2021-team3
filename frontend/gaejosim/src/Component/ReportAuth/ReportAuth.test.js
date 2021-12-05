@@ -69,5 +69,5 @@ describe("<ReportAuth />", () => {
     });
   });
 
-  //todo: input, redirect to reportaction, setState true/false, axios with user
+  //todo: axios post, axios get, functions
 });
