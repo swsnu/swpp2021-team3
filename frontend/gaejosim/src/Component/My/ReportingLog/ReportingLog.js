@@ -20,13 +20,13 @@ class ReportingLog extends Component {
             className="ReportingLog_Paper"
             alt="paper_img"
             src={process.env.PUBLIC_URL + `/images/icons/icon-paper.png`}
-            onClick={() => this.props.clicked}
+            // onClick={() => this.props.clicked}
           />
           <img
             className="ReportingLog_Delete"
             alt="delete_img"
             src={process.env.PUBLIC_URL + `/images/icons/icon-delete.png`}
-            onClick={() => this.props.clicked}
+            // onClick={() => this.props.clicked}
           />
         </div>
       </div>

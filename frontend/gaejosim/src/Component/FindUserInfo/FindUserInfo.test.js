@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -16,7 +16,7 @@ describe("<FindUserInfo />", () => {
     const mockFindIDButton = jest.fn();
     const component = shallow(<FindUserInfo clickDone={mockFindIDButton} />);
     const wrapper = component.find(".FindIDButton");
-    wrapper.at(0).simulate("click");
+    wrapper.simulate("click");
     expect(mockFindIDButton).toHaveBeenCalledTimes(0);
   });
 
@@ -72,3 +72,5 @@ describe("<FindUserInfo />", () => {
     });
   });
 });
+
+//todo: axios post, onClickFindIDButton, onClickFindPWButton

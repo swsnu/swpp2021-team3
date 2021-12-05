@@ -5,7 +5,7 @@ import MyReportedLogs from "./MyReportedLogs";
 describe("<MyReportedLogs />", () => {
   it("should render without errors", () => {
     const component = shallow(<MyReportedLogs />);
-    const wrapper = component.find(".My");
+    const wrapper = component.find(".MyReportedLogs");
     expect(wrapper.length).toBe(0);
   });
 

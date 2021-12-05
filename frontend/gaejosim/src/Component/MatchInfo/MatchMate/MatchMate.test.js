@@ -7,5 +7,5 @@ describe("<MatchMate />", () => {
     const component = shallow(<MatchMate />);
     const wrapper = component.find(".MatchMate");
     expect(wrapper.length).toBe(1);
-  }); //props undefined
+  }); //todo: props undefined
 });

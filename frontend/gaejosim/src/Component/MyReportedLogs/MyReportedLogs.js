@@ -65,7 +65,7 @@ class MyReportedLogs extends Component {
       });
     }
 
-    console.log("test : " + myReportedLogs);
+    // console.log("test : " + myReportedLogs);
 
     return (
       <div className="myReportedLogsPage">

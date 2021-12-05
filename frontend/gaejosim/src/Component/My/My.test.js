@@ -1,10 +1,21 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
-import { Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import My from "./My";
+
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<My />", () => {
   it("should render without errors", () => {
@@ -61,19 +72,31 @@ describe("<My />", () => {
   //   expect(mockPaper2Button).toHaveBeenCalledTimes(0);
   // });
 
-  xit("should handle SeemoreText1 button", () => {
-    const mockSeemoreText1 = jest.fn();
-    const component = shallow(<My clickDone={mockSeemoreText1} />);
-    const wrapper = component.find(".seemoreText1");
-    wrapper.simulate("click");
-    expect(mockSeemoreText1).toHaveBeenCalledTimes(0);
-  });
+  // it("should handle SeemoreText1 button", () => {
+  //   const mockSeemoreText1 = jest.fn();
+  //   const component = mount(
+  //     <Router>
+  //       <Provider store={store}>
+  //         <My clickDone={mockSeemoreText1} />
+  //       </Provider>
+  //     </Router>
+  //   );
+  //   const wrapper = component.find(".SeemoreText1");
+  //   wrapper.simulate("click");
+  //   expect(mockSeemoreText1).toHaveBeenCalledTimes(0);
+  // });
 
-  xit("should handle SeemoreText2 button", () => {
-    const mockSeemoreText2 = jest.fn();
-    const component = shallow(<My clickDone={mockSeemoreText2} />);
-    const wrapper = component.find(".SeemoreText2");
-    wrapper.simulate("click");
-    expect(mockSeemoreText2).toHaveBeenCalledTimes(1);
-  });
+  // it("should handle SeemoreText2 button", () => {
+  //   const mockSeemoreText2 = jest.fn();
+  //   const component = mount(
+  //     <Router>
+  //       <Provider store={store}>
+  //         <My clickDone={mockSeemoreText2} />
+  //       </Provider>
+  //     </Router>
+  //   );
+  //   const wrapper = component.find(".SeemoreText2");
+  //   wrapper.simulate("click");
+  //   expect(mockSeemoreText2).toHaveBeenCalledTimes(0);
+  // });
 });

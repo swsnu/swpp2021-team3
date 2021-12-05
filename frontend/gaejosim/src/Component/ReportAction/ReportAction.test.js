@@ -37,9 +37,8 @@ describe("<ReportAction />", () => {
       <ReportAction clickDone={mockClickTag1_1} />
       // </Router>
     );
-    const wrapper = component.find(".button");
-    // wrapper.simulate("click");
-    fireEvent.wrapper.simulate("click");
+    const wrapper = component.find(".Tag1_1");
+    wrapper.simulate("click");
     expect(mockClickTag1_1).toHaveBeenCalledTimes(0);
   });
 
