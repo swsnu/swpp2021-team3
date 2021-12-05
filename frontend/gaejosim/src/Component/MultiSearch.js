@@ -25,22 +25,23 @@ class MultiSearch extends Component {
 
     const url = "http://localhost:3000/api/search/";
     console.log("call axios.get request");
-    const response = await axios.get(url, {
-      params: {
-        summoners: this.state.summoners,
-      },
-    })
-    .then(res => {
-      console.log("response.data.matchers")
-      console.log(res.data.matchers)
-      this.setState({matchers: res.data.matchers, getResult: true})
-    })
+    const response = await axios
+      .get(url, {
+        params: {
+          summoners: this.state.summoners,
+        },
+      })
+      .then((res) => {
+        console.log("response.data.matchers");
+        console.log(res.data.matchers);
+        this.setState({ matchers: res.data.matchers, getResult: true });
+      });
   };
 
   // TODO: 한번만 콜하게 바꾸기
   render() {
     let matcherInfos;
-    
+
     if (this.state.getResult === false) {
       this.getMatchers();
     } else {
@@ -66,7 +67,7 @@ class MultiSearch extends Component {
     }
     return (
       <div className="MultiSearch">
-        {!this.state.getResult && <div className="loading">loading...</div>}
+        {!this.state.getResult && <div className="loading">Loading...</div>}
         {this.state.getResult && (
           <div className="matchInfos">{matcherInfos}</div>
         )}

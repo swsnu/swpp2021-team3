@@ -75,11 +75,13 @@ class CommonSearch extends Component {
               MP: {this.state.mannerPoint}
             </div> */}
             <div className="tier">
-              {this.state.tier}, {this.state.rank}, MP:{this.state.mannerPoint}
+              <br />
+              {this.state.tier}, {this.state.rank} <br />
+              MP:{this.state.mannerPoint} <br />
+              <br />
+              <div className="recent_results">{resultViews}</div>
             </div>
-            {/* <div className="recent_results">{resultViews}</div> */}
           </p>
-          <div className="recent_results">{resultViews}</div>
         </div>
       </div>
     );
