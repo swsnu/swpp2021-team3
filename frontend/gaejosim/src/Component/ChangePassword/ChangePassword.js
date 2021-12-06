@@ -23,7 +23,7 @@ class ChangePassword extends Component {
 
         axios.get('/api/token/').then()
        
-        const response = await axios.post('/api/change/password/', {
+        await axios.post('/api/change/password/', {
             "old_password" : this.state.oldPW,
             "new_password" : this.state.newPW,
             "password_confirm" : this.state.newPWConfirm,
@@ -85,4 +85,4 @@ class ChangePassword extends Component {
     }
 }
 
-export default ChangePassword;
+export default withRouter(ChangePassword)

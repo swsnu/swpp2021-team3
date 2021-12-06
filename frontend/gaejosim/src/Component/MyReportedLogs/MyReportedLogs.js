@@ -1,4 +1,4 @@
-import React, { useRef, Component } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import "./MyReportedLogs.css";
 
@@ -21,8 +21,8 @@ class MyReportedLogs extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios
-      .get("/api/my/received_reports/", {})
+
+    await axios.get("/api/my/received_reports/", {})
       .then((res) => {
         // let userInfo = res.data.user;
         let reportInfo = res.data.reports;
