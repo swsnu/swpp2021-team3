@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./backend/requirements.txt .
 COPY . .
 RUN pip install -r requirements.txt
-RUN pip install uswgi
+RUN pip install uwsgi
 
 CMD uwsgi \
     --wsgi-file /gaejosim/wsgi.py \
