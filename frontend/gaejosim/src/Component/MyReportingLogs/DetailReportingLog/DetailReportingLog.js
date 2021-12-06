@@ -4,6 +4,8 @@ import './DetailReportingLog.css'
 
 class DetailReportingLog extends Component {
   
+  
+
   render() {
     return (
       <div className = 'DetailReportingLog'>
