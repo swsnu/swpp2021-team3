@@ -1,27 +1,28 @@
-.KDA{
-    font-weight: 300;
-    font-size: 15px;
-    letter-spacing: 1px;
+.KDA {
+  font-weight: 400;
+  font-size: 14px;
+  color: #ffffff;
+  padding: 1px;
 }
 
-.championImg{
-    width: 16px;
-    height: 16px;
+.championImg {
+  width: 16px;
+  height: 16px;
 }
 
-.laneImg{
-    width: 18px;
-    height: 18px;
+.laneImg {
+  width: 18px;
+  height: 18px;
 }
 
-.resultView{
-    padding: 1px;
+.resultView {
+  padding: 1px;
 }
 
-#W{
-    background-color: rgb(112, 112, 221);
+#W {
+  background-color: rgb(112, 112, 221);
 }
 
-#L{
-    background-color: rgb(221, 112, 158);
+#L {
+  background-color: rgb(221, 112, 158);
 }

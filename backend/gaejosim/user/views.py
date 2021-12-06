@@ -19,7 +19,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-927e5e6c-bb20-4a24-b9b8-993fc7ff9d07",  # updated 12/3
+    "key": "RGAPI-ede5b6c7-d02c-443a-b1b2-067e8a5582ec",  # updated 12/4
 }
 
 
@@ -227,7 +227,7 @@ def my_page(request):
                 "evaluation": report.evaluation,
                 "apology": bool(report.apology),
             }
-            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:5]
+            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:2]
         ]
 
         reports_for_user = [
@@ -240,7 +240,7 @@ def my_page(request):
             }
             for report in Report.objects.filter(reported_summoner=summoner).order_by(
                 "-id"
-            )[:5]
+            )[:2]
         ]
 
     return JsonResponse(

@@ -1,6 +1,6 @@
 .AllReports {
   position: absolute;
-  /* width: 65px; */
+  width: 100px;
   /* height: 20px; */
   left: 57px;
   bottom: 73px;
@@ -19,7 +19,7 @@
 
 .TodayReports {
   position: absolute;
-  /* width: 88px; */
+  width: 100px;
   /* height: 20px; */
   left: 215px;
   bottom: 73px;
@@ -38,9 +38,12 @@
 
 .NumReports {
   position: absolute;
-  width: 66px;
+  /* width: 66px; */
   height: 54px;
-  left: 56px;
+  /* left: 56px; */
+  width: 100px;
+  /* height: 20px; */
+  left: 57px;
   bottom: 19px;
 
   /* font-family: Noto Sans; */
@@ -57,15 +60,16 @@
 
 .NumPrevents {
   position: absolute;
-  width: 24px;
   height: 54px;
-  left: 247px;
   bottom: 19px;
+  width: 100px;
+  left: 215px;
 
   /* font-family: Noto Sans; */
   font-style: normal;
   font-weight: 800;
   font-size: 40px;
+  text-align: center;
   line-height: 54px;
   display: flex;
   align-items: center;

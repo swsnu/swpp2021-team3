@@ -526,8 +526,7 @@ class MyPageTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=(
-                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -560,8 +559,7 @@ class MyPageTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=(
-                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -636,5 +634,5 @@ class MyPageTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data["user"]["username"], "test1")
         self.assertEqual(data["user"]["email"], "test1@swpp.com")
-        self.assertEqual(len(data["reports"]["reports_for_user"]), 3)
+        self.assertEqual(len(data["reports"]["reports_for_user"]), 2)
         self.assertEqual(len(data["reports"]["reports_by_user"]), 1)

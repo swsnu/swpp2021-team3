@@ -1,25 +1,22 @@
 import React, { Component } from "react";
-import {withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-import ReportedLog from "../ReportedLog/ReportedLog";
-import ReportingLog from "../ReportingLog/ReportingLog";
+import ReportedLog from "./ReportedLog/ReportedLog";
+import ReportingLog from "./ReportingLog/ReportingLog";
 
 import "./My.css";
 
-//TODO: 리포트 없을 때는 디스플레이 하지 않게 변경
-
 class My extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      username : '',
-      email : '',
-      summonerName : '',
-      mannerPoint : 0,
-      reportsForUser : [],
-      reportsByUser : [],
+      username: "",
+      email: "",
+      summonerName: "",
+      mannerPoint: 0,
+      reportsForUser: [],
+      reportsByUser: [],
       getResult: false,
     };
   }
@@ -30,56 +27,80 @@ class My extends Component {
 
     axios.get("/api/token/").then();
 
-    console.log("getMyInfo")
-    const response = await axios.get('/api/mypage/', {  
-    })
-    .then(res => {
-      let userInfo = res.data.user
-      let reportInfo = res.data.reports
-      console.log(res.data)
-      this.setState({username: userInfo.username, email: userInfo.email, summonerName: userInfo.summoner_name, mannerPoint: userInfo.mannerPoint,
-          reportsForUser: reportInfo.reports_for_user, reportsByUser : reportInfo.reports_by_user, getResult : true
-      })
-    })
+    console.log("getMyInfo");
+    const response = await axios.get("/api/mypage/", {}).then((res) => {
+      let userInfo = res.data.user;
+      let reportInfo = res.data.reports;
+      // console.log(res.data);
+      this.setState({
+        username: userInfo.username,
+        email: userInfo.email,
+        summonerName: userInfo.summoner_name,
+        mannerPoint: userInfo.mannerPoint,
+        reportsForUser: reportInfo.reports_for_user,
+        reportsByUser: reportInfo.reports_by_user,
+        getResult: true,
+      });
+    });
   };
 
   onClickReportedLogs = () => {
-    this.props.history.push('/myReportedLogs')
+    this.props.history.push("/myReportedLogs");
   };
 
   onClickReportingLogs = () => {
-    this.props.history.push('/myReportingLogs')
+    this.props.history.push("/myReportingLogs");
   };
 
   render() {
-    let reportedLogs = []
-    let reportingLogs = []
+    let reportedLogs = [];
+    let reportingLogs = [];
     if (this.state.getResult === false) {
-      this.getMyInfo()
-    } 
-    else {
+      this.getMyInfo();
+    } else {
+      // let idx1 = 0;
       reportedLogs = this.state.reportsForUser.map((report, reportIdx) => {
+        // idx1++;
+        let reportedLogsIdx = "reportedLogs" + reportIdx;
         return (
-          <ReportedLog key={reportIdx} userID={report.id} userEvaluation={report.userEvaluation}
-            tags={report.tags} comment={report.comment} apology={report.apology}
-          />
-        )
-      })
+          <div className={reportedLogsIdx} key={reportIdx}>
+            <ReportedLog
+              // key={idx1}
+              key={reportIdx}
+              userID={report.id}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
+        );
+      });
+      // console.log(reportedLogs); // this works
       reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
+        let reportingLogsIdx = "reportingLogs" + reportIdx;
         return (
-          <ReportingLog key={reportIdx} userID={report.id} reportedSummoner={report.reported_summoner}
-            userEvaluation={report.userEvaluation}
-            tags={report.tags} comment={report.comment} apology={report.apology}
-          />
-        )
-      })
-
+          <div className={reportingLogsIdx} key={reportIdx}>
+            <ReportingLog
+              key={reportIdx}
+              userID={report.id}
+              reportedSummoner={report.reported_summoner}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
+        );
+      });
+      // console.log(reportingLogs); // this works
     }
+
     return (
       <div className="myPage">
         <div className="mypageTitle">마이페이지</div>
-        {this.state.getResult && 
-          <div className = 'resultDisplay'>
+        {this.state.getResult && (
+          <div className="resultDisplay">
             <div className="mypageContent">
               <div style={{ fontWeight: "bold" }}>유저네임</div>
               {this.state.username}
@@ -104,15 +125,7 @@ class My extends Component {
               >
                 더보기
               </div>
-              <div classNmae='mypage_box1'>
-                {reportingLogs}
-              </div>
-              {/* <div className="mypage_box1">
-               {reportingLogs[0]}
-              </div>
-              <div className="mypage_box2">
-               {(reportingLogs.length == 2) && reportingLogs[1]}
-              </div> */}
+              <div>{reportingLogs}</div>
             </div>
             <div>
               <div className="recentText2">Recent Reported Logs</div>
@@ -122,21 +135,13 @@ class My extends Component {
               >
                 더보기
               </div>
-              <div classNmae='mypage_box1'>
-                {reportedLogs}
-              </div>
-              {/* <div className="mypage_box3">
-                <ReportedLog />
-              </div>
-              <div className="mypage_box4">
-                <ReportedLog />
-              </div> */}
+              <div>{reportedLogs}</div>
             </div>
           </div>
-        }
+        )}
       </div>
     );
   }
 }
 
-export default withRouter(My)
+export default withRouter(My);

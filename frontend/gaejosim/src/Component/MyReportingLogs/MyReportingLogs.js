@@ -1,128 +1,79 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import "./MyReportingLogs.css";
 
-import ReportingLog from "../ReportingLog/ReportingLog";
+import { withRouter } from "react-router-dom";
+
+import ReportingLog2 from "./ReportingLog2/ReportingLog2";
 
 class MyReportingLogs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // reports: [],
-      // getReportsBoolean: false,
-
-      ApologyCheck: false,
+      reports: [],
+      getResult: false,
     };
   }
 
-  // componentDidMount() {
-  //   if (this.state.getReportsBoolean === false) {
-  //     this.getReports();
-  //   }
-  // }
+  getReportingLogs = async () => {
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-  // getReports = async () => {
-  //   axios.defaults.xsrfCookieName = "csrftoken";
-  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.get("/api/token/").then();
 
-  //   axios.get("/api/token/").then();
-
-  //   const response_signin = await axios.post("/api/signin/", {
-  //     username: "test1",
-  //     password: "password",
-  //   });
-
-  //   if (response_signin.status === 200) {
-  //     const response = await axios.get("/api/my/reports/");
-
-  //     this.setState({
-  //       reports: response.data.reports,
-  //       getReports: true,
-  //     });
-  //   }
-  // };
-
-  deleteReport = async () => {
-    // axios.defaults.xsrfCookieName = "csrftoken";
-    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-    // axios.get("/api/token/").then();
-
-    // const response_signin = await axios.post("/api/signin/", {
-    //   username: "test1",
-    //   password: "password",
-    // });
-
-    // if (response_signin.status === 200) {
-    //   axios
-    //     .delete("/api/reports/:id/")
-    //     .then(() => this.setState({ status: "Your report is deleted" }));
-    // }
-    alert("리포트가 삭제되었습니다");
-  };
-
-  onClickApologyCheck = () => {
-    this.setState({ ApologyCheck: true });
-  };
-
-  onClickDeleteHandler = () => {
-    this.deleteReport();
+    const response = await axios.get("/api/my/reports/", {}).then((res) => {
+      // let userInfo = res.data.user;
+      let reportInfo = res.data.reports;
+      // console.log("reportInfo:" + reportInfo); // this works
+      console.log(res.data); //this works
+      this.setState({
+        // username: userInfo.username,
+        // email: userInfo.email,
+        // summonerName: userInfo.summoner_name,
+        // mannerPoint: userInfo.mannerPoint,
+        // reportsForUser: reportInfo.reports_for_user,
+        // reportsByUser: reportInfo.reports_by_user,
+        reportinglogs: reportInfo.reports,
+        getResult: true,
+      });
+    });
   };
 
   render() {
-    let redirect = null;
+    let myReportingLogs = [];
 
-    // let reports_info;
-
-    // if (this.state.reports_info === false) {
-    //   this.getReports();
-    // } else {
-    //   reports_info = this.state.reports.map((reports) => {
-    //     return (
-    //       <div className={reports.id}>
-    //         <div>
-    //           Recent Reported Log{reports.id}: {reports.reported_summoner}
-    //         </div>
-    //         <div>
-    //           {reports.tag}, {reports.evaluation}, {reports.comment}
-    //         </div>
-    //       </div>
-    //     );
-    //   });
-    // }
-
-    if (this.state.ApologyCheck === true) {
-      redirect = <Redirect to={`/myApologyCheck`} />;
+    if (this.state.getResult === false) {
+      this.getReportingLogs();
+    } else {
+      myReportingLogs = this.state.reports.map((report, reportIdx) => {
+        let myreportinglogsIdx = "myreportinglogs" + reportIdx;
+        return (
+          <div className={myreportinglogsIdx} key={reportIdx}>
+            <ReportingLog2
+              key={reportIdx}
+              userID={report.id}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              reportedSummoer={report.reported_summoner}
+              comment={report.comment}
+              apology={report.apology}
+            />
+          </div>
+        );
+      });
     }
+
+    console.log("test : " + myReportingLogs);
 
     return (
       <div className="myReportingLogsPage">
-        {redirect}
-        <text className="myReportingLogsTitle">작성한 리포트</text>
+        <div className="myReportingLogsTitle">작성한 리포트</div>
         <div style={{ left: "38.5%" }}>
-          <div className="Reportinglogs_box1">
-            <ReportingLog />
-          </div>
-          <div className="Reportinglogs_box2">
-            <ReportingLog />
-          </div>
-          <div className="Reportinglogs_box3">
-            <ReportingLog />
-          </div>
-          <div className="Reportinglogs_box4">
-            <ReportingLog />
-          </div>
-          <div className="Reportinglogs_box5">
-            <ReportingLog />
-          </div>
-          <div className="Reportinglogs_box6">
-            <ReportingLog />
-          </div>
+          {this.state.getResult && <div>{myReportingLogs}</div>}
         </div>
       </div>
     );
   }
 }
 
-export default MyReportingLogs;
+export default withRouter(MyReportingLogs);

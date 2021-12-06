@@ -1,28 +1,30 @@
-// import React from "react";
-// // import {shallow} from 'enzyme';
-// import { render, screen } from "@testing-library/react";
-// import ReportAuthPage from "./ReportAuthPage";
-
-// test("renders ReportAuth page", () => {
-//   render(<ReportAuthPage />);
-//   const linkElement = screen.getByText(/Report/);
-//   expect(linkElement).toBeInTheDocument();
-// });
-
 import React from "react";
 import ReactDom from "react-dom";
 import ReportAuthPage from "./ReportAuthPage";
 import { BrowserRouter } from "react-router-dom";
 
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 it("renders ReportAuthPage without crashing", () => {
   const div = document.createElement("div");
 
   ReactDom.render(
-    <BrowserRouter>
-      <ReportAuthPage />
-    </BrowserRouter>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <ReportAuthPage />
+      </BrowserRouter>
+    </Provider>,
     div
   );
 
   ReactDom.unmountComponentAtNode(div);
-});
+}); // Maximum update depth exceeded
