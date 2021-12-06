@@ -37,7 +37,8 @@ class ReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -78,7 +79,8 @@ class ReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=(
+                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -257,6 +259,77 @@ class ReportTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 201)
 
+    def test_fail_delete_report_without_login(self):
+        """fail to delete report without login"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        report = Report.objects.create(
+            tag="대리 게임,팀킬",
+            comment="test_comment",
+            reported_summoner=self.test_summoner2,
+            reporting_user=self.test_user1,
+            evaluation=30,
+        )
+
+        response = client.delete(
+            f"/api/reports/{report.id}/", HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 401)
+
+    def test_fail_delete_others_report(self):
+        """fail to delete others report"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        client.login(username="test2", password="password")
+
+        report = Report.objects.create(
+            tag="대리 게임,팀킬",
+            comment="test_comment",
+            reported_summoner=self.test_summoner2,
+            reporting_user=self.test_user1,
+            evaluation=30,
+        )
+
+        response = client.delete(
+            f"/api/reports/{report.id}/", HTTP_X_CSRFTOKEN=csrftoken)
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_success_delete_report(self):
+        """fail to delete report without login"""
+        report = Report.objects.create(
+            tag="대리 게임,팀킬",
+            comment="test_comment",
+            reported_summoner=self.test_summoner1,
+            reporting_user=self.test_user2,
+            evaluation=70,
+        )
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        client.login(username="test2", password="password")
+
+        response = client.delete(
+            f"/api/reports/{report.id}/", HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_delete_not_existing_report(self):
+        """fail to delete not existing report"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        client.login(username="test2", password="password")
+
+        response = client.delete(
+            "/api/reports/100/", HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 404)
+
     def test_success_my_reports(self):
         """list of my reports"""
         self.client.login(username="test2", password="password")
@@ -325,7 +398,8 @@ class HomePageTest(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -362,7 +436,8 @@ class HomePageTest(TestCase):
             reporting_user=self.test_user2,
             evaluation=70,
         )
-        report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(days=-2)
+        report_1.created_at = datetime.now(
+            timezone("Asia/Seoul")) + timedelta(days=-2)
         report_1.save()
 
         client = Client(enforce_csrf_checks=True)
@@ -408,7 +483,8 @@ class MyReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=(
+                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -441,7 +517,8 @@ class MyReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=(
+                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
