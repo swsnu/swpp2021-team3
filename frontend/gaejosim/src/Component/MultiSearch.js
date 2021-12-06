@@ -8,33 +8,27 @@ import './MultiSearch.css'
 
 class MultiSearch extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       summoners: props.summoners,
       matchers: [],
       getResult: false,
-    };
+    }
   }
 
   getMatchers = async () => {
-    console.log('call of getMatchers')
-    console.log('state of getResult', this.state.getResult)
 
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
     axios.get('/api/token/').then()
 
-    const url = 'http://localhost:3000/api/search/'
-    console.log('call axios.get request')
     await axios.get('/api/search/', {
         params: {
           summoners: this.state.summoners,
         },
     })
       .then((res) => {
-        console.log('response.data.matchers')
-        console.log(res.data.matchers)
         this.setState({ matchers: res.data.matchers, getResult: true })
       })
   }
@@ -42,25 +36,21 @@ class MultiSearch extends Component {
   // TODO: 한번만 콜하게 바꾸기
   render() {
     let matcherInfos
-
     if (this.state.getResult === false) {
       this.getMatchers()
     } else {
-      let idx = 0;
-      matcherInfos = this.state.matchers.map((matcher) => {
-        idx = idx + 1
-        let summonerIdx = 'summoner' + idx
+      matcherInfos = this.state.matchers.map((matcher, matcherIdx) => {
         return (
-          <div className={summonerIdx} key={summonerIdx}>
+          <div className = {`summoner${matcherIdx+1}`} key = {matcherIdx+1}>
             <CommonSearch
-              summonerName={matcher.summoner_name}
-              tier={matcher.tier}
-              rank={matcher.rank}
-              mannerPoint={matcher.manner_point}
-              tagValues={matcher.tag_values}
-              winLose={matcher.win_lose}
-              recentResults={matcher.recent_result}
-              num={idx}
+              summonerName = {matcher.summoner_name}
+              tier = {matcher.tier}
+              rank = {matcher.rank}
+              mannerPoint = {matcher.manner_point}
+              tagValues = {matcher.tag_values}
+              winLose = {matcher.win_lose}
+              recentResults = {matcher.recent_result}
+              num = {matcherIdx+1}
             />
           </div>
         )
@@ -69,9 +59,7 @@ class MultiSearch extends Component {
     return (
       <div className='MultiSearch'>
         {!this.state.getResult && <div className='loading'>Loading...</div>}
-        {this.state.getResult && (
-          <div className='matchInfos'>{matcherInfos}</div>
-        )}
+        {this.state.getResult && (<div className='matchInfos'>{matcherInfos}</div>)}
       </div>
     )
   }

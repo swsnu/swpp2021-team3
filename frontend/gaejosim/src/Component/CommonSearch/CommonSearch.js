@@ -29,10 +29,8 @@ class CommonSearch extends Component {
 
   render() {
     const winLoseArr = this.state.winLose;
-    let idx = -1;
-    const resultViews = this.state.recentResults.map((result) => {
-      idx = idx + 1;
-      return <Result key={idx} result={result} winLose={winLoseArr[idx]} />;
+    const resultViews = this.state.recentResults.map((result, resultIdx) => {
+      return <Result key={resultIdx} result={result} winLose={winLoseArr[resultIdx]} />;
     });
     console.log(this.state.num);
 
