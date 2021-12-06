@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
@@ -33,14 +33,24 @@ class Statistic extends Component {
   render() {
     return (
       <div className='Statistic'>
-        {this.state.getResult && <div className='AllReports'>All Reports</div>}
-        {this.state.getResult && (<div className="NumReportsContainer"><div className='NumReports'>{this.state.numReports}</div></div>)}
-        {this.state.getResult && (<div className='TodayReports'>Today Reports</div>)}
-        {this.state.getResult && (<div className="NumPreventsContainer"><div className='NumPrevents'>{this.state.numPrevents}</div></div>)}
-        {this.props.storedisLogin && this.state.numToAnswer !== 0 && (<div>Alert:{this.state.numToAnswer}</div>)}
-        {/* todo: numtoanswer css styling */}
-        {/* <div className='NumToAnswerText'>numToAnswer</div> */}
-        {/* <div className="NumToAnswerContainer"><div className="NumToAnswer">3</div></div> */}
+        {this.state.getResult && <div className = 'AllReports'>All Reports</div>}
+        {this.state.getResult && (<div className = 'NumReportsContainer'>
+          <div className = 'NumReports'>{this.state.numReports}</div>
+        </div>)}
+        {this.state.getResult && (<div className = 'TodayReports'>Today Reports</div>)}
+        {this.state.getResult && (<div className = 'NumPreventsContainer'>
+          <div className = 'NumPrevents'>{this.state.numPrevents}</div>
+        </div>)}
+        {/* {this.props.storedisLogin && this.state.numToAnswer !== 0 &&  */}
+        {this.props.storedisLogin && 
+        (<div className = 'NumToAnser'> 
+          <div className = 'NumToAnswerText'>numToAnswer</div>
+          <div className = 'NumToAnswerContainer'>
+            <NavLink to = '/my'>
+              <div className='NumToAnswer'>{this.state.numToAnswer}</div>
+            </NavLink>
+          </div>
+        </div>)}
       </div>
     )
   }
