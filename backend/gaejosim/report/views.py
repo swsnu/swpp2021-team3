@@ -15,7 +15,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
+    "key": "RGAPI-3e214592-8789-4c41-860a-f61e288bf1ec",  # updated 12/7
 }
 
 tag_dict = {
@@ -436,13 +436,43 @@ def delete_report(request, report_id):
     user = request.user
 
     try:
-        report = Report.objects.get(id=report_id)
+        report = Report.objects.select_related(
+            'reported_summoner').get(id=report_id)
 
     except Report.DoesNotExist:
         return JsonResponse({"error": "해당 신고가 존재하지 않습니다."}, status=404)
 
     if report.reporting_user != user:
         return JsonResponse({"error": "작성한 리포트만 삭제할 수 있습니다"}, status=400)
+
+    report_tag_list = report.tag.split(",")
+    report_evaluation = report.evaluation
+
+    reported_summoner = report.reported_summoner
+    manner_point = reported_summoner.manner_point
+
+    for tag_key in report_tag_list:
+        if tag_dict[tag_key] == 1:
+            manner_point.tag1 += 0.5
+        elif tag_dict[tag_key] == 2:
+            manner_point.tag2 += 0.5
+        elif tag_dict[tag_key] == 3:
+            manner_point.tag3 += 0.5
+        elif tag_dict[tag_key] == 4:
+            manner_point.tag4 += 0.5
+        else:
+            manner_point.tag5 += 0.5
+
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
+
+    if reports_cnt == 1:
+        manner_point.point = 80
+    else:
+        manner_point.point = (
+            manner_point.point * reports_cnt - report_evaluation
+        ) / (reports_cnt - 1)
+    manner_point.save()
 
     report.delete()
 
