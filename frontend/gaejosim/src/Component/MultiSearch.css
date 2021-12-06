@@ -1,32 +1,61 @@
+/* .summoner0 {
+  position: relative;
+  top: 40.8%;
+  left: 10%;
+  transform: translateX(-50%);
+} */
+
 .summoner1 {
-    position: absolute;
-    left : -19px;
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 18%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
 .summoner2 {
-    position: absolute;
-    left : 247px;
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 34%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
 .summoner3 {
-    position: absolute;
-    left : 513px;
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
 .summoner4 {
-    position: absolute;
-    left : 779px;
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 66%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
 .summoner5 {
-    position: absolute;
-    left : 1045px;
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 82%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
 .loading {
-    position: absolute;
-    left : 600px;
-    bottom: 700px;
-    font-size : 30px;
-    font-weight: 800;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 36%;
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffffff;
 }

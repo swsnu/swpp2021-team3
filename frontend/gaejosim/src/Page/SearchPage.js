@@ -24,8 +24,10 @@ class SearchPage extends Component {
         <img className="SearchPageLogo" alt="GAEJOSIM" src={Logo} />
         <Header />
         <div className="Background"></div>
-        <div className="Logo">Gaejosim</div>
-        <Searchbar />
+        {/* <div className="Logo">Gaejosim</div> */}
+        <div className="Searchbar_SearchPage">
+          <Searchbar />
+        </div>
         <button
           className="GoToReport"
           id="button"

@@ -1,224 +1,198 @@
-/* .Process {
-    position: absolute;
-    height: 840px;
-    width: 480px;
-    left: 300px;
-    right: 300px;
-    top: 278px;
-    bottom: 1227px;
-} */
-
-.ReportAction{
-    background-color: aquamarine;
+.LeftBarStyle2 {
+  position: absolute;
+  width: 14.6%;
+  height: 8px;
+  left: 34.7%;
+  top: 25.3%;
+  background: #fc0174;
+  border-radius: 40px;
 }
 
-.Box1{
-    position: absolute;
-    height: 240px;
-    width: 840px;
-    left: 300px;
-    right: 300px;
-    border-radius: 32px;
-    top: 278px;
-    bottom: 1227px;
-    background-color: #FFFFFF;
-}
-.Box1 #MannerPoint{
-    position : absolute;
-    height: 50px;
-    width: 1000px;
-    top: 20px;
-    left: 54px;
-    right: 863px;
-    bottom: 1510px;
-
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-    letter-spacing: 0px;
-    text-align: left;
+.RightBarStyle2 {
+  position: absolute;
+  width: 14.6%;
+  height: 8px;
+  left: 50.1%;
+  top: 25.3%;
+  background: #fc0174;
+  border-radius: 40px;
 }
 
-.Box1 #MannerPointDescription{
-    position : absolute;
-    height: 50px;
-    width: 1000px;
-    top: 425px;
-    left: 380px;
-    right: 863px;
-    bottom: 1510px;
+.LeftText2 {
+  position: relative;
+  left: 83.5%;
+  top: -300%;
 
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-    letter-spacing: 0px;
-    text-align: left;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: right;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
-.Box1 #MannerPointInput{
-    position : absolute;
-    height: 80px;
-    width: 691px;
-    left: 74px;
-    top: 88px;
-    border-radius: 16px;
-    outline:0;
-    border:0;
-    background-color: #EFF0F7;
+.RightText2 {
+  position: relative;
+  left: 83%;
+  top: -300%;
 
-    font-size: 20px;
-    font-weight: 700;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: right;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
-.Box2{
-    position: absolute;
-    height: 240px;
-    width: 840px;
-    border-radius: 32px;
-    left: 300px;
-    right: 300px;
-    top: 577px;
-    bottom: 688px;
-    background-color: #FFFFFF;
+#MannerPoint {
+  position: absolute;
+
+  top: 32.3%;
+  left: 34.7%;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #ffffff;
 }
 
-.Box2 #Tag{
-    position : absolute;
-    height: 50px;
-    width: 1000px;
-    top: 20px;
-    left: 54px;
-    right: 863px;
-    bottom: 1510px;
-
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-    letter-spacing: 0px;
-    text-align: left;
-}
-.Box2 .tags{
-    position : absolute;
-    height: 120px;
-    width: 750px;
-    top: 80px;
-    left: 54px;
-    right: 863px;
-    bottom: 1510px;
-
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-    letter-spacing: 0px;
-    text-align: left;
+#MannerPointInput {
+  position: absolute;
+  width: 20.5%;
+  left: 44%;
+  top: 34.3%;
+  border-radius: 16px;
+  outline: 0;
+  border: 0;
+  color: #fc0174;
 }
 
-.Box2 #button{
-    position : relative;
-    height: 44px;
-    width: 140px;
-    left: 10px;
-    right: 10px;
-    top: 0px;
-    border-radius: 16px;
-    background-color: #5F2EEA;
-    outline:0;
-    border:0;
-    padding: 3px;
-    margin-left:6px;
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: 0.75px;
-    text-align: center;
-    color: #FFFFFF;
+#evaluation_0 {
+  position: absolute;
+  top: -5%;
+  font-size: 9px;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 80%;
 }
 
-.Box3{
-    position: absolute;
-    height: 240px;
-    width: 840px;
-    border-radius: 32px;
-    left: 300px;
-    right: 300px;
-    top: 876px;
-    bottom: 149px;
-    background-color: #FFFFFF;
+#evaluation_100 {
+  position: absolute;
+  top: -5%;
+  right: 0%;
+  font-size: 9px;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 80%;
 }
 
-.Box3 #Comment{
-    position : absolute;
-    height: 50px;
-    width: 1000px;
-    top: 20px;
-    left: 54px;
-    right: 863px;
-    bottom: 1510px;
+#Tag {
+  position: absolute;
 
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-    letter-spacing: 0px;
-    text-align: left;
+  top: 39%;
+  left: 34.7%;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #ffffff;
 }
 
-.Box3 #CommentInput{
-    position : absolute;
-    height: 80px;
-    width: 691px;
-    left: 74px;
-    top: 88px;
-    border-radius: 16px;
-    outline:0;
-    border:0;
-    background-color: #EFF0F7;
-
+.TagsButtonContainer {
+  position: absolute;
+  top: 40.7%;
+  left: 43.75%;
+  width: 21%;
+  height: 4%;
 }
 
-#submit{
-    position: absolute;
-    height: 38.4px;
-    width: 108px;
-    left: 596px;
-    top: 1150px;
-    border-radius: 16px;
-    background-color: #5F2EEA;
-    outline:0;
-    border:0;
+#tagbutton {
+  position: relative;
+  height: 90%;
+  width: 48%;
+  border-radius: 10px;
+  background-color: #fc0174;
+  outline: 0;
+  border: 0;
+  padding: 1%;
+  margin-left: 2%;
+  margin-bottom: 2.3%;
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: 0.75px;
-    text-align: center;
-    color: #FFFFFF;
-
+  font-size: 12%;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
 }
 
-#cancel{
-    position: absolute;
-    height: 38.4px;
-    width: 108px;
-    left: 740px;
-    top: 1150px;
-    border-radius: 16px;
-    background-color: #5F2EEA;
-    outline:0;
-    border:0;
+#Comment {
+  position: absolute;
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: 0.75px;
-    text-align: center;
-    color: #FFFFFF;
+  top: 63.5%;
+  left: 34.7%;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #ffffff;
+}
+
+#CommentInput {
+  position: absolute;
+  width: 20.5%;
+  height: 4%;
+  left: 44%;
+  top: 65.4%;
+  border-radius: 8px;
+  outline: 0;
+  border: 1px solid #fc0174;
+}
+
+.submitButton {
+  position: absolute;
+
+  width: 8.3%;
+  height: 39.81px;
+  left: 37.85%;
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}
+
+.cancelButton {
+  position: absolute;
+  width: 8.3%;
+  height: 39.81px;
+  left: 53.25%;
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
 }

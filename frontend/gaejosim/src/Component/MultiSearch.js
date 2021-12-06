@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import CommonSearch from "./CommonSearch/CommonSearch";
-import axios from "axios";
+import React, { Component } from 'react'
+import axios from 'axios'
 
-import "./MultiSearch.css";
+import CommonSearch from './CommonSearch/CommonSearch'
 
-// TODO: api call 시 type 요소 뺄지 논의하기
+import './MultiSearch.css'
 
 class MultiSearch extends Component {
   constructor(props) {
@@ -13,44 +12,40 @@ class MultiSearch extends Component {
       summoners: props.summoners,
       matchers: [],
       getResult: false,
-    };
+    }
   }
 
   getMatchers = async () => {
-    console.log("call of getMatchers");
-    console.log("state of getResult", this.state.getResult);
+    console.log('call of getMatchers');
+    console.log('state of getResult', this.state.getResult)
 
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-    axios.get("/api/token/").then();
+    axios.get('/api/token/').then()
 
-    const url = "http://localhost:3000/api/search/";
-    console.log("call axios.get request");
-    const response = await axios.get(url, {
-      params: {
-        type: "multi",
-        summoners: this.state.summoners,
-      },
-    });
+    await axios.get('/api/search', {
+        params: {
+          summoners: this.props.summoners,
+        },
+    })
+      .then((res) => {
+        // console.log('response.data.matchers');
+        // console.log(res.data.matchers);
+        this.setState({ matchers: res.data.matchers, getResult: true })
+      })
+  }
 
-    this.setState({
-      matchers: response.data.matchers,
-      getResult: true,
-    });
-  };
-
+  // TODO: 한번만 콜하게 바꾸기
   render() {
-    let matcherInfos;
+    let matcherInfos
     if (this.state.getResult === false) {
-      this.getMatchers();
+      this.getMatchers()
     } else {
-      let idx = 0;
-      matcherInfos = this.state.matchers.map((matcher) => {
-        idx = idx + 1;
-        let summonerIdx = "summoner" + idx;
+      matcherInfos = this.state.matchers.map((matcher, matcherIdx) => {
         return (
-          <div className={summonerIdx}>
+          // <div className={summonerIdx} key={summonerIdx}>
+          <div className = {`summoner${matcherIdx+1}`} key={matcherIdx+1}>
             <CommonSearch
               summonerName={matcher.summoner_name}
               tier={matcher.tier}
@@ -59,21 +54,20 @@ class MultiSearch extends Component {
               tagValues={matcher.tag_values}
               winLose={matcher.win_lose}
               recentResults={matcher.recent_result}
-              num={idx}
+              num={matcherIdx+1}
             />
+            {/* </div> */}
           </div>
         );
       });
     }
     return (
-      <div className="MultiSearch">
-        {!this.state.getResult && <div className="loading">loading...</div>}
-        {this.state.getResult && (
-          <div className="matchInfos">{matcherInfos}</div>
-        )}
+      <div className='MultiSearch'>
+        {!this.state.getResult && <div className='loading'>Loading...</div>}
+        {this.state.getResult && (<div className='matchInfos'>{matcherInfos}</div>)}
       </div>
-    );
+    )
   }
 }
 
-export default MultiSearch;
+export default MultiSearch

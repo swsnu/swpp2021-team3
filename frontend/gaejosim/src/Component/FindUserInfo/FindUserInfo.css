@@ -1,0 +1,129 @@
+.FindIDTitle {
+  position: absolute;
+  /* width: 67px; */
+  /* height: 36px; */
+  left: 35.4%;
+  top: 34.5%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.FindIDTitle {
+  position: absolute;
+  /* width: 67px; */
+  /* height: 36px; */
+  left: 17.4%;
+  top: 34.5%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.FindPWTitle {
+  position: absolute;
+  /* width: 67px; */
+  /* height: 36px; */
+  left: 52%;
+  top: 34.5%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.FindID_inputField {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 17.4%;
+  top: 40.4%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.FindPW_inputField1 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 52%;
+  top: 40.4%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.FindPW_inputField2 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 52%;
+  top: 47.8%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.FindIDButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  /* right: 75%;
+  transform: translateX(125%); */
+  left: 28.5%;
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}
+
+.FindPWButton {
+  position: absolute;
+  width: 120px;
+  height: 39.81px;
+  /* left: 75%;
+  transform: translateX(-125%); */
+  left: 63.2%;
+  top: 78%;
+  background: #fc0174;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+
+  outline: 0;
+  border: 0;
+}

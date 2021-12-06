@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 // import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom'
-import axios from 'axios';
+
+import { NavLink, withRouter } from "react-router-dom";
+import axios from "axios";
+
+import "./ChangePassword.css";
 
 // TODO: post 요청을 put으로 back에서 바꾸면 axios 코드 변경
 
@@ -20,7 +23,7 @@ class ChangePassword extends Component {
 
         axios.get('/api/token/').then()
        
-        const response = await axios.post('/api/change/password/', {
+        await axios.post('/api/change/password/', {
             "old_password" : this.state.oldPW,
             "new_password" : this.state.newPW,
             "password_confirm" : this.state.newPWConfirm,
@@ -49,20 +52,27 @@ class ChangePassword extends Component {
     render() {
         return (
             <div className = 'ChangePW'> 
-                <NavLink exact to = '/login'>로그인</NavLink>
-                <NavLink exact to = '/finduserinfo'>아이디 비밀번호 찾기</NavLink>
+                <text className="ChangePWTitle">비밀번호 변경</text>
+                <NavLink exact to = '/login'>
+                  <div className="ChangePW_Login_text">로그인</div>
+                </NavLink>
+                <NavLink exact to = '/finduserinfo'>
+                   <div className="ChangePW_Finduserinfo_text">
+                    아이디 비밀번호 찾기
+                   </div>
+                </NavLink>
                 <input
-                    className = 'inputField'
+                    className="ChangePW_inputField1"
                     type = 'string'
                     placeholder = '기존 비밀번호'
                     onChange={(event) => this.setState({ oldPW : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className="ChangePW_inputField2"
                     type = 'string'
                     placeholder = '신규 비밀번호'
                     onChange={(event) => this.setState({ newPW : event.target.value })} />
                 <input
-                    className = 'inputField'
+                    className="ChangePW_inputField3"
                     type = 'string'
                     placeholder = '신규 비밀번호 확인'
                     onChange={(event) => this.setState({ newPWConfirm : event.target.value })} />
@@ -75,4 +85,4 @@ class ChangePassword extends Component {
     }
 }
 
-export default ChangePassword;
+export default withRouter(ChangePassword)

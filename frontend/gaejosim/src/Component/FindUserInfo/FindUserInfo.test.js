@@ -1,33 +1,59 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import FindUserInfo from "./FindUserInfo";
 
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 describe("<FindUserInfo />", () => {
   it("should render without errors", () => {
-    const component = shallow(<FindUserInfo />);
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <FindUserInfo />
+        </Provider>
+      </Router>
+    );
     const wrapper = component.find(".FindUserInfo");
     expect(wrapper.length).toBe(0);
   });
 
-  xit("should handle FindIDButton", () => {
+  it("should handle FindIDButton", () => {
     const mockFindIDButton = jest.fn();
-    const component = shallow(<FindUserInfo clickDone={mockFindIDButton} />);
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <FindUserInfo clickDone={mockFindIDButton} />
+        </Provider>
+      </Router>
+    );
     const wrapper = component.find(".FindIDButton");
-    wrapper.at(0).simulate("click");
+    wrapper.simulate("click");
     expect(mockFindIDButton).toHaveBeenCalledTimes(0);
   });
-
-  xit("should handle FindPWButton", () => {
+  it("should handle FindPWButton", () => {
     const mockFindPWButton = jest.fn();
-    const component = shallow(<FindUserInfo clickDone={mockFindPWButton} />);
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <FindUserInfo clickDone={mockFindPWButton} />
+        </Provider>
+      </Router>
+    );
     const wrapper = component.find(".FindPWButton");
-    // wrapper.simulate("click");
-    // component.find(".FindPWButton").simulate("click");
-    // expect(mockFindPWButton).toHaveBeenCalledTimes(0);
-    expect(wrapper.exists()).toEqual(false);
+    wrapper.simulate("click");
+    expect(mockFindPWButton).toHaveBeenCalledTimes(0);
   });
 
   it("changes input1", () => {
@@ -72,3 +98,5 @@ describe("<FindUserInfo />", () => {
     });
   });
 });
+
+//todo: axios post, onClickFindIDButton, onClickFindPWButton

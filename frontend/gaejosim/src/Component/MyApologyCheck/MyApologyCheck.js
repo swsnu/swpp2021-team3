@@ -67,22 +67,10 @@ class MyApologyCheck extends Component {
     return (
       <div className="myReportedLogsPage">
         {redirect}
-        <text className="myApologyCheckTitle">반성문 확인</text>
-        <div>
-          <div className="apology_box1">
-            <text className="boxText1">
-              Recent Reporting Log reports_for_user.id :
-              reports_by_user.reported_summoner
-            </text>
-            <text className="boxText2">
-              reports_by_user.tag, reports_by_user.evaluation,
-              reports_by_user.comment{" "}
-            </text>
-          </div>
-        </div>
+        <div className="myApologyCheckTitle">반성문 확인</div>
         <div>
           <div className="apology_check_box">
-            <text className="apology_check_text">apology.content</text>
+            <div className="apology_check_text">apology.content</div>
           </div>
         </div>
         <button
