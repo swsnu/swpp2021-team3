@@ -15,7 +15,6 @@ api_default = {
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
     "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
-
 }
 
 tag_dict = {
@@ -45,8 +44,7 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
         if not team_players:
-            JsonResponse(
-                {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
+            JsonResponse({"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":
@@ -164,8 +162,7 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(
-        reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
 
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
@@ -303,7 +300,10 @@ def apology(request, report_id):
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
-            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+            return JsonResponse(
+                {"error": "반성의 의미를 담아서 다시 작성해주세요."},
+                status=400,
+            )
 
         apology = Apology(content=content, is_verified=True)
         apology.save()
@@ -327,15 +327,14 @@ def apology(request, report_id):
             else:
                 manner_point.tag5 += 0.5
 
-        reports_cnt = Report.objects.filter(
-            reported_summoner=user.summoner).count()
+        reports_cnt = Report.objects.filter(reported_summoner=user.summoner).count()
 
         if reports_cnt == 1:
             manner_point.point = 80
         else:
-            manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
-                reports_cnt - 1
-            )
+            manner_point.point = (
+                manner_point.point * reports_cnt - report_evaluation
+            ) / (reports_cnt - 1)
         manner_point.save()
 
         return JsonResponse(
@@ -374,7 +373,12 @@ def apology(request, report_id):
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
-            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+            return JsonResponse(
+                {
+                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                },
+                status=400,
+            )
 
         apology.content = content
         apology.is_verified = True
