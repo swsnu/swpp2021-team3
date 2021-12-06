@@ -1,29 +1,53 @@
-.summoner1 {
-  position: absolute;
-  /* left: -19px; */
+/* .summoner0 {
+  position: relative;
   top: 40.8%;
+  left: 10%;
+  transform: translateX(-50%);
+} */
+
+.summoner1 {
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 18%;
+  transform: translateX(-50%);
+  bottom: -220px;
+}
+
+.summoner2 {
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 34%;
+  transform: translateX(-50%);
+  bottom: -220px;
+}
+
+.summoner3 {
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
   left: 50%;
   transform: translateX(-50%);
+  bottom: -220px;
 }
 
-.class2 {
-  position: absolute;
-  left: 247px;
+.summoner4 {
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 66%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
-.class3 {
-  position: absolute;
-  left: 513px;
-}
-
-.class4 {
-  position: absolute;
-  left: 779px;
-}
-
-.class5 {
-  position: absolute;
-  left: 1045px;
+.summoner5 {
+  position: relative;
+  /* left: -19px; */
+  /* top: 40.8%; */
+  left: 82%;
+  transform: translateX(-50%);
+  bottom: -220px;
 }
 
 .loading {

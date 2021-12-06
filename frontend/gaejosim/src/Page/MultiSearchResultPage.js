@@ -11,12 +11,12 @@ class MultiSearchResultPage extends Component {
   render() {
     let summonerArr = this.props.match.params.summonerList.split("-")
     let summonerList = summonerArr.join(",")
-    console.log("summonerList ", summonerList)
+    console.log("on new page")
     return (
       <div className="MultiSearchResultPageMulti">
         <Header />
         <Searchbar />
-        <MultiSearch summoners={summonerList} />
+        <MultiSearch summoners={summonerList}/>
       </div>
     );
   }

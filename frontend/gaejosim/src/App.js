@@ -33,26 +33,15 @@ function App() {
           <Route path="/changepassword" exact component={ChangePasswordPage} />
 
           <Route path="/search" exact component={SearchPage} />
-          <Route
-            path="/searchresult/:summonerList"
-            exact
-            component={MultiSearchResultPage}
-          />
+          <Route path="/searchresult/:summonerList" exact component={MultiSearchResultPage}/>
 
           <Route path="/reportAuth" exact component={ReportAuthPage} />
-          <Route
-            path="/reportAction/:summonerID"
-            exact
-            component={ReportActionPage}
-          />
+          <Route path="/reportAction/:summonerID" exact component={ReportActionPage} />
 
           <Route path="/my" exact component={MyPage} />
           <Route path="/myReportedLogs" exact component={MyReportedLogsPage} />
-          <Route
-            path="/myReportingLogs"
-            exact
-            component={MyReportingLogsPage}
-          />
+          <Route path="/myReportingLogs" exact component={MyReportingLogsPage} />
+          
           <Route path="/myApologyCheck" exact component={MyApologyCheckPage} />
           <Route path="/myApologyWrite" exact component={MyApologyWritePage} />
 
