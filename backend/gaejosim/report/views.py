@@ -45,8 +45,7 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
         if not team_players:
-            JsonResponse(
-                {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
+            JsonResponse({"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":
