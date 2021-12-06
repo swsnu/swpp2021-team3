@@ -21,6 +21,12 @@ class SignUp extends Component {
         agreePolicy : false,
     }
 
+    emailChecker = (email) => {
+        let regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        return regex.test(email);
+    }
+
+
     passwordHandler = (passwordCheck) => {
         if(this.state.password === passwordCheck) this.setState({ passwordConfirm : true})
         else return
@@ -35,7 +41,10 @@ class SignUp extends Component {
             alert('모든 필드의 값들을 다 기입해주셔야 회원가입이 가능합니다.')
             return
         }
-        if(!this.state.passwordConfirm) {
+        if(!this.emailChecker(this.state.email)){
+            alert('이메일 형식이 올바르지 않습니다.')
+        }
+        else if(!this.state.passwordConfirm) {
             alert('기입한 비밀번호와 비밀번호 체크 영역의 값이 동일하지 않습니다.')
             return
         }
