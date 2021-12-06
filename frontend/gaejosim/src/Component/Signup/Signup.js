@@ -1,17 +1,10 @@
-import React, { Component } from "react";
-// import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { NavLink, withRouter } from 'react-router-dom'
+import axios from 'axios'
 
-import { NavLink, withRouter } from "react-router-dom";
-import axios from "axios";
-
-import "./Signup.css";
-
-
-// TODO: reducer 연결해 로그인시 접근 불가하게 수정
-// TODO: 각 필드 값 형식 제한하는 validate 함수 추가하기
+import './Signup.css'
 
 class SignUp extends Component {
-
     state = {
         id : '', 
         email : '', 
@@ -53,24 +46,21 @@ class SignUp extends Component {
             return
         }
         else {
-            console.log('call post call')
             this.postSignUpData()
         }
     }
 
     postSignUpData = async () => {
-        console.log("postSignUpData")
-
-        axios.defaults.xsrfCookieName = 'csrftoken';
-        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
         axios.get('/api/token/').then()
        
         await axios.post('/api/signup/', {
-            "username" : this.state.id,
-	        "email" : this.state.email, 
-	        "summoner_name" : this.state.summonerID,
-	        "password" : this.state.password,
+            'username' : this.state.id,
+	        'email' : this.state.email, 
+	        'summoner_name' : this.state.summonerID,
+	        'password' : this.state.password,
         })
         .then((response) => {
             alert(`${response.data.message}\n로그인 페이지로 이동합니다.`)
@@ -84,12 +74,12 @@ class SignUp extends Component {
     render() {
         return (
             <div className = 'SignUp'>
-                <text className="SignupTitle">회원가입</text>
-                <NavLink exact to="/login">
-                  <text className="Signup_Login_text">로그인하기</text>
-                </NavLink>
+                <div className = 'SignupTitle'>회원가입</div>
+                <NavLink exact to = '/login'>
+                  <div className= 'Signup_Login_text'>로그인하기</div>
+                </NavLink> 
                 <input
-                    className="Signup_inputField1"
+                    className = 'Signup_inputField1'
                     type = 'string'
                     placeholder = '아이디'
                     onChange={(event) => this.setState({ id : event.target.value })} />
