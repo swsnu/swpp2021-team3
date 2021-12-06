@@ -16,12 +16,20 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<CommonSearch />", () => {
-  //todo done : Cannot read property 'map' of undefined : which can be a good example of map
+  //todo : this.state.recentResults.map is not a function
   xit("should render without errors", () => {
     const component = mount(
       <Router>
         <Provider store={store}>
-          <CommonSearch recent_result={[]} />
+          <CommonSearch 
+              summonerName={test}
+              tier={test}
+              rank={test}
+              mannerPoint={test}
+              tagValues={test}
+              winLose={test}
+              recentResults={test}
+              num={test} />
         </Provider>
       </Router>
     );
@@ -31,7 +39,15 @@ describe("<CommonSearch />", () => {
 
   xit("should render states without errors.", () => {
     const wrapper = shallow(
-      <CommonSearch recent_result={{ recent_result: "foo" }} />
+      <CommonSearch 
+              summonerName={test}
+              tier={test}
+              rank={test}
+              mannerPoint={test}
+              tagValues={test}
+              winLose={test}
+              recentResults={test}
+              num={test} />
     );
     expect(wrapper.find("#tier").length).toEqual(0);
   });

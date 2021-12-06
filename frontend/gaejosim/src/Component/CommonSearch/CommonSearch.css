@@ -2,10 +2,13 @@
   position: absolute;
 
   width: 15%;
-  height: calc(9% + 410px);
-  top: 36%;
+  /* height: calc(9% + 470px); */
+  height: 470px;
+
+  /* top: 36%; */
   left: 50%;
   transform: translateX(-50%);
+  /* bottom: 100px; */
 
   background-color: #282a30;
   border-radius: 32px;

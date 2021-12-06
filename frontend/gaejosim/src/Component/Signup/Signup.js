@@ -83,26 +83,31 @@ class SignUp extends Component {
                     className = 'Signup_inputField1'
                     type = 'string'
                     placeholder = '아이디'
+                    style={{fontSize: '11px'}}
                     onChange={(event) => this.setState({ id : event.target.value })} />
                 <input
                     className = 'Signup_inputField2'
                     type = 'string'
                     placeholder = '이메일'
+                    style={{fontSize: '11px'}}
                     onChange={(event) => this.setState({ email : event.target.value })} />
                 <input
                     className = 'Signup_inputField3'
                     type = 'string'
                     placeholder = '소환사 이름'
+                    style={{fontSize: '11px'}}
                     onChange={(event) => this.setState({ summonerID : event.target.value })} />
                 <input
                     className = 'Signup_inputField4'
                     type = 'password'
                     placeholder = '비밀번호'
+                    style={{fontSize: '11px'}}
                     onChange={(event) => this.setState({ password : event.target.value })} />
                 <input
                     className = 'Signup_inputField5'
                     type = 'password'
                     placeholder = '비밀번호 확인'
+                    style={{fontSize: '11px'}}
                     onChange={(event) => this.passwordHandler(event.target.value)} />
                 {(!this.state.agreePolicy) && <button className = 'AgreeButton'
                     onClick={() => this.onClickAgreeButton()}>

@@ -7,6 +7,6 @@ describe("<LoginPage />", () => {
   it("should render without errors", () => {
     const component = shallow(<LoginPage />);
     const wrapper = component.find(".LoginPage");
-    expect(wrapper.length).toBe(0);
+    expect(wrapper.length).toBe(1);
   });
 });

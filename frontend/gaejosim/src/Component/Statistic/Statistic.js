@@ -34,10 +34,13 @@ class Statistic extends Component {
     return (
       <div className='Statistic'>
         {this.state.getResult && <div className='AllReports'>All Reports</div>}
-        {this.state.getResult && (<div className='NumReports'>{this.state.numReports}</div>)}
+        {this.state.getResult && (<div className="NumReportsContainer"><div className='NumReports'>{this.state.numReports}</div></div>)}
         {this.state.getResult && (<div className='TodayReports'>Today Reports</div>)}
-        {this.state.getResult && (<div className='NumPrevents'>{this.state.numPrevents}</div>)}
+        {this.state.getResult && (<div className="NumPreventsContainer"><div className='NumPrevents'>{this.state.numPrevents}</div></div>)}
         {this.props.storedisLogin && this.state.numToAnswer !== 0 && (<div>Alert:{this.state.numToAnswer}</div>)}
+        {/* todo: numtoanswer css styling */}
+        {/* <div className='NumToAnswerText'>numToAnswer</div> */}
+        {/* <div className="NumToAnswerContainer"><div className="NumToAnswer">3</div></div> */}
       </div>
     )
   }

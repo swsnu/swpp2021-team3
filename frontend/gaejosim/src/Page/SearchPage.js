@@ -25,7 +25,9 @@ class SearchPage extends Component {
         <Header />
         <div className="Background"></div>
         {/* <div className="Logo">Gaejosim</div> */}
-        <Searchbar />
+        <div className="Searchbar_SearchPage">
+          <Searchbar />
+        </div>
         <button
           className="GoToReport"
           id="button"

@@ -137,7 +137,6 @@
   font-size: 12%;
   font-style: normal;
   font-weight: 600;
-  /* line-height: 28px; */
   text-align: center;
   color: #ffffff;
 }
@@ -145,7 +144,7 @@
 #Comment {
   position: absolute;
 
-  top: 63.8%;
+  top: 63.5%;
   left: 34.7%;
 
   font-size: 20px;
@@ -159,23 +158,20 @@
 #CommentInput {
   position: absolute;
   width: 20.5%;
-  height: 3.75%;
+  height: 4%;
   left: 44%;
   top: 65.4%;
   border-radius: 8px;
   outline: 0;
   border: 1px solid #fc0174;
-  /* background-color: #eff0f7; */
 }
 
 .submitButton {
   position: absolute;
-  /* width: 120px; */
+
   width: 8.3%;
   height: 39.81px;
   left: 37.85%;
-  /* left: 50%; */
-  /* transform: translateX(-75%); */
   top: 78%;
   background: #fc0174;
   border-radius: 40px;
@@ -190,7 +186,6 @@
   position: absolute;
   width: 8.3%;
   height: 39.81px;
-  /* left: calc(50.1% + 15.4 / 2); */
   left: 53.25%;
   top: 78%;
   background: #fc0174;

@@ -48,6 +48,7 @@ class Searchbar extends Component {
                 <textarea className = 'multiInput' type = 'text' 
                     placeholder = {`소환사1님이 방에 참가했습니다.\n소환사2님이 방에 참가했습니다.\n소환사3님이 방에 참가했습니다.\n소환사4님이 방에 참가했습니다.\n소환사5님이 방에 참가했습니다.\n또는\n소환사1, 소환사2, 소환사3, 소환사4, 소환사5`}
                     value = {this.state.searchInput}
+                    style={{fontSize: '11px'}}
                     onChange = {(event) => this.setState({ searchInput : event.target.value })} />
                 <button className = 'search'
                     onClick = {() => this.onClickSearchButton()}>검색</button>
