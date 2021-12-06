@@ -1,13 +1,11 @@
 # backend/Dockerfile
 FROM python:3.8
 VOLUME /app
-WORKDIR /app
-COPY ./backend/requirements.txt .
-COPY . .
-RUN pip install -r requirements.txt
+COPY . /app
+RUN pip install -r /app/backend/requirements.txt
 RUN pip install uwsgi
-RUN cd backend/gaejosim/gaejosim/
+WORKDIR /app/backend/gaejosim
 
 CMD uwsgi \
-    --wsgi-file backend/gaejosim/gaejosim/wsgi.py \
+    --wsgi-file gaejosim/wsgi.py \
     --http :8000
