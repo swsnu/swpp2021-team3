@@ -5,6 +5,7 @@ import CommonSearch from './CommonSearch/CommonSearch'
 
 import './MultiSearch.css'
 
+
 class MultiSearch extends Component {
   constructor(props) {
     super(props);

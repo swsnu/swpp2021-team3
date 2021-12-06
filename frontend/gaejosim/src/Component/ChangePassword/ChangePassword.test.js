@@ -35,7 +35,6 @@ describe("<ChangePassword />", () => {
     const wrapper = component.find(".ChangePWButton");
     wrapper.simulate("click");
     expect(mockChangePWButton).toHaveBeenCalledTimes(0);
-    // expect(wrapper.exists()).toEqual(false);
   });
 
   it("changes input1", () => {
