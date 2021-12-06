@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import * as actionTypes from '../../Store/Actions/ActionTypes'
+import { connect } from 'react-redux'
 
 import './Login.css'
 
@@ -22,7 +22,7 @@ class Login extends Component {
         username: this.state.id,
         password: this.state.password,
       })
-      .then((response) => {
+      .then(() => {
         this.props.onStoreLogin()
         alert('성공적으로 로그인하였습니다.\n검색페이지로 이동합니다.')
         this.props.history.push('/search')

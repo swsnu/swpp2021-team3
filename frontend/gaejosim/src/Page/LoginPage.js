@@ -4,7 +4,7 @@ import Login from '../Container/Login/Login';
 class LoginPage extends Component {
     render () {
         return (
-            <div className='FindUserInfoPage'>
+            <div className = 'LoginPage'>
                 <Login />
             </div>
         )
