@@ -77,7 +77,7 @@ class SignUp extends Component {
             <div className = 'SignUp'>
                 <text className="SignupTitle">회원가입</text>
                 <NavLink exact to="/login">
-                  <text className="Signup_Login_text">로그인하기</text>
+                  <div className="Signup_Login_text">로그인하기</div>
                 </NavLink>
                 <input
                     className="Signup_inputField1"
@@ -96,12 +96,12 @@ class SignUp extends Component {
                     onChange={(event) => this.setState({ summonerID : event.target.value })} />
                 <input
                     className = 'Signup_inputField4'
-                    type = 'string'
+                    type = 'password'
                     placeholder = '비밀번호'
                     onChange={(event) => this.setState({ password : event.target.value })} />
                 <input
                     className = 'Signup_inputField5'
-                    type = 'string'
+                    type = 'password'
                     placeholder = '비밀번호 확인'
                     onChange={(event) => this.passwordHandler(event.target.value)} />
                 {(!this.state.agreePolicy) && <button className = 'AgreeButton'

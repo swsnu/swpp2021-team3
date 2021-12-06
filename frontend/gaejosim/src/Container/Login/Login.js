@@ -72,7 +72,7 @@ class Login extends Component {
                     onChange={(event) => this.setState({ id : event.target.value })} />
                 <input
                     className = 'Login_inputField2'
-                    type = 'string'
+                    type = 'password'
                     placeholder = '비밀번호'
                     onChange={(event) => this.setState({ password : event.target.value })} />
                 <button className = 'LoginButton'
