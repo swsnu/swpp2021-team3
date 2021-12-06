@@ -18,7 +18,7 @@ class MultiSearchResultPage extends Component {
         <div className="Searchbar_MultiSearchPage">
           <Searchbar />
         </div>
-        <MultiSearch summoners={this.state.summonerList} />
+        <MultiSearch summoners={summonerList} />
       </div>
     );
   }
