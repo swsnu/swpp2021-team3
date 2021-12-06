@@ -23,17 +23,10 @@ class MyReportingLogs extends Component {
 
 
     await axios.get("/api/my/reports/", {}).then((res) => {
-      // let userInfo = res.data.user;
       let reportInfo = res.data.reports;
       // console.log("reportInfo:" + reportInfo); // this works
-      console.log(res.data); //this works
+      // console.log(res.data); //this works
       this.setState({
-        // username: userInfo.username,
-        // email: userInfo.email,
-        // summonerName: userInfo.summoner_name,
-        // mannerPoint: userInfo.mannerPoint,
-        // reportsForUser: reportInfo.reports_for_user,
-        // reportsByUser: reportInfo.reports_by_user,
         reportinglogs: reportInfo.reports,
         getResult: true,
       });
@@ -64,7 +57,7 @@ class MyReportingLogs extends Component {
       });
     }
 
-    console.log("test : " + myReportingLogs);
+    // console.log("test : " + myReportingLogs);
 
     return (
       <div className="myReportingLogsPage">

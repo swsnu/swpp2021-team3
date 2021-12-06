@@ -36,17 +36,19 @@
   color: #ffffff;
 }
 
-.NumReports {
+.NumReportsContainer{
   position: absolute;
-  /* width: 66px; */
   height: 54px;
-  /* left: 56px; */
   width: 100px;
-  /* height: 20px; */
   left: 57px;
   bottom: 19px;
+}
 
-  /* font-family: Noto Sans; */
+.NumReports {
+  position: absolute;
+  left: 25%;
+  transform: translateX(-25%);
+
   font-style: normal;
   font-weight: 800;
   font-size: 40px;
@@ -58,14 +60,64 @@
   color: #ffffff;
 }
 
-.NumPrevents {
+.NumPreventsContainer{
   position: absolute;
   height: 54px;
   bottom: 19px;
   width: 100px;
   left: 215px;
+}
+
+.NumPrevents {
+  position: absolute;
+  left: 40%;
+  transform: translateX(-40%);
+
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  text-align: center;
+  line-height: 54px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+
+.NumToAnswerText {
+  position: absolute;
+  width: 100px;
+  /* height: 20px; */
+  left: 393px;
+  bottom: 73px;
 
   /* font-family: Noto Sans; */
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.NumToAnswerContainer{
+  position: absolute;
+  height: 54px;
+  bottom: 19px;
+  width: 100px;
+  left: 393px;
+}
+
+.NumToAnswer {
+  position: absolute;
+  left: 40%;
+  transform: translateX(-40%);
+
   font-style: normal;
   font-weight: 800;
   font-size: 40px;

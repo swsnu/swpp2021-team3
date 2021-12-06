@@ -62,12 +62,14 @@ class Login extends Component {
           className = 'Login_inputField1'
           type = 'string'
           placeholder = '아이디'
+          style={{fontSize: '11px'}}
           onChange = {(event) => this.setState({ id: event.target.value })}
         />
         <input
           className = 'Login_inputField2'
           type = 'password'
           placeholder = '비밀번호'
+          style={{fontSize: '11px'}}
           onChange = {(event) => this.setState({ password: event.target.value })}
         />
         <button
