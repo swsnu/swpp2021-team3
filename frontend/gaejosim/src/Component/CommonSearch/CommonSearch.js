@@ -5,8 +5,6 @@ import Result from './Result/Result'
 
 import './CommonSearch.css'
 
-// TODO: tag diagram 형성하기
-
 class CommonSearch extends Component {
   constructor(props) {
     super(props)
