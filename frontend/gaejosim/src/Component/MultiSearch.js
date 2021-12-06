@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import CommonSearch from "./CommonSearch/CommonSearch";
-import axios from "axios";
+import React, { Component } from 'react'
+import axios from 'axios'
 
-import "./MultiSearch.css";
+import CommonSearch from './CommonSearch/CommonSearch'
+
+import './MultiSearch.css'
+
 
 class MultiSearch extends Component {
   constructor(props) {
@@ -15,39 +17,39 @@ class MultiSearch extends Component {
   }
 
   getMatchers = async () => {
-    console.log("call of getMatchers");
-    console.log("state of getResult", this.state.getResult);
+    console.log('call of getMatchers')
+    console.log('state of getResult', this.state.getResult)
 
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-    axios.get("/api/token/").then();
+    axios.get('/api/token/').then()
 
-    const url = "http://localhost:3000/api/search/";
-    console.log("call axios.get request");
-    await axios.get(url, {
+    const url = 'http://localhost:3000/api/search/'
+    console.log('call axios.get request')
+    await axios.get('/api/search/', {
         params: {
           summoners: this.state.summoners,
         },
-      })
+    })
       .then((res) => {
-        console.log("response.data.matchers");
-        console.log(res.data.matchers);
-        this.setState({ matchers: res.data.matchers, getResult: true });
-      });
-  };
+        console.log('response.data.matchers')
+        console.log(res.data.matchers)
+        this.setState({ matchers: res.data.matchers, getResult: true })
+      })
+  }
 
   // TODO: 한번만 콜하게 바꾸기
   render() {
-    let matcherInfos;
+    let matcherInfos
 
     if (this.state.getResult === false) {
-      this.getMatchers();
+      this.getMatchers()
     } else {
       let idx = 0;
       matcherInfos = this.state.matchers.map((matcher) => {
-        idx = idx + 1;
-        let summonerIdx = "summoner" + idx;
+        idx = idx + 1
+        let summonerIdx = 'summoner' + idx
         return (
           <div className={summonerIdx} key={summonerIdx}>
             <CommonSearch
@@ -61,18 +63,18 @@ class MultiSearch extends Component {
               num={idx}
             />
           </div>
-        );
-      });
+        )
+      })
     }
     return (
-      <div className="MultiSearch">
-        {!this.state.getResult && <div className="loading">Loading...</div>}
+      <div className='MultiSearch'>
+        {!this.state.getResult && <div className='loading'>Loading...</div>}
         {this.state.getResult && (
-          <div className="matchInfos">{matcherInfos}</div>
+          <div className='matchInfos'>{matcherInfos}</div>
         )}
       </div>
-    );
+    )
   }
 }
 
-export default MultiSearch;
+export default MultiSearch
