@@ -1,4 +1,4 @@
-git pull
+git pull origin Deploy
 tar xvf secrets.tar
 docker stop backend_container
 docker rm backend_container
