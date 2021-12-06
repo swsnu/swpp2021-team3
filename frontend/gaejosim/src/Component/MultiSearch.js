@@ -50,6 +50,7 @@ class MultiSearch extends Component {
         idx = idx + 1;
         let summonerIdx = "summoner" + idx;
         return (
+          // <div className="summonerBox">
           <div className={summonerIdx} key={summonerIdx}>
             <CommonSearch
               summonerName={matcher.summoner_name}
@@ -61,6 +62,7 @@ class MultiSearch extends Component {
               recentResults={matcher.recent_result}
               num={idx}
             />
+            {/* </div> */}
           </div>
         );
       });

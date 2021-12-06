@@ -1,18 +1,25 @@
-.titleTextStyleMulti{
-    position: absolute;
-    top: 150px;
-    left: 350px; 
-    font-weight: 800;
-    font-size: 64px;
-    line-height: 66px;
+.titleTextStyleMulti {
+  position: absolute;
+  top: 150px;
+  left: 350px;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 66px;
 }
 
-.subtitleTextStyleMulti{
-    position: absolute;
-    top: 280px;
-    left: 25.97%; 
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 66px;
+.subtitleTextStyleMulti {
+  position: absolute;
+  top: 280px;
+  left: 25.97%;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 66px;
 }
 
+.Searchbar_MultiSearchPage {
+  position: absolute;
+  width: 45.1%;
+  height: 100%;
+  left: 27.6%;
+  top: 15%;
+}

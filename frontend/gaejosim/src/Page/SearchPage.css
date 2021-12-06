@@ -20,6 +20,14 @@
   transform: translateX(-50%);
 }
 
+.Searchbar_SearchPage {
+  position: absolute;
+  width: 45.1%;
+  height: 100%;
+  left: 27.6%;
+  top: 46.5%;
+}
+
 .GoToReport {
   position: absolute;
   width: 202px;
