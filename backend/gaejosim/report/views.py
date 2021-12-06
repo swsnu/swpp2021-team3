@@ -5,6 +5,7 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.core.cache import cache
 from core.ml import papago_translate, watson_nlu_emotion
 from core.utils import is_riot_timeout, check_logged_in
 from user.models import Summoner, MannerPoint
@@ -242,12 +243,18 @@ def reports_statistics(request):
     today = datetime.now(timezone("Asia/Seoul"))
     yesterday = today + timedelta(days=-1)
     tomorrow = today + timedelta(days=1)
-    reports = Report.objects.all()
 
-    total_report_num = reports.count()
-    today_report_num = Report.objects.filter(
-        created_at__range=(yesterday, tomorrow)
-    ).count()
+    total_report_num = cache.get("total_report_num")
+    if not total_report_num:
+        total_report_num = Report.objects.count()
+        cache.set("total_report_num", total_report_num, 60)
+
+    today_report_num = cache.get("today_report_num")
+    if not today_report_num:
+        today_report_num = Report.objects.filter(
+            created_at__range=(yesterday, tomorrow)
+        ).count()
+        cache.set("today_report_num", today_report_num, 60)
 
     user = request.user
     reports_list = []
@@ -301,7 +308,9 @@ def apology(request, report_id):
 
         if not passed:
             return JsonResponse(
-                {"error": "반성의 의미를 담아서 다시 작성해주세요."},
+                {
+                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                },
                 status=400,
             )
 
