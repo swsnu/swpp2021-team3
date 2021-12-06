@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import "./Statistic.css";
-
 import { connect } from "react-redux";
 
-// TODO: css numToAnswer display
+import "./Statistic.css";
 
 class Statistic extends Component {
   state = {
@@ -15,9 +13,8 @@ class Statistic extends Component {
     numToAnswer: 0,
   };
 
-  constructor(props) {
-    super(props);
-    this.getStatistics();
+  componentDidMount() {
+    this.getStatistics()
   }
 
   getStatistics = async () => {
@@ -26,14 +23,8 @@ class Statistic extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios.get("/api/home/", {}).then((res) => {
-      console.log("response.data");
-      console.log(res.data);
-      this.state.numReports = res.data.accumulated_reports;
-      this.state.numPrevents = res.data.today_reports;
-      this.state.numToAnswer = res.data.not_answered_reports;
-      this.state.getResult = true;
-      // this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, numToAswer: res.data.not_answered_reports, getResult: true})
+    await axios.get("/api/home/", {}).then((res) => {
+      this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, numToAswer: res.data.not_answered_reports, getResult: true})
     });
   };
 
@@ -51,7 +42,7 @@ class Statistic extends Component {
           <div className="NumPrevents">{this.state.numPrevents}</div>
         )}
         {this.props.storedisLogin && this.state.numToAnswer !== 0 && (
-          <div>Alert:{this.state.numToAswer}</div>
+          <div>Alert:{this.state.numToAnswer}</div>
         )}
       </div>
     );
