@@ -9,5 +9,5 @@ RUN pip install uwsgi
 RUN ls
 
 CMD uwsgi \
-    --wsgi-file ./backend/gaejosim/gaejosim/wsgi.py \
+    --wsgi-file app/backend/gaejosim/gaejosim/wsgi.py \
     --http :8000
