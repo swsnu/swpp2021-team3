@@ -69,8 +69,8 @@ class ReportAction extends Component {
     }
 
     console.log(clickArr);
-    // this.state.clickTags = clickArr.join(',');
-    this.setState({clickTags : clickArr.jogin(',')})
+    this.state.clickTags = clickArr.join(',')
+    // this.setState({clickTags : clickArr.join(',')})
     console.log(this.state.clickTags)
 
     if (this.state.clickTags.length === 0) {
@@ -96,7 +96,7 @@ class ReportAction extends Component {
     })
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        alert('성공적으로 제출하였습니다.');
+        alert('성공적으로 제출하였습니다.\n검색 페이지로 이동합니다.');
         this.props.history.push('/search');
       })
       .catch((error) => {
