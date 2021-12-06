@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timedelta
 from pytz import timezone
 from django.test import TestCase, Client
+from django.core.cache import cache
 from user.models import Summoner, User, MannerPoint
 from report.models import Report
 
@@ -36,8 +37,7 @@ class ReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=(
-                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -78,8 +78,7 @@ class ReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=(
-                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -284,6 +283,8 @@ class ReportTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
+        cache.clear()
+
         response = self.client.get(
             "/api/home/",
             content_type="application/json",
@@ -324,8 +325,7 @@ class HomePageTest(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=(
-                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -341,6 +341,8 @@ class HomePageTest(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
+
+        cache.clear()
 
         response = self.client.get(
             "/api/home/",
@@ -360,8 +362,7 @@ class HomePageTest(TestCase):
             reporting_user=self.test_user2,
             evaluation=70,
         )
-        report_1.created_at = datetime.now(
-            timezone("Asia/Seoul")) + timedelta(days=-2)
+        report_1.created_at = datetime.now(timezone("Asia/Seoul")) + timedelta(days=-2)
         report_1.save()
 
         client = Client(enforce_csrf_checks=True)
@@ -407,8 +408,7 @@ class MyReportTestCase(TestCase):
                 "KgYZAM7Hpw9KrbsXRA3lUu3ggfa1hqPVlNSjkC"
                 "lLXmdXQtl3oHJ2Ru_khoEqlcD50kul9bWbLBZChw"
             ),
-            summoner_id=(
-                "0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
+            summoner_id=("0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"),
             manner_point=self.manner_point2,
         )
 
@@ -441,8 +441,7 @@ class MyReportTestCase(TestCase):
                 "LhALH8cJjZrGgCsiO5Obmxb2ZB2jCZzAOSoL7k9KV"
                 "E_TD2EoydA9u5UCHykUxMU_bjq3bUR67RJu1w"
             ),
-            summoner_id=(
-                "8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
+            summoner_id=("8Jx0TrOYnYdR8e-mKkykFWThuHYQn5zO8FawWyNS5jkOl2spaohrC_SW"),
             manner_point=self.manner_point3,
         )
 
@@ -530,6 +529,8 @@ class MyReportTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
+        cache.clear()
+
         response = client.get(
             "/api/home/",
             content_type="application/json",
@@ -563,6 +564,8 @@ class MyReportTestCase(TestCase):
 
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
+
+        cache.clear()
 
         response = client.get(
             "/api/my/received_reports/",
@@ -1031,7 +1034,8 @@ class MyReportTestCase(TestCase):
         csrftoken = response.cookies["csrftoken"].value
 
         summoner2 = Summoner.objects.get(
-            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA")
+            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"
+        )
 
         past_point = summoner2.manner_point.point
         past_tag1 = summoner2.manner_point.tag1
@@ -1064,7 +1068,8 @@ class MyReportTestCase(TestCase):
         self.assertEqual(data["report_id"], report.id)
 
         summoner2 = Summoner.objects.get(
-            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA")
+            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"
+        )
 
         changed_point = summoner2.manner_point.point
         changed_tag1 = summoner2.manner_point.tag1

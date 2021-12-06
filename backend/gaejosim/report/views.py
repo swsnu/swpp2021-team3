@@ -5,6 +5,7 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.core.cache import cache
 from core.ml import papago_translate, watson_nlu_emotion
 from core.utils import is_riot_timeout, check_logged_in
 from user.models import Summoner, MannerPoint
@@ -44,8 +45,7 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
         if not team_players:
-            JsonResponse(
-                {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
+            JsonResponse({"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":
@@ -163,8 +163,7 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(
-        reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
 
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
@@ -244,12 +243,18 @@ def reports_statistics(request):
     today = datetime.now(timezone("Asia/Seoul"))
     yesterday = today + timedelta(days=-1)
     tomorrow = today + timedelta(days=1)
-    reports = Report.objects.all()
 
-    total_report_num = reports.count()
-    today_report_num = Report.objects.filter(
-        created_at__range=(yesterday, tomorrow)
-    ).count()
+    total_report_num = cache.get("total_report_num")
+    if not total_report_num:
+        total_report_num = Report.objects.count()
+        cache.set("total_report_num", total_report_num, 60)
+
+    today_report_num = cache.get("today_report_num")
+    if not today_report_num:
+        today_report_num = Report.objects.filter(
+            created_at__range=(yesterday, tomorrow)
+        ).count()
+        cache.set("today_report_num", today_report_num, 60)
 
     user = request.user
     reports_list = []
@@ -302,7 +307,12 @@ def apology(request, report_id):
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
-            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+            return JsonResponse(
+                {
+                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                },
+                status=400,
+            )
 
         apology = Apology(content=content, is_verified=True)
         apology.save()
@@ -326,15 +336,14 @@ def apology(request, report_id):
             else:
                 manner_point.tag5 += 0.5
 
-        reports_cnt = Report.objects.filter(
-            reported_summoner=user.summoner).count()
+        reports_cnt = Report.objects.filter(reported_summoner=user.summoner).count()
 
         if reports_cnt == 1:
             manner_point.point = 80
         else:
-            manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
-                reports_cnt - 1
-            )
+            manner_point.point = (
+                manner_point.point * reports_cnt - report_evaluation
+            ) / (reports_cnt - 1)
         manner_point.save()
 
         return JsonResponse(
@@ -373,7 +382,12 @@ def apology(request, report_id):
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
-            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+            return JsonResponse(
+                {
+                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                },
+                status=400,
+            )
 
         apology.content = content
         apology.is_verified = True
