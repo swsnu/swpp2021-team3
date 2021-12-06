@@ -29,6 +29,7 @@ class MultiSearch extends Component {
         },
     })
       .then((res) => {
+        console.log("getMatchers")
         this.setState({ matchers: res.data.matchers, getResult: true })
       })
   }
