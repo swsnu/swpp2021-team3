@@ -13,10 +13,11 @@ class Statistic extends Component {
     numReports: 100,
     numPrevents: 5,
     numToAnswer: 0,
+    render: false,
   };
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    console.log("cdm")
     this.getStatistics()
   }
 
@@ -32,11 +33,7 @@ class Statistic extends Component {
     .then(res => {
       console.log("response.data")
       console.log(res.data)
-      this.state.numReports = res.data.accumulated_reports
-      this.state.numPrevents = res.data.today_reports
-      this.state.numToAnswer = res.data.not_answered_reports
-      this.state.getResult = true
-      // this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, numToAswer: res.data.not_answered_reports, getResult: true})
+      this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, numToAswer: res.data.not_answered_reports, getResult: true})
     })
   };
 
@@ -47,7 +44,7 @@ class Statistic extends Component {
         {this.state.getResult && <div className="NumReports">{this.state.numReports}</div>}
         {this.state.getResult && <div className="TodayReports">Today Reports</div> }
         {this.state.getResult && <div className="NumPrevents">{this.state.numPrevents}</div> }
-        {this.props.storedisLogin && (this.state.numToAnswer!== 0) && <div>Alert:{this.state.numToAswer}</div>}
+        {this.props.storedisLogin && (this.state.numToAnswer!== 0) && <div>Alert:{this.state.numToAnswer}</div>}
       </div>
     );
   }
