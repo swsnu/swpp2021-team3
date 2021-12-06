@@ -327,7 +327,7 @@ class ReportTestCase(TestCase):
         client.login(username="test2", password="password")
 
         response = client.delete(
-            f"/api/reports/100/", HTTP_X_CSRFTOKEN=csrftoken)
+            "/api/reports/100/", HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 404)
 
     def test_success_my_reports(self):
