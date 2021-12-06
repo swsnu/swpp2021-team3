@@ -67,7 +67,7 @@ class ReportAuth extends Component {
   // };
 
   handleReportSummoner = (selected) => {
-    this.setState({ reportedSummoner: selected.label, authenticated: true });
+    this.setState({ reportedSummoner: selected.label, authenticated: true })
   }
 
   onClickAuthenticateButton = () => {
@@ -75,11 +75,11 @@ class ReportAuth extends Component {
   }
 
   onClickNextButton = () => {
-    this.props.history.push(`/ReportAction/${this.state.reportedSummoner}`);
+    this.props.history.push(`/ReportAction/${this.state.reportedSummoner}`)
   }
 
   setValue = (newValue) => {
-    this.setState({ reportedSummoner: newValue });
+    this.setState({ reportedSummoner: newValue })
   }
 
   render() {
