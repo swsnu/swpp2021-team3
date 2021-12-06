@@ -90,7 +90,7 @@ class ReportAction extends Component {
         this.props.history.push('/search')
       })
       .catch((error) => {
-        alert(error.response.data.error);
+        alert(error.response.data.error)
       })
   };
 
