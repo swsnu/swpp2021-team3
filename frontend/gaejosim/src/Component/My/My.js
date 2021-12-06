@@ -49,11 +49,11 @@ class My extends Component {
   };
 
   onClickReportedLogs = () => {
-    this.props.history.push("/myReportedLogs");
+    this.props.history.push("/reportedlogs");
   };
 
   onClickReportingLogs = () => {
-    this.props.history.push("/myReportingLogs");
+    this.props.history.push("/reportinglogs");
   };
 
   render() {

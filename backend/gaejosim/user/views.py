@@ -20,7 +20,6 @@ api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
     "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
-
 }
 
 

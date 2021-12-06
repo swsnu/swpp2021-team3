@@ -1,73 +1,73 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./MyReportingLogs.css";
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
-import { withRouter } from "react-router-dom";
+import DetailReportingLog from './DetailReportingLog/DetailReportingLog'
 
-import ReportingLog2 from "./ReportingLog2/ReportingLog2";
+import './MyReportingLogs.css'
 
 class MyReportingLogs extends Component {
+  
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       reports: [],
       getResult: false,
-    };
+    }
   }
 
   getReportingLogs = async () => {
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-    axios.get("/api/token/").then();
+    axios.get('/api/token/').then()
 
-
-    await axios.get("/api/my/reports/", {}).then((res) => {
-      let reportInfo = res.data.reports;
-      // console.log("reportInfo:" + reportInfo); // this works
-      // console.log(res.data); //this works
-      this.setState({
-        reportinglogs: reportInfo.reports,
-        getResult: true,
-      });
-    });
-  };
+    await axios.get('/api/my/reports/', {})
+      .then((res) => {
+        this.setState({
+          reports: res.data.reports,
+          getResult: true,
+        })
+      })
+      .catch((error) => {
+        alert(error.response.data.error + '\n 로그인 페이지로 이동합니다.')
+        this.props.history.push('/login')
+      })
+  }
 
   render() {
-    let myReportingLogs = [];
+    let myReportingLogs = []
 
     if (this.state.getResult === false) {
-      this.getReportingLogs();
+      this.getReportingLogs()
     } else {
       myReportingLogs = this.state.reports.map((report, reportIdx) => {
-        let myreportinglogsIdx = "myreportinglogs" + reportIdx;
         return (
-          <div className={myreportinglogsIdx} key={reportIdx}>
-            <ReportingLog2
-              key={reportIdx}
-              userID={report.id}
-              userEvaluation={report.evaluation}
-              tags={report.tag}
-              reportedSummoer={report.reported_summoner}
-              comment={report.comment}
-              apology={report.apology}
+          <div className = {`myreportinglogs`+reportIdx} key = {reportIdx}>
+            <DetailReportingLog
+              key = {reportIdx}
+              reportID = {report.id}
+              reportedSummoner = {report.reported_summoner}
+              evaluation = {report.evaluation}
+              tags = {report.tag}
+              comment = {report.comment}
+              apology = {report.apology}
             />
           </div>
-        );
-      });
+        )
+      })
     }
 
-    // console.log("test : " + myReportingLogs);
 
     return (
-      <div className="myReportingLogsPage">
-        <div className="myReportingLogsTitle">작성한 리포트</div>
-        <div style={{ left: "38.5%" }}>
+      <div className = 'myReportingLogsPage'>
+        <div className = 'myReportingLogsTitle'>작성한 리포트</div>
+        <div style = {{ left: '38.5%' }}>
           {this.state.getResult && <div>{myReportingLogs}</div>}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default withRouter(MyReportingLogs);
+export default withRouter(MyReportingLogs)
