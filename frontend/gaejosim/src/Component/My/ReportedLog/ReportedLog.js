@@ -16,17 +16,12 @@ class ReportingLog extends Component {
              {this.props.apology} */}
           </div>
           <img
-            className="ReportingLog_Paper"
-            alt="paper_img"
-            src={process.env.PUBLIC_URL + `/images/icons/icon-paper.png`}
+            className="ReportedLog_Pencil"
+            alt="pencil_img"
+            src={process.env.PUBLIC_URL + `/images/icons/icon-pencil.png`}
             // onClick={() => this.props.clicked}
           />
-          <img
-            className="ReportingLog_Delete"
-            alt="delete_img"
-            src={process.env.PUBLIC_URL + `/images/icons/icon-delete.png`}
-            // onClick={() => this.props.clicked}
-          />
+         
         </div>
       </div>
     );
