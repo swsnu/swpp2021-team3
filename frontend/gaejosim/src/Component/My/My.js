@@ -9,6 +9,7 @@ import "./My.css";
 
 // TODO: change password, change username 추가하기
 
+
 class My extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +31,7 @@ class My extends Component {
     axios.get("/api/token/").then();
 
     console.log("getMyInfo");
+
     await axios.get("/api/mypage/", {}).then((res) => {
       let userInfo = res.data.user;
       let reportInfo = res.data.reports;

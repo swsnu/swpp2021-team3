@@ -30,8 +30,8 @@ class MultiSearch extends Component {
         },
     })
       .then((res) => {
-        console.log('response.data.matchers');
-        console.log(res.data.matchers);
+        // console.log('response.data.matchers');
+        // console.log(res.data.matchers);
         this.setState({ matchers: res.data.matchers, getResult: true })
       })
   }
@@ -44,7 +44,7 @@ class MultiSearch extends Component {
     } else {
       matcherInfos = this.state.matchers.map((matcher, matcherIdx) => {
         return (
-          // <div className='summonerBox'>
+          // <div className={summonerIdx} key={summonerIdx}>
           <div className = {`summoner${matcherIdx+1}`} key={matcherIdx+1}>
             <CommonSearch
               summonerName={matcher.summoner_name}

@@ -4,7 +4,7 @@ import "./ReportingLog2.css";
 
 class ReportingLog2 extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="ReportingLog2">
         <div className="ReportingLog2_Box">

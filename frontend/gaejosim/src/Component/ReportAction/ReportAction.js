@@ -271,6 +271,7 @@ class ReportAction extends Component {
             id = 'CommentInput'
             placeholder = '게임 내 해당 플레이어가 보였던 행동에 대해 기술하세요.'
             value = {this.state.comment}
+            style={{fontSize: '10px'}}
             onChange = {(event) => this.setState({ comment: event.target.value })}
           />
         </div>

@@ -21,20 +21,13 @@ class MyReportedLogs extends Component {
 
     axios.get("/api/token/").then();
 
-    await axios
-      .get("/api/my/received_reports/", {})
+
+    await axios.get("/api/my/received_reports/", {})
       .then((res) => {
-        // let userInfo = res.data.user;
         let reportInfo = res.data.reports;
         // console.log("reportInfo:" + reportInfo); // this works
-        console.log(res.data); //this works
+        // console.log(res.data); //this works
         this.setState({
-          // username: userInfo.username,
-          // email: userInfo.email,
-          // summonerName: userInfo.summoner_name,
-          // mannerPoint: userInfo.mannerPoint,
-          // reportsForUser: reportInfo.reports_for_user,
-          // reportsByUser: reportInfo.reports_by_user,
           reportedlogs: reportInfo.reports,
           getResult: true,
         });
@@ -66,7 +59,6 @@ class MyReportedLogs extends Component {
     }
 
     // console.log("test : " + myReportedLogs);
-
 
     return (
       <div className="myReportedLogsPage">
