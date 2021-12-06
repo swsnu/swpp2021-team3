@@ -7,6 +7,8 @@ import ReportingLog from "./ReportingLog/ReportingLog";
 
 import "./My.css";
 
+// TODO: change password, change username 추가하기
+
 class My extends Component {
   constructor(props) {
     super(props);
