@@ -58,20 +58,16 @@ class My extends Component {
       this.getMyInfo()
     } 
     else {
-      let idx1 = 0
-      let idx2 = 0
-      reportedLogs = this.state.reportsForUser.map((report) => {
-        idx1++
+      reportedLogs = this.state.reportsForUser.map((report, reportIdx) => {
         return (
-          <ReportedLog key={idx1} userID={report.id} userEvaluation={report.userEvaluation}
+          <ReportedLog key={reportIdx} userID={report.id} userEvaluation={report.userEvaluation}
             tags={report.tags} comment={report.comment} apology={report.apology}
           />
         )
       })
-      reportingLogs = this.state.reportsByUser.map((report) => {
-        idx2++
+      reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
         return (
-          <ReportingLog key={idx2} userID={report.id} reportedSummoner={report.reported_summoner}
+          <ReportingLog key={reportIdx} userID={report.id} reportedSummoner={report.reported_summoner}
             userEvaluation={report.userEvaluation}
             tags={report.tags} comment={report.comment} apology={report.apology}
           />
@@ -108,12 +104,15 @@ class My extends Component {
               >
                 더보기
               </div>
-              <div className="mypage_box1">
+              <div classNmae='mypage_box1'>
+                {reportingLogs}
+              </div>
+              {/* <div className="mypage_box1">
                {reportingLogs[0]}
               </div>
               <div className="mypage_box2">
                {(reportingLogs.length == 2) && reportingLogs[1]}
-              </div>
+              </div> */}
             </div>
             <div>
               <div className="recentText2">Recent Reported Logs</div>
@@ -123,12 +122,15 @@ class My extends Component {
               >
                 더보기
               </div>
-              <div className="mypage_box3">
+              <div classNmae='mypage_box1'>
+                {reportedLogs}
+              </div>
+              {/* <div className="mypage_box3">
                 <ReportedLog />
               </div>
               <div className="mypage_box4">
                 <ReportedLog />
-              </div>
+              </div> */}
             </div>
           </div>
         }
