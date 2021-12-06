@@ -34,25 +34,25 @@ class CommonSearch extends Component {
       let tagArr = this.state.tagValues
       trollDiagram = <ResponsiveRadar
               data={[
-                {"tag": "언행", "mannerPoint": tagArr[0],},
-                {"tag": "게임폭파", 'mannerPoint': tagArr[1],},
-                {"tag": "게임 시작 전", "mannerPoint": tagArr[2],},
-                {"tag": "게임 중", "mannerPoint": tagArr[3],},
-                {"tag": "기타", "mannerPoint": tagArr[4],},
+                {'tag': '언행', 'mannerPoint': tagArr[0],},
+                {'tag': '게임폭파', 'mannerPoint': tagArr[1],},
+                {'tag': '게임 시작 전', 'mannerPoint': tagArr[2],},
+                {'tag': '게임 중', 'mannerPoint': tagArr[3],},
+                {'tag': '기타', 'mannerPoint': tagArr[4],},
               ]}
                 keys = {[ 'mannerPoint' ]}
-                indexBy = "tag"
-                valueFormat = ">-.2f"
+                indexBy = 'tag'
+                valueFormat = '>-.2f'
                 // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'
                 gridLabelOffset = {36}
-                gridShape = "linear"
+                gridShape = 'linear'
                 dotSize = {5}
                 // dotColor={{ theme: 'background' }}
                 dotBorderWidth = {2}
                 colors='#fc0174'
-                // blendMode="multiply"
-                motionConfig="wobbly"
+                // blendMode='multiply'
+                motionConfig='wobbly'
                 legends={[
                   {
                       anchor: 'top-left',

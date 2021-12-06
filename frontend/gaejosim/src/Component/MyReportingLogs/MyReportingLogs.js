@@ -58,7 +58,6 @@ class MyReportingLogs extends Component {
       })
     }
 
-
     return (
       <div className = 'myReportingLogsPage'>
         <div className = 'myReportingLogsTitle'>작성한 리포트</div>

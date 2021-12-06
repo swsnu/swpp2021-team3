@@ -141,16 +141,6 @@ class ReportAction extends Component {
       redirect = <Redirect to={`/`} />;
     }
 
-    // const marks = [
-    //   {
-    //     value: 0,
-    //     label: '0점',
-    //   },
-    //   {
-    //     value: 100,
-    //     label: '100점',
-    //   },
-    // ];
 
     return (
       <div className = 'ReportAction'>
