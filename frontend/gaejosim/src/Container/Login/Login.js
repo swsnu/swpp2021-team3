@@ -14,23 +14,22 @@ class Login extends Component {
     }
 
     postLoginData = async () => {
-        console.log("postSignUpData")
-
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
         axios.get('/api/token/').then()
 
-        const response = await axios.post('/api/signin/', {
+        await axios.post('/api/signin/', {
             "username" : this.state.id,
 	        "password" : this.state.password,
         })
-        .then((response) => {
-            console.log("로그인 완료")
+        .then(() => {
             this.props.onStoreLogin()
+            alert('로그인 되었습니다.\n검색페이지로 이동합니다.')
             this.props.history.push('/search')
         })
         .catch((error) => {
+            console.log(error.response.data)
             alert(error.response.data.error)
         })
     }

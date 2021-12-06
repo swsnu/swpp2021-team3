@@ -17,7 +17,6 @@ class Statistic extends Component {
   };
 
   componentDidMount() {
-    console.log("cdm")
     this.getStatistics()
   }
 
@@ -28,11 +27,9 @@ class Statistic extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios.get('/api/home/', {
+    await axios.get('/api/home/', {
     })
     .then(res => {
-      console.log("response.data")
-      console.log(res.data)
       this.setState({numReports: res.data.accumulated_reports, numPrevents: res.data.today_reports, numToAswer: res.data.not_answered_reports, getResult: true})
     })
   };
