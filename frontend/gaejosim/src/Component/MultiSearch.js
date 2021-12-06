@@ -12,23 +12,23 @@ class MultiSearch extends Component {
       summoners: props.summoners,
       matchers: [],
       getResult: false,
-    };
+    }
   }
 
   getMatchers = async () => {
     console.log('call of getMatchers');
-    console.log('state of getResult', this.state.getResult);
+    console.log('state of getResult', this.state.getResult)
 
-    axios.defaults.xsrfCookieName = 'csrftoken';
-    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-    axios.get('/api/token/').then();
+    axios.get('/api/token/').then()
 
     await axios.get('/api/search', {
         params: {
-          summoners: this.state.summoners,
+          summoners: this.props.summoners,
         },
-      })
+    })
       .then((res) => {
         console.log('response.data.matchers');
         console.log(res.data.matchers);
@@ -39,7 +39,6 @@ class MultiSearch extends Component {
   // TODO: 한번만 콜하게 바꾸기
   render() {
     let matcherInfos
-
     if (this.state.getResult === false) {
       this.getMatchers()
     } else {
@@ -65,11 +64,9 @@ class MultiSearch extends Component {
     return (
       <div className='MultiSearch'>
         {!this.state.getResult && <div className='loading'>Loading...</div>}
-        {this.state.getResult && (
-          <div className='matchInfos'>{matcherInfos}</div>
-        )}
+        {this.state.getResult && (<div className='matchInfos'>{matcherInfos}</div>)}
       </div>
-    );
+    )
   }
 }
 
