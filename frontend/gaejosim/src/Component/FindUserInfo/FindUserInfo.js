@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios'
 // import { connect } from 'react-redux'
-
+import './FindUserInfo.css'
 
 class FindUserInfo extends Component {
   
@@ -78,13 +78,19 @@ class FindUserInfo extends Component {
     return (
       <div className = 'Login'>
         <NavLink exact to = '/signup'>
+          <div className = 'FindUserInfo_SignUp_text'>
           회원가입하기
+          </div>
         </NavLink>
         <NavLink exact to = '/login'>
+          <div className = 'FindUserInfo_Login_text'>
           로그인하기
+          </div>
         </NavLink>
         <NavLink exact to = '/changepassword'>
-          비밀번호 변경하기
+          <div className = 'FindUserInfo_ChangePW_text'>
+            비밀번호 변경하기
+          </div>
         </NavLink>
         <div className = 'FindID'>
           <label className = 'FindIDTitle'>아이디 찾기</label>
