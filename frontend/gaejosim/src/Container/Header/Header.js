@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux';
 
@@ -20,9 +20,9 @@ class Header extends Component {
 
     axios.get('/api/token/').then()
 
-    const response = await axios.post('/api/logout/', {
+    await axios.post('/api/logout/', {
     })
-    .then((response) => {
+    .then(() => {
         console.log("로그아웃 완료")
         this.props.onStoreLogout()
         this.props.history.push('/search')

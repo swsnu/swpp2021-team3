@@ -21,8 +21,7 @@ class FindUserInfo extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios
-      .post("/api/forgot/id/", {
+    await axios.post("/api/forgot/id/", {
         email: this.state.emailForID,
       })
       .then((response) => {
@@ -42,8 +41,7 @@ class FindUserInfo extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios
-      .post("/api/forgot/password/", {
+    await axios.post("/api/forgot/password/", {
         email: this.state.emailForPW,
         username: this.state.IDforPW,
       })

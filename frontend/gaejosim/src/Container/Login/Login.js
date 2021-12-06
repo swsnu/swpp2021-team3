@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink, withRouter, Redirect } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import axios from "axios";
 
 import * as actionTypes from "../../Store/Actions/ActionTypes";
@@ -21,7 +21,7 @@ class Login extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios
+    await axios
       .post("/api/signin/", {
         username: this.state.id,
         password: this.state.password,
@@ -49,8 +49,8 @@ class Login extends Component {
   };
 
   render() {
-    let redirect = null;
-    if (this.props.storedisLogin) redirect = <Redirect to="/search" />;
+    // let redirect = null;
+    // if (this.props.storedisLogin) redirect = <Redirect to="/search" />;
     return (
       <div className="Login">
         <div className="LoginTitle">로그인</div>

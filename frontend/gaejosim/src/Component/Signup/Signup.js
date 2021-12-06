@@ -57,7 +57,7 @@ class SignUp extends Component {
 
         axios.get('/api/token/').then()
        
-        const response = await axios.post('/api/signup/', {
+        await axios.post('/api/signup/', {
             "username" : this.state.id,
 	        "email" : this.state.email, 
 	        "summoner_name" : this.state.summonerID,

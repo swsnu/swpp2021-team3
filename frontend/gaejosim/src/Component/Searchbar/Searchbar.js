@@ -40,8 +40,9 @@ class Searchbar extends Component {
                 summonerArr = this.state.searchInput.split(',')
                 summonerArr = summonerArr.map((summoner) => summoner.replace(/\s/g, ''))
             }
-            this.state.summonerNum = summonerArr.length
-            this.state.summonerList = summonerArr.join('-')
+            let summonerNum = summonerArr.length
+            let summonerStr = summonerArr.join('-')
+            this.setState({summonerNum: summonerNum, summonerList : summonerStr})
         }
         else return
     }

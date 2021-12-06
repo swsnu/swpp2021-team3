@@ -28,7 +28,7 @@ class My extends Component {
     axios.get("/api/token/").then();
 
     console.log("getMyInfo");
-    const response = await axios.get("/api/mypage/", {}).then((res) => {
+    await axios.get("/api/mypage/", {}).then((res) => {
       let userInfo = res.data.user;
       let reportInfo = res.data.reports;
       // console.log(res.data);

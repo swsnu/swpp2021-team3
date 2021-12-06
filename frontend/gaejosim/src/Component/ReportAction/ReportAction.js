@@ -12,8 +12,9 @@ import "./ReportAction.css";
 class ReportAction extends Component {
   constructor(props) {
     super(props);
+    let reportedSummoner = this.props.match.params.summonerID
     this.state = {
-      reported_summoner: "2625", // props.reported_summoner,
+      reported_summoner: reportedSummoner, 
       comment: "",
       evaluation: 50,
       clickTag1_1: false,
@@ -69,7 +70,8 @@ class ReportAction extends Component {
     }
 
     console.log(clickArr);
-    this.state.clickTags = clickArr.join(",");
+    // this.state.clickTags = clickArr.join(",");
+    this.setState({clickTags : clickArr.jogin(',')})
     console.log(this.state.clickTags);
 
     if (this.state.clickTags.length === 0) {
@@ -87,7 +89,7 @@ class ReportAction extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios
+    await axios
       .post("/api/reports/", {
         name: this.state.reported_summoner,
         evaluation: parseInt(this.state.evaluation),

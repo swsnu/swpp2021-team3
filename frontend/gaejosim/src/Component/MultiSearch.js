@@ -25,8 +25,7 @@ class MultiSearch extends Component {
 
     const url = "http://localhost:3000/api/search/";
     console.log("call axios.get request");
-    const response = await axios
-      .get(url, {
+    await axios.get(url, {
         params: {
           summoners: this.state.summoners,
         },

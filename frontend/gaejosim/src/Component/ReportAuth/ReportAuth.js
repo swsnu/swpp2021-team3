@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 // import TextField from '@mui/material/TextField';
@@ -28,7 +28,7 @@ class ReportAuth extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios
+    await axios
       .get("/api/reports/auth/")
       .then((res) => {
         this.setState({

@@ -21,7 +21,7 @@ class MyReportingLogs extends Component {
 
     axios.get("/api/token/").then();
 
-    const response = await axios.get("/api/my/reports/", {}).then((res) => {
+    await axios.get("/api/my/reports/", {}).then((res) => {
       // let userInfo = res.data.user;
       let reportInfo = res.data.reports;
       // console.log("reportInfo:" + reportInfo); // this works
