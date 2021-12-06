@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from user import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("user.urls")),
     path("api/", include("report.urls")),
     path("api/", include("search.urls")),
+    path("riot.txt/", views.riot),
 ]
