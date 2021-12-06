@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
 import { ResponsiveRadar } from '@nivo/radar'
 
-// import TagView from './TagView/TagView'
 import Result from './Result/Result'
-
-import tagdiagram_1 from './tagDiagrams/diagram_1.png'
-import tagdiagram_2 from './tagDiagrams/diagram_2.png'
-import tagdiagram_3 from './tagDiagrams/diagram_3.png'
-import tagdiagram_4 from './tagDiagrams/diagram_4.png'
-import tagdiagram_5 from './tagDiagrams/diagram_5.png'
 
 import './CommonSearch.css'
 
@@ -32,81 +25,65 @@ class CommonSearch extends Component {
   render() {
     const winLoseArr = this.state.winLose
     let resultViews = []
+    let trollDiagram 
     
     if(typeof this.state.recentResults !== 'undefined') {
-      console.log(this.state.recentResults)
       resultViews = this.state.recentResults.map((result, resultIdx) => {
         return <Result key={resultIdx} result={result} winLose={winLoseArr[resultIdx]} />
       })
     }
+    if(typeof this.state.tagValues !== 'undefined') {
+      let tagArr = this.state.tagValues
+      trollDiagram = <ResponsiveRadar
+              data={[
+                {"tag": "언행", "mannerPoint": tagArr[0],},
+                {"tag": "게임폭파", 'mannerPoint': tagArr[1],},
+                {"tag": "게임 시작 전", "mannerPoint": tagArr[2],},
+                {"tag": "게임 중", "mannerPoint": tagArr[3],},
+                {"tag": "기타", "mannerPoint": tagArr[4],},
+              ]}
+                keys = {[ 'mannerPoint' ]}
+                indexBy = "tag"
+                valueFormat = ">-.2f"
+                // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+                borderColor = '#fc0174'
+                gridLabelOffset = {36}
+                gridShape = "linear"
+                dotSize = {5}
+                // dotColor={{ theme: 'background' }}
+                dotBorderWidth = {2}
+                colors='#fc0174'
+                // blendMode="multiply"
+                motionConfig="wobbly"
+                legends={[
+                  {
+                      anchor: 'top-left',
+                      direction: 'column',
+                      translateX: -50,
+                      translateY: -40,
+                      itemWidth: 80,
+                      itemHeight: 20,
+                      itemTextColor: '#999',
+                      symbolSize: 10,
+                      symbolShape: 'circle',
+                      effects: [
+                          {
+                              on: 'hover',
+                              style: {
+                                  itemTextColor: '#000'
+                              }
+                          }
+                      ]
+                  }
+              ]}
+            />
+    }
 
     return (
       <div className='boxStyle1'>
-        {/* tagdiagrm tagview로 바꾸기 */}
-        {/* <div className = 'tag_values'>
-                    <TagView tag_values={this.state.tag_values}/>
-                </div> */}
         <div className='DiagramBox'>
-          <ResponsiveRadar
-              data={[
-                {
-                  "tag": "tag1",
-                  "a": 20,
-                },
-                {
-                  "tag": "tag2",
-                  "a": 24,
-                },
-                {
-                  "tag": "tag3",
-                  "a": 34,
-                },
-                {
-                  "tag": "tag4",
-                  "a": 62,
-                },
-                {
-                  "tag": "tag5",
-                  "a": 66,
-                }
-              ]}
-              keys={[ 'a' ]}
-              indexBy="tag"
-              valueFormat=">-.2f"
-              // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-              borderColor='#fc0174'
-              gridLabelOffset={36}
-              gridShape="linear"
-              dotSize={5}
-              // dotColor={{ theme: 'background' }}
-              dotBorderWidth={2}
-              colors='#fc0174'
-              // blendMode="multiply"
-              motionConfig="wobbly"
-              legends={[
-                {
-                    anchor: 'top-left',
-                    direction: 'column',
-                    translateX: -50,
-                    translateY: -40,
-                    itemWidth: 80,
-                    itemHeight: 20,
-                    itemTextColor: '#999',
-                    symbolSize: 10,
-                    symbolShape: 'circle',
-                    effects: [
-                        {
-                            on: 'hover',
-                            style: {
-                                itemTextColor: '#000'
-                            }
-                        }
-                    ]
-                }
-            ]}
-          />
+          {trollDiagram}
         </div>
-
         <div className = 'SummonerInfo'>
           <div className = 'Summoner'>
             <b className = 'nameStyle1'>{this.state.summonerName}</b>
