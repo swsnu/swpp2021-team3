@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import './Signup.css'
 
+
 class SignUp extends Component {
     state = {
         id : '', 
@@ -16,8 +17,8 @@ class SignUp extends Component {
 
     // Use email regex from https://www.w3resource.com/javascript/form/email-validation.php
     emailChecker = (email) => {
-        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        return regex.test(email);
+        let regex = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/
+        return regex.test(email)
     }
 
     passwordHandler = (passwordCheck) => {
@@ -62,13 +63,13 @@ class SignUp extends Component {
 	        'summoner_name' : this.state.summonerID,
 	        'password' : this.state.password,
         })
-        .then((response) => {
-            alert(`${response.data.message}\n로그인 페이지로 이동합니다.`)
-            this.props.history.push('/login')
-        })
-        .catch((error) => {
-            alert(error.response.data.error)
-        })
+            .then((response) => {
+                alert(`${response.data.message}\n로그인 페이지로 이동합니다.`)
+                this.props.history.push('/login')
+            })
+            .catch((error) => {
+                alert(error.response.data.error)
+            })
     }
 
     render() {

@@ -21,7 +21,7 @@ class Login extends Component {
     await axios.post('/api/signin/', {
         username: this.state.id,
         password: this.state.password,
-      })
+    })
       .then(() => {
         this.props.onStoreLogin()
         alert('성공적으로 로그인하였습니다.\n검색페이지로 이동합니다.')
