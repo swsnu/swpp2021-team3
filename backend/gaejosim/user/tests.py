@@ -232,7 +232,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -249,7 +249,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password1")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -269,7 +269,7 @@ class UserTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
-        response = client.post(
+        response = client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -292,7 +292,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -315,7 +315,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.post(
+        response = self.client.put(
             "/api/change/password/",
             json.dumps(
                 {
@@ -634,5 +634,5 @@ class MyPageTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data["user"]["username"], "test1")
         self.assertEqual(data["user"]["email"], "test1@swpp.com")
-        self.assertEqual(len(data["reports"]["reports_for_user"]), 3)
+        self.assertEqual(len(data["reports"]["reports_for_user"]), 2)
         self.assertEqual(len(data["reports"]["reports_by_user"]), 1)

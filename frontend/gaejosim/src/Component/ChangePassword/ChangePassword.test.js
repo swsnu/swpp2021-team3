@@ -1,9 +1,20 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import ChangePassword from "./ChangePassword";
+
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<ChangePassword />", () => {
   it("should render without errors", () => {
@@ -14,8 +25,12 @@ describe("<ChangePassword />", () => {
 
   it("should handle ChangePWButton", () => {
     const mockChangePWButton = jest.fn();
-    const component = shallow(
-      <ChangePassword clickDone={mockChangePWButton} />
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <ChangePassword clickDone={mockChangePWButton} />
+        </Provider>
+      </Router>
     );
     const wrapper = component.find(".ChangePWButton");
     wrapper.simulate("click");
@@ -65,3 +80,5 @@ describe("<ChangePassword />", () => {
     });
   });
 });
+
+//todo: axios put test code

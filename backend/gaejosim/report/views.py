@@ -14,7 +14,8 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-7fd97294-d6a6-403f-8a8f-5ca33beaa59e",  # updated 11/26
+    "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
+
 }
 
 tag_dict = {
@@ -44,7 +45,8 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
         if not team_players:
-            JsonResponse({"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
+            JsonResponse(
+                {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":

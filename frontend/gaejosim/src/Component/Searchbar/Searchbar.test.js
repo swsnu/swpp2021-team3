@@ -1,6 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
-// import { Router } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { shallow } from "enzyme";
@@ -8,10 +7,24 @@ import Searchbar from "./Searchbar";
 import SearchPage from "../../Page/SearchPage";
 
 // import MyPage from '../../Page/MyPage';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<Searchbar />", () => {
   it("should render without errors", () => {
-    const component = shallow(<Searchbar />);
+    const component = shallow(
+      <Provider store={store}>
+        <Searchbar />
+      </Provider>
+    );
     const wrapper = component.find(".Searchbar");
     expect(wrapper.length).toBe(0);
   });
@@ -28,7 +41,9 @@ describe("<Searchbar />", () => {
   xit("changes input1", () => {
     const { getByPlaceholderText } = render(
       <Router>
-        <Searchbar />
+        <Provider store={store}>
+          <Searchbar />
+        </Provider>
       </Router>
     );
     const input1 = getByPlaceholderText(
@@ -52,9 +67,13 @@ describe("router search page", () => {
   test("should pass", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
     const { getByText } = render(
+      // <Provider>
       <Router history={history}>
-        <SearchPage />
+        <Provider store={store}>
+          <SearchPage />
+        </Provider>
       </Router>
+      // </Provider>
     );
     expect(history.location.pathname).toBe("/");
     fireEvent.click(getByText("검색"));

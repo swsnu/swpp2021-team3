@@ -34,7 +34,7 @@
   color: #ffffff;
 }
 
-.mpGraphAll {
+/* .mpGraphAll {
   position: absolute;
   top: 85%;
   width: 60%;
@@ -52,9 +52,29 @@
   background: #fc0174;
   opacity: 100%;
   border-radius: 40px;
+} */
+
+.reportingLogs0 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 35.5%;
+  background: #282a30;
+  border-radius: 12px;
 }
 
-.mypage_box1 {
+.reportingLogs1 {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  left: 38%;
+  top: 43.5%;
+  background: #282a30;
+  border-radius: 12px;
+}
+
+/* .mypage_box1 {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -69,13 +89,12 @@
   width: 40%;
   height: 7.2%;
   left: 38%;
-  /* top: 45%; */
   top: 43.5%;
   background: #282a30;
   border-radius: 12px;
-}
+} */
 
-.mypage_box3 {
+.reportedLogs0 {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -85,7 +104,7 @@
   border-radius: 12px;
 }
 
-.mypage_box4 {
+.reportedLogs1 {
   position: absolute;
   width: 40%;
   height: 7.2%;
