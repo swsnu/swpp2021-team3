@@ -14,9 +14,9 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 2.5%;
-  height: 120px;
-  width: 120px;
+  top: 15px;
+  height: 125px;
+  width: 125px;
   background-color: transparent;
   border-radius: 90px;
 }
@@ -54,6 +54,17 @@
   height: 120px;
   width: 120px;
   margin-bottom: 0%;
+}
+
+.SummonerInfo{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 150px;
+  height: 120px;
+  width: 120px;
+  background-color: transparent;
+  border-radius: 90px;
 }
 
 .nameStyle1 {

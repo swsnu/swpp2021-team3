@@ -2,12 +2,25 @@ import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
 import axios from 'axios'
 
 import './ReportAction.css'
 
 // TODO : Check here if you want to how to visualize MUI : https://mui.com/components/slider/
 
+const theme = createTheme({
+
+    palette: {
+      primary: {
+        main: '#fc0174',
+      },
+      secondary: {
+        main: '#fc0174',
+      }
+    },
+})
 class ReportAction extends Component {
   constructor(props) {
     super(props)
@@ -174,18 +187,18 @@ class ReportAction extends Component {
         {/* <div className='Box1'> */}
         <h3 id = 'MannerPoint'>매너포인트</h3>
         <Box id ='MannerPointInput' sx = {{ width: 700 }}>
+          <ThemeProvider theme={theme}>
           <Slider
             aria-label = 'MannerPoint'
             defaultValue = {50}
             valueLabelDisplay = 'auto'
             step = {10}
-            // marks={marks}
             min = {0}
             max = {100}
             color = 'secondary'
-            // color='#000000'
             onChange = {(event) => this.setState({ evaluation: event.target.value })}
           />
+          </ThemeProvider>
           {/* <div id='evaluation'>{this.state.evaluation}점</div> */}
           <div id = 'evaluation_0'>0</div>
           <div id = 'evaluation_100'>100</div>
