@@ -8,5 +8,5 @@ RUN pip install -r requirements.txt
 RUN pip install uwsgi
 
 CMD uwsgi \
-    --wsgi-file /gaejosim/wsgi.py \
+    --wsgi-file gaejosim/wsgi.py \
     --http :8000
