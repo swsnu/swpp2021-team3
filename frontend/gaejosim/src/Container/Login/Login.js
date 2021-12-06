@@ -72,7 +72,7 @@ class Login extends Component {
         />
         <input
           className="Login_inputField2"
-          type="string"
+          type="password"
           placeholder="비밀번호"
           onChange={(event) => this.setState({ password: event.target.value })}
         />
