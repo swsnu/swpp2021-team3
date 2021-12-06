@@ -6,46 +6,72 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { shallow, mount } from "enzyme";
 
 import ReportAuth from "./ReportAuth";
-// import ReportActionPage from "../../Page/ReportActionPage";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<ReportAuth />", () => {
   it("should render without errors", () => {
-    const component = shallow(<ReportAuth />);
+    const component = shallow(
+      <Provider store={store}>
+        <ReportAuth />
+      </Provider>
+    );
     const wrapper = component.find(".ReportAuth");
     expect(wrapper.length).toBe(0);
   });
 
   it("properly change the value of buttonAuth", () => {
-    const wrapper = shallow(<ReportAuth />);
-    // expect(wrapper.state("clickNext")).toBe(false);
-
-    // wrapper.instance().onClickNextButton();
-    // expect(wrapper.state("clickNext")).toBe(true);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <ReportAuth />
+      </Provider>
+    );
     expect(wrapper.exists()).toEqual(true);
   });
 
-  xit("should handle NextButton", () => {
+  it("should handle NextButton", () => {
     const mockNext = jest.fn();
-    const component = shallow(<ReportAuth clickDone={mockNext} />);
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <ReportAuth clickDone={mockNext} />
+        </Provider>
+      </Router>
+    );
     const wrapper = component.find(".buttonStyle");
     wrapper.simulate("change");
     expect(mockNext).toHaveBeenCalledTimes(0);
-    // expect(wrapper.exists()).toEqual(true);
   });
 
-  it("properly change the value of clickNext", () => {
-    const wrapper = shallow(<ReportAuth />);
-    // expect(wrapper.state("clickNext")).toBe(false);
-
-    // wrapper.instance().onClickNextButton();
-    // expect(wrapper.state("clickNext")).toBe(true);
-    expect(wrapper.exists()).toEqual(true);
+  it("should handle AuthButton", () => {
+    const mockAuth = jest.fn();
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <ReportAuth clickDone={mockAuth} />
+        </Provider>
+      </Router>
+    );
+    const wrapper = component.find(".buttonAuthStyle");
+    wrapper.simulate("change");
+    expect(mockAuth).toHaveBeenCalledTimes(0);
   });
 
   xit("changes input", () => {
+    //text 인식을 못함
     const { getByPlaceholderText } = render(
       <Router>
-        <ReportAuth />
+        <Provider store={store}>
+          <ReportAuth />
+        </Provider>
       </Router>
     );
     const input = getByPlaceholderText("리포트 대상 플레이어를 선택하세요.");
@@ -56,5 +82,5 @@ describe("<ReportAuth />", () => {
     });
   });
 
-  //todo: input, redirect to reportaction, setState true/false, axios with user
+  //todo: axios post, axios get, functions
 });

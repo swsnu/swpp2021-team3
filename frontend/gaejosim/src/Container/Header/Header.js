@@ -20,11 +20,11 @@ class Header extends Component {
 
     axios.get('/api/token/').then()
 
-    await axios.post('/api/logout/', {
+    const response = await axios.post('/api/logout/', {
     })
-    .then(() => {
+    .then((response) => {
+        console.log("로그아웃 완료")
         this.props.onStoreLogout()
-        alert('로그아웃 되었습니다.\n검색페이지로 이동합니다.')
         this.props.history.push('/search')
     })
     .catch((error) => {

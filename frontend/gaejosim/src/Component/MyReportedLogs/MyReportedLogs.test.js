@@ -1,11 +1,30 @@
 import React from "react";
 import { shallow } from "enzyme";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+
 import MyReportedLogs from "./MyReportedLogs";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<MyReportedLogs />", () => {
   it("should render without errors", () => {
-    const component = shallow(<MyReportedLogs />);
-    const wrapper = component.find(".My");
+    const component = shallow(
+      <Router>
+        <Provider store={store}>
+          <MyReportedLogs />
+        </Provider>
+      </Router>
+    );
+    const wrapper = component.find(".MyReportedLogsTitle");
     expect(wrapper.length).toBe(0);
   });
 

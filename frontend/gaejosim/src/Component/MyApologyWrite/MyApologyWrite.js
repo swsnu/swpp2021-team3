@@ -22,17 +22,16 @@ class MyApologyWrite extends Component {
         {redirect}
         <text className="myApologyWriteTitle">반성문 작성</text>
         <div>
-          <div className="apology_box1">
+          {/* <div className="apology_box1">
             <text className="boxText1">
               Recent Reported Log1 : ReportedSummoner
             </text>
             <text className="boxText2">
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
-          </div>
+          </div> */}
         </div>
         <div className="apology_write_box">
-          {/* <div className="apology_write_box"> */}
           <input
             // className="apology_write_input"
             id="text"
