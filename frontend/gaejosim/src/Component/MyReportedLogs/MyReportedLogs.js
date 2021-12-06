@@ -21,8 +21,8 @@ class MyReportedLogs extends Component {
 
     axios.get("/api/token/").then();
 
-    await axios
-      .get("/api/my/received_reports/", {})
+
+    await axios.get("/api/my/received_reports/", {})
       .then((res) => {
         // let userInfo = res.data.user;
         let reportInfo = res.data.reports;

@@ -20,6 +20,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
     "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
+
 }
 
 
@@ -227,7 +228,7 @@ def my_page(request):
                 "evaluation": report.evaluation,
                 "apology": bool(report.apology),
             }
-            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:5]
+            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:2]
         ]
 
         reports_for_user = [
@@ -240,7 +241,7 @@ def my_page(request):
             }
             for report in Report.objects.filter(reported_summoner=summoner).order_by(
                 "-id"
-            )[:5]
+            )[:2]
         ]
 
     return JsonResponse(
