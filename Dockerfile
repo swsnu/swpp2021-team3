@@ -6,8 +6,8 @@ COPY ./backend/requirements.txt .
 COPY . .
 RUN pip install -r requirements.txt
 RUN pip install uwsgi
-RUN ls
+RUN cd backend/gaejosim/gaejosim/
 
 CMD uwsgi \
-    --wsgi-file app/backend/gaejosim/gaejosim/wsgi.py \
+    --wsgi-file wsgi.py \
     --http :8000
