@@ -9,10 +9,9 @@ class ReportingLog extends Component {
       <div className="ReportingLog">
         <div className="ReportingLog_Box">
           <div className="ReportingLog_Text">
-            Recent Reporting Log : {this.props.userID}
-            {this.props.reportedSummoner}
+            [신고 대상 소환사] {this.props.reportedSummoner} [매너포인트] {this.props.evaluation}           
             <br />
-            태그:{this.props.tags}, 매너포인트:{this.props.userEvaluation}
+            [태그] {this.props.tags} 
             {/* {this.props.comments}
              {this.props.apology} */}
           </div>

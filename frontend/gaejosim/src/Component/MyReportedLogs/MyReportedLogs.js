@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./MyReportedLogs.css";
-
 import { withRouter } from "react-router-dom";
 
-import ReportedLog2 from "./ReportedLog2/ReportedLog2";
+import DetailReportedLog from "./DetailReportedLog/DetailReportedLog";
+
+import "./MyReportedLogs.css";
 
 class MyReportedLogs extends Component {
   constructor(props) {
@@ -24,14 +24,16 @@ class MyReportedLogs extends Component {
 
     await axios.get("/api/my/received_reports/", {})
       .then((res) => {
-        let reportInfo = res.data.reports;
-        // console.log("reportInfo:" + reportInfo); // this works
-        // console.log(res.data); //this works
+        // let reportInfo = res.data.reports;
         this.setState({
-          reportedlogs: reportInfo.reports,
+          reportedlogs: res.data.reports,
           getResult: true,
-        });
-      });
+        })
+      })
+      .catch((error) => {
+        alert(error.response.data.error + '\n 로그인 페이지로 이동합니다.')
+        this.props.history.push('/login')
+      })
   };
 
   render() {
@@ -41,10 +43,10 @@ class MyReportedLogs extends Component {
       this.getReportedLogs();
     } else {
       myReportedLogs = this.state.reports.map((report, reportIdx) => {
-        let myreportedlogsIdx = "myreportedlogs" + reportIdx;
+        // let myreportedlogsIdx = "myreportedlogs" + reportIdx;
         return (
-          <div className={myreportedlogsIdx} key={reportIdx}>
-            <ReportedLog2
+          <div className={`myreportedlogs`+reportIdx} key={reportIdx}>
+            <DetailReportedLog
               key={reportIdx}
               userID={report.id}
               userEvaluation={report.evaluation}

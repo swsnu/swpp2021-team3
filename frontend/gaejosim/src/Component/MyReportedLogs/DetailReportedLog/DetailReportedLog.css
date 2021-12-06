@@ -1,4 +1,4 @@
-.ReportedLog2_Box {
+.DetailReportedLog_Box {
   /* position: absolute; */
   width: 40%;
   height: 7.2%;
@@ -8,7 +8,7 @@
   border-radius: 12px;
 }
 
-.ReportedLog2_Text {
+.DetailReportedLog_Text {
   position: absolute;
   width: 40%;
   height: 7.2%;
@@ -26,7 +26,7 @@
   white-space: nowrap;
 }
 
-.ReportedLog2_Pencil {
+.DetailReportedLog_Pencil {
   position: absolute;
   right: 2%;
   top: 30%;

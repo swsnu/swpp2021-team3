@@ -3,12 +3,12 @@ import { shallow } from "enzyme";
 // import { render, fireEvent } from "@testing-library/react";
 // import { BrowserRouter as Router } from "react-router-dom";
 
-import ReportedLog2 from "./ReportedLog2";
+import DetailReportedLog from "./DetailReportedLog";
 
-describe("<ReportedLog2 />", () => {
+describe("<DetailReportedLog />", () => {
   it("should render without errors", () => {
-    const component = shallow(<ReportedLog2 />);
-    const wrapper = component.find(".ReportedLog2");
-    expect(wrapper.length).toBe(0);
+    const component = shallow(<DetailReportedLog />);
+    const wrapper = component.find(".DetailReportedLog");
+    expect(wrapper.length).toBe(1);
   });
 });
