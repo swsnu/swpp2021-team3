@@ -32,7 +32,8 @@ class CommonSearch extends Component {
     }
     if(typeof this.state.tagValues !== 'undefined') {
       let tagArr = this.state.tagValues
-      trollDiagram = <ResponsiveRadar
+      if(tagArr !== null) {
+        trollDiagram = <ResponsiveRadar
               data={[
                 {'tag': '언행', 'mannerPoint': tagArr[0],},
                 {'tag': '게임폭파', 'mannerPoint': tagArr[1],},
@@ -75,6 +76,7 @@ class CommonSearch extends Component {
                   }
               ]}
             />
+            }
     }
 
     return (
