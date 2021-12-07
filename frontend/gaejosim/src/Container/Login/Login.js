@@ -18,6 +18,8 @@ class Login extends Component {
 
     axios.get('/api/token/').then();
 
+    // console.log("login api call")
+    // console.log(this.state.id)
     await axios.post('/api/signin/', {
         username: this.state.id,
         password: this.state.password,
@@ -28,7 +30,7 @@ class Login extends Component {
         this.props.history.push('/search')
       })
       .catch((error) => {
-        alert(error.response.data.error);
+        alert(error.response.data.error)
       })
   }
 

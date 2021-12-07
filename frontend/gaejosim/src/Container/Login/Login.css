@@ -1,79 +1,12 @@
 .LoginTitle {
   position: absolute;
-  /* width: 67px; */
-  /* height: 36px; */
   left: 35.4%;
-  top: 34.5%;
+  top: 35.3%;
 
-  /* font-family: Noto Sans KR; */
   font-style: normal;
   font-weight: bold;
   font-size: 25px;
   line-height: 36px;
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.05em;
-
-  color: #ffffff;
-}
-
-.Login_Signup_text {
-  position: absolute;
-  /* width: 53px; */
-  /* height: 22px; */
-  /* left: 62%; */
-  right: 34.5%;
-  top: 36%;
-
-  /* font-family: Noto Sans KR; */
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 22px;
-  /* identical to box height */
-
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.05em;
-
-  color: #ffffff;
-}
-
-.Login_Finduserinfo_text {
-  position: absolute;
-  /* width: 53px; */
-  /* height: 22px; */
-  left: 35.4%;
-  top: 55.8%;
-
-  /* font-family: Noto Sans KR; */
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 22px;
-  /* identical to box height */
-
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.05em;
-
-  color: #ffffff;
-}
-
-.Login_Changepassword_text {
-  position: absolute;
-  /* width: 53px; */
-  /* height: 22px; */
-  right: 34.5%;
-  top: 55.8%;
-
-  /* font-family: Noto Sans KR; */
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 22px;
-  /* identical to box height */
-
   display: flex;
   align-items: center;
   letter-spacing: -0.05em;
@@ -86,7 +19,7 @@
   width: 30.6%;
   height: 6.5%;
   left: 35.1%;
-  top: 40.4%;
+  top: 40%;
 
   background: #ffffff;
   border: 1px solid #fc0174;
@@ -99,12 +32,63 @@
   width: 30.6%;
   height: 6.5%;
   left: 35.1%;
-  top: 47.8%;
+  top: 47.5%;
 
   background: #ffffff;
   border: 1px solid #fc0174;
   box-sizing: border-box;
   border-radius: 12px;
+}
+
+.Login_Signup_text {
+  position: absolute;
+  right: 34.5%;
+  top: 36.6%;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Login_Finduserinfo_text {
+  position: absolute;
+  left: 35.4%;
+  top: 55%;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.Login_Changepassword_text {
+  position: absolute;
+  right: 34.5%;
+  top: 55%;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }
 
 .LoginButton {
@@ -113,7 +97,6 @@
   height: 39.81px;
   left: 50%;
   transform: translateX(-50%);
-  /* left: 45.8%; */
   top: 78%;
   background: #fc0174;
   border-radius: 40px;

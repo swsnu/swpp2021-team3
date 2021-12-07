@@ -11,7 +11,7 @@ class Searchbar extends Component {
     }
 
     onClickSearchButton = () => {
-        console.log("onClickSearchButton")
+        // console.log("onClickSearchButton")
         let summonerArr = []
         if(this.state.searchInput !== '') {
             if(this.state.searchInput.includes('님이 방에 참가했습니다.')) {
@@ -32,7 +32,7 @@ class Searchbar extends Component {
             }
             else {
                let summonerList = summonerArr.join('-')    
-               console.log("Change url")
+            //    console.log("Change url")
                this.props.history.push(`/searchresult/${summonerList}`)
             }
         }

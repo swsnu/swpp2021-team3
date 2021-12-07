@@ -1,24 +1,20 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Header from "../Container/Header/Header";
-// import Progressbar from '../Component/Progressbar/Progressbar';
-import ReportAction from "../Component/ReportAction/ReportAction";
+import Header from '../Container/Header/Header'
+import ReportAction from '../Component/ReportAction/ReportAction'
 
-import "./ReportActionPage.css";
+import './ReportActionPage.css'
 
 class ReportActionPage extends Component {
   render() {
-    const reportedSummoner = this.props.match.params.summonerID;
-    console.log("name", reportedSummoner);
-
+    const reportedSummoner = this.props.match.params.summonerid
     return (
-      <div className="ReportActionPage">
+      <div className='ReportActionPage'>
         <Header />
-        {/* <Progressbar process="2"/> */}
-        <ReportAction reported_summoner={reportedSummoner} />
+        <ReportAction reported_summoner = {reportedSummoner} />
       </div>
-    );
+    )
   }
 }
 
-export default ReportActionPage;
+export default ReportActionPage
