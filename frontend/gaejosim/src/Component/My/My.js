@@ -111,7 +111,7 @@ class My extends Component {
               {this.state.mannerPoint}
             </div>
             <div style = {{ left: '38.5%' }}>
-              <div className='recentText1'>Recent Reporting Logs</div>
+              <div className='recentText1'>최근 신고 기록</div>
               <div
                 className = 'SeemoreText1'
                 onClick = {() => this.onClickReportingLogs()}
@@ -121,7 +121,7 @@ class My extends Component {
               <div>{reportingLogs}</div>
             </div>
             <div>
-              <div className = 'recentText2'>Recent Reported Logs</div>
+              <div className = 'recentText2'>최근 신고 받은 기록</div>
               <div
                 className = 'SeemoreText2'
                 onClick = {() => this.onClickReportedLogs()}
