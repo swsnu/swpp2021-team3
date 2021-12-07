@@ -46,21 +46,21 @@ class MultiSearch extends Component {
         console.log(matcher, "matcher")
         return (
           // <div className={summonerIdx} key={summonerIdx}>
-        <div className = {`summoner${matcherIdx+1}`} key={matcherIdx+1}>
-          <CommonSearch
-            summonerName = {matcher.summoner_name}
-            tier = {matcher.tier}
-            rank = {matcher.rank}
-            mannerPoint = {matcher.manner_point}
-            tagValues = {matcher.tag_values}
-            winLose = {matcher.win_lose}
-            recentResults = {matcher.recent_result}
-            num = {matcherIdx+1}
-          />
-          {/* </div> */}
-        </div>
-        )
-    })
+          <div className = {`summoner${matcherIdx+1}`} key={matcherIdx+1}>
+            <CommonSearch
+              summonerName={matcher.summoner_name}
+              tier={matcher.tier}
+              rank={matcher.rank}
+              mannerPoint={matcher.manner_point}
+              tagValues={matcher.tag_values}
+              winLose={matcher.win_lose}
+              recentResults={matcher.recent_result}
+              num={matcherIdx+1}
+            />
+            {/* </div> */}
+          </div>
+        );
+      });
     }
 
     return (
