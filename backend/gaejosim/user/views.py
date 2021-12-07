@@ -11,6 +11,8 @@ from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import check_password
 from django.core.mail.message import EmailMessage
+from django.core.cache import cache
+
 
 from report.models import Report
 from core.utils import check_logged_in
@@ -212,6 +214,7 @@ def generate_temp_password():
 def log_out(request):
     """sign out"""
     logout(request)
+    cache.clear()
 
     return JsonResponse({"message": "로그아웃이 완료되었습니다."}, status=200)
 
