@@ -4,6 +4,8 @@ import axios from 'axios';
 import * as actionTypes from '../../Store/Actions/ActionTypes'
 import { connect } from 'react-redux'
 
+import Logo from './../../Assets/Images/GAEJOSIM.png'
+
 import './Header.css'
 
 
@@ -38,9 +40,16 @@ class Header extends Component {
     this.props.history.push('/my')
   }
 
+  onClickSearchPageButton = () => {
+    this.props.history.push('/')
+  }
+
   render() {
     return (
       <div className='Header'>
+        <div className = 'mainpageButton' onClick = {() => this.onClickSearchPageButton()}>
+          <img className="GotoSearchPageLogo" alt="GAEJOSIM" src={Logo} />
+        </div>
         {!this.props.storedisLogin && <button
           className = 'loginButton'
           onClick = {() => this.onClickLoginButton()}
