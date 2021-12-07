@@ -42,8 +42,8 @@ function App() {
           <Route path = '/reportedlogs' exact component = {MyReportedLogsPage} />
           <Route path = '/reportinglogs' exact component = {MyReportingLogsPage} />
           
-          <Route path = '/apologycheck/:reportID' exact component = {MyApologyCheckPage} />
-          <Route path = '/apologywrite/:reportID' exact component = {MyApologyWritePage} />
+          <Route path = '/apologycheck/:reportid' exact component = {MyApologyCheckPage} />
+          <Route path = '/apologywrite/:reportid' exact component = {MyApologyWritePage} />
 
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>

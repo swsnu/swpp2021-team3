@@ -36,7 +36,7 @@ class ReportAuth extends Component {
         })
       })
       .catch((error) => {
-        alert(error);
+        alert(error.response.data.error)
       })
   }
 
