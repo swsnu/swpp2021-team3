@@ -18,8 +18,8 @@ class DetailReportedLog extends Component {
             [신고 대상 소환사] {this.props.reportedSummoner} [매너포인트] {this.props.evaluation}           
             <br />
             [태그] {this.props.tags} 
-            {/* {this.props.comments}
-             {this.props.apology} */}
+            {this.props.comments}
+            {this.props.apology}
           </div>
           <img
             className = 'DetailReportedLog_Pencil'

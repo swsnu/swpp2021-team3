@@ -81,13 +81,13 @@ class My extends Component {
         return (
           <div className = {`reportedLogs${reportIdx}`} key={reportIdx}>
             <DetailReportedLog
-              key={reportIdx}
-              userID={report.id}
-              userEvaluation={report.evaluation}
-              tags={report.tag}
-              // reportedSummoer={report.reported_summoner}
-              comment={report.comment}
-              apology={report.apology}
+              key = {reportIdx}
+              reportID = {report.id}
+              reportedSummoner = {report.reported_summoner}
+              evaluation = {report.evaluation}
+              tags = {report.tag}
+              comment = {report.comment}
+              apology = {report.apology}
             />
           </div>
         )
