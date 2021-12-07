@@ -51,29 +51,19 @@ class ReportAction extends Component {
 
   onClickSubmitButton = () => {
     let clickList = [
-      this.state.clickTag1_1,
-      this.state.clickTag1_2,
-      this.state.clickTag2_1,
-      this.state.clickTag2_2,
-      this.state.clickTag3_1,
-      this.state.clickTag3_2,
-      this.state.clickTag4_1,
-      this.state.clickTag4_2,
-      this.state.clickTag5_1,
-      this.state.clickTag5_2,
+      this.state.clickTag1_1, this.state.clickTag1_2,
+      this.state.clickTag2_1, this.state.clickTag2_2,
+      this.state.clickTag3_1, this.state.clickTag3_2,
+      this.state.clickTag4_1, this.state.clickTag4_2,
+      this.state.clickTag5_1, this.state.clickTag5_2,
     ]
 
     let tagList = [
-      '과격한 언행',
-      '비속어 사용',
-      '고의성 던짐',
-      '탈주/닷지',
-      '대리 게임',
-      '픽 상황 갑질',
-      'cs 스틸',
-      '팀킬',
-      '정치',
-      '라인 거부',
+      '과격한 언행', '비속어 사용',
+      '고의성 던짐', '탈주/닷지',
+      '대리 게임', '픽 상황 갑질',
+      'cs 스틸', '팀킬',
+      '정치', '라인 거부',
     ]
 
     let clickArr = []
@@ -113,7 +103,7 @@ class ReportAction extends Component {
         this.props.history.push('/search')
       })
       .catch((error) => {
-        alert(error.response.data.error);
+        alert(error.response.data.error)
       })
   };
 
@@ -164,16 +154,6 @@ class ReportAction extends Component {
       redirect = <Redirect to={`/`} />;
     }
 
-    // const marks = [
-    //   {
-    //     value: 0,
-    //     label: '0점',
-    //   },
-    //   {
-    //     value: 100,
-    //     label: '100점',
-    //   },
-    // ];
 
     return (
       <div className = 'ReportAction'>
