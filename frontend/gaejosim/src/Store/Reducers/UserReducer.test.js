@@ -1,5 +1,6 @@
 import * as actionTypes from "../Actions/ActionTypes";
-import userReducer from "./userReducer";
+// import userReducer from "./userReducer";
+import userReducer from './UserReducer'
 
 const initialUserState = {
   login: false,
