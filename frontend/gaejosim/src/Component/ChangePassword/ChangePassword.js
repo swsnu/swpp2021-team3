@@ -16,7 +16,7 @@ class ChangePassword extends Component {
     }
 
     putChangePWData = async () => {
-        console.log("postchangePWData")
+        // console.log("postchangePWData")
 
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
