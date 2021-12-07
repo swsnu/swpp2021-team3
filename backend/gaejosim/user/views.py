@@ -15,6 +15,7 @@ from django.core.mail.message import EmailMessage
 from report.models import Report
 from core.utils import check_logged_in
 from .models import Summoner, User, MannerPoint
+from django.core.cache import cache
 
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
@@ -212,6 +213,7 @@ def generate_temp_password():
 def log_out(request):
     """sign out"""
     logout(request)
+    cache.clear()
 
     return JsonResponse({"message": "로그아웃이 완료되었습니다."}, status=200)
 
