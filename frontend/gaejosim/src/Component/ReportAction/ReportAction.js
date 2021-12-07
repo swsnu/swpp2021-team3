@@ -11,7 +11,7 @@ import './ReportAction.css'
 class ReportAction extends Component {
   constructor(props) {
     super(props)
-    let reportedSummoner = this.props.match.params.summonerID
+    let reportedSummoner = this.props.match.params.summonerid
     this.state = {
       reported_summoner: reportedSummoner, 
       comment: '',
@@ -58,10 +58,10 @@ class ReportAction extends Component {
       if (clickList[idx]) clickArr.push(tagList[idx]);
     }
 
-    console.log(clickArr);
+    // console.log(clickArr);
     this.state.clickTags = clickArr.join(',')
     // this.setState({clickTags : clickArr.join(',')})
-    console.log(this.state.clickTags)
+    // console.log(this.state.clickTags)
 
     if (this.state.clickTags.length === 0) {
       alert('제출을 위해 하나 이상의 태그를 선택하셔야 합니다.')
@@ -78,6 +78,7 @@ class ReportAction extends Component {
 
     axios.get('/api/token/').then()
 
+    console.log("reported_summoner", this.state.reported_summoner)
     await axios.post('/api/reports/', {
         name: this.state.reported_summoner,
         evaluation: parseInt(this.state.evaluation),
