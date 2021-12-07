@@ -5,7 +5,7 @@ import MyApologyWrite from "./../Component/MyApologyWrite/MyApologyWrite";
 class MyApologyWritePage extends Component {
   render() {
     return (
-      <div className="MyApologyWritePage">
+      <div className = "MyApologyWritePage">
         <Header/>
         <MyApologyWrite />
       </div>

@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 import MyReportingLogs from "./MyReportingLogs";
-import userReducer from "./../../Store/Reducers/UserReducer";
+import userReducer from "../../Store/Reducers/UserReducer";
 
 const rootReducer = combineReducers({
   userR: userReducer,

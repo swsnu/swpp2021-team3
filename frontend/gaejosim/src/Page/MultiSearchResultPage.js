@@ -9,7 +9,7 @@ import "./MultiSearchResultPage.css";
 class MultiSearchResultPage extends Component {
 
   render() {
-    let summonerArr = this.props.match.params.summonerList.split("-")
+    let summonerArr = this.props.match.params.summonerlist.split("-")
     let summonerList = summonerArr.join(",")
     console.log("on new page")
     return (
