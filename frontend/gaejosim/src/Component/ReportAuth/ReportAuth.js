@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Select from 'react-select'
 // import TextField from '@mui/material/TextField'
@@ -87,10 +87,10 @@ class ReportAuth extends Component {
     let redirect = null
 
     if (!this.props.storedisLogin) {
-
       // todo: this.props.history.push makes infinite loop
-      // this.props.history.push('/login');
-
+      alert('로그인 한 상태에서만 다른 소환사를 신고할 수 있습니다.\n 로그인 페이지로 이동합니다.')
+      redirect = <Redirect to = '/login'/>
+      // this.props.history.push('/login')
     }
     if (this.props.storedisLogin && this.state.getPlayers) {
       options = this.state.recentPlayers.map((player, index) => ({
