@@ -12,7 +12,7 @@ api_default = {
     "asia": "https://asia.api.riotgames.com",  # asia server
     "korea": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
+    "key": "RGAPI-3781f2d3-1e17-42c1-8357-e858b3f62bbe",  # updated 12/7 - 12:00
 }
 
 
@@ -79,8 +79,7 @@ def search(request):
         if summoner_league_req.json() != []:
             for league_dto in summoner_league_req.json():
                 if league_dto["queueType"] == "RANKED_SOLO_5x5":
-                    tier = {"tier": league_dto["tier"],
-                            "rank": league_dto["rank"]}
+                    tier = {"tier": league_dto["tier"], "rank": league_dto["rank"]}
                     break
 
         matches_by_summoner_url = (
@@ -94,8 +93,7 @@ def search(request):
 
         if matches_by_summoner_list != []:
             task = [
-                get_match_result(match, summoner_puuid,
-                                 recent_result, recent_win_lose)
+                get_match_result(match, summoner_puuid, recent_result, recent_win_lose)
                 for match in matches_by_summoner_list
             ]
             asyncio.run(asyncio.wait(task))
