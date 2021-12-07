@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timedelta
 from pytz import timezone
 from django.test import TestCase, Client
+from django.core.cache import cache
 from user.models import Summoner, User, MannerPoint
 from report.models import Report
 
@@ -258,6 +259,77 @@ class ReportTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 201)
 
+    def test_fail_delete_report_without_login(self):
+        """fail to delete report without login"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        report = Report.objects.create(
+            tag="대리 게임,팀킬",
+            comment="test_comment",
+            reported_summoner=self.test_summoner2,
+            reporting_user=self.test_user1,
+            evaluation=30,
+        )
+
+        response = client.delete(
+            f"/api/reports/{report.id}/", HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 401)
+
+    def test_fail_delete_others_report(self):
+        """fail to delete others report"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        client.login(username="test2", password="password")
+
+        report = Report.objects.create(
+            tag="대리 게임,팀킬",
+            comment="test_comment",
+            reported_summoner=self.test_summoner2,
+            reporting_user=self.test_user1,
+            evaluation=30,
+        )
+
+        response = client.delete(
+            f"/api/reports/{report.id}/", HTTP_X_CSRFTOKEN=csrftoken)
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_success_delete_report(self):
+        """fail to delete report without login"""
+        report = Report.objects.create(
+            tag="대리 게임,팀킬",
+            comment="test_comment",
+            reported_summoner=self.test_summoner1,
+            reporting_user=self.test_user2,
+            evaluation=70,
+        )
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        client.login(username="test2", password="password")
+
+        response = client.delete(
+            f"/api/reports/{report.id}/", HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_delete_not_existing_report(self):
+        """fail to delete not existing report"""
+        client = Client(enforce_csrf_checks=True)
+        response = client.get("/api/token/")
+        csrftoken = response.cookies["csrftoken"].value
+
+        client.login(username="test2", password="password")
+
+        response = client.delete(
+            "/api/reports/100/", HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 404)
+
     def test_success_my_reports(self):
         """list of my reports"""
         self.client.login(username="test2", password="password")
@@ -283,6 +355,8 @@ class ReportTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
+
+        cache.clear()
 
         response = self.client.get(
             "/api/home/",
@@ -341,6 +415,8 @@ class HomePageTest(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
+
+        cache.clear()
 
         response = self.client.get(
             "/api/home/",
@@ -530,6 +606,8 @@ class MyReportTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
+        cache.clear()
+
         response = client.get(
             "/api/home/",
             content_type="application/json",
@@ -563,6 +641,8 @@ class MyReportTestCase(TestCase):
 
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
+
+        cache.clear()
 
         response = client.get(
             "/api/my/received_reports/",
@@ -1031,7 +1111,8 @@ class MyReportTestCase(TestCase):
         csrftoken = response.cookies["csrftoken"].value
 
         summoner2 = Summoner.objects.get(
-            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA")
+            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"
+        )
 
         past_point = summoner2.manner_point.point
         past_tag1 = summoner2.manner_point.tag1
@@ -1064,7 +1145,8 @@ class MyReportTestCase(TestCase):
         self.assertEqual(data["report_id"], report.id)
 
         summoner2 = Summoner.objects.get(
-            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA")
+            summoner_id="0Fhe_5f7uVFLejRSWJ3GNDDFa10KCchYrdonT_rWEw5R-kxvHAh0YdE4cA"
+        )
 
         changed_point = summoner2.manner_point.point
         changed_tag1 = summoner2.manner_point.tag1

@@ -5,6 +5,7 @@ import requests
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.core.cache import cache
 from core.ml import papago_translate, watson_nlu_emotion
 from core.utils import is_riot_timeout, check_logged_in
 from user.models import Summoner, MannerPoint
@@ -14,7 +15,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
+    "key": "RGAPI-3e214592-8789-4c41-860a-f61e288bf1ec",  # updated 12/7
 }
 
 tag_dict = {
@@ -244,12 +245,18 @@ def reports_statistics(request):
     today = datetime.now(timezone("Asia/Seoul"))
     yesterday = today + timedelta(days=-1)
     tomorrow = today + timedelta(days=1)
-    reports = Report.objects.all()
 
-    total_report_num = reports.count()
-    today_report_num = Report.objects.filter(
-        created_at__range=(yesterday, tomorrow)
-    ).count()
+    total_report_num = cache.get("total_report_num")
+    if not total_report_num:
+        total_report_num = Report.objects.count()
+        cache.set("total_report_num", total_report_num, 60)
+
+    today_report_num = cache.get("today_report_num")
+    if not today_report_num:
+        today_report_num = Report.objects.filter(
+            created_at__range=(yesterday, tomorrow)
+        ).count()
+        cache.set("today_report_num", today_report_num, 60)
 
     user = request.user
     reports_list = []
@@ -302,7 +309,12 @@ def apology(request, report_id):
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
-            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+            return JsonResponse(
+                {
+                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                },
+                status=400,
+            )
 
         apology = Apology(content=content, is_verified=True)
         apology.save()
@@ -332,9 +344,9 @@ def apology(request, report_id):
         if reports_cnt == 1:
             manner_point.point = 80
         else:
-            manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
-                reports_cnt - 1
-            )
+            manner_point.point = (
+                manner_point.point * reports_cnt - report_evaluation
+            ) / (reports_cnt - 1)
         manner_point.save()
 
         return JsonResponse(
@@ -373,7 +385,12 @@ def apology(request, report_id):
         passed = watson_nlu_emotion(translated_content)
 
         if not passed:
-            return JsonResponse({"error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."}, status=400)
+            return JsonResponse(
+                {
+                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                },
+                status=400,
+            )
 
         apology.content = content
         apology.is_verified = True
@@ -410,3 +427,55 @@ def apology(request, report_id):
             },
             status=200,
         )
+
+
+@check_logged_in
+@require_http_methods(["DELETE"])
+def delete_report(request, report_id):
+    """delete reportm report"""
+    user = request.user
+
+    try:
+        report = Report.objects.select_related(
+            'reported_summoner').get(id=report_id)
+
+    except Report.DoesNotExist:
+        return JsonResponse({"error": "해당 신고가 존재하지 않습니다."}, status=404)
+
+    if report.reporting_user != user:
+        return JsonResponse({"error": "작성한 리포트만 삭제할 수 있습니다"}, status=400)
+
+    report_tag_list = report.tag.split(",")
+    report_evaluation = report.evaluation
+
+    reported_summoner = report.reported_summoner
+    manner_point = reported_summoner.manner_point
+
+    for tag_key in report_tag_list:
+        if tag_dict[tag_key] == 1:
+            manner_point.tag1 += 0.5
+        elif tag_dict[tag_key] == 2:
+            manner_point.tag2 += 0.5
+        elif tag_dict[tag_key] == 3:
+            manner_point.tag3 += 0.5
+        elif tag_dict[tag_key] == 4:
+            manner_point.tag4 += 0.5
+        else:
+            manner_point.tag5 += 0.5
+
+    reports_cnt = Report.objects.filter(
+        reported_summoner=reported_summoner).count()
+
+    if reports_cnt == 1:
+        manner_point.point = 80
+    else:
+        manner_point.point = (
+            manner_point.point * reports_cnt - report_evaluation
+        ) / (reports_cnt - 1)
+    manner_point.save()
+
+    report.delete()
+
+    return JsonResponse({
+        "message": "해당 신고가 삭제되었습니다."
+    }, status=200)

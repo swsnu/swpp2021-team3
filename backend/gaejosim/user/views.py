@@ -19,7 +19,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-10b22a33-147b-4b53-a48e-01f7abf2b9c2",  # updated 12/6
+    "key": "RGAPI-3e214592-8789-4c41-860a-f61e288bf1ec",  # updated 12/7
 }
 
 
@@ -28,6 +28,16 @@ api_default = {
 def token(request):
     """set token"""
     return HttpResponse(status=204)
+
+
+@require_http_methods(["GET"])
+def riot(request):
+    """get riot.txt"""
+    txt = ""
+    with open("./riot.txt", encoding="utf-8") as txtfile:
+        for row in txtfile.readlines():
+            txt += row
+    return HttpResponse(txt, status=200)
 
 
 @require_http_methods(["POST"])
@@ -203,7 +213,7 @@ def log_out(request):
     """sign out"""
     logout(request)
 
-    return JsonResponse({"message": "로그인이 완료되었습니다."}, status=200)
+    return JsonResponse({"message": "로그아웃이 완료되었습니다."}, status=200)
 
 
 @check_logged_in
@@ -227,7 +237,7 @@ def my_page(request):
                 "evaluation": report.evaluation,
                 "apology": bool(report.apology),
             }
-            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:5]
+            for report in Report.objects.filter(reporting_user=user).order_by("-id")[:2]
         ]
 
         reports_for_user = [
@@ -240,7 +250,7 @@ def my_page(request):
             }
             for report in Report.objects.filter(reported_summoner=summoner).order_by(
                 "-id"
-            )[:5]
+            )[:2]
         ]
 
     return JsonResponse(
