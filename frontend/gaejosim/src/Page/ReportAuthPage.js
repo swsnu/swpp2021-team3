@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
-import Header from "../Container/Header/Header";
-import ReportAuth from "../Component/ReportAuth/ReportAuth";
+import Header from '../Container/Header/Header'
+import ReportAuth from '../Component/ReportAuth/ReportAuth'
 
 class ReportAuthPage extends Component {
   render() {
     return (
-      <div className="ReportAuthPage">
+      <div className='ReportAuthPage'>
         <Header />
         <ReportAuth />
       </div>
@@ -14,4 +14,4 @@ class ReportAuthPage extends Component {
   }
 }
 
-export default ReportAuthPage;
+export default ReportAuthPage

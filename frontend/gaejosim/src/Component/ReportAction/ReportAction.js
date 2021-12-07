@@ -2,16 +2,29 @@ import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
 import axios from 'axios'
 
 import './ReportAction.css'
 
 // TODO : Check here if you want to how to visualize MUI : https://mui.com/components/slider/
 
+const theme = createTheme({
+
+    palette: {
+      primary: {
+        main: '#fc0174',
+      },
+      secondary: {
+        main: '#fc0174',
+      }
+    },
+})
 class ReportAction extends Component {
   constructor(props) {
     super(props)
-    let reportedSummoner = this.props.match.params.summonerID
+    let reportedSummoner = this.props.match.params.summonerid
     this.state = {
       reported_summoner: reportedSummoner, 
       comment: '',
@@ -38,29 +51,19 @@ class ReportAction extends Component {
 
   onClickSubmitButton = () => {
     let clickList = [
-      this.state.clickTag1_1,
-      this.state.clickTag1_2,
-      this.state.clickTag2_1,
-      this.state.clickTag2_2,
-      this.state.clickTag3_1,
-      this.state.clickTag3_2,
-      this.state.clickTag4_1,
-      this.state.clickTag4_2,
-      this.state.clickTag5_1,
-      this.state.clickTag5_2,
+      this.state.clickTag1_1, this.state.clickTag1_2,
+      this.state.clickTag2_1, this.state.clickTag2_2,
+      this.state.clickTag3_1, this.state.clickTag3_2,
+      this.state.clickTag4_1, this.state.clickTag4_2,
+      this.state.clickTag5_1, this.state.clickTag5_2,
     ]
 
     let tagList = [
-      '과격한 언행',
-      '비속어 사용',
-      '고의성 던짐',
-      '탈주/닷지',
-      '대리 게임',
-      '픽 상황 갑질',
-      'cs 스틸',
-      '팀킬',
-      '정치',
-      '라인 거부',
+      '과격한 언행', '비속어 사용',
+      '고의성 던짐', '탈주/닷지',
+      '대리 게임', '픽 상황 갑질',
+      'cs 스틸', '팀킬',
+      '정치', '라인 거부',
     ]
 
     let clickArr = []
@@ -68,10 +71,10 @@ class ReportAction extends Component {
       if (clickList[idx]) clickArr.push(tagList[idx]);
     }
 
-    console.log(clickArr);
+    // console.log(clickArr);
     this.state.clickTags = clickArr.join(',')
     // this.setState({clickTags : clickArr.join(',')})
-    console.log(this.state.clickTags)
+    // console.log(this.state.clickTags)
 
     if (this.state.clickTags.length === 0) {
       alert('제출을 위해 하나 이상의 태그를 선택하셔야 합니다.')
@@ -88,6 +91,7 @@ class ReportAction extends Component {
 
     axios.get('/api/token/').then()
 
+    // console.log("reported_summoner", this.state.reported_summoner)
     await axios.post('/api/reports/', {
         name: this.state.reported_summoner,
         evaluation: parseInt(this.state.evaluation),
@@ -95,12 +99,12 @@ class ReportAction extends Component {
         comment: this.state.comment,
     })
       .then((response) => {
-        console.log(JSON.stringify(response.data));
-        alert('성공적으로 제출하였습니다.\n검색 페이지로 이동합니다.');
-        this.props.history.push('/search');
+        // console.log(JSON.stringify(response.data))
+        alert('성공적으로 제출하였습니다.\n검색 페이지로 이동합니다.')
+        this.props.history.push('/search')
       })
       .catch((error) => {
-        alert(error.response.data.error);
+        alert(error.response.data.error)
       })
   };
 
@@ -151,16 +155,6 @@ class ReportAction extends Component {
       redirect = <Redirect to={`/`} />;
     }
 
-    // const marks = [
-    //   {
-    //     value: 0,
-    //     label: '0점',
-    //   },
-    //   {
-    //     value: 100,
-    //     label: '100점',
-    //   },
-    // ];
 
     return (
       <div className = 'ReportAction'>
@@ -174,18 +168,18 @@ class ReportAction extends Component {
         {/* <div className='Box1'> */}
         <h3 id = 'MannerPoint'>매너포인트</h3>
         <Box id ='MannerPointInput' sx = {{ width: 700 }}>
+          <ThemeProvider theme={theme}>
           <Slider
             aria-label = 'MannerPoint'
             defaultValue = {50}
             valueLabelDisplay = 'auto'
             step = {10}
-            // marks={marks}
             min = {0}
             max = {100}
             color = 'secondary'
-            // color='#000000'
             onChange = {(event) => this.setState({ evaluation: event.target.value })}
           />
+          </ThemeProvider>
           {/* <div id='evaluation'>{this.state.evaluation}점</div> */}
           <div id = 'evaluation_0'>0</div>
           <div id = 'evaluation_100'>100</div>

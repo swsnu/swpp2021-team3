@@ -1,87 +1,69 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-// import axios from "axios";
-import "./MyApologyCheck.css";
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import axios from 'axios'
+
+import './MyApologyCheck.css'
+
 
 class MyApologyCheck extends Component {
+
   state = {
-    GotoMyPage: false,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      // id: props.id,
-      // content: props.content,
-      // is_verified: props.is_verified,
-      // report_id: props.report_id,
-
-      // getApologyBoolean: false,
-
-      GotoMyPage: false,
-    };
+    reportID : this.props.reportID,
+    apologyID : 0,
+    content : '',
+    verified: false,
+    getApology: false,
   }
 
-  // componentDidMount() {
-  //   if (this.state.getApologyBoolean === false) {
-  //     this.getApology();
-  //   }
-  // }
+  getApology = async () => {
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-  // getApology = async () => {
-  //   axios.defaults.xsrfCookieName = "csrftoken";
-  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.get('/api/token/').then()
+    
+    await axios.get(`/api/reports/${this.props.reportID}/apology/`, {})
+      .then((res) => {
+        this.setState({apologyID: res.data.id, content: res.data.content, verified: res.data.verified, getApology: true})  
+      })
+      .catch((err) => {
+        alert(err.response.data.error)
+        this.props.history.push('/my')
+      })  
+  }
 
-  //   axios.get("/api/token/").then();
-
-  //   const response_signin = await axios.post("/api/signin/", {
-  //     username: "test1",
-  //     password: "password",
-  //   });
-
-  //   if (response_signin.status === 200) {
-  //     const response = await axios.get(
-  //       "/api/reports//api/reports/:report_id/apology/"
-  //     );
-
-  //     this.setState({
-  //       id: response.data.id,
-  //       content: response.data.content,
-  //       is_verified: response.data.is_verified,
-  //       report_id: response.data.report_id,
-  //       getMyPageDataBoolean: true,
-  //     });
-  //   }
-  // };
-
-  onClickGotoMyPage = () => {
-    this.setState({ GotoMyPage: true });
-  };
+  onClickGotoMyPageButton = () => {
+    this.props.history.push('/my')
+  }
 
   render() {
-    let redirect = null;
-    if (this.state.GotoMyPage === true) {
-      redirect = <Redirect to={`/my`} />;
+    if(this.state.getApology === false) {
+      this.getApology()
     }
-
     return (
-      <div className="myReportedLogsPage">
-        {redirect}
-        <div className="myApologyCheckTitle">반성문 확인</div>
-        <div>
-          <div className="apology_check_box">
-            <div className="apology_check_text">apology.content</div>
+      <div className = 'myReportedLogsPage'>
+        <div className = 'myApologyCheckTitle'>반성문 확인</div>
+        {this.state.getApology === true && <div className = 'ApologyInfo'>
+          <div className = 'myApologyInfo'>
+              [신고 리포트 번호]{this.state.reportID}
+              [반성문 번호] {this.state.apologyID}
+              [유효성 검증 여부] {this.state.verified}
           </div>
-        </div>
-        <button
-          className="Apology_check_completed_button"
-          onClick={() => this.onClickGotoMyPage()}
-        >
-          확인
-        </button>
+          <div>
+            <div className='apology_check_box'>
+              <div className='apology_check_text'>{this.state.content}</div>
+            </div>
+          </div>
+          <button
+            className = 'Apology_check_completed_button'
+            onClick = {() => this.onClickGotoMyPageButton()}
+          >
+            확인
+          </button>
+          </div>  
+        }
       </div>
-    );
+    )
   }
 }
 
-export default MyApologyCheck;
+export default withRouter(MyApologyCheck)

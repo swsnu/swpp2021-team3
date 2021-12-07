@@ -9,8 +9,8 @@ class MyPage extends Component {
         <Header />
         <My />
       </div>
-    );
+    )
   }
 }
 
-export default MyPage;
+export default MyPage

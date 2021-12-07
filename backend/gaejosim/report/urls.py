@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path("home/", cache_page(60)(views.reports_statistics), name="home"),
+    path("reports/<int:report_id>/", views.delete_report, name="report"),
     path("reports/<int:report_id>/apology/", views.apology, name="apology"),
     path(
         "reports/auth/",

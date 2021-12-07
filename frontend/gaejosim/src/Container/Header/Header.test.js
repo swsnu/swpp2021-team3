@@ -6,6 +6,7 @@ import { shallow, mount } from "enzyme";
 import Header from "./Header";
 import LoginPage from "../../Page/LoginPage";
 import MyPage from "../../Page/MyPage";
+import SearchPage from '../../Page/SearchPage';
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -67,6 +68,20 @@ describe("<Header />", () => {
     expect(mockloginButton).toHaveBeenCalledTimes(0);
   });
 
+  it("should handle mainpageButton", () => {
+    const mockmainpageButton = jest.fn();
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <Header clickDone={mockmainpageButton} />
+        </Provider>
+      </Router>
+    );
+    const wrapper = component.find(".mainpageButton");
+    wrapper.simulate("click");
+    expect(mockmainpageButton).toHaveBeenCalledTimes(0);
+  });
+
   xit("should handle mypageButton", () => {
     const mockmypageButton = jest.fn();
     const component = mount(
@@ -126,6 +141,22 @@ describe("router my page", () => {
     );
     expect(history.location.pathname).toBe("/");
     fireEvent.click(getByText("마이페이지"));
+    expect(history.location.pathname).toBe("/");
+  });
+});
+
+describe("router search page", () => {
+  test("should pass", () => {
+    const history = createMemoryHistory({ initialEntries: ["/"] });
+    const { getByText } = render(
+      <Router history={history}>
+        <Provider store={store}>
+          <SearchPage />
+        </Provider>
+      </Router>
+    );
+    expect(history.location.pathname).toBe("/");
+    fireEvent.click(getByText("검색"));
     expect(history.location.pathname).toBe("/");
   });
 });

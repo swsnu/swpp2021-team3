@@ -11,7 +11,7 @@
   /* top: 40.8%; */
   left: 18%;
   transform: translateX(-50%);
-  bottom: -220px;
+  bottom: -210px;
 }
 
 .summoner2 {
@@ -20,7 +20,7 @@
   /* top: 40.8%; */
   left: 34%;
   transform: translateX(-50%);
-  bottom: -220px;
+  bottom: -210px;
 }
 
 .summoner3 {
@@ -29,7 +29,7 @@
   /* top: 40.8%; */
   left: 50%;
   transform: translateX(-50%);
-  bottom: -220px;
+  bottom: -210px;
 }
 
 .summoner4 {
@@ -38,7 +38,7 @@
   /* top: 40.8%; */
   left: 66%;
   transform: translateX(-50%);
-  bottom: -220px;
+  bottom: -210px;
 }
 
 .summoner5 {
@@ -47,14 +47,15 @@
   /* top: 40.8%; */
   left: 82%;
   transform: translateX(-50%);
-  bottom: -220px;
+  bottom: -210px;
 }
 
 .loading {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 36%;
+  /* top: 36%; */
+  top: 48%;
   font-size: 30px;
   font-weight: 800;
   color: #ffffff;
