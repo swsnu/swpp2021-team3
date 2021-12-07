@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import ReportedLog from './ReportedLog/ReportedLog'
 import DetailReportingLog from '../MyReportingLogs/DetailReportingLog/DetailReportingLog'
-
+import DetailReportedLog from '../MyReportedLogs/DetailReportedLog/DetailReportedLog'
 
 import './My.css'
 
-// 삭제 후 리렌더
+// 삭제 후 리렌더 : 리듀서..?
 // TODO: change password, change username 추가하기, nickname
 // TODO: delete reportinglog directory, delete reportedlog directory
 
@@ -23,7 +22,7 @@ class My extends Component {
       reportsForUser: [],
       reportsByUser: [],
       getResult: false,
-    };
+    }
   }
 
   getMyInfo = async () => {
@@ -35,12 +34,13 @@ class My extends Component {
     await axios.get('/api/mypage/', {}).then((res) => {
       let userInfo = res.data.user
       let reportInfo = res.data.reports
-    
+      console.log(userInfo)
+      console.log(reportInfo)
       this.setState({
         username: userInfo.username,
         email: userInfo.email,
         summonerName: userInfo.summoner_name,
-        mannerPoint: userInfo.mannerPoint,
+        mannerPoint: userInfo.manner_point,
         reportsForUser: reportInfo.reports_for_user,
         reportsByUser: reportInfo.reports_by_user,
         getResult: true,
@@ -80,13 +80,14 @@ class My extends Component {
       reportedLogs = this.state.reportsForUser.map((report, reportIdx) => {
         return (
           <div className = {`reportedLogs${reportIdx}`} key={reportIdx}>
-            <ReportedLog
-              key = {reportIdx}
-              userID = {report.id}
-              userEvaluation = {report.evaluation}
-              tags = {report.tag}
-              comment = {report.comment}
-              apology = {report.apology}
+            <DetailReportedLog
+              key={reportIdx}
+              userID={report.id}
+              userEvaluation={report.evaluation}
+              tags={report.tag}
+              // reportedSummoer={report.reported_summoner}
+              comment={report.comment}
+              apology={report.apology}
             />
           </div>
         )
