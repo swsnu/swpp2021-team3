@@ -12,7 +12,7 @@ api_default = {
     "asia": "https://asia.api.riotgames.com",  # asia server
     "korea": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-3781f2d3-1e17-42c1-8357-e858b3f62bbe",  # updated 12/7 - 12:00
+    "key": "RGAPI-3781f2d3-1e17-42c1-8357-e858b3f62bbe",  # updated 12/7
 }
 
 
