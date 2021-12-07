@@ -3,11 +3,14 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import ReportedLog from './ReportedLog/ReportedLog'
-import ReportingLog from './ReportingLog/ReportingLog'
+import DetailReportingLog from '../MyReportingLogs/DetailReportingLog/DetailReportingLog'
+
 
 import './My.css'
 
-// TODO: change password, change username 추가하기
+// 삭제 후 리렌더
+// TODO: change password, change username 추가하기, nickname
+// TODO: delete reportinglog directory, delete reportedlog directory
 
 class My extends Component {
   constructor(props) {
@@ -54,18 +57,19 @@ class My extends Component {
   }
 
   render() {
-    let reportedLogs = []
     let reportingLogs = []
+    let reportedLogs = []
     if (this.state.getResult === false) {
-      this.getMyInfo();
+      this.getMyInfo()
     } else {
-      reportedLogs = this.state.reportsForUser.map((report, reportIdx) => {
+      reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
         return (
-          <div className = {`reportedLogs${reportIdx}`} key={reportIdx}>
-            <ReportedLog
+          <div className={`reportingLogs${reportIdx}`} key={reportIdx}>
+            <DetailReportingLog 
               key = {reportIdx}
-              userID = {report.id}
-              userEvaluation = {report.evaluation}
+              reportID = {report.id}
+              reportedSummoner = {report.reported_summoner}
+              evaluation = {report.evaluation}
               tags = {report.tag}
               comment = {report.comment}
               apology = {report.apology}
@@ -73,14 +77,12 @@ class My extends Component {
           </div>
         )
       })
-      
-      reportingLogs = this.state.reportsByUser.map((report, reportIdx) => {
+      reportedLogs = this.state.reportsForUser.map((report, reportIdx) => {
         return (
-          <div className={`reportingLogs${reportIdx}`} key={reportIdx}>
-            <ReportingLog
+          <div className = {`reportedLogs${reportIdx}`} key={reportIdx}>
+            <ReportedLog
               key = {reportIdx}
               userID = {report.id}
-              reportedSummoner = {report.reported_summoner}
               userEvaluation = {report.evaluation}
               tags = {report.tag}
               comment = {report.comment}

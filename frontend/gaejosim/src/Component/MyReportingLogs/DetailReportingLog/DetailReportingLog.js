@@ -20,6 +20,7 @@ class DetailReportingLog extends Component {
       .then((res) => {
         this.setState({deleted: true})
         alert('과거 작성하였던 리포트가 성공적으로 삭제되었습니다.')
+        this.props.history.push('/my')
       })
       .catch((error) => {
         alert(error.response.data.error)
