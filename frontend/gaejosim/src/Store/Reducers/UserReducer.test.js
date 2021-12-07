@@ -1,4 +1,4 @@
-import * as actionTypes from "../actions/ActionTypes";
+import * as actionTypes from "../Actions/ActionTypes";
 import userReducer from "./userReducer";
 
 const initialUserState = {
