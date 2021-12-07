@@ -91,7 +91,7 @@ class ReportAction extends Component {
 
     axios.get('/api/token/').then()
 
-    console.log("reported_summoner", this.state.reported_summoner)
+    // console.log("reported_summoner", this.state.reported_summoner)
     await axios.post('/api/reports/', {
         name: this.state.reported_summoner,
         evaluation: parseInt(this.state.evaluation),
@@ -99,7 +99,7 @@ class ReportAction extends Component {
         comment: this.state.comment,
     })
       .then((response) => {
-        console.log(JSON.stringify(response.data))
+        // console.log(JSON.stringify(response.data))
         alert('성공적으로 제출하였습니다.\n검색 페이지로 이동합니다.')
         this.props.history.push('/search')
       })
