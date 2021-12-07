@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import Header from '../Container/Header/Header';
-import MyApologyWrite from "./../Component/MyApologyWrite/MyApologyWrite";
+import React, { Component } from 'react'
+
+import Header from '../Container/Header/Header'
+import MyApologyWrite from './../Component/MyApologyWrite/MyApologyWrite'
 
 class MyApologyWritePage extends Component {
   render() {
+    let reportID = this.props.match.params.reportid
     return (
-      <div className = "MyApologyWritePage">
+      <div className = 'MyApologyWritePage'>
         <Header/>
-        <MyApologyWrite />
+        <MyApologyWrite reportID = {reportID} />
       </div>
-    );
+    )
   }
 }
 
-export default MyApologyWritePage;
+export default MyApologyWritePage

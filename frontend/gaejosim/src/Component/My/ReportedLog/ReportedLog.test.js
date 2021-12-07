@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<ReportedLog />", () => {
-  it("should render without errors", () => {
+  xit("should render without errors", () => {
     const component = mount(<Router><Provider store={store}><ReportedLog /></Provider></Router>);
     const wrapper = component.find(".ReportedLog");
     expect(wrapper.length).toBe(1);
@@ -39,7 +39,7 @@ describe("<ReportedLog />", () => {
     expect(mockReportedLog_Pencil).toHaveBeenCalledTimes(0);
   });
 
-  it("router apology write should pass", () => {
+  xit("router apology write should pass", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
     const { getByText } = render(
       <Router history={history}>

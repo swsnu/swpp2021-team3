@@ -14,8 +14,8 @@ class FindUserInfo extends Component {
 
   // Use email regex from https://www.w3resource.com/javascript/form/email-validation.php
   emailChecker = (email) => {
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return regex.test(email);
+    let regex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+    return regex.test(email)
   }
 
   postFindIDData = async () => {
@@ -57,7 +57,7 @@ class FindUserInfo extends Component {
   onClickFindIDButton = () => {
     if (!this.state.emailForID) {
       alert('아이디를 찾기 위해서는 이메일을 입력해야합니다.')
-    } else if(!this.emailChecker) {
+    } else if(!this.emailChecker(this.state.emailForID)) {
       alert('아이디를 찾기 위해서는 올바른 형식의 이메일을 입력해야합니다.')
     } else {
       this.postFindIDData()
@@ -67,7 +67,7 @@ class FindUserInfo extends Component {
   onClickFindPWButton = () => {
     if (!this.state.emailForPW || !this.state.IDforPW) {
       alert('비밀번호를 찾기 위해서는 이메일과 아이디를 모두 입력해야합니다.')
-    } else if(!this.emailChecker) {
+    } else if(!this.emailChecker(this.state.emailForPW)) {
       alert('비밀번호를 찾기 위해서는 올바른 형식의 이메일을 입력해야합니다.')
     } else {
       this.postFindPWData()
