@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom'
 
 import "./DetailReportedLog.css";
 
+
 class DetailReportedLog extends Component {
+  onClickWriteApologyButton = (reportID) => {
+    this.props.history.push(`/apologywrite/${reportID}`)
+  }
+
   render() {
     // console.log(this.props);
     return (
@@ -19,7 +25,7 @@ class DetailReportedLog extends Component {
             className="DetailReportedLog_Pencil"
             alt="pencil_img"
             src={process.env.PUBLIC_URL + `/images/icons/icon-pencil.png`}
-            // onClick={() => this.props.clicked}
+            onClick={() => this.onClickWriteApologyButton(this.props.reportID)}
           />
         </div>
       </div>
@@ -27,4 +33,4 @@ class DetailReportedLog extends Component {
   }
 }
 
-export default DetailReportedLog;
+export default withRouter(DetailReportedLog);

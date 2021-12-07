@@ -1,14 +1,20 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom'
+// import axios from 'axios'
 
 import "./ReportedLog.css";
 
-class ReportingLog extends Component {
+class ReportedLog extends Component {
+  onClickWriteApologyButton = (reportID) => {
+    this.props.history.push(`/apologywrite/${reportID}`)
+  }
+
   render() {
     // console.log(this.props);
     return (
-      <div className="ReportingLog">
-        <div className="ReportingLog_Box">
-          <div className="ReportingLog_Text">
+      <div className="ReportedLog">
+        <div className="ReportedLog_Box">
+          <div className="ReportedLog_Text">
             [신고 대상 소환사] {this.props.reportedSummoner} [매너포인트] {this.props.evaluation}           
             <br />
             [태그] {this.props.tags} 
@@ -19,7 +25,7 @@ class ReportingLog extends Component {
             className="ReportedLog_Pencil"
             alt="pencil_img"
             src={process.env.PUBLIC_URL + `/images/icons/icon-pencil.png`}
-            // onClick={() => this.props.clicked}
+            onClick={() => this.onClickWriteApologyButton(this.props.reportID)}
           />
          
         </div>
@@ -28,4 +34,4 @@ class ReportingLog extends Component {
   }
 }
 
-export default ReportingLog;
+export default withRouter(ReportedLog);
