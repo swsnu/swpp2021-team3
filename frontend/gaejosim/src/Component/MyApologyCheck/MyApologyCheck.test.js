@@ -1,6 +1,19 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
+import { BrowserRouter as Router } from "react-router-dom";
 import MyApologyCheck from "./MyApologyCheck";
+
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import userReducer from "./../../Store/Reducers/UserReducer";
+
+const rootReducer = combineReducers({
+  userR: userReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 
 describe("<MyApologyCheck />", () => {
   it("should render without errors", () => {
@@ -9,10 +22,14 @@ describe("<MyApologyCheck />", () => {
     expect(wrapper.length).toBe(0);
   });
 
-  it("should handle apology_check_completed_button button", () => {
+  xit("should handle apology_check_completed_button button", () => {
     const mock_apology_check_completed_button = jest.fn();
-    const component = shallow(
-      <MyApologyCheck clickDone={mock_apology_check_completed_button} />
+    const component = mount(
+      <Router>
+        <Provider store={store}>
+          <MyApologyCheck clickDone={mock_apology_check_completed_button} />
+        </Provider>
+      </Router>
     );
     const wrapper = component.find(".Apology_check_completed_button");
     wrapper.simulate("click");
