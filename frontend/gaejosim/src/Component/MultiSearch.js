@@ -18,9 +18,9 @@ class MultiSearch extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("getDerivedStateFromProps");
     if (nextProps.summoners !== prevState.summoners) {
-      return { summoners : nextProps.summoners, getResult: false };
+      return { summoners : nextProps.summoners, getResult: false }
     }
-    return null;
+    return null
   }
 
   getMatchers = async () => {
@@ -37,14 +37,12 @@ class MultiSearch extends Component {
         },
     })
       .then((res) => {
-        console.log('response.data.matchers', res.data.matchers)
         this.setState({ matchers: res.data.matchers, getResult: true })
       })
   }
 
   
   render() {
-    console.log("render")
     let matcherInfos
     if(this.state.getResult === false) {
       this.getMatchers()
