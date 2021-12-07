@@ -16,8 +16,8 @@ class MultiSearch extends Component {
   }
 
   getMatchers = async () => {
-    console.log('call of getMatchers');
-    console.log('state of getResult', this.state.getResult)
+    // console.log('call of getMatchers');
+    // console.log('state of getResult', this.state.getResult)
 
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -30,8 +30,8 @@ class MultiSearch extends Component {
         },
     })
       .then((res) => {
-        console.log('response.data.matchers')
-        console.log(res.data.matchers)
+        // console.log('response.data.matchers')
+        // console.log(res.data.matchers)
         this.setState({ matchers: res.data.matchers, getResult: true })
       })
   }
@@ -43,7 +43,7 @@ class MultiSearch extends Component {
       this.getMatchers()
     } else {
       matcherInfos = this.state.matchers.map((matcher, matcherIdx) => {
-        console.log(matcher, "matcher")
+        // console.log(matcher, "matcher")
         return (
           // <div className={summonerIdx} key={summonerIdx}>
         <div className = {`summoner${matcherIdx+1}`} key={matcherIdx+1}>

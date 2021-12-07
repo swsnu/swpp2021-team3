@@ -7,9 +7,6 @@ import DetailReportedLog from '../MyReportedLogs/DetailReportedLog/DetailReporte
 
 import './My.css'
 
-// 삭제 후 리렌더 : 리듀서..?
-// TODO: change password, change username 추가하기, nickname
-// TODO: delete reportinglog directory, delete reportedlog directory
 
 class My extends Component {
   constructor(props) {
@@ -25,6 +22,7 @@ class My extends Component {
     }
   }
 
+
   getMyInfo = async () => {
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -34,8 +32,6 @@ class My extends Component {
     await axios.get('/api/mypage/', {}).then((res) => {
       let userInfo = res.data.user
       let reportInfo = res.data.reports
-      console.log(userInfo)
-      console.log(reportInfo)
       this.setState({
         username: userInfo.username,
         email: userInfo.email,

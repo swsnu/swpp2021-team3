@@ -25,7 +25,7 @@ class MyReportedLogs extends Component {
 
     await axios.get('/api/my/received_reports/', {})
       .then((res) => {
-        console.log("resdata" , res.data)
+        // console.log("resdata" , res.data)
         this.setState({
           reportedlogs: res.data.reports,
           getResult: true,
