@@ -1,7 +1,11 @@
 """report views"""
+import asyncio
 import json
+import ssl
 from datetime import datetime, timedelta
 import requests
+import aiohttp
+import certifi
 from pytz import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
@@ -42,12 +46,16 @@ def report_authentication(request):
 
     recent_10_game_players = []
 
-    for match_id in recent_matches_list:
-        team_players = get_team_players(user, match_id)
-        if not team_players:
-            JsonResponse(
-                {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
-        recent_10_game_players += team_players
+    team_players = []
+    task = [
+        get_team_players(user, match_id, team_players) for match_id in recent_matches_list
+    ]
+    asyncio.run(asyncio.wait(task))
+
+    if not team_players:
+        JsonResponse(
+            {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
+    recent_10_game_players += team_players
 
     if request.method == "POST":
 
@@ -73,14 +81,18 @@ def get_recent_matches(user):
     return recent_matches_list
 
 
-def get_team_players(user, match_id):
+async def get_team_players(user, match_id, team_players):
     """get five players list in the same team"""
-    match_url = (
-        f"{api_default['asia']}/lol/match/v5/matches/"
-        + f"{match_id}?api_key={api_default['key']}"
-    )
+    ssl_context = ssl.create_default_context(cafile=certifi.where())
+    conn = aiohttp.TCPConnector(ssl=ssl_context)
 
-    match_result = requests.get(match_url).json()
+    async with aiohttp.ClientSession(connector=conn) as session:
+        async with session.get(
+            f"{api_default['asia']}/lol/match/v5/matches/"
+            + f"{match_id}?api_key={api_default['key']}"
+        ) as resp:
+
+            match_result = await resp.json()
 
     if is_riot_timeout(match_result):
         return None
@@ -91,7 +103,7 @@ def get_team_players(user, match_id):
     team_200 = []
     user_team = None
 
-    for i in range(1, 10):
+    for i in range(0, 10):
         participant = match_participants[i]
 
         if match_participants[i]["summonerId"] == user.summoner.summoner_id:
@@ -104,12 +116,13 @@ def get_team_players(user, match_id):
             team_200.append(match_participants[i]["summonerName"])
 
     if user_team == 100:
-        return team_100
-    return team_200
+        team_players += team_100
+    else:
+        team_players += team_200
 
 
-@require_http_methods(["POST"])
-@check_logged_in
+@ require_http_methods(["POST"])
+@ check_logged_in
 def post_report(request):
     """make a report"""
     user = request.user
@@ -198,8 +211,8 @@ def post_report(request):
     )
 
 
-@check_logged_in
-@require_http_methods(["GET"])
+@ check_logged_in
+@ require_http_methods(["GET"])
 def my_reports(request):
     """list of my reports"""
     user = request.user
@@ -219,8 +232,8 @@ def my_reports(request):
     return JsonResponse({"reports": reports}, status=200)
 
 
-@check_logged_in
-@require_http_methods(["GET"])
+@ check_logged_in
+@ require_http_methods(["GET"])
 def my_received_reports(request):
     """list of reports I've got"""
     user = request.user
@@ -239,7 +252,7 @@ def my_received_reports(request):
     return JsonResponse({"reports": reports}, status=200)
 
 
-@require_http_methods(["GET"])
+@ require_http_methods(["GET"])
 def reports_statistics(request):
     """total reports statistics"""
     today = datetime.now(timezone("Asia/Seoul"))
@@ -277,8 +290,8 @@ def reports_statistics(request):
     )
 
 
-@check_logged_in
-@require_http_methods(["GET", "POST", "PUT"])
+@ check_logged_in
+@ require_http_methods(["GET", "POST", "PUT"])
 def apology(request, report_id):
     """get, post, put an apology"""
     user = request.user
@@ -429,8 +442,8 @@ def apology(request, report_id):
         )
 
 
-@check_logged_in
-@require_http_methods(["DELETE"])
+@ check_logged_in
+@ require_http_methods(["DELETE"])
 def delete_report(request, report_id):
     """delete reportm report"""
     user = request.user
