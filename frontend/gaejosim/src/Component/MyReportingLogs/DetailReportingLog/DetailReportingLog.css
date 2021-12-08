@@ -1,0 +1,39 @@
+.DetailReportingLog_Box {
+  /* position: absolute; */
+  width: 40%;
+  height: 7.2%;
+  /* left: 38%; */
+  /* top: 56%; */
+  background: #282a30;
+  border-radius: 12px;
+}
+
+.DetailReportingLog_Text {
+  position: absolute;
+  width: 40%;
+  height: 7.2%;
+  top: 21%;
+  left: 2%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  /* display: flex; */
+  /* align-items: center; */
+  color: #ffffff;
+  text-align: left;
+  /* white-space: pre-line; */
+  white-space: nowrap;
+}
+
+.DetailReportingLog_Delete {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.DetailReportingLog_Paper {
+  position: absolute;
+  right: 6%;
+  top: 30%;
+}

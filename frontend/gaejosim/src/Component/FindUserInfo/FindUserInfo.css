@@ -1,11 +1,8 @@
-.FindIDTitle {
+/* .FindIDTitle {
   position: absolute;
-  /* width: 67px; */
-  /* height: 36px; */
+
   left: 35.4%;
   top: 34.5%;
-
-  /* font-family: Noto Sans KR; */
   font-style: normal;
   font-weight: bold;
   font-size: 25px;
@@ -15,7 +12,7 @@
   letter-spacing: -0.05em;
 
   color: #ffffff;
-}
+} */
 
 .FindIDTitle {
   position: absolute;
@@ -60,7 +57,7 @@
   width: 30.6%;
   height: 6.5%;
   left: 17.4%;
-  top: 40.4%;
+  top: 39.5%;
 
   background: #ffffff;
   border: 1px solid #fc0174;
@@ -73,7 +70,7 @@
   width: 30.6%;
   height: 6.5%;
   left: 52%;
-  top: 40.4%;
+  top: 39.5%;
 
   background: #ffffff;
   border: 1px solid #fc0174;
@@ -86,7 +83,7 @@
   width: 30.6%;
   height: 6.5%;
   left: 52%;
-  top: 47.8%;
+  top: 47%;
 
   background: #ffffff;
   border: 1px solid #fc0174;
@@ -126,4 +123,64 @@
 
   outline: 0;
   border: 0;
+}
+
+.FindUserInfo_SignUp_text {
+  position: absolute;
+
+  left: 52%;
+  top: 54.5%;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.FindUserInfo_ChangePW_text {
+  position: absolute;
+  /* width: 53px; */
+  /* height: 22px; */
+  right: 17.4%;
+  top: 54.5%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.FindUserInfo_Login_text {
+  position: absolute;
+  /* width: 53px; */
+  /* height: 22px; */
+  right: 52%;
+  top: 47%;
+
+  /* font-family: Noto Sans KR; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
 }

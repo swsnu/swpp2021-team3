@@ -11,6 +11,8 @@ from django.db.utils import IntegrityError
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import check_password
 from django.core.mail.message import EmailMessage
+from django.core.cache import cache
+
 
 from report.models import Report
 from core.utils import check_logged_in
@@ -19,7 +21,7 @@ from .models import Summoner, User, MannerPoint
 api_default = {
     "region": "https://kr.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-3e214592-8789-4c41-860a-f61e288bf1ec",  # updated 12/7
+    "key": "RGAPI-933ebb7e-fa69-41dc-9196-9baf175361a0",  # updated 12/8 - 14:30
 }
 
 
@@ -212,6 +214,7 @@ def generate_temp_password():
 def log_out(request):
     """sign out"""
     logout(request)
+    cache.clear()
 
     return JsonResponse({"message": "로그아웃이 완료되었습니다."}, status=200)
 

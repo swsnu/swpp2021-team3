@@ -1,52 +1,65 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-// import axios from "axios";
-import "./MyApologyWrite.css";
+import React, { Component } from 'react'
+import { withRouter, Redirect } from 'react-router-dom'
+import axios from 'axios'
+
+import './MyApologyWrite.css'
+
 
 class MyApologyWrite extends Component {
-  state = {
-    GotoMyPage: false,
-  };
 
-  onClickGotoMyPage = () => {
-    this.setState({ GotoMyPage: true });
-  };
+  state = {
+    content: '',
+  }
+
+  postApologyData = async (reportID) => {
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
+    axios.get('/api/token/').then()
+    
+    await axios.post(`/api/reports/${this.props.reportID}/apology/`, {
+      content : this.state.content
+    })
+      .then((res) => {
+        // console.log(JSON.stringify(res.data))
+        alert('성공적으로 제출하였습니다.\nML을 통해 작성한 내용을 분석합니다.')
+        this.props.history.push('/my')
+      })
+      .catch((err) => {
+        alert(err.response.data.error)
+      })
+  }
+
+  onClickSubmitButton = () => {
+    this.postApologyData(this.props.reportID)
+  }
 
   render() {
-    let redirect = null;
-    if (this.state.GotoMyPage === true) {
-      redirect = <Redirect to={`/my`} />;
-    }
     return (
-      <div className="myReportedLogsPage">
-        {redirect}
-        <text className="myApologyWriteTitle">반성문 작성</text>
+      <div className='myReportedLogsPage'>
+        <text className='myApologyWriteTitle'>반성문 작성</text>
         <div>
-          {/* <div className="apology_box1">
-            <text className="boxText1">
+          {/* <div className='apology_box1'>
+            <text className='boxText1'>
               Recent Reported Log1 : ReportedSummoner
             </text>
-            <text className="boxText2">
+            <text className='boxText2'>
               #tag1, #tag2, #tag3, Evalutation, Comment
             </text>
           </div> */}
         </div>
-        <div className="apology_write_box">
+        <div className = 'apology_write_box'>
           <input
-            // className="apology_write_input"
-            id="text"
-            type="text"
-            // row="10"
-            placeholder={"반성문을 이곳에 작성하세요"}
-            //   value={this.state.summoner_names_multi}
-            //   onChange={(event) =>
-            // this.setState({ summoner_names_multi: event.target.value })
-            //   }
+            className = 'apology_write_input'
+            id = 'text'
+            type = 'text'
+            placeholder = {'반성문을 이곳에 작성하세요'}
+            onChange = {(event) => this.setState({ content: event.target.value })}
           />
         </div>
         <button
-          className="Apology_write_completed_button"
-          onClick={() => this.onClickGotoMyPage()}
+          className='Apology_write_completed_button'
+          onClick={() => this.onClickSubmitButton()}
         >
           제출
         </button>
@@ -55,4 +68,4 @@ class MyApologyWrite extends Component {
   }
 }
 
-export default MyApologyWrite;
+export default withRouter(MyApologyWrite)

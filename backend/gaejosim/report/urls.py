@@ -13,10 +13,10 @@ urlpatterns = [
         name="report_auth",
     ),
     path("reports/", views.post_report, name="report"),
-    path("my/reports/", views.my_reports, name="my_reports"),
+    path("my/reports/", cache_page(300)(views.my_reports), name="my_reports"),
     path(
         "my/received_reports/",
-        cache_page(600)(views.my_received_reports),
+        cache_page(300)(views.my_received_reports),
         name="my_received_reports",
     ),
 ]
