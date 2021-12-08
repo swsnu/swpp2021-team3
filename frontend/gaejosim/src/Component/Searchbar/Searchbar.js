@@ -14,8 +14,8 @@ class Searchbar extends Component {
         // console.log("onClickSearchButton")
         let summonerArr = []
         if(this.state.searchInput !== '') {
-            if(this.state.searchInput.includes('님이 방에 참가했습니다.')) {
-                summonerArr = this.state.searchInput.split('님이 방에 참가했습니다.') 
+            if(this.state.searchInput.includes('님이 로비에 참가했습니다.')) {
+                summonerArr = this.state.searchInput.split('님이 로비에 참가했습니다.') 
                 summonerArr = summonerArr.map((summoner) => summoner.replace(/\s/g, ''))    
                 summonerArr.pop()
             }
@@ -46,7 +46,7 @@ class Searchbar extends Component {
         return (
             <div className = 'Searchbar'>
                 <textarea className = 'multiInput' type = 'text' 
-                    placeholder = {`소환사1님이 방에 참가했습니다.\n소환사2님이 방에 참가했습니다.\n소환사3님이 방에 참가했습니다.\n소환사4님이 방에 참가했습니다.\n소환사5님이 방에 참가했습니다.\n또는\n소환사1, 소환사2, 소환사3, 소환사4, 소환사5`}
+                    placeholder = {`소환사1님이 로비에 참가했습니다.\n소환사2님이 로비에 참가했습니다.\n소환사3님이 로비에 참가했습니다.\n소환사4님이 로비에 참가했습니다.\n소환사5님이 ㅍ에 참가했습니다.\n또는\n소환사1, 소환사2, 소환사3, 소환사4, 소환사5`}
                     value = {this.state.searchInput}
                     style={{fontSize: '11px'}}
                     onChange = {(event) => this.setState({ searchInput : event.target.value })} />
