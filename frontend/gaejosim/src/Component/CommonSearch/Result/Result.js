@@ -10,10 +10,7 @@ const Result = (props) => {
         <img className = 'championImg' alt = 'champion_img' src = {process.env.PUBLIC_URL + `/images/champions/champion_${props.result.champion_id}.png`} />   
       </b>
       <b className = 'lane'>
-        <img className = 'laneImg'
-          alt = 'lane_img'
-          src = {process.env.PUBLIC_URL + `/images/lanes/lane_${props.result.lane}.png`}
-        />
+        <img className = 'laneImg' alt = 'lane_img' src = {process.env.PUBLIC_URL + `/images/lanes/lane_${props.result.lane}.png`}/>
       </b>
       <b className='KDA' id={matchResult}>
         {props.result.kills}/{props.result.deaths}/{props.result.assists}

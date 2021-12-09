@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { NavLink, withRouter, Redirect } from 'react-router-dom'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 import DetailReportingLog from '../MyReportingLogs/DetailReportingLog/DetailReportingLog'
 import DetailReportedLog from '../MyReportedLogs/DetailReportedLog/DetailReportedLog'
@@ -21,7 +22,6 @@ class My extends Component {
       getResult: false,
     }
   }
-
 
   getMyInfo = async () => {
     axios.defaults.xsrfCookieName = 'csrftoken'
@@ -53,6 +53,13 @@ class My extends Component {
   }
 
   render() {
+    let redirect = null
+    let idx = 0
+    if (!this.props.storedisLogin) {
+      alert('로그인 한 상태에서만 마이페이지에 접근할 수 있습니다.\n 로그인 페이지로 이동합니다.')
+      redirect = <Redirect to = '/login'/>
+    }
+
     let reportingLogs = []
     let reportedLogs = []
     if (this.state.getResult === false) {
@@ -92,6 +99,7 @@ class My extends Component {
 
     return (
       <div className = 'myPage'>
+        {redirect}
         <div className = 'mypageTitle'>마이페이지</div>
         {this.state.getResult && (
           <div className = 'resultDisplay'>
@@ -110,6 +118,11 @@ class My extends Component {
               <br />
               <div style = {{ fontWeight: 'bold' }}>매너포인트</div>
               {this.state.mannerPoint}
+              <br />
+              <br />
+              <NavLink exact to='/changepassword'>
+                <div className = 'My_Changepassword_text' style = {{ fontWeight: 'bold' }}>비밀번호 변경</div>
+              </NavLink>
             </div>
             <div style = {{ left: '38.5%' }}>
               <div className='recentText1'>최근 신고 기록</div>
@@ -138,4 +151,11 @@ class My extends Component {
   }
 }
 
-export default withRouter(My)
+const mapStateToProps = (state) => {
+  return {
+    storedisLogin: state.userR.login,
+  }
+}
+
+
+export default connect(mapStateToProps, null)(withRouter(My))
