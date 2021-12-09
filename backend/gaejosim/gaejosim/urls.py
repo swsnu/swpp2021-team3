@@ -22,5 +22,5 @@ urlpatterns = [
     path("api/", include("user.urls")),
     path("api/", include("report.urls")),
     path("api/", include("search.urls")),
-    path("riot.txt/", views.riot),
+    path("api/riot.txt/", views.riot),
 ]
