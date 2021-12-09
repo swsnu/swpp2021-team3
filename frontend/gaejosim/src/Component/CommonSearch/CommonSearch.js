@@ -82,11 +82,11 @@ class CommonSearch extends Component {
       else {
         trollDiagram = <ResponsiveRadar
               data={[
-                {'tag': '언행', 'mannerPoint': tagArr[0],},
-                {'tag': '게임폭파', 'mannerPoint': tagArr[1],},
-                {'tag': '게임 시작 전', 'mannerPoint': tagArr[2],},
-                {'tag': '게임 중', 'mannerPoint': tagArr[3],},
-                {'tag': '기타', 'mannerPoint': tagArr[4],},
+                {'tag': '언행', 'mannerPoint': (tagArr[0] > 5) ? 5: tagArr[0]},
+                {'tag': '게임폭파', 'mannerPoint': (tagArr[1] > 5) ? 5: tagArr[1],},
+                {'tag': '게임 시작 전', 'mannerPoint': (tagArr[2] > 5) ? 5: tagArr[2],},
+                {'tag': '게임 중', 'mannerPoint': (tagArr[3] > 5) ? 5: tagArr[3],},
+                {'tag': '기타', 'mannerPoint': (tagArr[4] > 5) ? 5: tagArr[4],},
               ]}
                 keys = {[ 'mannerPoint' ]}
                 indexBy = 'tag'
