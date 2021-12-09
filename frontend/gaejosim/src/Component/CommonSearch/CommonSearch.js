@@ -35,11 +35,11 @@ class CommonSearch extends Component {
       if(tagArr === null) {
         trollDiagram = <ResponsiveRadar 
               data={[
-                {'tag': '언행', 'mannerPoint': 0,},
-                {'tag': '게임폭파', 'mannerPoint': 0,},
-                {'tag': '게임 시작 전', 'mannerPoint': 0,},
-                {'tag': '게임 중', 'mannerPoint': 0,},
-                {'tag': '기타', 'mannerPoint': 0,},
+                {'tag': '언행', 'mannerPoint': 5,},
+                {'tag': '게임폭파', 'mannerPoint': 5,},
+                {'tag': '게임 시작 전', 'mannerPoint': 5,},
+                {'tag': '게임 중', 'mannerPoint': 5,},
+                {'tag': '기타', 'mannerPoint': 5,},
               ]}
                 keys = {[ 'mannerPoint' ]}
                 indexBy = 'tag'
@@ -148,7 +148,7 @@ class CommonSearch extends Component {
               <div className = 'tier'>
                 <br />
                 {this.state.tier}, {this.state.rank} <br />
-                MP:{this.state.mannerPoint} <br />
+                {(this.state.mannerPoint !== null) && `MP: ${this.state.mannerPoint}`} <br />
                 <br />
                 <div className = 'recent_results'>{resultViews}</div>
               </div>  
