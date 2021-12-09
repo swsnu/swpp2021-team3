@@ -11,7 +11,6 @@ class Searchbar extends Component {
     }
 
     onClickSearchButton = () => {
-        // console.log("onClickSearchButton")
         let summonerArr = []
         if(this.state.searchInput !== '') {
             if(this.state.searchInput.includes('님이 로비에 참가했습니다.')) {
