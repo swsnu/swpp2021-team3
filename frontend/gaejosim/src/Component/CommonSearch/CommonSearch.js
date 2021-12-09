@@ -43,6 +43,7 @@ class CommonSearch extends Component {
               ]}
                 keys = {[ 'mannerPoint' ]}
                 indexBy = 'tag'
+                maxValue = {6}
                 valueFormat = '>-.2f'
                 // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'
@@ -89,6 +90,7 @@ class CommonSearch extends Component {
               ]}
                 keys = {[ 'mannerPoint' ]}
                 indexBy = 'tag'
+                maxValue = {6}
                 valueFormat = '>-.2f'
                 // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'

@@ -4,7 +4,6 @@ import './Result.css'
 
 const Result = (props) => {
   let matchResult = props.winLose
-  console.log(props.result.lane)
   return (
     <div className = 'result'>
       <b className = 'champion'>
