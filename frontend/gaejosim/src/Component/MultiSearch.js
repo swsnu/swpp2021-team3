@@ -16,7 +16,7 @@ class MultiSearch extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("getDerivedStateFromProps");
+    // console.log("getDerivedStateFromProps");
     if (nextProps.summoners !== prevState.summoners) {
       return { summoners : nextProps.summoners, getResult: false }
     }
@@ -24,7 +24,7 @@ class MultiSearch extends Component {
   }
 
   getMatchers = async () => {
-    console.log('getMatchers');
+    // console.log('getMatchers');
 
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
