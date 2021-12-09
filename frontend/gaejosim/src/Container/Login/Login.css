@@ -43,7 +43,7 @@
 .Login_Signup_text {
   position: absolute;
   right: 34.5%;
-  top: 36.6%;
+  top: 55%;
 
   font-style: normal;
   font-weight: bold;
@@ -74,7 +74,7 @@
   color: #ffffff;
 }
 
-.Login_Changepassword_text {
+/* .Login_Changepassword_text {
   position: absolute;
   right: 34.5%;
   top: 55%;
@@ -89,7 +89,7 @@
   letter-spacing: -0.05em;
 
   color: #ffffff;
-}
+} */
 
 .LoginButton {
   position: absolute;
