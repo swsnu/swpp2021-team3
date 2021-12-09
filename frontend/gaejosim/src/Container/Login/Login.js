@@ -18,8 +18,6 @@ class Login extends Component {
 
     axios.get('/api/token/').then();
 
-    // console.log("login api call")
-    // console.log(this.state.id)
     await axios.post('/api/signin/', {
         username: this.state.id,
         password: this.state.password,
@@ -55,9 +53,6 @@ class Login extends Component {
         </NavLink>
         <NavLink exact to='/finduserinfo'>
           <div className='Login_Finduserinfo_text'>아이디 비밀번호 찾기</div>
-        </NavLink>
-        <NavLink exact to='/changepassword'>
-          <div className='Login_Changepassword_text'>비밀번호 변경</div>
         </NavLink>
 
         <input

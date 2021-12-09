@@ -19,7 +19,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 describe("<My />", () => {
   it("should render without errors", () => {
-    const component = shallow(<My />);
+    const component = mount(<Router><Provider store={store}><My /></Provider></Router>);
     const wrapper = component.find(".My");
     expect(wrapper.length).toBe(0);
   });

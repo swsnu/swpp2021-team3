@@ -35,24 +35,22 @@ class CommonSearch extends Component {
       if(tagArr === null) {
         trollDiagram = <ResponsiveRadar 
               data={[
-                {'tag': '언행', 'mannerPoint': 0,},
-                {'tag': '게임폭파', 'mannerPoint': 0,},
-                {'tag': '게임 시작 전', 'mannerPoint': 0,},
-                {'tag': '게임 중', 'mannerPoint': 0,},
-                {'tag': '기타', 'mannerPoint': 0,},
+                {'tag': '언행', 'mannerPoint': 5,},
+                {'tag': '게임폭파', 'mannerPoint': 5,},
+                {'tag': '게임 시작 전', 'mannerPoint': 5,},
+                {'tag': '게임 중', 'mannerPoint': 5,},
+                {'tag': '기타', 'mannerPoint': 5,},
               ]}
                 keys = {[ 'mannerPoint' ]}
                 indexBy = 'tag'
+                maxValue = {6}
                 valueFormat = '>-.2f'
-                // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'
                 gridLabelOffset = {36}
                 gridShape = 'linear'
                 dotSize = {5}
-                // dotColor={{ theme: 'background' }}
                 dotBorderWidth = {2}
                 colors='#fc0174'
-                // blendMode='multiply'
                 motionConfig='wobbly'
                 legends={[
                   {
@@ -81,24 +79,22 @@ class CommonSearch extends Component {
       else {
         trollDiagram = <ResponsiveRadar
               data={[
-                {'tag': '언행', 'mannerPoint': tagArr[0],},
-                {'tag': '게임폭파', 'mannerPoint': tagArr[1],},
-                {'tag': '게임 시작 전', 'mannerPoint': tagArr[2],},
-                {'tag': '게임 중', 'mannerPoint': tagArr[3],},
-                {'tag': '기타', 'mannerPoint': tagArr[4],},
+                {'tag': '언행', 'mannerPoint': (tagArr[0] > 5) ? 5: tagArr[0]},
+                {'tag': '게임폭파', 'mannerPoint': (tagArr[1] > 5) ? 5: tagArr[1],},
+                {'tag': '게임 시작 전', 'mannerPoint': (tagArr[2] > 5) ? 5: tagArr[2],},
+                {'tag': '게임 중', 'mannerPoint': (tagArr[3] > 5) ? 5: tagArr[3],},
+                {'tag': '기타', 'mannerPoint': (tagArr[4] > 5) ? 5: tagArr[4],},
               ]}
                 keys = {[ 'mannerPoint' ]}
                 indexBy = 'tag'
+                maxValue = {6}
                 valueFormat = '>-.2f'
-                // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'
                 gridLabelOffset = {36}
                 gridShape = 'linear'
                 dotSize = {5}
-                // dotColor={{ theme: 'background' }}
                 dotBorderWidth = {2}
                 colors='#fc0174'
-                // blendMode='multiply'
                 motionConfig='wobbly'
                 legends={[
                   {
@@ -148,7 +144,7 @@ class CommonSearch extends Component {
               <div className = 'tier'>
                 <br />
                 {this.state.tier}, {this.state.rank} <br />
-                MP:{this.state.mannerPoint} <br />
+                {(this.state.mannerPoint !== null) && `MP: ${this.state.mannerPoint}`} <br />
                 <br />
                 <div className = 'recent_results'>{resultViews}</div>
               </div>  

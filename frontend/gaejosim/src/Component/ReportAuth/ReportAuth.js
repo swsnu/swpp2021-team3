@@ -87,7 +87,6 @@ class ReportAuth extends Component {
     let redirect = null
 
     if (!this.props.storedisLogin) {
-      // todo: this.props.history.push makes infinite loop
       alert('로그인 한 상태에서만 다른 소환사를 신고할 수 있습니다.\n 로그인 페이지로 이동합니다.')
       redirect = <Redirect to = '/login'/>
       // this.props.history.push('/login')
