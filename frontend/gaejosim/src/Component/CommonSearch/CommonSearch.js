@@ -45,15 +45,12 @@ class CommonSearch extends Component {
                 indexBy = 'tag'
                 maxValue = {6}
                 valueFormat = '>-.2f'
-                // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'
                 gridLabelOffset = {36}
                 gridShape = 'linear'
                 dotSize = {5}
-                // dotColor={{ theme: 'background' }}
                 dotBorderWidth = {2}
                 colors='#fc0174'
-                // blendMode='multiply'
                 motionConfig='wobbly'
                 legends={[
                   {
@@ -92,15 +89,12 @@ class CommonSearch extends Component {
                 indexBy = 'tag'
                 maxValue = {6}
                 valueFormat = '>-.2f'
-                // margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
                 borderColor = '#fc0174'
                 gridLabelOffset = {36}
                 gridShape = 'linear'
                 dotSize = {5}
-                // dotColor={{ theme: 'background' }}
                 dotBorderWidth = {2}
                 colors='#fc0174'
-                // blendMode='multiply'
                 motionConfig='wobbly'
                 legends={[
                   {

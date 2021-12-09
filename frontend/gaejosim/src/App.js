@@ -18,7 +18,7 @@ import MyReportingLogsPage from './Page/MyReportingLogsPage'
 import MyApologyCheckPage from './Page/MyApologyCheckPage'
 import MyApologyWritePage from './Page/MyApologyWritePage'
 
-// TODO: change url names in lowercase
+import RiotPage from './Page/RiotPage'
 
 function App() {
   return (
@@ -45,6 +45,8 @@ function App() {
           <Route path = '/apologycheck/:reportid' exact component = {MyApologyCheckPage} />
           <Route path = '/apologywrite/:reportid' exact component = {MyApologyWritePage} />
 
+          <Route path = '/riot/txt' exact component = {RiotPage} />
+          
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </BrowserRouter>
