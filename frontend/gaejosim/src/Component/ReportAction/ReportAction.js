@@ -212,7 +212,7 @@ class ReportAction extends Component {
           <button
             className = 'Tag2_2Button'
             id = 'tagbutton'
-            onClick = {() => this.onClickTagButton('2_1')}
+            onClick = {() => this.onClickTagButton('2_2')}
           > 
           {this.state.clickTag2_2 !== false ? '탈주/닷지 V' : '탈주/닷지'}
           </button>

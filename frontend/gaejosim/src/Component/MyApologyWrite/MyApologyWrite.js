@@ -22,7 +22,7 @@ class MyApologyWrite extends Component {
     })
       .then((res) => {
         // console.log(JSON.stringify(res.data))
-        alert('성공적으로 제출하였습니다.\nAI가 결과를 분석중입니다.')
+        alert('성공적으로 제출하였습니다.\nML을 통해 작성한 내용을 분석합니다.')
         this.props.history.push('/my')
       })
       .catch((err) => {
