@@ -15,7 +15,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-80fd2eda-2d27-464a-8c29-b157aca1690a",  # updated 12/9
+    "key": "RGAPI-3e41c852-7f2c-45e3-b8e2-d82b8b9b319e",  # updated 12/9
 }
 
 tag_dict = {
@@ -45,8 +45,7 @@ def report_authentication(request):
     for match_id in recent_matches_list:
         team_players = get_team_players(user, match_id)
         if not team_players:
-            JsonResponse(
-                {"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
+            JsonResponse({"error": "RIOT API 호출 시간초과입니다. 잠시 뒤에 다시 시도하세요."}, status=400)
         recent_10_game_players += team_players
 
     if request.method == "POST":
@@ -164,8 +163,7 @@ def post_report(request):
 
     # apply to manner point
     manner_point = reported_summoner.manner_point
-    reports_cnt = Report.objects.filter(
-        reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
 
     manner_point.point = (manner_point.point * reports_cnt + evaluation) / (
         reports_cnt + 1
@@ -338,8 +336,7 @@ def apology(request, report_id):
             else:
                 manner_point.tag5 += 0.5
 
-        reports_cnt = Report.objects.filter(
-            reported_summoner=user.summoner).count()
+        reports_cnt = Report.objects.filter(reported_summoner=user.summoner).count()
 
         if reports_cnt == 1:
             manner_point.point = 80
@@ -436,8 +433,7 @@ def delete_report(request, report_id):
     user = request.user
 
     try:
-        report = Report.objects.select_related(
-            'reported_summoner').get(id=report_id)
+        report = Report.objects.select_related("reported_summoner").get(id=report_id)
 
     except Report.DoesNotExist:
         return JsonResponse({"error": "해당 신고가 존재하지 않습니다."}, status=404)
@@ -463,19 +459,16 @@ def delete_report(request, report_id):
         else:
             manner_point.tag5 += 0.5
 
-    reports_cnt = Report.objects.filter(
-        reported_summoner=reported_summoner).count()
+    reports_cnt = Report.objects.filter(reported_summoner=reported_summoner).count()
 
     if reports_cnt == 1:
         manner_point.point = 80
     else:
-        manner_point.point = (
-            manner_point.point * reports_cnt - report_evaluation
-        ) / (reports_cnt - 1)
+        manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
+            reports_cnt - 1
+        )
     manner_point.save()
 
     report.delete()
 
-    return JsonResponse({
-        "message": "해당 신고가 삭제되었습니다."
-    }, status=200)
+    return JsonResponse({"message": "해당 신고가 삭제되었습니다."}, status=200)
