@@ -74,22 +74,6 @@
   color: #ffffff;
 }
 
-.Login_Changepassword_text {
-  position: absolute;
-  right: 34.5%;
-  top: 55%;
-
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 22px;
-
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.05em;
-
-  color: #ffffff;
-}
 
 .LoginButton {
   position: absolute;
