@@ -46,8 +46,8 @@ function App() {
           <Route path = '/apologywrite/:reportid' exact component = {MyApologyWritePage} />
 
           <Route path = '/riot/txt' exact component = {RiotPage} />
-          
-          <Route render={() => <h1>Not Found</h1>} />
+
+            <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -50,6 +50,31 @@
   font-size: 15px;
   line-height: 22px;
 
+
+.Login_inputField2 {
+  position: absolute;
+  width: 30.6%;
+  height: 6.5%;
+  left: 35.1%;
+  top: 47.5%;
+
+  background: #ffffff;
+  border: 1px solid #fc0174;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.Login_Signup_text {
+  position: absolute;
+  left: 35.4%;
+  top: 55%;
+
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+
   display: flex;
   align-items: center;
   letter-spacing: -0.05em;
@@ -59,7 +84,7 @@
 
 .Login_Finduserinfo_text {
   position: absolute;
-  left: 35.4%;
+  right: 34.5%;
   top: 55%;
 
   font-style: normal;
