@@ -19,8 +19,8 @@ class Riot extends Component {
     axios.get('/api/token/').then()
 
     // TODO: change this to underline
-    // await axios.get('/api/riot.txt/', {})
-    await axios.get('/riot.txt/', {})
+    await axios.get('/api/riot.txt/', {})
+//     await axios.get('/riot.txt/', {})
       .then((res) => {
         console.log(res.data)
         this.setState({ keyChain: res.data, getResult: true })

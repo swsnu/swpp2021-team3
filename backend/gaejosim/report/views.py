@@ -15,7 +15,7 @@ api_default = {
     "region": "https://kr.api.riotgames.com",
     "asia": "https://asia.api.riotgames.com",  # korea server
     # api key : needs to regenerate every 24hr
-    "key": "RGAPI-80fd2eda-2d27-464a-8c29-b157aca1690a",  # updated 12/9
+    "key": "RGAPI-f0956800-a5da-4d19-88e2-1b1f88344cec",  # updated 12/15
 }
 
 tag_dict = {
@@ -311,7 +311,7 @@ def apology(request, report_id):
         if not passed:
             return JsonResponse(
                 {
-                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                    "error": "반성의 마음을 담아 다시 작성해주세요."
                 },
                 status=400,
             )
@@ -387,7 +387,7 @@ def apology(request, report_id):
         if not passed:
             return JsonResponse(
                 {
-                    "error": "You need to reflect on yourself a little more so that you can submit it. Please rewrite it."
+                    "error": "반성의 마음을 담아 다시 작성해주세요."
                 },
                 status=400,
             )
@@ -437,7 +437,7 @@ def delete_report(request, report_id):
 
     try:
         report = Report.objects.select_related(
-            'reported_summoner').get(id=report_id)
+            "reported_summoner").get(id=report_id)
 
     except Report.DoesNotExist:
         return JsonResponse({"error": "해당 신고가 존재하지 않습니다."}, status=404)
@@ -469,13 +469,11 @@ def delete_report(request, report_id):
     if reports_cnt == 1:
         manner_point.point = 80
     else:
-        manner_point.point = (
-            manner_point.point * reports_cnt - report_evaluation
-        ) / (reports_cnt - 1)
+        manner_point.point = (manner_point.point * reports_cnt - report_evaluation) / (
+            reports_cnt - 1
+        )
     manner_point.save()
 
     report.delete()
 
-    return JsonResponse({
-        "message": "해당 신고가 삭제되었습니다."
-    }, status=200)
+    return JsonResponse({"message": "해당 신고가 삭제되었습니다."}, status=200)
