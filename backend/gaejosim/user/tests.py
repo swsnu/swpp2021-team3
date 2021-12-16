@@ -232,7 +232,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.put(
+        response = self.client.post(
             "/api/change/password/",
             json.dumps(
                 {
@@ -249,7 +249,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password1")
         self.assertTrue(login)
 
-        response = self.client.put(
+        response = self.client.post(
             "/api/change/password/",
             json.dumps(
                 {
@@ -269,7 +269,7 @@ class UserTestCase(TestCase):
         response = client.get("/api/token/")
         csrftoken = response.cookies["csrftoken"].value
 
-        response = client.put(
+        response = client.post(
             "/api/change/password/",
             json.dumps(
                 {
@@ -292,7 +292,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.put(
+        response = self.client.post(
             "/api/change/password/",
             json.dumps(
                 {
@@ -315,7 +315,7 @@ class UserTestCase(TestCase):
         login = self.client.login(username="test1", password="password")
         self.assertTrue(login)
 
-        response = self.client.put(
+        response = self.client.post(
             "/api/change/password/",
             json.dumps(
                 {
