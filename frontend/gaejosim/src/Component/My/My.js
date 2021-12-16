@@ -23,6 +23,7 @@ class My extends Component {
     }
   }
 
+
   getMyInfo = async () => {
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
