@@ -21,11 +21,12 @@ with open(SECRETS_BASE, encoding="utf8") as secret:
 SECRET_KEY = secrets_base["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "ec2-13-209-43-25.ap-northeast-2.compute.amazonaws.com",
 ]
 
 
@@ -88,8 +89,10 @@ DATABASES = {
         "PASSWORD": secrets_base["DB_PASSWORD"],
         "HOST": secrets_base["DB_HOST"],
         "PORT": secrets_base["DB_PORT"],
-        "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-                    'charset': 'utf8mb4'},
+        "OPTIONS": {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+            "charset": "utf8mb4",
+        },
     }
 }
 

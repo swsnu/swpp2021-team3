@@ -118,7 +118,7 @@ def sign_up(request):
 
 
 @check_logged_in
-@require_http_methods(["PUT"])
+@require_http_methods(["POST"])
 def change_password(request):
     """change password"""
     user = request.user
